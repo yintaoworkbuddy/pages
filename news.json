@@ -1,13 +1,8 @@
 {
   "updated_at": "离线示例数据",
-  "baidu": [
-    {"title": "（示例）百度实时热搜榜请联网后查看", "url": "https://top.baidu.com/board?tab=realtime", "hot": ""},
-    {"title": "（示例）当前网络可能限制了新闻源访问", "url": "https://top.baidu.com/board?tab=realtime", "hot": ""},
-    {"title": "（示例）可稍后刷新或切换网络重试", "url": "https://top.baidu.com/board?tab=realtime", "hot": ""}
-  ],
-  "weibo": [
-    {"title": "（示例）微博实时热搜榜请联网后查看", "url": "https://s.weibo.com/top/summary", "hot": ""},
-    {"title": "（示例）当前网络可能限制了新闻源访问", "url": "https://s.weibo.com/top/summary", "hot": ""},
-    {"title": "（示例）可稍后刷新或切换网络重试", "url": "https://s.weibo.com/top/summary", "hot": ""}
+  "zhihu": [
+    {"title": "（示例）知乎实时热榜请联网后查看", "url": "https://www.zhihu.com/hot", "hot": ""},
+    {"title": "（示例）当前网络可能限制了新闻源访问", "url": "https://www.zhihu.com/hot", "hot": ""},
+    {"title": "（示例）可稍后刷新或切换网络重试", "url": "https://www.zhihu.com/hot", "hot": ""}
   ]
 }
