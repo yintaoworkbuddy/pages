@@ -1,8 +1,384 @@
 {
-  "updated_at": "离线示例数据",
+  "updated_at": "2026-08-07 15:28",
   "zhihu": [
-    {"title": "（示例）知乎实时热榜请联网后查看", "url": "https://www.zhihu.com/hot", "hot": ""},
-    {"title": "（示例）当前网络可能限制了新闻源访问", "url": "https://www.zhihu.com/hot", "hot": ""},
-    {"title": "（示例）可稍后刷新或切换网络重试", "url": "https://www.zhihu.com/hot", "hot": ""}
+    {
+      "title": "如何看待梁文锋旗下幻方量化多只产品收益转负，单月跌幅超 20%？",
+      "url": "https://www.zhihu.com/question/2068637080209421054",
+      "hot": "977 万热度"
+    },
+    {
+      "title": "网传南航一航班提供饮料为西梅汁，致乘客大排长队上厕所，是真的吗？如何评价这一事件？",
+      "url": "https://www.zhihu.com/question/2068358710498254999",
+      "hot": "687 万热度"
+    },
+    {
+      "title": "新生儿入住月子会所 4 天后颅内出血进ICU，监控现护理人员拍打、吼叫行为，相关方应承担怎样责任？",
+      "url": "https://www.zhihu.com/question/2068703340356003104",
+      "hot": "412 万热度"
+    },
+    {
+      "title": "如何看待韩媒曝韩国足协 7 场比赛性贿赂 20 名裁判，涉中韩国奥战+世预赛？暴露出哪些问题？",
+      "url": "https://www.zhihu.com/question/2068833130803196943",
+      "hot": "300 万热度"
+    },
+    {
+      "title": "泸溪河发布「桃酥出现金属牙冠」调查结论，排除生产带入可能性，消费者已澄清视频情况不属实，如何看待此事？",
+      "url": "https://www.zhihu.com/question/2069020073851983605",
+      "hot": "259 万热度"
+    },
+    {
+      "title": "电影《八仙！》里为什么把汉钟离的名字改成了钟离权？",
+      "url": "https://www.zhihu.com/question/2062925324489339966",
+      "hot": "241 万热度"
+    },
+    {
+      "title": "孩子准备上大一了，一个月跟我要1500的生活费，会不会太多了？",
+      "url": "https://www.zhihu.com/question/2066558957930420222",
+      "hot": "236 万热度"
+    },
+    {
+      "title": "胖东来宣布暂别行业会议和帮扶，是否意味着中国零售业「向胖东来学习」的热潮正在退去？",
+      "url": "https://www.zhihu.com/question/2068641150270026516",
+      "hot": "219 万热度"
+    },
+    {
+      "title": "多家手机品牌回应将大规模涨价，OPPO、荣耀、小米等部分机型已上调价格，如何看待此次手机涨价潮？",
+      "url": "https://www.zhihu.com/question/2068727171682718365",
+      "hot": "210 万热度"
+    },
+    {
+      "title": "如何看待蜘蛛侠荷兰弟替身「河南弟」误导舆论、造假抢功、疑似还遭剧组开除一事？",
+      "url": "https://www.zhihu.com/question/2068334810846717156",
+      "hot": "203 万热度"
+    },
+    {
+      "title": "前日本奥运举重选手便利店偷鸡蛋，推倒店员致其骨折，被当场逮捕，为什么会做出此举？日本运动员的处境如何？",
+      "url": "https://www.zhihu.com/question/2068423522058244663",
+      "hot": "192 万热度"
+    },
+    {
+      "title": "比武招亲摆明是给采花大盗递刀,武侠游戏为什么还乐此不疲地设计这种擂台?",
+      "url": "https://www.zhihu.com/question/2068266245296744222",
+      "hot": "172 万热度"
+    },
+    {
+      "title": "如何评价GPT-5.6Luna免费不限量，后续基础大模型都会走向免费吗？",
+      "url": "https://www.zhihu.com/question/2068986574256312589",
+      "hot": "165 万热度"
+    },
+    {
+      "title": "刚果（金）正式禁止铜、钴精矿出口，全球 70% 钴供给将受影响，国际铜价应声上涨，将产生哪些影响？",
+      "url": "https://www.zhihu.com/question/2068810918826447155",
+      "hot": "155 万热度"
+    },
+    {
+      "title": "专家建议落实双休、增加假期，称「剪头发看电影等消费需要时间」，如何看待此建议？增加假期能带动消费吗？",
+      "url": "https://www.zhihu.com/question/2068732573711329057",
+      "hot": "155 万热度"
+    },
+    {
+      "title": "《蜘蛛侠：崭新之日》大爆，前三部导演乔恩·瓦茨遭网暴「永远别再执导蜘蛛侠了」，客观来说前三部质量如何？",
+      "url": "https://www.zhihu.com/question/2068304398212495175",
+      "hot": "155 万热度"
+    },
+    {
+      "title": "小米澎程系列配置「低速慢行灯」，时速低于 10km/h 自动开启，实用性如何？能解决哪些夜间驾驶痛点？",
+      "url": "https://www.zhihu.com/question/2067414687868774120",
+      "hot": "139 万热度"
+    },
+    {
+      "title": "男子结婚 8 年发现 3 娃非亲生，要求离婚、返还抚育开支并赔偿精神抚慰金，如何从法律角度解读？",
+      "url": "https://www.zhihu.com/question/2069009762692199687",
+      "hot": "137 万热度"
+    },
+    {
+      "title": "唐僧扫塔为什么不从最高层往下扫，而是从下往上扫？",
+      "url": "https://www.zhihu.com/question/22432296",
+      "hot": "136 万热度"
+    },
+    {
+      "title": "公司实行「上四休三」，但要降薪 1000 元，员工不接受只能辞职，这样合理吗？换做是你会如何选择？",
+      "url": "https://www.zhihu.com/question/2068750826869413005",
+      "hot": "126 万热度"
+    },
+    {
+      "title": "怎么看 OpenCode 创始人说「DeepSeek 涨价不是因为亏钱，而是为了劝退用户」？",
+      "url": "https://www.zhihu.com/question/2069015264461579129",
+      "hot": "125 万热度"
+    },
+    {
+      "title": "为什么可以说“站在地上”，却不能说“游在河里”？",
+      "url": "https://www.zhihu.com/question/2008213346428662469",
+      "hot": "122 万热度"
+    },
+    {
+      "title": "为什么《人民的名义》中唯独没有介绍侯亮平和钟小艾的家庭背景？是因为他们是正面人物要考虑影响吗？",
+      "url": "https://www.zhihu.com/question/59229305",
+      "hot": "120 万热度"
+    },
+    {
+      "title": "如何看待日本网红Mina轻生离世，曾疑因偶像的含沙射影被大批粉丝人肉、网暴，直播含泪恳求停止网暴？",
+      "url": "https://www.zhihu.com/question/2068633449532076447",
+      "hot": "119 万热度"
+    },
+    {
+      "title": "如何看待儿科医生韩杰「漏诊」获刑 1 年，本人称「认错但不认罪」？从专业角度看他应该获刑吗？",
+      "url": "https://www.zhihu.com/question/2068723614723956859",
+      "hot": "115 万热度"
+    }
+  ],
+  "weibo": [
+    {
+      "title": "ai漫剧男主唯一塌房方式被找到了",
+      "url": "https://s.weibo.com/weibo?q=ai%E6%BC%AB%E5%89%A7%E7%94%B7%E4%B8%BB%E5%94%AF%E4%B8%80%E5%A1%8C%E6%88%BF%E6%96%B9%E5%BC%8F%E8%A2%AB%E6%89%BE%E5%88%B0%E4%BA%86",
+      "hot": "130.2万"
+    },
+    {
+      "title": "泸溪河牙冠事件消费者已致歉",
+      "url": "https://s.weibo.com/weibo?q=%E6%B3%B8%E6%BA%AA%E6%B2%B3%E7%89%99%E5%86%A0%E4%BA%8B%E4%BB%B6%E6%B6%88%E8%B4%B9%E8%80%85%E5%B7%B2%E8%87%B4%E6%AD%89",
+      "hot": "108.1万"
+    },
+    {
+      "title": "中国重磅科技集中上新",
+      "url": "https://s.weibo.com/weibo?q=%E4%B8%AD%E5%9B%BD%E9%87%8D%E7%A3%85%E7%A7%91%E6%8A%80%E9%9B%86%E4%B8%AD%E4%B8%8A%E6%96%B0",
+      "hot": "97.5万"
+    },
+    {
+      "title": "张雅琪晒中餐厅10图",
+      "url": "https://s.weibo.com/weibo?q=%E5%BC%A0%E9%9B%85%E7%90%AA%E6%99%92%E4%B8%AD%E9%A4%90%E5%8E%8510%E5%9B%BE",
+      "hot": "97.0万"
+    },
+    {
+      "title": "你上班银行上班你午休银行午休",
+      "url": "https://s.weibo.com/weibo?q=%E4%BD%A0%E4%B8%8A%E7%8F%AD%E9%93%B6%E8%A1%8C%E4%B8%8A%E7%8F%AD%E4%BD%A0%E5%8D%88%E4%BC%91%E9%93%B6%E8%A1%8C%E5%8D%88%E4%BC%91",
+      "hot": "96.0万"
+    },
+    {
+      "title": "戚薇AI短剧 雷霆视角",
+      "url": "https://s.weibo.com/weibo?q=%E6%88%9A%E8%96%87AI%E7%9F%AD%E5%89%A7%20%E9%9B%B7%E9%9C%86%E8%A7%86%E8%A7%92",
+      "hot": "95.1万"
+    },
+    {
+      "title": "现在的小学生已经是庞然大物了",
+      "url": "https://s.weibo.com/weibo?q=%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%B0%8F%E5%AD%A6%E7%94%9F%E5%B7%B2%E7%BB%8F%E6%98%AF%E5%BA%9E%E7%84%B6%E5%A4%A7%E7%89%A9%E4%BA%86",
+      "hot": "94.2万"
+    },
+    {
+      "title": "提离职被知道要裁员的领导硬留下",
+      "url": "https://s.weibo.com/weibo?q=%E6%8F%90%E7%A6%BB%E8%81%8C%E8%A2%AB%E7%9F%A5%E9%81%93%E8%A6%81%E8%A3%81%E5%91%98%E7%9A%84%E9%A2%86%E5%AF%BC%E7%A1%AC%E7%95%99%E4%B8%8B",
+      "hot": "75.7万"
+    },
+    {
+      "title": "星巴克 秋天第一场商战",
+      "url": "https://s.weibo.com/weibo?q=%E6%98%9F%E5%B7%B4%E5%85%8B%20%E7%A7%8B%E5%A4%A9%E7%AC%AC%E4%B8%80%E5%9C%BA%E5%95%86%E6%88%98",
+      "hot": "68.1万"
+    },
+    {
+      "title": "韩国被爆性贿赂世预赛裁判",
+      "url": "https://s.weibo.com/weibo?q=%E9%9F%A9%E5%9B%BD%E8%A2%AB%E7%88%86%E6%80%A7%E8%B4%BF%E8%B5%82%E4%B8%96%E9%A2%84%E8%B5%9B%E8%A3%81%E5%88%A4",
+      "hot": "66.9万"
+    },
+    {
+      "title": "好演员从不无缝进组",
+      "url": "https://s.weibo.com/weibo?q=%E5%A5%BD%E6%BC%94%E5%91%98%E4%BB%8E%E4%B8%8D%E6%97%A0%E7%BC%9D%E8%BF%9B%E7%BB%84",
+      "hot": "66.0万"
+    },
+    {
+      "title": "Mina同学发声",
+      "url": "https://s.weibo.com/weibo?q=Mina%E5%90%8C%E5%AD%A6%E5%8F%91%E5%A3%B0",
+      "hot": "58.8万"
+    },
+    {
+      "title": "宜宾地震",
+      "url": "https://s.weibo.com/weibo?q=%E5%AE%9C%E5%AE%BE%E5%9C%B0%E9%9C%87",
+      "hot": "50.0万"
+    },
+    {
+      "title": "于适 平儿都长这么大了",
+      "url": "https://s.weibo.com/weibo?q=%E4%BA%8E%E9%80%82%20%E5%B9%B3%E5%84%BF%E9%83%BD%E9%95%BF%E8%BF%99%E4%B9%88%E5%A4%A7%E4%BA%86",
+      "hot": "48.7万"
+    },
+    {
+      "title": "吴倩女儿长这么大了",
+      "url": "https://s.weibo.com/weibo?q=%E5%90%B4%E5%80%A9%E5%A5%B3%E5%84%BF%E9%95%BF%E8%BF%99%E4%B9%88%E5%A4%A7%E4%BA%86",
+      "hot": "47.2万"
+    },
+    {
+      "title": "面试面出了吃火锅的感觉",
+      "url": "https://s.weibo.com/weibo?q=%E9%9D%A2%E8%AF%95%E9%9D%A2%E5%87%BA%E4%BA%86%E5%90%83%E7%81%AB%E9%94%85%E7%9A%84%E6%84%9F%E8%A7%89",
+      "hot": "43.1万"
+    },
+    {
+      "title": "BLACKPINK全员确认出席十周年",
+      "url": "https://s.weibo.com/weibo?q=BLACKPINK%E5%85%A8%E5%91%98%E7%A1%AE%E8%AE%A4%E5%87%BA%E5%B8%AD%E5%8D%81%E5%91%A8%E5%B9%B4",
+      "hot": "41.1万"
+    },
+    {
+      "title": "云南茶园发现眼镜王蛇一家38口",
+      "url": "https://s.weibo.com/weibo?q=%E4%BA%91%E5%8D%97%E8%8C%B6%E5%9B%AD%E5%8F%91%E7%8E%B0%E7%9C%BC%E9%95%9C%E7%8E%8B%E8%9B%87%E4%B8%80%E5%AE%B638%E5%8F%A3",
+      "hot": "37.9万"
+    },
+    {
+      "title": "有AI之后反而更累了",
+      "url": "https://s.weibo.com/weibo?q=%E6%9C%89AI%E4%B9%8B%E5%90%8E%E5%8F%8D%E8%80%8C%E6%9B%B4%E7%B4%AF%E4%BA%86",
+      "hot": "37.7万"
+    },
+    {
+      "title": "泰国校园枪击已致7死",
+      "url": "https://s.weibo.com/weibo?q=%E6%B3%B0%E5%9B%BD%E6%A0%A1%E5%9B%AD%E6%9E%AA%E5%87%BB%E5%B7%B2%E8%87%B47%E6%AD%BB",
+      "hot": "37.3万"
+    },
+    {
+      "title": "老中医提醒立秋一定要管住嘴",
+      "url": "https://s.weibo.com/weibo?q=%E8%80%81%E4%B8%AD%E5%8C%BB%E6%8F%90%E9%86%92%E7%AB%8B%E7%A7%8B%E4%B8%80%E5%AE%9A%E8%A6%81%E7%AE%A1%E4%BD%8F%E5%98%B4",
+      "hot": "36.7万"
+    },
+    {
+      "title": "粉笔没招了所以全招了",
+      "url": "https://s.weibo.com/weibo?q=%E7%B2%89%E7%AC%94%E6%B2%A1%E6%8B%9B%E4%BA%86%E6%89%80%E4%BB%A5%E5%85%A8%E6%8B%9B%E4%BA%86",
+      "hot": "36.5万"
+    },
+    {
+      "title": "情绪冷漠症",
+      "url": "https://s.weibo.com/weibo?q=%E6%83%85%E7%BB%AA%E5%86%B7%E6%BC%A0%E7%97%87",
+      "hot": "36.2万"
+    },
+    {
+      "title": "人大教授花35万公款考证莫言家世",
+      "url": "https://s.weibo.com/weibo?q=%E4%BA%BA%E5%A4%A7%E6%95%99%E6%8E%88%E8%8A%B135%E4%B8%87%E5%85%AC%E6%AC%BE%E8%80%83%E8%AF%81%E8%8E%AB%E8%A8%80%E5%AE%B6%E4%B8%96",
+      "hot": "36.0万"
+    },
+    {
+      "title": "伦纳德被曝第三份阴阳合同",
+      "url": "https://s.weibo.com/weibo?q=%E4%BC%A6%E7%BA%B3%E5%BE%B7%E8%A2%AB%E6%9B%9D%E7%AC%AC%E4%B8%89%E4%BB%BD%E9%98%B4%E9%98%B3%E5%90%88%E5%90%8C",
+      "hot": "32.9万"
+    }
+  ],
+  "toutiao": [
+    {
+      "title": "今年是闭眼秋",
+      "url": "https://www.toutiao.com/trending/7670017499157266475",
+      "hot": "1120.9万"
+    },
+    {
+      "title": "官方通报教师招聘笔试前13名被淘汰",
+      "url": "https://www.toutiao.com/trending/7671138775929471014",
+      "hot": "1014.3万"
+    },
+    {
+      "title": "服务实体经济 财政金融打出组合拳",
+      "url": "https://www.toutiao.com/article/7671066408926593577",
+      "hot": "917.8万"
+    },
+    {
+      "title": "黄金跳涨 沉寂格局被谁打破",
+      "url": "https://www.toutiao.com/trending/7671114069729889846",
+      "hot": "830.4万"
+    },
+    {
+      "title": "东北立秋迎降温暴击有人穿羽绒服",
+      "url": "https://www.toutiao.com/trending/7670851398259146802",
+      "hot": "751.4万"
+    },
+    {
+      "title": "多方回应维修工困传菜梯被夹身亡",
+      "url": "https://www.toutiao.com/trending/7671159934785699846",
+      "hot": "679.9万"
+    },
+    {
+      "title": "9岁120斤啦啦队女孩跳舞火出圈",
+      "url": "https://www.toutiao.com/trending/7670834349955514409",
+      "hot": "615.2万"
+    },
+    {
+      "title": "立秋这顿饺子必须安排上",
+      "url": "https://www.toutiao.com/trending/7670181343439585331",
+      "hot": "556.6万"
+    },
+    {
+      "title": "男友花15元为女孩手搓“空调”",
+      "url": "https://www.toutiao.com/trending/7670855173081710611",
+      "hot": "503.7万"
+    },
+    {
+      "title": "四川宜宾地震网友称睡觉被摇醒",
+      "url": "https://www.toutiao.com/trending/7671132302990262291",
+      "hot": "455.7万"
+    },
+    {
+      "title": "被洪水泡过的瓶装水能喝？别冒险",
+      "url": "https://www.toutiao.com/trending/7670369856349061158",
+      "hot": "412.4万"
+    },
+    {
+      "title": "女司机用越野车绞盘拖移挡路大树",
+      "url": "https://www.toutiao.com/trending/7670897800980299818",
+      "hot": "373.1万"
+    },
+    {
+      "title": "情侣酒店熟睡时遭陌生男闯入",
+      "url": "https://www.toutiao.com/trending/7671114588943024170",
+      "hot": "337.6万"
+    },
+    {
+      "title": "70多岁父亲独自坐车到上海看望女儿",
+      "url": "https://www.toutiao.com/trending/7671102765592051763",
+      "hot": "305.5万"
+    },
+    {
+      "title": "台风白海豚或吞并鲸鱼 登陆地点更新",
+      "url": "https://www.toutiao.com/trending/7670771193105743923",
+      "hot": "276.4万"
+    },
+    {
+      "title": "全球为何再次囤积粮食",
+      "url": "https://www.toutiao.com/trending/7670577418826776617",
+      "hot": "250.1万"
+    },
+    {
+      "title": "陕西省委书记赶赴柞水县杏坪镇",
+      "url": "https://www.toutiao.com/trending/7671105885377069119",
+      "hot": "226.3万"
+    },
+    {
+      "title": "女子跳下货车男子追逐 二人系夫妻",
+      "url": "https://www.toutiao.com/trending/7671084798187438118",
+      "hot": "204.8万"
+    },
+    {
+      "title": "立秋的仪式感",
+      "url": "https://www.toutiao.com/trending/7670929851013251108",
+      "hot": "185.3万"
+    },
+    {
+      "title": "谁是宇树科技背后赢家",
+      "url": "https://www.toutiao.com/trending/7671113266424368678",
+      "hot": "167.7万"
+    },
+    {
+      "title": "成都中小学开学时间定了",
+      "url": "https://www.toutiao.com/trending/7670455294563975204",
+      "hot": "151.7万"
+    },
+    {
+      "title": "泰国校园枪击案死亡人数升至7人",
+      "url": "https://www.toutiao.com/trending/7671128044149030922",
+      "hot": "137.3万"
+    },
+    {
+      "title": "男子赴曼谷收“生意回款”失联58天",
+      "url": "https://www.toutiao.com/trending/7671107139330637843",
+      "hot": "124.2万"
+    },
+    {
+      "title": "双胞胎高考同分被哈工大同一专业录取",
+      "url": "https://www.toutiao.com/trending/7670801953521156105",
+      "hot": "112.4万"
+    },
+    {
+      "title": "对话重庆地铁吐血女孩",
+      "url": "https://www.toutiao.com/trending/7670863821283806770",
+      "hot": "101.7万"
+    }
   ]
 }
