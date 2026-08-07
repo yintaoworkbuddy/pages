@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我的主页 · 日期 / 天气 / 新闻</title>
+<title>我的主页 · 日期 / 天气 / 知乎热榜</title>
 <style>
   :root{
     --bg:#f5f6fa; --col:#ffffff; --txt:#1f2330; --sub:#8a90a2;
@@ -37,9 +37,7 @@
   .live{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--green)}
   .live .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.4s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-  .tabs{display:flex;gap:8px}
-  .tab{padding:6px 16px;border-radius:20px;border:1px solid #e3e6ee;background:#f7f8fb;color:var(--sub);font-size:13px;cursor:pointer;transition:.15s}
-  .tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .src-tag{font-size:12px;color:var(--sub);background:#f2f4f8;padding:5px 12px;border-radius:20px}
   .news-list{list-style:none}
   .news-item{display:flex;align-items:center;gap:12px;padding:11px 6px;border-bottom:1px solid #f0f1f5;cursor:pointer;transition:.15s}
   .news-item:last-child{border-bottom:none}
@@ -78,21 +76,18 @@
     </div>
   </div>
 
-  <!-- 新闻板块 -->
+  <!-- 新闻板块：知乎热榜 -->
   <div class="news">
     <div class="news-head">
-      <h2>📰 最新新闻 <span class="live"><span class="dot"></span>实时</span></h2>
-      <div class="tabs">
-        <div class="tab active" data-src="baidu">百度热搜</div>
-        <div class="tab" data-src="weibo">微博热搜</div>
-      </div>
+      <h2>📰 知乎热榜 <span class="live"><span class="dot"></span>实时</span></h2>
+      <span class="src-tag">来源：知乎</span>
     </div>
     <div class="offline-tip" id="offlineTip">⚠️ 实时新闻源连接失败，当前显示离线示例数据</div>
     <ul class="news-list" id="newsList"></ul>
-    <div class="news-status" id="newsStatus">正在加载新闻…</div>
+    <div class="news-status" id="newsStatus">正在加载知乎热榜…</div>
   </div>
 
-  <footer>本页含日期、安庆实时天气与最新新闻 · 部署于 GitHub Pages</footer>
+  <footer>本页含日期、安庆实时天气与知乎热榜 · 部署于 GitHub Pages</footer>
 
 <script>
   // ===== 日期模块 =====
@@ -119,106 +114,60 @@
     });
   })();
 
-  // ===== 新闻模块（多源容错 + CORS 代理）=====
-  const PROXIES=['https://api.allorigins.win/raw?url=','https://api.codetabs.com/v1/proxy/?quest=','https://thingproxy.freeboard.io/fetch/'];
-  const enc=encodeURIComponent;
-  // 每个平台尝试：vvhan 聚合 → 通过多个 CORS 代理取官方源
-  const SRC={
-    baidu:[
-      'https://api.vvhan.com/api/hotlist/baidu',
-      ...PROXIES.map(p=>p+enc('https://top.baidu.com/api/board?platform=wise&tab=realtime'))
-    ],
-    weibo:[
-      'https://api.vvhan.com/api/hotlist/wbHot',
-      ...PROXIES.map(p=>p+enc('https://weibo.com/ajax/side/hotSearch'))
-    ]
-  };
-  let currentTab='baidu';
+  // ===== 新闻模块：知乎热榜（单一主源 + 超时 + 本地兜底）=====
+  const ZHIHU_SRC='https://api.vvhan.com/api/hotlist/zhihu';
+  const TIMEOUT=8000;
 
-  function parse(items){
-    return (items||[]).map((it,i)=>({
-      title:it.title||it.word||it.name||'',
-      url:it.url||it.mobileUrl||'',
-      hot:it.hot||it.hotScore||it.num||it.heat||''
+  function parseZhihu(d){
+    let arr=d.data;
+    if(arr&&!Array.isArray(arr)) arr=arr.data||arr.list||[];
+    return (arr||[]).map(it=>({
+      title:it.title||it.qtitle||it.word||it.name||'',
+      url:it.url||it.mobileUrl||it.link||'',
+      hot:it.hot||it.hotScore||it.heat||''
     })).filter(x=>x.title).slice(0,30);
   }
-  // 百度官方结构：data.cards[].content[].word/url/hotScore
-  function parseBaiduOfficial(d){
-    const out=[];
-    (d.data&&d.data.cards||[]).forEach(c=>(c.content||[]).forEach(x=>{if(x.word)out.push({title:x.word,url:x.url||'',hot:x.hotScore||''});}));
-    return out;
-  }
-  // 微博官方结构：data.realtime[].word/num
-  function parseWeiboOfficial(d){
-    return (d.data&&d.data.realtime||[]).map(x=>({title:x.word,url:'https://s.weibo.com/weibo?q=%23'+encodeURIComponent(x.word)+'%23',hot:x.num||''}));
-  }
 
-  async function fetchOne(url,tab){
-    const r=await fetch(url,{mode:'cors'});
-    const txt=await r.text();
-    let d;try{d=JSON.parse(txt);}catch(e){return null;}
-    // vvhan 聚合：{data:[{title,hot,url}]} 或 {data:{data:[...]}}
-    if(tab==='baidu' && d.data && (Array.isArray(d.data)|| (d.data.data))){
-      const arr=Array.isArray(d.data)?d.data:(d.data.data||[]);
-      const items=parse(arr); if(items.length) return items;
-    }
-    if(tab==='weibo' && d.data && (Array.isArray(d.data)|| (d.data.data))){
-      const arr=Array.isArray(d.data)?d.data:(d.data.data||[]);
-      const items=parse(arr); if(items.length) return items;
-    }
-    // 官方源结构
-    if(tab==='baidu'){const items=parseBaiduOfficial(d);if(items.length)return items;}
-    if(tab==='weibo'){const items=parseWeiboOfficial(d);if(items.length)return items;}
-    return null;
-  }
-
-  async function loadNews(tab){
-    const list=document.getElementById('newsList');
-    const status=document.getElementById('newsStatus');
-    const tip=document.getElementById('offlineTip');
-    list.innerHTML='';status.style.display='block';status.textContent='正在加载新闻…';tip.style.display='none';
-    for(const url of SRC[tab]){
-      try{
-        const items=await fetchOne(url,tab);
-        if(items&&items.length){
-          renderNews(items,tab);status.style.display='none';return;
-        }
-      }catch(e){/* 试下一个源 */}
-    }
-    // 全部失败：尝试本地 news.json 兜底
-    try{
-      const r=await fetch('news.json?t='+Date.now());const j=await r.json();
-      const items=parse(tab==='baidu'?j.baidu:j.weibo);
-      if(items&&items.length){tip.style.display='block';renderNews(items,tab);status.style.display='none';return;}
-    }catch(e){}
-    status.style.display='block';
-    status.innerHTML='实时新闻源连接失败<br><button onclick="loadNews(currentTab)">重试</button>';
-  }
-
-  function renderNews(items,tab){
+  function renderNews(items){
     const list=document.getElementById('newsList');list.innerHTML='';
     items.forEach((it,i)=>{
       const li=document.createElement('li');li.className='news-item';
       const rankCls=i<3?('rank top'+(i+1)):'rank';
       const hot=it.hot?('🔥 '+it.hot):'';
       li.innerHTML=`<span class="${rankCls}">${i+1}</span><span class="title">${it.title}</span><span class="hot">${hot}</span>`;
-      if(it.url)li.onclick=()=>window.open(it.url,'_blank');
+      const go=it.url||('https://www.zhihu.com/search?type=content&q='+encodeURIComponent(it.title));
+      li.onclick=()=>window.open(go,'_blank');
       list.appendChild(li);
     });
   }
 
-  // tab 切换
-  document.querySelectorAll('.tab').forEach(t=>{
-    t.onclick=()=>{
-      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-      t.classList.add('active');currentTab=t.dataset.src;loadNews(currentTab);
-    };
-  });
+  async function loadNews(){
+    const list=document.getElementById('newsList');
+    const status=document.getElementById('newsStatus');
+    const tip=document.getElementById('offlineTip');
+    list.innerHTML='';status.style.display='block';status.textContent='正在加载知乎热榜…';tip.style.display='none';
+    // 1) 主源：vvhan 知乎热榜
+    try{
+      const ctrl=new AbortController();
+      const timer=setTimeout(()=>ctrl.abort(),TIMEOUT);
+      const r=await fetch(ZHIHU_SRC,{mode:'cors',signal:ctrl.signal});
+      clearTimeout(timer);
+      const d=await r.json();
+      const items=parseZhihu(d);
+      if(items.length){renderNews(items);status.style.display='none';return;}
+    }catch(e){/* 走兜底 */}
+    // 2) 兜底：本地 news.json
+    try{
+      const r=await fetch('news.json?t='+Date.now());const j=await r.json();
+      const items=(j.zhihu||[]).filter(x=>x.title).slice(0,30);
+      if(items.length){tip.style.display='block';renderNews(items);status.style.display='none';return;}
+    }catch(e){}
+    status.style.display='block';
+    status.innerHTML='实时新闻源连接失败<br><button onclick="loadNews()">重试</button>';
+  }
 
-  loadNews('baidu');
-  setInterval(()=>loadNews(currentTab),5*60*1000);
-
-  // 离线兜底示例（仅在 fetch 全失败时由 news.json 提供；此处不写死）
+  loadNews();
+  setInterval(loadNews,5*60*1000);
 </script>
 </body>
 </html>
