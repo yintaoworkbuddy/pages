@@ -15,10 +15,21 @@
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
     background:var(--bg); color:var(--txt); padding:28px; min-height:100vh;
   }
-  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}
   header h1{font-size:22px;letter-spacing:.5px}
   header h1 span{color:var(--sub);font-weight:400;font-size:14px;margin-left:8px}
   .meta{color:var(--sub);font-size:13px}
+
+  /* 信息条：日期 + 天气 */
+  .infobar{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+  @media(max-width:760px){.infobar{grid-template-columns:1fr}}
+  .info-card{background:linear-gradient(135deg,#3d7bff,#6aa1ff);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;display:flex;flex-direction:column;gap:6px}
+  .info-card.weather{background:linear-gradient(135deg,#22c08a,#4fd6a6)}
+  .info-card .label{font-size:13px;opacity:.85;display:flex;align-items:center;gap:6px}
+  .info-card .big{font-size:26px;font-weight:700;line-height:1.2}
+  .info-card .small{font-size:13px;opacity:.9}
+  .info-card .icon{font-size:22px}
+
   .board{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   @media(max-width:760px){.board{grid-template-columns:1fr}}
   .col{background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:16px;min-height:240px}
@@ -43,6 +54,21 @@
     <h1>项目看板 <span id="date"></span></h1>
     <div class="meta">拖动卡片可调整 · 由 WorkBuddy 自动部署</div>
   </header>
+
+  <!-- 信息条：日期 + 天气 -->
+  <div class="infobar">
+    <div class="info-card date">
+      <div class="label"><span class="icon">📅</span> 今日日期</div>
+      <div class="big" id="dateBig">加载中…</div>
+      <div class="small" id="dateSmall"></div>
+    </div>
+    <div class="info-card weather">
+      <div class="label"><span class="icon">🌤️</span> 安徽 · 安庆 实时天气</div>
+      <div class="big" id="weatherTemp">加载中…</div>
+      <div class="small" id="weatherDesc"></div>
+    </div>
+  </div>
+
   <div class="board">
     <section class="col todo">
       <h2><span class="dot"></span> 待办 <span class="count" id="c1">0</span></h2>
@@ -57,10 +83,58 @@
       <div id="list3"></div>
     </section>
   </div>
-  <footer>这是一个随机生成的测试看板 · 部署于 EdgeOne Pages</footer>
+  <footer>这是一个随机生成的测试看板 · 部署于 GitHub Pages</footer>
 
 <script>
-  // 随机任务池
+  // ===== 日期模块 =====
+  function renderDate(){
+    const now=new Date();
+    const y=now.getFullYear();
+    const m=now.getMonth()+1;
+    const d=now.getDate();
+    const week=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][now.getDay()];
+    document.getElementById('dateBig').textContent=`${y}年${m}月${d}日`;
+    document.getElementById('dateSmall').textContent=`${week} · 农历信息已略`;
+    document.getElementById('date').textContent=`${y}/${m}/${d}`;
+  }
+  renderDate();
+
+  // ===== 天气模块（Open-Meteo 免费 API，无需密钥）=====
+  const WMO={
+    0:'晴',1:'大致晴朗',2:'局部多云',3:'阴',
+    45:'雾',48:'雾凇',
+    51:'小毛毛雨',53:'毛毛雨',55:'大毛毛雨',
+    56:'冻毛毛雨',57:'强冻毛毛雨',
+    61:'小雨',63:'中雨',65:'大雨',
+    66:'冻雨',67:'强冻雨',
+    71:'小雪',73:'中雪',75:'大雪',77:'雪粒',
+    80:'阵雨',81:'强阵雨',82:'暴雨',
+    85:'阵雪',86:'强阵雪',
+    95:'雷阵雨',96:'雷阵雨伴冰雹',99:'强雷暴伴冰雹'
+  };
+  function renderWeather(){
+    // 安庆市：约 30.51N, 117.05E
+    const url='https://api.open-meteo.com/v1/forecast?latitude=30.51&longitude=117.05&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Asia/Shanghai';
+    fetch(url)
+      .then(r=>r.json())
+      .then(d=>{
+        const c=d.current||{};
+        const code=c.weather_code;
+        const temp=Math.round(c.temperature_2m);
+        document.getElementById('weatherTemp').textContent=`${temp}°C`;
+        document.getElementById('weatherDesc').textContent=
+          `${WMO[code]||'未知'} · 湿度 ${c.relative_humidity_2m}% · 风速 ${c.wind_speed_10m} km/h`;
+      })
+      .catch(()=>{
+        document.getElementById('weatherTemp').textContent='获取失败';
+        document.getElementById('weatherDesc').textContent='网络受限，请检查网络后刷新';
+      });
+  }
+  renderWeather();
+  // 每 10 分钟刷新一次天气
+  setInterval(renderWeather,10*60*1000);
+
+  // ===== 看板（随机任务池）=====
   const pool = [
     {t:"梳理需求文档",d:"与产品确认本期范围与验收标准",tag:"需求",cls:"p"},
     {t:"设计数据库表结构",d:"输出 ER 图并评审通过",tag:"后端",cls:"b"},
@@ -76,10 +150,8 @@
     {t:"移动端适配",d:"完成 iPhone SE 兼容",tag:"前端",cls:"b"}
   ];
   const cols=[document.getElementById('list1'),document.getElementById('list2'),document.getElementById('list3')];
-  // 随机分配数量
   function rnd(n){return Math.floor(Math.random()*n)}
   const shuffled=[...pool].sort(()=>Math.random()-0.5);
-  // 三列大致 4 / 4 / 4
   const split=[4,4,4];
   let idx=0;
   split.forEach((num,ci)=>{
@@ -87,6 +159,7 @@
       const it=shuffled[idx++];
       const el=document.createElement('div');
       el.className='card';
+      el.draggable=true;
       el.innerHTML=`<div class="t">${it.t}</div><div class="d">${it.d}</div><div class="tags"><span class="tag ${it.cls}">${it.tag}</span></div>`;
       cols[ci].appendChild(el);
     }
@@ -94,7 +167,7 @@
   document.getElementById('c1').textContent=cols[0].children.length;
   document.getElementById('c2').textContent=cols[1].children.length;
   document.getElementById('c3').textContent=cols[2].children.length;
-  document.getElementById('date').textContent=new Date().toLocaleDateString('zh-CN');
+
   // 简单拖拽
   let dragEl=null;
   document.querySelectorAll('.card').forEach(c=>{
