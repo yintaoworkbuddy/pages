@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>十月旅行规划</title>
+<!-- 本工作台通过 WorkBuddy 资料库能力（library skill）搭建、存储和部署 -->
+<style>
+:root{
+  --primary:#E67E22;--primary-light:#FDF2E9;--primary-dark:#D35400;
+  --bg:#F5F6FA;--card-bg:#FFFFFF;--text:#2C3E50;--text-light:#95A5A6;--text-muted:#BDC3C7;
+  --border:#E8E8E8;--danger:#E74C3C;--danger-light:#FDEDEC;--success:#27AE60;--success-light:#EAFAF1;
+  --warning:#F39C12;--info:#3498DB;--radius:10px;--shadow:0 2px 8px rgba(0,0,0,.06);
+  --shadow-lg:0 4px 16px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
+button{font-family:inherit;cursor:pointer;border:none;outline:none;transition:all .2s}
+input,select,textarea{font-family:inherit;font-size:16px;outline:none;border:none}
+input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
+
+/* Header */
+.app-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(230,126,34,.3)}
+.app-header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px}
+.header-actions{display:flex;align-items:center;gap:8px}
+.sync-badge{display:flex;align-items:center;gap:5px;font-size:12px;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;white-space:nowrap}
+.sync-badge.offline{background:rgba(231,76,60,.3)}
+.sync-badge.online{background:rgba(39,174,96,.3)}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
+.sync-badge.offline .sync-dot{background:#E74C3C;animation:none}
+.sync-badge.online .sync-dot{background:#2ECC71}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.icon-btn{background:rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.icon-btn:hover{background:rgba(255,255,255,.3)}
+.icon-btn svg{width:18px;height:18px}
+
+/* Container */
+.container{max-width:960px;margin:0 auto;padding:12px 16px}
+
+/* Today Section */
+.today-section{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+.today-section h2{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.today-section h2 svg{width:18px;height:18px;color:var(--primary)}
+.today-empty{color:var(--text-light);font-size:14px;padding:8px 0}
+.today-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;margin-bottom:6px;transition:background .2s}
+.today-item:last-child{margin-bottom:0}
+.today-item.overdue{background:var(--danger-light);border-left:3px solid var(--danger)}
+.today-item.today{background:var(--primary-light);border-left:3px solid var(--primary)}
+.today-item.upcoming{background:#F0F7FD;border-left:3px solid var(--info)}
+.today-item-info{flex:1;min-width:0}
+.today-item-title{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.today-item-meta{font-size:12px;color:var(--text-light);display:flex;gap:8px;align-items:center}
+.today-item-badge{font-size:11px;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.badge-overdue{background:#E74C3C;color:#fff}
+.badge-today{background:var(--primary);color:#fff}
+.badge-upcoming{background:var(--info);color:#fff}
+.today-action{flex-shrink:0;background:#fff;border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text)}
+.today-action:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* Tabs */
+.tabs{display:flex;gap:0;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
+.tab-btn{flex:1;padding:12px 8px;font-size:14px;font-weight:500;color:var(--text-light);background:transparent;display:flex;flex-direction:column;align-items:center;gap:4px;border-bottom:3px solid transparent}
+.tab-btn svg{width:20px;height:20px}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);background:var(--primary-light)}
+.tab-btn:hover:not(.active){color:var(--text)}
+
+/* Module */
+.module{display:none}
+.module.active{display:block}
+
+/* Cards */
+.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.card-title{font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+.card-title svg{width:20px;height:20px;color:var(--primary)}
+
+/* Add Form */
+.add-form{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+.add-form-header{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.add-form-header svg{width:18px;height:18px;color:var(--primary)}
+.form-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.form-field{flex:1;min-width:140px}
+.form-field label{display:block;font-size:12px;color:var(--text-light);margin-bottom:4px;font-weight:500}
+.form-field input,.form-field select,.form-field textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;background:var(--bg);color:var(--text)}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--primary);background:#fff}
+.form-field textarea{resize:vertical;min-height:40px}
+.btn-add{background:var(--primary);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;min-height:44px}
+.btn-add:hover{background:var(--primary-dark)}
+.btn-add svg{width:18px;height:18px}
+
+/* List items */
+.list-item{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;transition:box-shadow .2s}
+.list-item:hover{box-shadow:var(--shadow-lg)}
+.list-item-body{flex:1;min-width:0}
+.list-item-title{font-size:14px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.list-item-meta{font-size:12px;color:var(--text-light);display:flex;gap:10px;flex-wrap:wrap;margin-top:3px;align-items:center}
+.list-item-notes{font-size:12px;color:var(--text-light);margin-top:4px;font-style:italic}
+.list-item-actions{display:flex;gap:6px;flex-shrink:0}
+.list-item-actions button{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--bg)}
+.list-item-actions button:hover{background:var(--primary-light);border-color:var(--primary)}
+.list-item-actions button svg{width:16px;height:16px}
+.list-item-actions .btn-delete:hover{background:var(--danger-light);border-color:var(--danger)}
+.list-item-actions .btn-delete:hover svg{color:var(--danger)}
+.list-item-actions .btn-delete svg{color:var(--text-light)}
+.list-item-actions .btn-check:hover{background:var(--success-light);border-color:var(--success)}
+.list-item-actions .btn-check svg{color:var(--text-light)}
+.list-item-actions .btn-check:hover svg{color:var(--success)}
+.list-item.done .list-item-title{text-decoration:line-through;color:var(--text-light)}
+.list-item.done{opacity:.65}
+.tag{font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg);color:var(--text-light)}
+.tag-expense{background:var(--danger-light);color:var(--danger)}
+.tag-income{background:var(--success-light);color:var(--success)}
+.tag-transport{background:#E8F0FE;color:#1A73E8}
+.tag-hotel{background:#FCE8E6;color:#D93025}
+.tag-food{background:#FEF7E0;color:#F9AB00}
+.tag-ticket{background:#F3E8FD;color:#9334C9}
+.tag-shopping{background:#E6F4EA;color:#137333}
+.tag-other{background:#F1F3F4;color:#5F6368}
+.amount-expense{color:var(--danger);font-weight:600}
+.amount-income{color:var(--success);font-weight:600}
+.priority-high{color:var(--danger)}
+.priority-medium{color:var(--warning)}
+.priority-low{color:var(--text-light)}
+
+/* Budget Summary */
+.budget-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.budget-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;text-align:center}
+.budget-card .label{font-size:12px;color:var(--text-light);margin-bottom:4px}
+.budget-card .value{font-size:22px;font-weight:700}
+.budget-card.expense .value{color:var(--danger)}
+.budget-card.income .value{color:var(--success)}
+.budget-card.balance .value{color:var(--primary)}
+
+/* Pie chart */
+.chart-section{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+.chart-section h3{font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.chart-section h3 svg{width:18px;height:18px;color:var(--primary)}
+.pie-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.pie-chart{flex-shrink:0}
+.pie-legend{flex:1;min-width:180px}
+.pie-legend-item{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px}
+.pie-legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.pie-legend-amount{margin-left:auto;font-weight:600}
+
+/* Destination Board */
+.dest-board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.dest-column{background:var(--bg);border-radius:var(--radius);padding:10px;min-height:120px}
+.dest-column h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.dest-column .count{font-size:11px;color:var(--text-light);background:var(--card-bg);padding:1px 6px;border-radius:10px}
+.dest-card{background:var(--card-bg);border-radius:8px;padding:10px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:pointer;transition:box-shadow .2s}
+.dest-card:hover{box-shadow:var(--shadow)}
+.dest-card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.dest-card-meta{font-size:11px;color:var(--text-light)}
+.dest-card-priority{display:inline-block;font-size:11px;font-weight:600;margin-right:6px}
+
+/* Empty state */
+.empty-state{text-align:center;padding:24px 16px;color:var(--text-light)}
+.empty-state svg{width:48px;height:48px;color:var(--text-muted);margin-bottom:8px}
+.empty-state p{font-size:14px}
+
+/* Backup reminder */
+.backup-reminder{background:#FEF7E0;border:1px solid #F9D972;border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:13px;color:#7A5C00;display:flex;align-items:center;gap:8px}
+.backup-reminder svg{width:18px;height:18px;flex-shrink:0}
+
+/* Modal */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:200;justify-content:center;align-items:flex-start;padding:20px;padding-top:10vh}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);width:100%;max-width:480px;max-height:80vh;overflow-y:auto}
+.modal-header{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-header h3{font-size:16px;font-weight:600}
+.modal-close{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--border)}
+.modal-close:hover{background:var(--danger-light)}
+.modal-close svg{width:16px;height:16px;color:var(--text-light)}
+.modal-body{padding:16px}
+.modal-body .form-field{margin-bottom:12px}
+.modal-footer{padding:16px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+.btn-save{background:var(--primary);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;min-height:44px}
+.btn-save:hover{background:var(--primary-dark)}
+.btn-cancel{background:var(--bg);color:var(--text);padding:10px 20px;border-radius:8px;font-size:14px;border:1px solid var(--border);min-height:44px}
+.btn-cancel:hover{background:var(--border)}
+
+/* Confirm dialog */
+.confirm-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:300;justify-content:center;align-items:center;padding:20px}
+.confirm-overlay.show{display:flex}
+.confirm-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);width:100%;max-width:340px;padding:24px;text-align:center}
+.confirm-box h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.confirm-box p{font-size:14px;color:var(--text-light);margin-bottom:16px}
+.confirm-box .confirm-actions{display:flex;gap:10px;justify-content:center}
+.confirm-box .btn-confirm-danger{background:var(--danger);color:#fff}
+.confirm-box .btn-confirm-danger:hover{background:#C0392B}
+
+/* ===== Overview 行程总览 ===== */
+.overview{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
+.overview h2{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.overview h2 svg{width:18px;height:18px;color:var(--primary)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.stat-card{background:var(--bg);border-radius:8px;padding:9px 4px;text-align:center}
+.stat-value{font-size:18px;font-weight:700;color:var(--primary);line-height:1.3;white-space:nowrap}
+.stat-value small{font-size:11px;font-weight:600}
+.stat-label{font-size:11px;color:var(--text-light)}
+.route-scroll{overflow-x:auto;padding:6px 2px 8px;-webkit-overflow-scrolling:touch}
+.route-map{display:flex;align-items:flex-start;min-width:max-content}
+.route-stop{width:68px;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
+.route-dot{width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--primary);flex-shrink:0}
+.route-stop.daytrip .route-dot{border-color:var(--info)}
+.route-stop.home .route-dot{background:var(--primary)}
+.route-city{font-size:12px;font-weight:600;color:var(--text);margin-top:5px;white-space:nowrap}
+.route-dates{font-size:10px;color:var(--text-light);white-space:nowrap;margin-top:1px}
+.route-nights{font-size:10px;color:var(--primary);font-weight:600;white-space:nowrap}
+.route-seg{width:44px;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
+.seg-line{width:100%;border-top:2px dashed var(--text-muted);margin-top:8px}
+.seg-icon{display:flex;background:var(--card-bg);padding:0 2px;margin-top:-9px}
+.seg-icon svg{width:14px;height:14px}
+.seg-icon.plane{color:var(--info)}
+.seg-icon.train{color:var(--success)}
+.seg-date{font-size:9px;color:var(--text-light);margin-top:2px;white-space:nowrap}
+.route-legend{display:flex;gap:14px;margin-top:6px;padding-top:8px;border-top:1px dashed var(--border);font-size:11px;color:var(--text-light)}
+.route-legend span{display:flex;align-items:center;gap:4px}
+.route-legend svg{width:13px;height:13px}
+.legend-plane{color:var(--info)}
+.legend-train{color:var(--success)}
+.overview-todos{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+.ot-label{font-size:11px;color:var(--text-light);font-weight:600}
+.todo-chip{font-size:11px;background:#FEF7E0;color:#7A5C00;border:1px solid #F9D972;padding:3px 9px;border-radius:12px;white-space:nowrap}
+
+/* Responsive */
+body{-webkit-tap-highlight-color:transparent}
+@media(max-width:768px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .app-header{padding:12px 14px}
+  .app-header h1{font-size:17px}
+  .container{padding:10px 12px}
+  .tabs{position:sticky;top:0;z-index:60;border-radius:0 0 var(--radius) var(--radius)}
+  .route-scroll::after{content:"← 左右滑动查看全程路线 →";display:block;text-align:center;font-size:11px;color:var(--text-light);padding-top:4px}
+  .list-item{padding:12px;gap:8px}
+  .list-item-actions button{width:38px;height:38px}
+  .modal-close{width:38px;height:38px}
+  .budget-summary{grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .budget-card .value{font-size:18px}
+  .dest-board{grid-template-columns:1fr 1fr}
+  .form-row{flex-direction:column}
+  .form-field{min-width:100%}
+  .list-item{flex-wrap:wrap}
+  .tab-btn{font-size:12px;padding:10px 4px}
+  .tab-btn span{font-size:11px}
+  .pie-wrap{flex-direction:column;align-items:center}
+}
+@media(max-width:480px){
+  .budget-summary{grid-template-columns:1fr}
+  .dest-board{grid-template-columns:1fr}
+  .app-header h1{font-size:15px}
+  .header-actions{gap:4px}
+  .sync-badge{font-size:11px;padding:3px 6px}
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--text-muted);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="app-header">
+  <h1>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    十月旅行规划
+  </h1>
+  <div class="header-actions">
+    <div class="sync-badge offline" id="syncBadge">
+      <span class="sync-dot"></span>
+      <span id="syncText">离线模式</span>
+    </div>
+    <button class="icon-btn" id="btnExport" title="导出JSON备份">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </button>
+    <button class="icon-btn" id="btnImport" title="导入恢复">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    </button>
+    <input type="file" id="importFile" accept=".json" style="display:none">
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Overview 行程总览 -->
+  <section class="overview">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h7"/></svg>
+      行程总览 · 10/5 出发 → 10/25 到家
+    </h2>
+    <div class="stats-row" id="statsRow"></div>
+    <div class="route-scroll">
+      <div class="route-map" id="routeMap"></div>
+      <div class="route-legend">
+        <span><svg class="legend-plane" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 19.5l19-7.5L2.5 4.5 2.5 10l13 2-13 2z"/></svg>飞机 5 段</span>
+        <span><svg class="legend-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 10h16"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/><path d="M6 16l-2 4M18 16l2 4"/></svg>高铁 6 段</span>
+      </div>
+    </div>
+    <div class="overview-todos" id="overviewTodos">
+      <span class="ot-label">出行前待办：</span>
+      <span class="todo-chip">港澳通行证签注（2人）</span>
+      <span class="todo-chip">GS7634 出票确认班期</span>
+      <span class="todo-chip">玉龙雪山索道票提前抢</span>
+      <span class="todo-chip">鼓浪屿轮渡票</span>
+    </div>
+  </section>
+
+  <!-- Today Section -->
+  <section class="today-section">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      今天要处理
+    </h2>
+    <div id="todayList"></div>
+  </section>
+
+  <!-- Tabs -->
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="itinerary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="15" r="2"/></svg>
+      <span>行程规划</span>
+    </button>
+    <button class="tab-btn" data-tab="budget">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <span>预算管理</span>
+    </button>
+    <button class="tab-btn" data-tab="destinations">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      <span>目的地看板</span>
+    </button>
+  </nav>
+
+  <!-- Module: Itinerary -->
+  <div class="module active" id="module-itinerary">
+    <div class="add-form">
+      <div class="add-form-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        添加行程
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>日期</label>
+          <input type="date" id="itin-date">
+        </div>
+        <div class="form-field">
+          <label>活动/景点</label>
+          <input type="text" id="itin-title" placeholder="如：故宫博物院">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>交通方式</label>
+          <select id="itin-transport">
+            <option value="">选择交通</option>
+            <option value="地铁">地铁</option>
+            <option value="公交">公交</option>
+            <option value="出租车">出租车</option>
+            <option value="步行">步行</option>
+            <option value="自驾">自驾</option>
+            <option value="高铁">高铁</option>
+            <option value="飞机">飞机</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>状态</label>
+          <select id="itin-status">
+            <option value="待办">待办</option>
+            <option value="进行中">进行中</option>
+            <option value="已完成">已完成</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>备注</label>
+          <textarea id="itin-notes" placeholder="如：上午9点入园，预留3小时"></textarea>
+        </div>
+      </div>
+      <button class="btn-add" id="btnAddItinerary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        添加行程
+      </button>
+    </div>
+    <div id="itineraryList"></div>
+  </div>
+
+  <!-- Module: Budget -->
+  <div class="module" id="module-budget">
+    <div class="budget-summary">
+      <div class="budget-card expense">
+        <div class="label">总支出</div>
+        <div class="value" id="totalExpense">¥0</div>
+      </div>
+      <div class="budget-card income">
+        <div class="label">总收入</div>
+        <div class="value" id="totalIncome">¥0</div>
+      </div>
+      <div class="budget-card balance">
+        <div class="label">结余</div>
+        <div class="value" id="balance">¥0</div>
+      </div>
+    </div>
+
+    <div class="chart-section" id="chartSection">
+      <h3>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+        支出分类
+      </h3>
+      <div class="pie-wrap" id="pieWrap"></div>
+    </div>
+
+    <div class="add-form">
+      <div class="add-form-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        添加收支
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>日期</label>
+          <input type="date" id="bud-date">
+        </div>
+        <div class="form-field">
+          <label>项目名称</label>
+          <input type="text" id="bud-title" placeholder="如：住宿费">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>金额</label>
+          <input type="number" id="bud-amount" placeholder="0" min="0" step="0.01">
+        </div>
+        <div class="form-field">
+          <label>分类</label>
+          <select id="bud-category">
+            <option value="交通">交通</option>
+            <option value="住宿">住宿</option>
+            <option value="餐饮">餐饮</option>
+            <option value="门票">门票</option>
+            <option value="购物">购物</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>类型</label>
+          <select id="bud-type">
+            <option value="支出">支出</option>
+            <option value="收入">收入</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>备注</label>
+          <textarea id="bud-notes" placeholder="可选"></textarea>
+        </div>
+      </div>
+      <button class="btn-add" id="btnAddBudget">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        添加收支
+      </button>
+    </div>
+    <div id="budgetList"></div>
+  </div>
+
+  <!-- Module: Destinations -->
+  <div class="module" id="module-destinations">
+    <div class="add-form">
+      <div class="add-form-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        添加目的地
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>地点名称</label>
+          <input type="text" id="dest-title" placeholder="如：八达岭长城">
+        </div>
+        <div class="form-field">
+          <label>优先级</label>
+          <select id="dest-priority">
+            <option value="高">高</option>
+            <option value="中">中</option>
+            <option value="低">低</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>推荐理由</label>
+          <input type="text" id="dest-reason" placeholder="如：秋季赏叶最佳">
+        </div>
+        <div class="form-field">
+          <label>状态</label>
+          <select id="dest-status">
+            <option value="想去">想去</option>
+            <option value="计划中">计划中</option>
+            <option value="已去">已去</option>
+            <option value="已放弃">已放弃</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>备注</label>
+          <textarea id="dest-notes" placeholder="可选"></textarea>
+        </div>
+      </div>
+      <button class="btn-add" id="btnAddDest">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        添加目的地
+      </button>
+    </div>
+    <div class="dest-board" id="destBoard"></div>
+  </div>
+
+</div>
+
+<!-- Edit Modal -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="editModalTitle">编辑</h3>
+      <button class="modal-close" id="btnCloseModal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="editModalBody"></div>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="btnCancelEdit">取消</button>
+      <button class="btn-save" id="btnSaveEdit">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Dialog -->
+<div class="confirm-overlay" id="confirmDialog">
+  <div class="confirm-box">
+    <h3 id="confirmTitle">确认</h3>
+    <p id="confirmMsg">确定要删除吗？</p>
+    <div class="confirm-actions">
+      <button class="btn-cancel" id="btnConfirmCancel">取消</button>
+      <button class="btn-save btn-confirm-danger" id="btnConfirmOk" style="background:var(--danger);color:#fff">确认</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== Constants ====================
+var DATABASE_ID = "qcCorYe9Ga8ydRwaecinCX";
+var OPTIONS_MAP = {
+  "类型": {
+    "行程规划": { "text": "行程规划", "id": "CsVDtK59O0d7" },
+    "预算管理": { "text": "预算管理", "id": "9blsFJpIbYCE" },
+    "目的地看板": { "text": "目的地看板", "id": "43GUwpsWENMT" }
+  }
+};
+var STORAGE_KEY = "wb_travel_planner_data_v11";
+var syncMode = "offline";
+var allRecords = [];
+var editTarget = null;
+var confirmCallback = null;
+
+// Category colors for pie chart
+var CATEGORY_COLORS = {
+  "交通": "#3498DB",
+  "住宿": "#E74C3C",
+  "餐饮": "#F39C12",
+  "门票": "#9B59B6",
+  "购物": "#27AE60",
+  "其他": "#95A5A6"
+};
+
+// ==================== Utilities ====================
+function getTodayStr() {
+  var d = new Date();
+  var y = d.getFullYear();
+  var m = String(d.getMonth() + 1).padStart(2, "0");
+  var day = String(d.getDate()).padStart(2, "0");
+  return y + "-" + m + "-" + day;
+}
+function getDateStr(days) {
+  var d = new Date();
+  d.setDate(d.getDate() + days);
+  var y = d.getFullYear();
+  var m = String(d.getMonth() + 1).padStart(2, "0");
+  var day = String(d.getDate()).padStart(2, "0");
+  return y + "-" + m + "-" + day;
+}
+function normalizeDate(dateStr) {
+  if (!dateStr) return "";
+  if (typeof dateStr === "string") {
+    return dateStr.substring(0, 10);
+  }
+  return "";
+}
+function formatDate(dateStr) {
+  var d = normalizeDate(dateStr);
+  if (!d) return "";
+  var parts = d.split("-");
+  return parts[1] + "月" + parts[2] + "日";
+}
+function formatMoney(amount) {
+  var n = Number(amount) || 0;
+  return "¥" + n.toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1");
+}
+function escapeHtml(str) {
+  if (!str) return "";
+  var div = document.createElement("div");
+  div.textContent = String(str);
+  return div.innerHTML;
+}
+function genId() {
+  return "local_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6);
+}
+
+// ==================== Data Layer ====================
+function isSdkAvailable() {
+  return typeof window.__SMART_PAGE__ !== "undefined" &&
+         window.__SMART_PAGE__ !== null &&
+         typeof window.__SMART_PAGE__.database !== "undefined" &&
+         window.__SMART_PAGE__.database !== null;
+}
+
+function setSyncMode(mode) {
+  syncMode = mode;
+  var badge = document.getElementById("syncBadge");
+  var text = document.getElementById("syncText");
+  if (mode === "online") {
+    badge.className = "sync-badge online";
+    text.textContent = "已同步";
+  } else if (mode === "syncing") {
+    badge.className = "sync-badge";
+    text.textContent = "同步中";
+  } else {
+    badge.className = "sync-badge offline";
+    text.textContent = "离线模式";
+  }
+}
+
+// Load data: try SDK first, fallback to localStorage
+async function loadData() {
+  setSyncMode("syncing");
+  if (isSdkAvailable()) {
+    try {
+      var db = window.__SMART_PAGE__.database;
+      var result = await db.query({ databaseId: DATABASE_ID, pageSize: 500 });
+      var records = [];
+      if (result && result.results) {
+        for (var i = 0; i < result.results.length; i++) {
+          var row = result.results[i];
+          records.push({
+            id: row._id || row.id || genId(),
+            rid: row._id || row.id || "",
+            type: row["类型"] || "",
+            date: normalizeDate(row["日期"]),
+            title: row["标题"] || "",
+            amount: Number(row["金额"]) || 0,
+            category: row["分类"] || "",
+            status: row["状态"] || "",
+            priority: row["优先级"] || "",
+            notes: row["备注"] || ""
+          });
+        }
+      }
+      allRecords = records;
+      setSyncMode("online");
+      if (allRecords.length === 0) {
+        var cached = localStorage.getItem(STORAGE_KEY);
+        if (cached) {
+          try { allRecords = JSON.parse(cached); } catch(e2) { allRecords = getExampleData(); saveLocal(); }
+        } else {
+          allRecords = getExampleData();
+          saveLocal();
+        }
+      }
+      return;
+    } catch (e) {
+      console.error("SDK query failed, falling back to localStorage", e);
+    }
+  }
+  // Fallback: localStorage
+  var stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    try {
+      allRecords = JSON.parse(stored);
+    } catch (e2) {
+      allRecords = getExampleData();
+    }
+  } else {
+    allRecords = getExampleData();
+    saveLocal();
+  }
+  setSyncMode("offline");
+}
+
+// Save to localStorage
+function saveLocal() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(allRecords));
+}
+
+// Add record
+async function addRecord(record) {
+  if (isSdkAvailable() && syncMode === "online") {
+    try {
+      var db = window.__SMART_PAGE__.database;
+      var properties = buildProperties(record);
+      var result = await db.addRecord({ databaseId: DATABASE_ID, properties: properties });
+      if (result && result.id) {
+        record.id = result.id;
+        record.rid = result.id;
+      }
+    } catch (e) {
+      console.error("SDK addRecord failed", e);
+      record.id = genId();
+    }
+  } else {
+    record.id = genId();
+  }
+  allRecords.push(record);
+  saveLocal();
+  renderAll();
+}
+
+// Update record
+async function updateRecord(id, fields) {
+  var rec = allRecords.find(function(r) { return r.id === id; });
+  if (!rec) return;
+  Object.assign(rec, fields);
+  saveLocal();
+  if (isSdkAvailable() && syncMode === "online" && rec.rid) {
+    try {
+      var db = window.__SMART_PAGE__.database;
+      var properties = buildProperties(rec);
+      await db.updateRecord({ databaseId: DATABASE_ID, recordId: rec.rid, properties: properties });
+    } catch (e) {
+      console.error("SDK updateRecord failed", e);
+    }
+  }
+  renderAll();
+}
+
+// Delete record
+async function deleteRecord(id) {
+  var rec = allRecords.find(function(r) { return r.id === id; });
+  if (!rec) return;
+  allRecords = allRecords.filter(function(r) { return r.id !== id; });
+  saveLocal();
+  if (isSdkAvailable() && syncMode === "online" && rec.rid) {
+    try {
+      var db = window.__SMART_PAGE__.database;
+      await db.deleteRecord({ databaseId: DATABASE_ID, recordId: rec.rid });
+    } catch (e) {
+      console.error("SDK deleteRecord failed", e);
+    }
+  }
+  renderAll();
+}
+
+// Build properties for SDK
+function buildProperties(rec) {
+  var props = {};
+  props["类型"] = { select: OPTIONS_MAP["类型"][rec.type] ? OPTIONS_MAP["类型"][rec.type].id : rec.type };
+  if (rec.date) {
+    props["日期"] = { date: rec.date };
+  } else {
+    props["日期"] = { date: "1970-01-01" };
+  }
+  props["标题"] = { text: rec.title || "" };
+  props["金额"] = { number: rec.amount || 0 };
+  props["分类"] = { text: rec.category || "" };
+  props["状态"] = { text: rec.status || "" };
+  props["优先级"] = { text: rec.priority || "" };
+  props["备注"] = { text: rec.notes || "" };
+  return props;
+}
+
+// ==================== Example Data ====================
+function getExampleData() {
+  var todayStr = getTodayStr();
+  return [
+    // ===== 行程规划（已确定的两段大交通） =====
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-05", title: "【已确定】安庆→池州九华山→西安中转过夜", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "天津航空GS7680 池州16:40→西安约18:30；西安咸阳机场过夜中转约13h，次晨衔接长安航空9H8355飞喀什" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-06", title: "【已确定】抵达喀什", amount: 0, category: "飞机", status: "已确定", priority: "", notes: "长安航空9H8355 西安约08:00→喀什12:10；携程联程票¥1320/人，2人合计¥2640" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-10", title: "【已确定】喀什→重庆（南航CZ2010直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "19:15→23:50，直飞4h35m，¥1370/人（2人¥2740）。携程10/10直飞CZ2010当天到不跨午夜，比10/12 CA4278早2天+只贵¥70/人" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-12", title: "【已确定】重庆→丽江（川航3U8011直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "21:20→22:50，直飞1h30m，¥480/人（2人¥960）。携程10/12查实：3U8011 ¥480 / PN6239 ¥490 / 8L9818 ¥590，全直飞" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-13", title: "丽江·玉龙雪山大索道·蓝月谷·菌子火锅", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "上午大索道→4506m冰川公园（提前在小程序抢票），备氧气瓶+厚外套；下午蓝月谷步行；晚上古城附近菌子火锅🍄" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "【已确定】丽江→南宁（首都航空JD5387直飞 07:00→08:45）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "直飞1h45m，¥370/人（2人¥740）。05:00出发去三义机场（距古城约40min）；10/14唯一直飞（携程复核确认），中转票贵一倍+耗时5-13h" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "南宁：半日休整", amount: 0, category: "市内", status: "已确定", priority: "低", notes: "上午抵南宁，下午中山路/建政路夜市，老友粉、卷筒粉；早休息" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-15", title: "【已确定】南宁→广州（高铁G2955）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "上午可补青秀山，下午南宁东→广州南约4h，晚上抵广州；车次G2955已选定，票价以购票为准" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-16", title: "广州：长隆主题乐园日", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "长隆野生动物世界或欢乐世界（提前线上购票）；晚上可看大马戏或珠江夜景" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-17", title: "顺德：美食一日", amount: 0, category: "美食", status: "已确定", priority: "中", notes: "广州→顺德（广珠城轨/地铁广佛线约30-50min）；清晖园、华盖路步行街；双皮奶、伦教糕、烧鹅、毋米粥" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-18", title: "中国澳门：一日游", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "拱北/横琴口岸过关（带港澳通行证！）；大三巴、恋爱巷、官也街、威尼斯人；晚上返顺德/广州住宿更省" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-19", title: "【已确定】中国香港一日 → 晚赴汕尾（G5660）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "白天太平山/中环/维港夜景；21:44 G5660 香港西九龙→汕尾，二等座¥134/人（当晚最晚班），省一晚香港酒店¥600-900" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-20", title: "汕尾：红海湾+金町湾", amount: 0, category: "海滨", status: "已确定", priority: "中", notes: "红海湾遮浪半岛（南海观世音、海边栈道）→金町湾沙滩→晚上二马路夜市（海鲜、薄饼、菜粿）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-21", title: "【已确定】汕尾→汕头：小公园老城日", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "高铁汕尾→汕头约1h，二等座¥79-94/人；下午小公园骑楼群、老妈宫粽球；傍晚西堤公园看礐石大桥日落；晚上牛肉火锅（八合里海记）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-22", title: "南澳岛：环岛一日", amount: 0, category: "海岛", status: "已确定", priority: "高", notes: "早7点前过跨海大桥避堵；环岛路→青澳湾（北回归线自然之门）→风车山；晚上宿汕头市区" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-23", title: "【已确定】汕头→厦门（高铁直达）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "约1.5h，二等座¥106/人，班次密集；建议早班（如D3114 07:27→09:20），中午到厦门，下午中山路+沙坡尾" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-24", title: "厦门：鼓浪屿一日", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "轮渡提前线上购票（往返¥35/人）；日光岩、菽庄花园、万国建筑；傍晚环岛路骑行/曾厝垵" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-25", title: "【已确定】厦门→安庆（天津航空GS7634直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "高崎T4 14:05→天柱山15:40，1h35m，2人约¥820-1060；上午八市早市吃早餐，中午赴机场。⚠️10/25为民航换季日，出票时确认班期，无票改高铁G1612（厦门北15:18→合肥南21:25+转安庆）保底" },
+
+    // ===== 预算管理（已确定机票） =====
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-05", title: "机票：安庆→喀什（2人，经西安联程）", amount: 2640, category: "交通", status: "支出", priority: "", notes: "携程联程¥1320/人×2" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-10", title: "机票：喀什→重庆（2人，南航CZ2010直飞）", amount: 2740, category: "交通", status: "支出", priority: "", notes: "¥1370/人×2；10/10 19:15→23:50" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-12", title: "机票：重庆→丽江（2人，川航3U8011直飞）", amount: 960, category: "交通", status: "支出", priority: "", notes: "¥480/人×2；10/12 21:20→22:50" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-14", title: "机票：丽江→南宁（2人，首都航空JD5387直飞）", amount: 740, category: "交通", status: "支出", priority: "", notes: "¥370/人×2；10/14 07:00→08:45" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-15", title: "高铁：南宁→广州（2人，G2955）", amount: 400, category: "交通", status: "支出", priority: "", notes: "约¥200/人×2（以购票为准）；南宁东→广州南约4h" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-19", title: "高铁：香港西九龙→汕尾（2人，G5660）", amount: 268, category: "交通", status: "支出", priority: "", notes: "¥134/人×2；10/19 21:44发，当晚最晚班" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-21", title: "高铁：汕尾→汕头（2人）", amount: 170, category: "交通", status: "支出", priority: "", notes: "¥79-94/人×2，约1h" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-23", title: "高铁：汕头→厦门（2人）", amount: 212, category: "交通", status: "支出", priority: "", notes: "¥106/人×2，约1.5h" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-25", title: "机票：厦门→安庆（2人，天津航空GS7634直飞）", amount: 940, category: "交通", status: "支出", priority: "", notes: "¥410-530/人×2（以出票为准）；14:05→15:40；换季日班期需确认，备选高铁G1612约¥1140" },
+
+    // ===== 目的地看板（已确定） =====
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "喀什", amount: 0, category: "南疆古城", status: "已确定", priority: "高", notes: "喀什古城、艾提尕尔清真寺、帕米尔高原" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "重庆", amount: 0, category: "山城美食", status: "已确定", priority: "高", notes: "洪崖洞、长江索道、李子坝、火锅" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "丽江·玉龙雪山", amount: 0, category: "雪山古城", status: "已确定", priority: "高", notes: "玉龙雪山大索道、蓝月谷、丽江古城、菌子火锅" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "南宁", amount: 0, category: "绿城中转", status: "已确定", priority: "中", notes: "中转站，10/14上午抵达，次日高铁赴广州" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "广州·顺德", amount: 0, category: "乐园美食", status: "已确定", priority: "高", notes: "长隆乐园、珠江夜景；顺德双皮奶、烧鹅、清晖园" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "中国澳门", amount: 0, category: "中西街区", status: "已确定", priority: "中", notes: "大三巴、官也街、威尼斯人；10/18一日游" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "中国香港", amount: 0, category: "维港都市", status: "已确定", priority: "高", notes: "太平山、中环、维港夜景；10/19玩1天，晚21:44高铁赴汕尾" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕尾·汕头·南澳", amount: 0, category: "粤东海滨", status: "已确定", priority: "高", notes: "红海湾、二马路夜市、小公园骑楼、牛肉火锅、南澳环岛" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "厦门", amount: 0, category: "文艺海岛", status: "已确定", priority: "中", notes: "10/23下午-10/24全天：鼓浪屿、中山路、环岛路、八市早市；10/25直飞返安庆，20天行程收官" }
+  ];
+}
+
+// ==================== Overview 行程总览 ====================
+var TRIP_START = "2026-10-05";
+var TRIP_END = "2026-10-25";
+var PLANE_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 19.5l19-7.5L2.5 4.5 2.5 10l13 2-13 2z"/></svg>';
+var TRAIN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 10h16"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/><path d="M6 16l-2 4M18 16l2 4"/></svg>';
+var ROUTE_STOPS = [
+  { city: "安庆", dates: "10/5 出发", home: true },
+  { city: "喀什", dates: "10/6-10", nights: "4晚" },
+  { city: "重庆", dates: "10/10-12", nights: "2晚" },
+  { city: "丽江", dates: "10/12-14", nights: "2晚" },
+  { city: "南宁", dates: "10/14-15", nights: "1晚" },
+  { city: "广州·顺德", dates: "10/15-18", nights: "3晚" },
+  { city: "中国澳门", dates: "10/18 当日", daytrip: true },
+  { city: "中国香港", dates: "10/19 一日", daytrip: true },
+  { city: "汕尾", dates: "10/19-21", nights: "2晚" },
+  { city: "汕头·南澳", dates: "10/21-23", nights: "2晚" },
+  { city: "厦门", dates: "10/23-25", nights: "2晚" },
+  { city: "安庆", dates: "10/25 到家", home: true }
+];
+var ROUTE_SEGS = [
+  { type: "plane", date: "10/5" },
+  { type: "plane", date: "10/10" },
+  { type: "plane", date: "10/12" },
+  { type: "plane", date: "10/14" },
+  { type: "train", date: "10/15" },
+  { type: "train", date: "10/18" },
+  { type: "train", date: "10/19" },
+  { type: "train", date: "10/19晚" },
+  { type: "train", date: "10/21" },
+  { type: "train", date: "10/23" },
+  { type: "plane", date: "10/25" }
+];
+
+function renderOverview() {
+  var today = new Date(getTodayStr() + "T00:00:00");
+  var start = new Date(TRIP_START + "T00:00:00");
+  var end = new Date(TRIP_END + "T00:00:00");
+  var oneDay = 86400000;
+  var countHtml;
+  if (today < start) {
+    countHtml = Math.ceil((start - today) / oneDay) + '<small> 天后出发</small>';
+  } else if (today <= end) {
+    countHtml = '<small>Day </small>' + (Math.floor((today - start) / oneDay) + 1) + '<small>/21</small>';
+  } else {
+    countHtml = '<small>行程已收官</small>';
+  }
+
+  var transportSum = 0, transportCount = 0;
+  for (var i = 0; i < allRecords.length; i++) {
+    var r = allRecords[i];
+    if (r.type === "预算管理" && r.category === "交通" && r.status === "支出") {
+      transportSum += r.amount || 0;
+      transportCount++;
+    }
+  }
+
+  document.getElementById("statsRow").innerHTML =
+    '<div class="stat-card"><div class="stat-value">' + countHtml + '</div><div class="stat-label">倒计时</div></div>' +
+    '<div class="stat-card"><div class="stat-value">21<small>天20晚</small></div><div class="stat-label">10 城环线</div></div>' +
+    '<div class="stat-card"><div class="stat-value">' + transportCount + '<small> 段</small></div><div class="stat-label">已定价大交通</div></div>' +
+    '<div class="stat-card"><div class="stat-value">¥' + transportSum.toLocaleString() + '</div><div class="stat-label">2人交通支出</div></div>';
+
+  var html = "";
+  for (var j = 0; j < ROUTE_STOPS.length; j++) {
+    var s = ROUTE_STOPS[j];
+    var cls = "route-stop" + (s.home ? " home" : "") + (s.daytrip ? " daytrip" : "");
+    html += '<div class="' + cls + '" title="' + s.city + ' ' + s.dates + (s.nights ? " " + s.nights : "") + '">';
+    html += '<div class="route-dot"></div>';
+    html += '<div class="route-city">' + s.city + '</div>';
+    html += '<div class="route-dates">' + s.dates + '</div>';
+    if (s.nights) html += '<div class="route-nights">' + s.nights + '</div>';
+    html += '</div>';
+    if (j < ROUTE_SEGS.length) {
+      var g = ROUTE_SEGS[j];
+      html += '<div class="route-seg"><div class="seg-line"></div><div class="seg-icon ' + g.type + '">' + (g.type === "plane" ? PLANE_ICON : TRAIN_ICON) + '</div><div class="seg-date">' + g.date + '</div></div>';
+    }
+  }
+  document.getElementById("routeMap").innerHTML = html;
+}
+
+// ==================== Render Functions ====================
+function renderAll() {
+  renderOverview();
+  renderToday();
+  renderItinerary();
+  renderBudget();
+  renderDestinations();
+  checkBackupReminder();
+}
+
+function renderToday() {
+  var container = document.getElementById("todayList");
+  var today = getTodayStr();
+  var upcoming = getDateStr(3);
+  var items = [];
+
+  for (var i = 0; i < allRecords.length; i++) {
+    var r = allRecords[i];
+    if (r.type !== "行程规划") continue;
+    if (!r.date || r.date === "1970-01-01") continue;
+    if (r.status === "已完成" || r.status === "已去" || r.status === "已放弃") continue;
+    if (r.type === "预算管理") continue;
+
+    var cls = "";
+    var badge = "";
+    var badgeText = "";
+    if (r.date < today) {
+      cls = "overdue";
+      badge = "badge-overdue";
+      badgeText = "逾期";
+    } else if (r.date === today) {
+      cls = "today";
+      badge = "badge-today";
+      badgeText = "今天";
+    } else if (r.date <= upcoming) {
+      cls = "upcoming";
+      badge = "badge-upcoming";
+      badgeText = "即将到期";
+    } else {
+      continue;
+    }
+    items.push({ record: r, cls: cls, badge: badge, badgeText: badgeText });
+  }
+
+  items.sort(function(a, b) {
+    return a.record.date.localeCompare(b.record.date);
+  });
+
+  if (items.length === 0) {
+    container.innerHTML = '<div class="today-empty">暂无待处理事项，一切就绪！</div>';
+    return;
+  }
+
+  var html = "";
+  for (var j = 0; j < items.length; j++) {
+    var item = items[j];
+    var r = item.record;
+    var actionText = r.status === "待办" ? "开始" : "完成";
+    html += '<div class="today-item ' + item.cls + '">'
+      + '<div class="today-item-info">'
+      +   '<div class="today-item-title">' + escapeHtml(r.title) + '</div>'
+      +   '<div class="today-item-meta">'
+      +     '<span class="today-item-badge ' + item.badge + '">' + item.badgeText + '</span>'
+      +     '<span>' + formatDate(r.date) + '</span>'
+      +     (r.category ? '<span>· ' + escapeHtml(r.category) + '</span>' : '')
+      +   '</div>'
+      + '</div>'
+      + '<button class="today-action" data-id="' + r.id + '" data-action="quick">' + actionText + '</button>'
+      + '</div>';
+  }
+  container.innerHTML = html;
+
+  var btns = container.querySelectorAll(".today-action");
+  for (var k = 0; k < btns.length; k++) {
+    btns[k].addEventListener("click", function(e) {
+      var id = this.getAttribute("data-id");
+      var rec = allRecords.find(function(r) { return r.id === id; });
+      if (!rec) return;
+      if (rec.status === "待办") {
+        updateRecord(id, { status: "进行中" });
+      } else if (rec.status === "进行中") {
+        updateRecord(id, { status: "已完成" });
+      } else {
+        updateRecord(id, { status: "待办" });
+      }
+    });
+  }
+}
+
+function renderItinerary() {
+  var container = document.getElementById("itineraryList");
+  var items = allRecords.filter(function(r) { return r.type === "行程规划"; });
+  items.sort(function(a, b) {
+    return (a.date || "9999").localeCompare(b.date || "9999");
+  });
+
+  if (items.length === 0) {
+    container.innerHTML = '<div class="empty-state">'
+      + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+      + '<p>还没有行程，点击上方添加</p></div>';
+    return;
+  }
+
+  var html = "";
+  for (var i = 0; i < items.length; i++) {
+    var r = items[i];
+    var done = r.status === "已完成";
+    html += '<div class="list-item' + (done ? " done" : "") + '">'
+      + '<div class="list-item-body">'
+      +   '<div class="list-item-title">'
+      +     escapeHtml(r.title)
+      +     (r.status === "待办" ? '<span class="tag">待办</span>' : "")
+      +     (r.status === "进行中" ? '<span class="tag" style="background:var(--warning);color:#fff">进行中</span>' : "")
+      +     (done ? '<span class="tag" style="background:var(--success-light);color:var(--success)">已完成</span>' : "")
+      +   '</div>'
+      +   '<div class="list-item-meta">'
+      +     (r.date ? '<span>' + formatDate(r.date) + '</span>' : '')
+      +     (r.category ? '<span>交通: ' + escapeHtml(r.category) + '</span>' : '')
+      +   '</div>'
+      +   (r.notes ? '<div class="list-item-notes">' + escapeHtml(r.notes) + '</div>' : '')
+      + '</div>'
+      + '<div class="list-item-actions">'
+      +   '<button class="btn-check" data-id="' + r.id + '" data-action="toggle" title="标记完成">'
+      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+      +   '</button>'
+      +   '<button data-id="' + r.id + '" data-action="edit-itin" title="编辑">'
+      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'
+      +   '</button>'
+      +   '<button class="btn-delete" data-id="' + r.id + '" data-action="delete" title="删除">'
+      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+      +   '</button>'
+      + '</div>'
+      + '</div>';
+  }
+  container.innerHTML = html;
+  bindListActions(container, "itinerary");
+}
+
+function renderBudget() {
+  var items = allRecords.filter(function(r) { return r.type === "预算管理"; });
+  items.sort(function(a, b) {
+    return (b.date || "").localeCompare(a.date || "");
+  });
+
+  var totalExp = 0, totalInc = 0;
+  var catTotals = {};
+  for (var i = 0; i < items.length; i++) {
+    var r = items[i];
+    if (r.status === "支出") {
+      totalExp += r.amount;
+      if (!catTotals[r.category]) catTotals[r.category] = 0;
+      catTotals[r.category] += r.amount;
+    } else if (r.status === "收入") {
+      totalInc += r.amount;
+    }
+  }
+  document.getElementById("totalExpense").textContent = formatMoney(totalExp);
+  document.getElementById("totalIncome").textContent = formatMoney(totalInc);
+  document.getElementById("balance").textContent = formatMoney(totalInc - totalExp);
+
+  renderPieChart(catTotals, totalExp);
+
+  var container = document.getElementById("budgetList");
+  if (items.length === 0) {
+    container.innerHTML = '<div class="empty-state">'
+      + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>'
+      + '<p>还没有收支记录，点击上方添加</p></div>';
+    return;
+  }
+
+  var html = "";
+  for (var j = 0; j < items.length; j++) {
+    var r = items[j];
+    var isExp = r.status === "支出";
+    var catClass = "tag-other";
+    var catLower = (r.category || "").toLowerCase();
+    if (catLower.indexOf("交通") >= 0 || catLower.indexOf("机票") >= 0) catClass = "tag-transport";
+    else if (catLower.indexOf("住宿") >= 0 || catLower.indexOf("酒店") >= 0) catClass = "tag-hotel";
+    else if (catLower.indexOf("餐饮") >= 0 || catLower.indexOf("吃") >= 0) catClass = "tag-food";
+    else if (catLower.indexOf("门票") >= 0) catClass = "tag-ticket";
+    else if (catLower.indexOf("购物") >= 0) catClass = "tag-shopping";
+
+    html += '<div class="list-item">'
+      + '<div class="list-item-body">'
+      +   '<div class="list-item-title">'
+      +     escapeHtml(r.title)
+      +     '<span class="tag ' + (isExp ? "tag-expense" : "tag-income") + '">' + escapeHtml(r.status) + '</span>'
+      +     '<span class="tag ' + catClass + '">' + escapeHtml(r.category) + '</span>'
+      +   '</div>'
+      +   '<div class="list-item-meta">'
+      +     (r.date ? '<span>' + formatDate(r.date) + '</span>' : '')
+      +     '<span class="' + (isExp ? "amount-expense" : "amount-income") + '">' + (isExp ? "-" : "+") + formatMoney(r.amount) + '</span>'
+      +   '</div>'
+      +   (r.notes ? '<div class="list-item-notes">' + escapeHtml(r.notes) + '</div>' : '')
+      + '</div>'
+      + '<div class="list-item-actions">'
+      +   '<button data-id="' + r.id + '" data-action="edit-bud" title="编辑">'
+      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'
+      +   '</button>'
+      +   '<button class="btn-delete" data-id="' + r.id + '" data-action="delete" title="删除">'
+      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+      +   '</button>'
+      + '</div>'
+      + '</div>';
+  }
+  container.innerHTML = html;
+  bindListActions(container, "budget");
+}
+
+function renderPieChart(catTotals, total) {
+  var wrap = document.getElementById("pieWrap");
+  if (total <= 0) {
+    wrap.innerHTML = '<div class="empty-state" style="padding:12px"><p>暂无支出数据</p></div>';
+    return;
+  }
+
+  var cats = Object.keys(catTotals).filter(function(c) { return catTotals[c] > 0; });
+  if (cats.length === 0) {
+    wrap.innerHTML = '<div class="empty-state" style="padding:12px"><p>暂无支出数据</p></div>';
+    return;
+  }
+
+  var radius = 60;
+  var cx = 70, cy = 70;
+  var circumference = 2 * Math.PI * radius;
+  var offset = 0;
+  var svgParts = '<svg class="pie-chart" width="140" height="140" viewBox="0 0 140 140">';
+  var legendHtml = "";
+
+  for (var i = 0; i < cats.length; i++) {
+    var cat = cats[i];
+    var val = catTotals[cat];
+    var pct = val / total;
+    var color = CATEGORY_COLORS[cat] || "#95A5A6";
+    var dashLen = circumference * pct;
+    svgParts += '<circle cx="' + cx + '" cy="' + cy + '" r="' + radius + '" fill="none" stroke="' + color + '" stroke-width="20" stroke-dasharray="' + dashLen + ' ' + (circumference - dashLen) + '" stroke-dashoffset="' + (-offset) + '" transform="rotate(-90 ' + cx + ' ' + cy + ')"/>';
+    offset += dashLen;
+    legendHtml += '<div class="pie-legend-item">'
+      + '<div class="pie-legend-dot" style="background:' + color + '"></div>'
+      + '<span>' + escapeHtml(cat) + '</span>'
+      + '<span class="pie-legend-amount">' + formatMoney(val) + ' (' + (pct * 100).toFixed(1) + '%)</span>'
+      + '</div>';
+  }
+  svgParts += '<text x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle" font-size="14" font-weight="700" fill="#2C3E50">' + formatMoney(total).replace("¥", "¥") + '</text>';
+  svgParts += '</svg>';
+
+  wrap.innerHTML = '<div class="pie-chart">' + svgParts + '</div><div class="pie-legend">' + legendHtml + '</div>';
+}
+
+function renderDestinations() {
+  var container = document.getElementById("destBoard");
+  var items = allRecords.filter(function(r) { return r.type === "目的地看板"; });
+  var columns = {
+    "想去": [],
+    "计划中": [],
+    "已去": [],
+    "已放弃": []
+  };
+  for (var i = 0; i < items.length; i++) {
+    var r = items[i];
+    var col = columns[r.status] || columns["想去"];
+    col.push(r);
+  }
+
+  var html = "";
+  var colKeys = ["想去", "计划中", "已去", "已放弃"];
+  for (var ci = 0; ci < colKeys.length; ci++) {
+    var key = colKeys[ci];
+    var colItems = columns[key];
+    html += '<div class="dest-column">'
+      + '<h4>' + key + ' <span class="count">' + colItems.length + '</span></h4>';
+    for (var j = 0; j < colItems.length; j++) {
+      var r = colItems[j];
+      var priClass = r.priority === "高" ? "priority-high" : (r.priority === "中" ? "priority-medium" : "priority-low");
+      html += '<div class="dest-card" data-id="' + r.id + '" data-action="edit-dest">'
+        + '<div class="dest-card-title">'
+        +   '<span class="dest-card-priority ' + priClass + '">' + escapeHtml(r.priority) + '</span>'
+        +   escapeHtml(r.title)
+        + '</div>'
+        + '<div class="dest-card-meta">' + escapeHtml(r.category || "") + '</div>'
+        + (r.notes ? '<div class="dest-card-meta">' + escapeHtml(r.notes) + '</div>' : '')
+        + '</div>';
+    }
+    html += '</div>';
+  }
+  container.innerHTML = html;
+
+  var cards = container.querySelectorAll(".dest-card");
+  for (var k = 0; k < cards.length; k++) {
+    cards[k].addEventListener("click", function() {
+      var id = this.getAttribute("data-id");
+      openEditModal(id, "dest");
+    });
+  }
+}
+
+// ==================== List Actions ====================
+function bindListActions(container, moduleType) {
+  var btns = container.querySelectorAll("button[data-action]");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function(e) {
+      e.stopPropagation();
+      var id = this.getAttribute("data-id");
+      var action = this.getAttribute("data-action");
+
+      if (action === "toggle") {
+        var rec = allRecords.find(function(r) { return r.id === id; });
+        if (!rec) return;
+        if (rec.status === "已完成") {
+          updateRecord(id, { status: "待办" });
+        } else {
+          updateRecord(id, { status: "已完成" });
+        }
+      } else if (action === "edit-itin") {
+        openEditModal(id, "itinerary");
+      } else if (action === "edit-bud") {
+        openEditModal(id, "budget");
+      } else if (action === "edit-dest") {
+        openEditModal(id, "dest");
+      } else if (action === "delete") {
+        showConfirm("删除确认", "确定要删除这条记录吗？此操作不可撤销。", function() {
+          deleteRecord(id);
+        });
+      }
+    });
+  }
+}
+
+// ==================== Edit Modal ====================
+function openEditModal(id, type) {
+  var rec = allRecords.find(function(r) { return r.id === id; });
+  if (!rec) return;
+  editTarget = rec;
+
+  var body = document.getElementById("editModalBody");
+  var title = document.getElementById("editModalTitle");
+  title.textContent = "编辑" + (type === "itinerary" ? "行程" : type === "budget" ? "收支" : "目的地");
+
+  var html = "";
+  if (type === "itinerary") {
+    html = '<div class="form-field"><label>日期</label><input type="date" id="edit-date" value="' + escapeHtml(rec.date) + '"></div>'
+      + '<div class="form-field"><label>活动/景点</label><input type="text" id="edit-title" value="' + escapeHtml(rec.title) + '"></div>'
+      + '<div class="form-field"><label>交通方式</label><select id="edit-category">'
+      + transportOptions(rec.category)
+      + '</select></div>'
+      + '<div class="form-field"><label>状态</label><select id="edit-status">'
+      + '<option value="待办"' + (rec.status === "待办" ? " selected" : "") + '>待办</option>'
+      + '<option value="进行中"' + (rec.status === "进行中" ? " selected" : "") + '>进行中</option>'
+      + '<option value="已完成"' + (rec.status === "已完成" ? " selected" : "") + '>已完成</option>'
+      + '</select></div>'
+      + '<div class="form-field"><label>备注</label><textarea id="edit-notes">' + escapeHtml(rec.notes) + '</textarea></div>';
+  } else if (type === "budget") {
+    html = '<div class="form-field"><label>日期</label><input type="date" id="edit-date" value="' + escapeHtml(rec.date) + '"></div>'
+      + '<div class="form-field"><label>项目名称</label><input type="text" id="edit-title" value="' + escapeHtml(rec.title) + '"></div>'
+      + '<div class="form-row">'
+      + '<div class="form-field"><label>金额</label><input type="number" id="edit-amount" value="' + rec.amount + '" min="0" step="0.01"></div>'
+      + '<div class="form-field"><label>分类</label><select id="edit-category">'
+      + budgetCategoryOptions(rec.category)
+      + '</select></div>'
+      + '</div>'
+      + '<div class="form-field"><label>类型</label><select id="edit-status">'
+      + '<option value="支出"' + (rec.status === "支出" ? " selected" : "") + '>支出</option>'
+      + '<option value="收入"' + (rec.status === "收入" ? " selected" : "") + '>收入</option>'
+      + '</select></div>'
+      + '<div class="form-field"><label>备注</label><textarea id="edit-notes">' + escapeHtml(rec.notes) + '</textarea></div>';
+  } else {
+    html = '<div class="form-field"><label>地点名称</label><input type="text" id="edit-title" value="' + escapeHtml(rec.title) + '"></div>'
+      + '<div class="form-row">'
+      + '<div class="form-field"><label>优先级</label><select id="edit-priority">'
+      + '<option value="高"' + (rec.priority === "高" ? " selected" : "") + '>高</option>'
+      + '<option value="中"' + (rec.priority === "中" ? " selected" : "") + '>中</option>'
+      + '<option value="低"' + (rec.priority === "低" ? " selected" : "") + '>低</option>'
+      + '</select></div>'
+      + '<div class="form-field"><label>状态</label><select id="edit-status">'
+      + '<option value="想去"' + (rec.status === "想去" ? " selected" : "") + '>想去</option>'
+      + '<option value="计划中"' + (rec.status === "计划中" ? " selected" : "") + '>计划中</option>'
+      + '<option value="已去"' + (rec.status === "已去" ? " selected" : "") + '>已去</option>'
+      + '<option value="已放弃"' + (rec.status === "已放弃" ? " selected" : "") + '>已放弃</option>'
+      + '</select></div>'
+      + '</div>'
+      + '<div class="form-field"><label>推荐理由</label><input type="text" id="edit-category" value="' + escapeHtml(rec.category) + '"></div>'
+      + '<div class="form-field"><label>备注</label><textarea id="edit-notes">' + escapeHtml(rec.notes) + '</textarea></div>';
+  }
+
+  body.innerHTML = html;
+  document.getElementById("editModal").classList.add("show");
+
+  document.getElementById("btnSaveEdit").onclick = function() {
+    var fields = {};
+    var editDate = document.getElementById("edit-date");
+    var editTitle = document.getElementById("edit-title");
+    var editCategory = document.getElementById("edit-category");
+    var editStatus = document.getElementById("edit-status");
+    var editNotes = document.getElementById("edit-notes");
+
+    if (editDate) fields.date = editDate.value;
+    if (editTitle) fields.title = editTitle.value;
+    if (editCategory) fields.category = editCategory.value;
+    if (editStatus) fields.status = editStatus.value;
+    if (editNotes) fields.notes = editNotes.value;
+
+    if (type === "budget") {
+      var editAmount = document.getElementById("edit-amount");
+      if (editAmount) fields.amount = Number(editAmount.value) || 0;
+    }
+    if (type === "dest") {
+      var editPriority = document.getElementById("edit-priority");
+      if (editPriority) fields.priority = editPriority.value;
+    }
+
+    updateRecord(editTarget.id, fields);
+    closeEditModal();
+  };
+}
+
+function closeEditModal() {
+  document.getElementById("editModal").classList.remove("show");
+  editTarget = null;
+}
+
+function transportOptions(selected) {
+  var opts = ["地铁", "公交", "出租车", "步行", "自驾", "高铁", "飞机"];
+  var html = "";
+  for (var i = 0; i < opts.length; i++) {
+    html += '<option value="' + opts[i] + '"' + (selected === opts[i] ? " selected" : "") + '>' + opts[i] + '</option>';
+  }
+  return html;
+}
+function budgetCategoryOptions(selected) {
+  var opts = ["交通", "住宿", "餐饮", "门票", "购物", "其他"];
+  var html = "";
+  for (var i = 0; i < opts.length; i++) {
+    html += '<option value="' + opts[i] + '"' + (selected === opts[i] ? " selected" : "") + '>' + opts[i] + '</option>';
+  }
+  return html;
+}
+
+// ==================== Confirm Dialog ====================
+function showConfirm(title, msg, callback) {
+  document.getElementById("confirmTitle").textContent = title;
+  document.getElementById("confirmMsg").textContent = msg;
+  confirmCallback = callback;
+  document.getElementById("confirmDialog").classList.add("show");
+}
+
+// ==================== Backup Reminder ====================
+function checkBackupReminder() {
+  var existing = document.querySelector(".backup-reminder");
+  if (allRecords.length >= 30 && !existing) {
+    var reminder = document.createElement("div");
+    reminder.className = "backup-reminder";
+    reminder.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg>数据已积累 ' + allRecords.length + ' 条，建议导出备份';
+    var container = document.querySelector(".container");
+    container.insertBefore(reminder, container.firstChild);
+  } else if (allRecords.length < 30 && existing) {
+    existing.remove();
+  }
+}
+
+// ==================== Export / Import ====================
+function exportData() {
+  var data = JSON.stringify(allRecords, null, 2);
+  var blob = new Blob([data], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "travel_planner_backup_" + getTodayStr() + ".json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importData(file) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      if (!Array.isArray(data)) {
+        alert("文件格式不正确：需要JSON数组");
+        return;
+      }
+      showConfirm("导入确认", "导入将覆盖当前所有数据（" + allRecords.length + "条），确定继续吗？", function() {
+        allRecords = data.map(function(r) {
+          return {
+            id: r.id || genId(),
+            rid: r.rid || "",
+            type: r.type || "",
+            date: r.date || "",
+            title: r.title || "",
+            amount: Number(r.amount) || 0,
+            category: r.category || "",
+            status: r.status || "",
+            priority: r.priority || "",
+            notes: r.notes || ""
+          };
+        });
+        saveLocal();
+        renderAll();
+      });
+    } catch (err) {
+      alert("导入失败：文件解析错误");
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ==================== Init ====================
+function init() {
+  // Set default dates
+  var today = getTodayStr();
+  document.getElementById("itin-date").value = "2026-10-01";
+  document.getElementById("bud-date").value = today;
+
+  // Tab switching
+  var tabBtns = document.querySelectorAll(".tab-btn");
+  for (var i = 0; i < tabBtns.length; i++) {
+    tabBtns[i].addEventListener("click", function() {
+      for (var j = 0; j < tabBtns.length; j++) {
+        tabBtns[j].classList.remove("active");
+      }
+      this.classList.add("active");
+      var tab = this.getAttribute("data-tab");
+      var modules = document.querySelectorAll(".module");
+      for (var k = 0; k < modules.length; k++) {
+        modules[k].classList.remove("active");
+      }
+      document.getElementById("module-" + tab).classList.add("active");
+    });
+  }
+
+  // Add buttons
+  document.getElementById("btnAddItinerary").addEventListener("click", function() {
+    var date = document.getElementById("itin-date").value;
+    var title = document.getElementById("itin-title").value.trim();
+    var transport = document.getElementById("itin-transport").value;
+    var status = document.getElementById("itin-status").value;
+    var notes = document.getElementById("itin-notes").value.trim();
+    if (!title) { alert("请输入活动/景点名称"); return; }
+    addRecord({
+      type: "行程规划", date: date, title: title, amount: 0,
+      category: transport, status: status, priority: "", notes: notes
+    });
+    document.getElementById("itin-title").value = "";
+    document.getElementById("itin-notes").value = "";
+    document.getElementById("itin-transport").selectedIndex = 0;
+    document.getElementById("itin-status").selectedIndex = 0;
+  });
+
+  document.getElementById("btnAddBudget").addEventListener("click", function() {
+    var date = document.getElementById("bud-date").value;
+    var title = document.getElementById("bud-title").value.trim();
+    var amount = Number(document.getElementById("bud-amount").value) || 0;
+    var category = document.getElementById("bud-category").value;
+    var type = document.getElementById("bud-type").value;
+    var notes = document.getElementById("bud-notes").value.trim();
+    if (!title) { alert("请输入项目名称"); return; }
+    if (amount <= 0) { alert("请输入有效金额"); return; }
+    addRecord({
+      type: "预算管理", date: date, title: title, amount: amount,
+      category: category, status: type, priority: "", notes: notes
+    });
+    document.getElementById("bud-title").value = "";
+    document.getElementById("bud-amount").value = "";
+    document.getElementById("bud-notes").value = "";
+  });
+
+  document.getElementById("btnAddDest").addEventListener("click", function() {
+    var title = document.getElementById("dest-title").value.trim();
+    var reason = document.getElementById("dest-reason").value.trim();
+    var priority = document.getElementById("dest-priority").value;
+    var status = document.getElementById("dest-status").value;
+    var notes = document.getElementById("dest-notes").value.trim();
+    if (!title) { alert("请输入地点名称"); return; }
+    addRecord({
+      type: "目的地看板", date: "", title: title, amount: 0,
+      category: reason, status: status, priority: priority, notes: notes
+    });
+    document.getElementById("dest-title").value = "";
+    document.getElementById("dest-reason").value = "";
+    document.getElementById("dest-notes").value = "";
+    document.getElementById("dest-status").selectedIndex = 0;
+  });
+
+  // Export/Import
+  document.getElementById("btnExport").addEventListener("click", exportData);
+  document.getElementById("btnImport").addEventListener("click", function() {
+    document.getElementById("importFile").click();
+  });
+  document.getElementById("importFile").addEventListener("change", function() {
+    if (this.files.length > 0) {
+      importData(this.files[0]);
+      this.value = "";
+    }
+  });
+
+  // Modal close
+  document.getElementById("btnCloseModal").addEventListener("click", closeEditModal);
+  document.getElementById("btnCancelEdit").addEventListener("click", closeEditModal);
+  document.getElementById("editModal").addEventListener("click", function(e) {
+    if (e.target === this) closeEditModal();
+  });
+
+  // Confirm dialog
+  document.getElementById("btnConfirmCancel").addEventListener("click", function() {
+    document.getElementById("confirmDialog").classList.remove("show");
+    confirmCallback = null;
+  });
+  document.getElementById("btnConfirmOk").addEventListener("click", function() {
+    document.getElementById("confirmDialog").classList.remove("show");
+    if (confirmCallback) confirmCallback();
+    confirmCallback = null;
+  });
+
+  // Load data and render
+  loadData().then(function() {
+    renderAll();
+  });
+}
+
+// Start
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>
