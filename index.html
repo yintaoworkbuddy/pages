@@ -30,6 +30,24 @@
   .info-card .small{font-size:13px;opacity:.9}
   .info-card .icon{font-size:22px}
 
+  /* 日历卡 */
+  .cal-card{gap:8px}
+  .cal-head{display:flex;align-items:center;justify-content:space-between}
+  .cal-title{font-size:17px;font-weight:700;letter-spacing:.5px}
+  .cal-nav{width:28px;height:28px;border-radius:8px;border:none;background:rgba(255,255,255,.22);color:#fff;font-size:17px;cursor:pointer;line-height:1;transition:.15s;padding:0}
+  .cal-nav:hover{background:rgba(255,255,255,.4)}
+  .cal-week{display:grid;grid-template-columns:repeat(7,1fr);font-size:11px;opacity:.85;text-align:center;margin-top:2px}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+  .cal-cell{height:26px;display:flex;align-items:center;justify-content:center;font-size:12.5px;border-radius:7px;position:relative}
+  .cal-cell.dim{visibility:hidden}
+  .cal-cell.wk{opacity:.75}
+  .cal-cell.today{background:#fff;color:var(--blue);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+  .cal-cell.trip{background:rgba(255,255,255,.28);font-weight:600}
+  .cal-cell.trip::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#ffd76e}
+  .cal-cell.today.trip{color:#e67e22}
+  .cal-today{font-size:12px;opacity:.92;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
+  .cal-today .trip-legend{opacity:.95}
+
   /* 旅行工作台入口 */
   .trip-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#e67e22,#f0932b);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;text-decoration:none;margin-bottom:22px;transition:transform .15s,box-shadow .15s}
   .trip-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(230,126,34,.35)}
@@ -77,10 +95,15 @@
 
   <!-- 信息条：日期 + 天气 -->
   <div class="infobar">
-    <div class="info-card date">
-      <div class="label"><span class="icon">📅</span> 今日日期</div>
-      <div class="big" id="dateBig">加载中…</div>
-      <div class="small" id="dateSmall"></div>
+    <div class="info-card date cal-card">
+      <div class="cal-head">
+        <button class="cal-nav" id="calPrev" title="上个月">‹</button>
+        <div class="cal-title" id="calTitle">加载中…</div>
+        <button class="cal-nav" id="calNext" title="下个月">›</button>
+      </div>
+      <div class="cal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-today" id="calToday"></div>
     </div>
     <div class="info-card weather">
       <div class="label"><span class="icon">🌤️</span> 安徽 · 安庆 实时天气</div>
@@ -121,14 +144,47 @@
   </footer>
 
 <script>
-  // ===== 日期模块 =====
+  // ===== 日历模块（月历 + 今日高亮 + 行程标注）=====
   (function(){
-    const now=new Date();
-    const y=now.getFullYear(),m=now.getMonth()+1,d=now.getDate();
-    const week=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][now.getDay()];
-    document.getElementById('dateBig').textContent=`${y}年${m}月${d}日`;
-    document.getElementById('dateSmall').textContent=`${week}`;
-    document.getElementById('date').textContent=`${y}/${m}/${d}`;
+    const TRIP_START=new Date(2026,9,5), TRIP_END=new Date(2026,9,25); // 十月行程 10/5–10/25
+    const grid=document.getElementById('calGrid');
+    const title=document.getElementById('calTitle');
+    const today=new Date();
+    const view=new Date(today.getFullYear(),today.getMonth(),1);
+    const WEEKS=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+
+    function isToday(d){return d.getFullYear()===today.getFullYear()&&d.getMonth()===today.getMonth()&&d.getDate()===today.getDate();}
+    function inTrip(d){return d>=TRIP_START&&d<=TRIP_END;}
+
+    function render(){
+      const y=view.getFullYear(),m=view.getMonth();
+      title.textContent=`${y}年${m+1}月`;
+      grid.innerHTML='';
+      const firstDay=new Date(y,m,1).getDay();
+      const days=new Date(y,m+1,0).getDate();
+      for(let i=0;i<firstDay;i++){
+        const c=document.createElement('div');c.className='cal-cell dim';grid.appendChild(c);
+      }
+      for(let d=1;d<=days;d++){
+        const cur=new Date(y,m,d);
+        const wd=cur.getDay();
+        const c=document.createElement('div');
+        c.className='cal-cell'+((wd===0||wd===6)?' wk':'');
+        if(isToday(cur))c.classList.add('today');
+        if(inTrip(cur))c.classList.add('trip');
+        c.textContent=d;
+        grid.appendChild(c);
+      }
+    }
+
+    document.getElementById('calPrev').onclick=()=>{view.setMonth(view.getMonth()-1);render();};
+    document.getElementById('calNext').onclick=()=>{view.setMonth(view.getMonth()+1);render();};
+
+    document.getElementById('calToday').innerHTML=
+      `<span>今天 ${today.getMonth()+1}月${today.getDate()}日 ${WEEKS[today.getDay()]}</span>`+
+      `<span class="trip-legend">🧳 行程 10/5–10/25</span>`;
+    document.getElementById('date').textContent=`${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}`;
+    render();
   })();
 
   // ===== 天气模块（Open-Meteo 免费 API + 浏览器自动定位）=====
