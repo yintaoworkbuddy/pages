@@ -131,18 +131,53 @@
     document.getElementById('date').textContent=`${y}/${m}/${d}`;
   })();
 
-  // ===== 天气模块（Open-Meteo 免费 API）=====
+  // ===== 天气模块（Open-Meteo 免费 API + 浏览器自动定位）=====
   const WMO={0:'晴',1:'大致晴朗',2:'局部多云',3:'阴',45:'雾',48:'雾凇',51:'小毛毛雨',53:'毛毛雨',55:'大毛毛雨',56:'冻毛毛雨',57:'强冻毛毛雨',61:'小雨',63:'中雨',65:'大雨',66:'冻雨',67:'强冻雨',71:'小雪',73:'中雪',75:'大雪',77:'雪粒',80:'阵雨',81:'强阵雨',82:'暴雨',85:'阵雪',86:'强阵雪',95:'雷阵雨',96:'雷阵雨伴冰雹',99:'强雷暴伴冰雹'};
   (function(){
-    const url='https://api.open-meteo.com/v1/forecast?latitude=30.51&longitude=117.05&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Asia/Shanghai';
-    fetch(url).then(r=>r.json()).then(d=>{
-      const c=d.current||{};const code=c.weather_code;const temp=Math.round(c.temperature_2m);
-      document.getElementById('weatherTemp').textContent=`${temp}°C`;
-      document.getElementById('weatherDesc').textContent=`${WMO[code]||'未知'} · 湿度 ${c.relative_humidity_2m}% · 风速 ${c.wind_speed_10m} km/h`;
-    }).catch(()=>{
-      document.getElementById('weatherTemp').textContent='获取失败';
-      document.getElementById('weatherDesc').textContent='网络受限，请检查网络后刷新';
-    });
+    const DEFAULT={lat:30.51, lon:117.05, name:'安徽 · 安庆'};
+    const lbl=document.querySelector('.info-card.weather .label');
+    const tempEl=document.getElementById('weatherTemp');
+    const descEl=document.getElementById('weatherDesc');
+
+    function loadWeather(lat,lon,locationName){
+      const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto`;
+      fetch(url).then(r=>r.json()).then(d=>{
+        const c=d.current||{};
+        const temp=Math.round(c.temperature_2m);
+        tempEl.textContent=`${temp}°C`;
+        descEl.textContent=`${WMO[c.weather_code]||'未知'} · 湿度 ${c.relative_humidity_2m}% · 风速 ${c.wind_speed_10m} km/h`;
+        if(locationName){
+          lbl.innerHTML=`<span class="icon">📍</span> ${locationName} 实时天气`;
+        }
+      }).catch(()=>{
+        tempEl.textContent='获取失败';
+        descEl.textContent='网络受限，请检查网络后刷新';
+      });
+    }
+
+    // 1) 先加载默认位置（安庆），保证秒开不空白
+    loadWeather(DEFAULT.lat, DEFAULT.lon, null);
+
+    // 2) 尝试浏览器定位，成功后自动更新为当前位置天气
+    if(navigator.geolocation){
+      lbl.innerHTML='<span class="icon">📍</span> 正在定位…';
+      navigator.geolocation.getCurrentPosition(pos=>{
+        const la=pos.coords.latitude, lo=pos.coords.longitude;
+        // 逆地理编码：经纬度 → 中文城市名（BigDataCloud 免费接口，无需 key）
+        fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${la}&longitude=${lo}&localityLanguage=zh`)
+          .then(r=>r.json())
+          .then(g=>{
+            const city=g.city||g.locality||'';
+            const prov=g.principalSubdivision||'';
+            const name=city||(prov||'当前位置');
+            loadWeather(la.toFixed(3), lo.toFixed(3), name);
+          })
+          .catch(()=>loadWeather(la.toFixed(3), lo.toFixed(3), '当前位置'));
+      }, err=>{
+        // 定位失败/被拒绝：保持默认安庆
+        lbl.innerHTML=`<span class="icon">🌤️</span> 安徽 · 安庆 实时天气`;
+      }, {timeout:8000, maximumAge:300000});
+    }
   })();
 
   // ===== 新闻模块：实时热榜（多源：知乎 / 微博 / 头条）=====
