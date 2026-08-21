@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我的主页 · 日期 / 天气 / 常用工具</title>
+<title>我的主页 · 日期 / 天气 / 常用工具 / 备选路线</title>
 <style>
   :root{
     --bg:#f5f6fa; --col:#ffffff; --txt:#1f2330; --sub:#8a90a2;
@@ -75,6 +75,10 @@
   @media(max-width:520px){.tool-row{grid-template-columns:1fr}}
   .tool-card.xhs .t-ico{color:#ff2e4d}
   .tool-card.fan .t-ico{color:#ff8c00}
+  .backup-home{margin-bottom:22px}
+  .tool-card.alt{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border:none}
+  .tool-card.alt .t-sub{color:rgba(255,255,255,.9)}
+  .tool-card.alt .t-arrow{color:rgba(255,255,255,.85)}
   footer{color:var(--sub);font-size:12px;text-align:center}
 
   /* 离线提示条 */
@@ -133,6 +137,19 @@
         </span>
       </a>
     </div>
+  </section>
+
+  <!-- 备选路线入口 -->
+  <section class="backup-home">
+    <h2 class="tools-title">🗺️ 备选路线（对比方案）</h2>
+    <a class="tool-card alt" href="travel-planner.html#backup">
+      <span class="t-ico">🔄</span>
+      <span class="t-body">
+        <span class="t-name">闽粤滇渝环线（备选）</span>
+        <span class="t-sub">不跑喀什 · 省 ¥2000+ · 正走 10/4–10/24 · 查看完整备选行程</span>
+      </span>
+      <span class="t-arrow">›</span>
+    </a>
   </section>
 
   <footer>
