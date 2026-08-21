@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我的主页 · 日期 / 天气 / 实时热榜</title>
+<title>我的主页 · 日期 / 天气 / 常用工具</title>
 <style>
   :root{
     --bg:#f5f6fa; --col:#ffffff; --txt:#1f2330; --sub:#8a90a2;
@@ -57,30 +57,24 @@
   .trip-card .t-sub{font-size:12px;opacity:.9;margin-top:3px}
   .trip-card .t-arrow{font-size:24px;opacity:.85;flex:0 0 auto}
 
-  /* 新闻板块 */
-  .news{background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:20px;margin-bottom:22px}
-  .news-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
-  .news-head h2{font-size:17px;display:flex;align-items:center;gap:8px}
-  .live{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--green)}
-  .live .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.4s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-  .src-tag{font-size:12px;color:var(--sub);background:#f2f4f8;padding:5px 12px;border-radius:20px}
-  .tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-  .tab{border:1px solid #e6e9f0;background:#fff;color:var(--sub);padding:7px 16px;border-radius:20px;cursor:pointer;font-size:13px;transition:.15s}
-  .tab:hover{border-color:var(--blue);color:var(--blue)}
-  .tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
-  .news-list{list-style:none}
-  .news-item{display:flex;align-items:center;gap:12px;padding:11px 6px;border-bottom:1px solid #f0f1f5;cursor:pointer;transition:.15s}
-  .news-item:last-child{border-bottom:none}
-  .news-item:hover{background:#f7f9ff;padding-left:12px}
-  .rank{flex:0 0 26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:#eef0f6;color:#9aa0b2}
-  .rank.top1{background:#ffe9e6;color:var(--red)}
-  .rank.top2{background:#fff3e0;color:#f09000}
-  .rank.top3{background:#fff8e1;color:#d9a400}
-  .news-item .title{flex:1;font-size:14px;line-height:1.4}
-  .news-item .hot{font-size:12px;color:var(--sub);flex:0 0 auto}
-  .news-status{padding:24px;text-align:center;color:var(--sub);font-size:13px}
-  .news-status button{margin-top:10px;padding:7px 18px;border:1px solid var(--blue);background:#fff;color:var(--blue);border-radius:8px;cursor:pointer;font-size:13px}
+  /* 工具跳转区 */
+  .tools{margin-bottom:22px}
+  .tools-title{font-size:17px;font-weight:600;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .tool-card{display:flex;align-items:center;gap:12px;background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;color:var(--txt);text-decoration:none;transition:transform .15s,box-shadow .15s;border:1px solid #eef0f6}
+  .tool-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(31,35,48,.12)}
+  .tool-card .t-ico{font-size:26px;flex:0 0 auto}
+  .tool-card .t-body{flex:1;min-width:0}
+  .tool-card .t-name{font-size:15px;font-weight:600;line-height:1.3}
+  .tool-card .t-sub{font-size:12px;color:var(--sub);margin-top:2px}
+  .tool-card .t-arrow{font-size:22px;color:var(--sub);flex:0 0 auto}
+  .tool-card.main{background:linear-gradient(135deg,#e67e22,#f0932b);color:#fff;border:none;margin-bottom:12px}
+  .tool-card.main .t-name{font-size:17px}
+  .tool-card.main .t-sub{color:rgba(255,255,255,.9)}
+  .tool-card.main .t-arrow{color:rgba(255,255,255,.85)}
+  .tool-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:520px){.tool-row{grid-template-columns:1fr}}
+  .tool-card.xhs .t-ico{color:#ff2e4d}
+  .tool-card.fan .t-ico{color:#ff8c00}
   footer{color:var(--sub);font-size:12px;text-align:center}
 
   /* 离线提示条 */
@@ -112,35 +106,37 @@
     </div>
   </div>
 
-  <!-- 旅行工作台入口 -->
-  <a class="trip-card" href="travel-planner.html">
-    <span class="t-icon">🧳</span>
-    <span class="t-body">
-      <span class="t-title">十月旅行规划工作台</span>
-      <span class="t-sub">10/5–10/25 · 喀什→重庆→丽江→南宁→广州→港澳→汕头→厦门 · 行程 / 预算 / 看板</span>
-    </span>
-    <span class="t-arrow">›</span>
-  </a>
-
-  <!-- 新闻板块：实时热榜（多源） -->
-  <div class="news">
-    <div class="news-head">
-      <h2>📰 实时热榜 <span class="live"><span class="dot"></span>实时</span></h2>
-      <span class="src-tag" id="srcTag">来源：知乎热榜</span>
+  <!-- 工具跳转区 -->
+  <section class="tools">
+    <h2 class="tools-title">🧰 常用工具</h2>
+    <a class="tool-card main" href="travel-planner.html">
+      <span class="t-ico">🧳</span>
+      <span class="t-body">
+        <span class="t-name">十月旅行规划工作台</span>
+        <span class="t-sub">10/5–10/25 · 行程 / 预算 / 看板</span>
+      </span>
+      <span class="t-arrow">›</span>
+    </a>
+    <div class="tool-row">
+      <a class="tool-card xhs" href="https://www.xiaohongshu.com" target="_blank" rel="noopener">
+        <span class="t-ico">📕</span>
+        <span class="t-body">
+          <span class="t-name">小红书</span>
+          <span class="t-sub">攻略 · 种草</span>
+        </span>
+      </a>
+      <a class="tool-card fan" href="https://www.16fan.com" target="_blank" rel="noopener">
+        <span class="t-ico">🧭</span>
+        <span class="t-body">
+          <span class="t-name">十六番</span>
+          <span class="t-sub">旅行 · 特价</span>
+        </span>
+      </a>
     </div>
-    <div class="tabs" id="tabs">
-      <button class="tab active" data-key="zhihu">知乎</button>
-      <button class="tab" data-key="weibo">微博</button>
-      <button class="tab" data-key="toutiao">头条</button>
-    </div>
-    <div class="offline-tip" id="offlineTip">⚠️ 实时源连接失败，当前显示离线缓存（更新于 <span id="cacheTime"></span>）</div>
-    <ul class="news-list" id="newsList"></ul>
-    <div class="news-status" id="newsStatus">正在加载…</div>
-  </div>
+  </section>
 
   <footer>
-    本页含日期、安庆实时天气与实时热榜（知乎 / 微博 / 头条）· 部署于 GitHub Pages
-    <div style="margin-top:6px">热榜内容来自知乎 / 微博 / 头条，版权归原作者及平台所有，本页仅作聚合展示并链接至原文。</div>
+    本页含月历、实时天气与常用工具跳转 · 部署于 GitHub Pages
   </footer>
 
 <script>
@@ -236,118 +232,6 @@
     }
   })();
 
-  // ===== 新闻模块：实时热榜（多源：知乎 / 微博 / 头条）=====
-  const VIKI='https://60s-api.viki.moe/v2/';
-  const TIMEOUT=8000;
-  const TABS={
-    zhihu:{name:'知乎热榜', src:'zhihu'},
-    weibo:{name:'微博热搜', src:'weibo'},
-    toutiao:{name:'头条热点', src:'toutiao'}
-  };
-  let current='zhihu';
-  const cache={};          // key -> {items, offline}
-  let cacheTime='';        // 离线缓存更新时间
-
-  function fmtHot(v){
-    v=Number(v)||0;
-    if(v>=1e8) return (v/1e8).toFixed(1)+'亿';
-    if(v>=1e4) return (v/1e4).toFixed(1)+'万';
-    return String(v);
-  }
-
-  function parseItems(key, d){
-    const raw = d && d.data ? d.data : [];
-    const arr = Array.isArray(raw) ? raw : (raw.data||[]);
-    return arr.map(it=>{
-      let url, hot;
-      if(key==='zhihu'){
-        url = it.link || ('https://www.zhihu.com/search?type=content&q='+encodeURIComponent(it.title||''));
-        hot = it.hot_value_desc || '';
-      }else{
-        url = it.link || '#';
-        hot = (it.hot_value!=null) ? fmtHot(it.hot_value) : '';
-      }
-      return {title:it.title||'', url, hot};
-    }).filter(x=>x.title).slice(0,30);
-  }
-
-  function render(key, data){
-    const list=document.getElementById('newsList');
-    const status=document.getElementById('newsStatus');
-    const tip=document.getElementById('offlineTip');
-    list.innerHTML=''; status.style.display='none';
-    document.getElementById('srcTag').textContent='来源：'+TABS[key].name;
-    if(data.offline){
-      tip.style.display='block';
-      document.getElementById('cacheTime').textContent=cacheTime||'未知';
-    }else{
-      tip.style.display='none';
-    }
-    data.items.forEach((it,i)=>{
-      const li=document.createElement('li');li.className='news-item';
-      const rankCls=i<3?('rank top'+(i+1)):'rank';
-      const hot=it.hot?('🔥 '+it.hot):'';
-      li.innerHTML=`<span class="${rankCls}">${i+1}</span><span class="title">${it.title}</span><span class="hot">${hot}</span>`;
-      li.onclick=()=>{ if(it.url&&it.url!=='#') window.open(it.url,'_blank'); };
-      list.appendChild(li);
-    });
-  }
-
-  async function loadTab(key, force){
-    if(cache[key] && !force){ render(key, cache[key]); return; }
-    const list=document.getElementById('newsList');
-    const status=document.getElementById('newsStatus');
-    const tip=document.getElementById('offlineTip');
-    list.innerHTML=''; tip.style.display='none'; status.style.display='block';
-    status.textContent='正在加载'+TABS[key].name+'…';
-    const liveUrl=VIKI+TABS[key].src;
-    let items=null, offline=false;
-    // 1) 实时源
-    try{
-      const ctrl=new AbortController();
-      const timer=setTimeout(()=>ctrl.abort(),TIMEOUT);
-      const r=await fetch(liveUrl,{mode:'cors',signal:ctrl.signal});
-      clearTimeout(timer);
-      const d=await r.json();
-      items=parseItems(key,d);
-    }catch(e){ items=null; }
-    // 2) 离线缓存兜底（真实数据，部署时抓取）
-    if(!items || !items.length){
-      try{
-        const r=await fetch('news.json?t='+Date.now());
-        const j=await r.json();
-        items=(j[key]||[]).filter(x=>x.title).slice(0,30);
-        offline=true;
-      }catch(e){ items=[]; }
-    }
-    if(!items || !items.length){
-      status.style.display='block';
-      status.innerHTML='加载失败<br><button onclick="loadTab(\''+key+'\',true)">重试</button>';
-      return;
-    }
-    cache[key]={items, offline};
-    render(key, cache[key]);
-  }
-
-  // 标签切换
-  document.getElementById('tabs').addEventListener('click', e=>{
-    const btn=e.target.closest('.tab'); if(!btn) return;
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    btn.classList.add('active');
-    current=btn.dataset.key;
-    loadTab(current);
-  });
-
-  // 初始化：读取离线缓存时间 + 加载首个标签
-  (async function init(){
-    try{
-      const r=await fetch('news.json?t='+Date.now());
-      const j=await r.json();
-      cacheTime=j.updated_at||'';
-    }catch(e){}
-    loadTab(current);
-    setInterval(()=>loadTab(current, true), 5*60*1000);
-  })();
 </script>
 </body>
 </html>
