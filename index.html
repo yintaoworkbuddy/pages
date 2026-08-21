@@ -68,7 +68,6 @@
   .tool-card .t-sub{font-size:12px;color:var(--sub);margin-top:2px}
   .tool-card .t-arrow{font-size:22px;color:var(--sub);flex:0 0 auto}
   .tool-card.main{background:linear-gradient(135deg,#e67e22,#f0932b);color:#fff;border:none;margin-bottom:12px}
-  .tool-card.main .t-name{font-size:17px}
   .tool-card.main .t-sub{color:rgba(255,255,255,.9)}
   .tool-card.main .t-arrow{color:rgba(255,255,255,.85)}
   .tool-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -78,6 +77,9 @@
   .tool-card.alt{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border:none}
   .tool-card.alt .t-sub{color:rgba(255,255,255,.9)}
   .tool-card.alt .t-arrow{color:rgba(255,255,255,.85)}
+  .route-badge{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px;letter-spacing:.5px;background:rgba(255,255,255,.22);color:#fff}
+  .tool-card.main .t-name{font-size:18px}
+  .tool-card.alt .t-name{font-size:17px;font-weight:700}
   footer{color:var(--sub);font-size:12px;text-align:center}
 
   /* 离线提示条 */
@@ -115,16 +117,18 @@
     <a class="tool-card main" href="travel-planner.html">
       <span class="t-ico">🧳</span>
       <span class="t-body">
-        <span class="t-name">十月旅行规划工作台</span>
-        <span class="t-sub">10/5–10/25 · 行程 / 预算 / 看板</span>
+        <span class="route-badge">✅ 主路线 · 已确定</span>
+        <span class="t-name">喀什·西南行</span>
+        <span class="t-sub">10/5–10/25 · 8 城 · 行程 / 预算 / 看板</span>
       </span>
       <span class="t-arrow">›</span>
     </a>
     <a class="tool-card alt" href="travel-planner.html#backup">
       <span class="t-ico">🔄</span>
       <span class="t-body">
-        <span class="t-name">备选路线 · 闽粤滇渝环线</span>
-        <span class="t-sub">不跑喀什 · 省 ¥2000+ · 正走 10/4–10/24 · 查看完整备选行程</span>
+        <span class="route-badge">⚪ 备选路线 · 未确定</span>
+        <span class="t-name">闽粤滇渝环线</span>
+        <span class="t-sub">10/4–10/24 · 不跑喀什 · 省 ¥2000+ · 21 天</span>
       </span>
       <span class="t-arrow">›</span>
     </a>
