@@ -154,6 +154,20 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .dest-card-meta{font-size:11px;color:var(--text-light)}
 .dest-card-priority{display:inline-block;font-size:11px;font-weight:600;margin-right:6px}
 
+  /* 城市图标 + 世界遗产/荣誉徽章（看板 & 行程） */
+  .dest-card-icon{font-size:14px;margin-right:5px;line-height:1}
+  .dest-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;color:#fff;white-space:nowrap}
+  .dest-badge.wh{background:#c0392b}
+  .dest-badge.memory{background:#7c5cbf}
+  .dest-badge.food{background:#e67e22}
+  .dest-badge.culture{background:#5b7c99}
+  .itin-icon{font-size:14px;margin-right:2px;line-height:1}
+  .itin-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;color:#fff;white-space:nowrap}
+  .itin-badge.wh{background:#c0392b}
+  .itin-badge.memory{background:#7c5cbf}
+  .itin-badge.food{background:#e67e22}
+  .itin-badge.culture{background:#5b7c99}
+
 /* Empty state */
 .empty-state{text-align:center;padding:24px 16px;color:var(--text-light)}
 .empty-state svg{width:48px;height:48px;color:var(--text-muted);margin-bottom:8px}
@@ -230,6 +244,8 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
   .culture-intro .ci-q .hl{color:#ffd76e}
   .culture-intro .ci-from{font-size:12px;opacity:.9;margin-top:6px;text-align:right}
   .culture-intro .ci-desc{font-size:13px;line-height:1.65;margin-top:12px;background:rgba(255,255,255,.1);padding:10px 12px;border-radius:8px}
+  .culture-intro .ci-heritage{font-size:12px;line-height:1.6;margin-top:8px;background:rgba(255,215,110,.16);padding:8px 12px;border-radius:8px;border-left:3px solid #ffd76e}
+  .culture-intro .ci-heritage b{color:#ffd76e}
 .ot-label{font-size:11px;color:var(--text-light);font-weight:600}
 .todo-chip{font-size:11px;background:#FEF7E0;color:#7A5C00;border:1px solid #F9D972;padding:3px 9px;border-radius:12px;white-space:nowrap}
 
@@ -365,6 +381,7 @@ body{-webkit-tap-highlight-color:transparent}
     <div class="ci-q">“让旅游成为人们感悟<span class="hl">中华文化</span>、增强<span class="hl">文化自信</span>的过程。”</div>
     <div class="ci-from">—— 习近平（关于文化和旅游融合发展的嘱托）</div>
     <div class="ci-desc">本次环线串起海丝起点泉州、潮汕侨乡、中西交融的港澳、世界美食之都顺德、千年商都广州、纳西东巴丽江与巴渝重庆。愿这一路不只是"打卡"，更能读城读史、以文塑旅——在每一处烟火与古迹里，感悟中华文化的博大精深，增强我们共同的文化自信。</div>
+    <div class="ci-heritage">🏛️ 本线串起 <b>4 处世界遗产</b>：泉州（宋元海丝）· 澳门（历史城区）· 丽江（古城）· 重庆（大足石刻 / 武隆喀斯特 ×2），另有汕头侨批（世界记忆）、顺德（美食之都）等中华文明活态印记。</div>
   </section>
 
   <!-- Today Section -->
@@ -1035,6 +1052,26 @@ var TRIP_END = "2026-10-19";
 var PLANE_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 19.5l19-7.5L2.5 4.5 2.5 10l13 2-13 2z"/></svg>';
 var TRAIN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 10h16"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/><path d="M6 16l-2 4M18 16l2 4"/></svg>';
 var FERRY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h16l-2 5H6z"/><path d="M12 3v10"/><path d="M9 3h6"/></svg>';
+
+// 城市文化元数据：图标 + 世界遗产/荣誉徽章（渲染行程与看板时按城市名注入，不改动种子数据）
+var CITY_META = {
+  "安庆":   { icon:"🎭", badge:"黄梅戏之乡",     btype:"culture" },
+  "泉州":   { icon:"🏯", badge:"🏛️ 世界遗产",   btype:"wh" },
+  "汕头":   { icon:"🌊", badge:"📜 世界记忆",   btype:"memory" },
+  "汕尾":   { icon:"🐚", badge:"🎭 渔歌非遗",   btype:"culture" },
+  "香港":   { icon:"🦁", badge:"🌐 中西交融",   btype:"culture" },
+  "澳门":   { icon:"⛪", badge:"🏛️ 世界遗产",   btype:"wh" },
+  "顺德":   { icon:"🍲", badge:"🍜 美食之都",   btype:"food" },
+  "广州":   { icon:"🏙️", badge:"🌊 海丝预备",   btype:"culture" },
+  "丽江":   { icon:"🏔️", badge:"🏛️ 世界遗产",   btype:"wh" },
+  "重庆":   { icon:"🌶️", badge:"🏛️ 世遗×2",    btype:"wh" }
+};
+function cityMetaOf(title){
+  if(!title) return null;
+  for (var k in CITY_META){ if (title.indexOf(k) >= 0) return { key:k, m:CITY_META[k] }; }
+  return null;
+}
+
 var ROUTE_STOPS = [
   { city: "安庆", dates: "10/5 出发", home: true },
   { city: "泉州", dates: "10/5-7", nights: "2晚" },
@@ -1215,17 +1252,22 @@ function renderItinerary() {
   for (var i = 0; i < items.length; i++) {
     var r = items[i];
     var done = r.status === "已完成";
+    var cm = cityMetaOf(r.title);
+    var itinIcon = cm ? '<span class="itin-icon">' + cm.m.icon + '</span>' : '';
+    var itinPill = cm ? '<span class="itin-badge ' + cm.m.btype + '">' + escapeHtml(cm.m.badge) + '</span>' : '';
     html += '<div class="list-item' + (done ? " done" : "") + '">'
       + '<div class="list-item-body">'
       +   '<div class="list-item-title">'
+      +     itinIcon
       +     escapeHtml(r.title)
+      +     itinPill
       +     (r.status === "待办" ? '<span class="tag">待办</span>' : "")
       +     (r.status === "进行中" ? '<span class="tag" style="background:var(--warning);color:#fff">进行中</span>' : "")
       +     (done ? '<span class="tag" style="background:var(--success-light);color:var(--success)">已完成</span>' : "")
       +   '</div>'
       +   '<div class="list-item-meta">'
       +     (r.date ? '<span>' + formatDate(r.date) + '</span>' : '')
-      +     (r.category ? '<span>交通: ' + escapeHtml(r.category) + '</span>' : '')
+      +     (r.category ? '<span>类型: ' + escapeHtml(r.category) + '</span>' : '')
       +   '</div>'
       +   (r.notes ? '<div class="list-item-notes">' + escapeHtml(r.notes) + '</div>' : '')
       + '</div>'
@@ -1382,10 +1424,15 @@ function renderDestinations() {
     for (var j = 0; j < colItems.length; j++) {
       var r = colItems[j];
       var priClass = r.priority === "高" ? "priority-high" : (r.priority === "中" ? "priority-medium" : "priority-low");
+      var cm = cityMetaOf(r.title);
+      var destIcon = cm ? '<span class="dest-card-icon">' + cm.m.icon + '</span>' : '';
+      var destBadge = cm ? '<span class="dest-badge ' + cm.m.btype + '">' + escapeHtml(cm.m.badge) + '</span>' : '';
       html += '<div class="dest-card" data-id="' + r.id + '" data-action="edit-dest">'
         + '<div class="dest-card-title">'
         +   '<span class="dest-card-priority ' + priClass + '">' + escapeHtml(r.priority) + '</span>'
+        +   destIcon
         +   escapeHtml(r.title)
+        +   destBadge
         + '</div>'
         + '<div class="dest-card-meta">' + escapeHtml(r.category || "") + '</div>'
         + (r.notes ? '<div class="dest-card-meta">' + escapeHtml(r.notes) + '</div>' : '')
