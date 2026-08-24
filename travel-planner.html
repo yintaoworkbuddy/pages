@@ -221,6 +221,15 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .legend-plane{color:var(--info)}
 .legend-train{color:var(--success)}
 .overview-todos{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+
+  /* 文化之旅 · 总书记文旅嘱托 */
+  .culture-intro{background:linear-gradient(135deg,#9b1c1c,#c0392b 60%,#e07a3f);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden}
+  .culture-intro::before{content:'”';position:absolute;right:10px;top:-14px;font-size:90px;line-height:1;color:rgba(255,255,255,.12);font-family:Georgia,serif}
+  .culture-intro .ci-flag{display:inline-block;font-size:11px;font-weight:700;background:rgba(255,255,255,.18);padding:3px 10px;border-radius:20px;margin-bottom:8px;letter-spacing:.5px}
+  .culture-intro .ci-q{font-size:17px;font-weight:700;line-height:1.5;letter-spacing:.3px}
+  .culture-intro .ci-q .hl{color:#ffd76e}
+  .culture-intro .ci-from{font-size:12px;opacity:.9;margin-top:6px;text-align:right}
+  .culture-intro .ci-desc{font-size:13px;line-height:1.65;margin-top:12px;background:rgba(255,255,255,.1);padding:10px 12px;border-radius:8px}
 .ot-label{font-size:11px;color:var(--text-light);font-weight:600}
 .todo-chip{font-size:11px;background:#FEF7E0;color:#7A5C00;border:1px solid #F9D972;padding:3px 9px;border-radius:12px;white-space:nowrap}
 
@@ -331,7 +340,7 @@ body{-webkit-tap-highlight-color:transparent}
   <section class="overview">
     <h2>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h7"/></svg>
-      行程总览 · 10/5 出发 → 10/25 到家
+      行程总览 · 10/5 出发 → 10/19 到家
     </h2>
     <div class="stats-row" id="statsRow"></div>
     <div class="route-scroll">
@@ -348,6 +357,14 @@ body{-webkit-tap-highlight-color:transparent}
       <span class="todo-chip">玉龙雪山索道票提前抢</span>
       <span class="todo-chip">鼓浪屿轮渡票</span>
     </div>
+  </section>
+
+  <!-- 文化之旅 · 总书记文旅嘱托（路线介绍下方） -->
+  <section class="culture-intro">
+    <span class="ci-flag">🏛️ 文旅融合 · 殷殷嘱托</span>
+    <div class="ci-q">“让旅游成为人们感悟<span class="hl">中华文化</span>、增强<span class="hl">文化自信</span>的过程。”</div>
+    <div class="ci-from">—— 习近平（关于文化和旅游融合发展的嘱托）</div>
+    <div class="ci-desc">本次环线串起海丝起点泉州、潮汕侨乡、中西交融的港澳、世界美食之都顺德、千年商都广州、纳西东巴丽江与巴渝重庆。愿这一路不只是"打卡"，更能读城读史、以文塑旅——在每一处烟火与古迹里，感悟中华文化的博大精深，增强我们共同的文化自信。</div>
   </section>
 
   <!-- Today Section -->
