@@ -6,8 +6,9 @@
 <title>我的主页 · 日期 / 天气 / 常用工具 / 旅行路线</title>
 <style>
   :root{
-    --bg:#f5f6fa; --col:#ffffff; --txt:#1f2330; --sub:#8a90a2;
-    --blue:#3d7bff; --green:#22c08a; --red:#ff5a52;
+    --bg:#f5f6fa; --col:#ffffff; --txt:#2c3e50; --sub:#95a5a6;
+    --blue:#3498db; --green:#27ae60; --red:#e74c3c;
+    --brand:#e67e22; --china:#c0392b;
     --shadow:0 4px 18px rgba(31,35,48,.08);
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -23,8 +24,8 @@
   /* 信息条：日期 + 天气 */
   .infobar{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
   @media(max-width:760px){.infobar{grid-template-columns:1fr}}
-  .info-card{background:linear-gradient(135deg,#3d7bff,#6aa1ff);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;display:flex;flex-direction:column;gap:6px}
-  .info-card.weather{background:linear-gradient(135deg,#22c08a,#4fd6a6)}
+  .info-card{background:linear-gradient(135deg,#2980b9,#4aa3e0);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;display:flex;flex-direction:column;gap:6px}
+  .info-card.weather{background:linear-gradient(135deg,#27ae60,#43c98a)}
   .info-card .label{font-size:13px;opacity:.85;display:flex;align-items:center;gap:6px}
   .info-card .big{font-size:26px;font-weight:700;line-height:1.2}
   .info-card .small{font-size:13px;opacity:.9}
@@ -117,6 +118,12 @@
   .cul-desc{font-size:12px;color:var(--sub);line-height:1.55}
   .cul-do{font-size:11.5px;color:#c0392b;background:#fdf3ef;padding:6px 8px;border-radius:8px;line-height:1.5}
   .culture-legend{font-size:11px;color:var(--sub);margin-top:12px;line-height:1.7;background:#f7f8fa;padding:10px 12px;border-radius:8px}
+
+  /* 卡片悬浮美化 + 世遗卡视觉强调（与工作台红色系呼应） */
+  .cul-card{transition:transform .18s ease,box-shadow .18s ease}
+  .cul-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(31,35,48,.16)}
+  .cul-card.wh-card{border-left:4px solid var(--china);background:linear-gradient(180deg,#ffffff,#fdf3ef)}
+  .cul-wh-ico{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--china);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;margin-right:2px}
 </style>
 </head>
 <body>
@@ -189,15 +196,15 @@
     <h2 class="culture-title"><span class="accent">◆</span> 以文塑旅 · 九城文化打开方式</h2>
     <p class="culture-sub">循着总书记"感悟中华文化、增强文化自信"的嘱托，这趟环线串起 <b>4 处世界遗产</b> 与多处中华文明活态印记——读懂它们，便是读懂中国。</p>
     <div class="culture-grid">
-      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🏯</span><span class="cul-name">泉州</span><span class="cul-badge wh">🏛️ 世界遗产</span></div><div class="cul-theme">宋元中国的世界海洋商贸中心</div><div class="cul-desc">22 处遗产点、南音古乐、蟳埔簪花。从"涨海声中万国商"读懂中华海洋文明与世界对话。</div><div class="cul-do">📍 必体验：开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围</div></div>
+      <div class="cul-card wh-card"><div class="cul-head"><span class="cul-ico">🏯</span><span class="cul-wh-ico">🏛️</span><span class="cul-name">泉州</span><span class="cul-badge wh">世界遗产</span></div><div class="cul-theme">宋元中国的世界海洋商贸中心</div><div class="cul-desc">22 处遗产点、南音古乐、蟳埔簪花。从"涨海声中万国商"读懂中华海洋文明与世界对话。</div><div class="cul-do">📍 必体验：开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围</div></div>
       <div class="cul-card"><div class="cul-head"><span class="cul-ico">🌊</span><span class="cul-name">汕头</span><span class="cul-badge memory">📜 世界记忆</span></div><div class="cul-theme">潮汕侨乡 · 开埠风云</div><div class="cul-desc">小公园骑楼、侨批（世界记忆名录）、潮剧工夫茶。一封侨批里的家国情怀与向海而生。</div><div class="cul-do">📍 必体验：小公园骑楼 · 侨批文物馆 · 牛肉火锅 · 生腌</div></div>
       <div class="cul-card"><div class="cul-head"><span class="cul-ico">🐚</span><span class="cul-name">汕尾</span><span class="cul-badge culture">🎭 渔歌非遗</span></div><div class="cul-theme">渔歌故里 · 红土风情</div><div class="cul-desc">渔家文化、正字戏、红宫红场。听一段渔歌，看红土地上的坚守与温情。</div><div class="cul-do">📍 必体验：红海湾遮浪半岛 · 金町湾 · 二马路夜市</div></div>
       <div class="cul-card"><div class="cul-head"><span class="cul-ico">🦁</span><span class="cul-name">香港</span><span class="cul-badge culture">🌐 中西交融</span></div><div class="cul-theme">东方之珠 · 狮子山下</div><div class="cul-desc">维港天际、历史建筑、狮子山精神。看中华文明兼容并蓄、开放包容的当代气度。</div><div class="cul-do">📍 必体验：太平山顶 · 维港夜景 · 叮叮车 · 庙街</div></div>
-      <div class="cul-card"><div class="cul-head"><span class="cul-ico">⛪</span><span class="cul-name">澳门</span><span class="cul-badge wh">🏛️ 世界遗产</span></div><div class="cul-theme">澳门历史城区</div><div class="cul-desc">大三巴、妈阁庙、中西合璧建筑。小城故事里中华与多元文化和谐共生。</div><div class="cul-do">📍 必体验：大三巴 · 恋爱巷 · 官也街 · 路环</div></div>
+      <div class="cul-card wh-card"><div class="cul-head"><span class="cul-ico">⛪</span><span class="cul-wh-ico">🏛️</span><span class="cul-name">澳门</span><span class="cul-badge wh">世界遗产</span></div><div class="cul-theme">澳门历史城区</div><div class="cul-desc">大三巴、妈阁庙、中西合璧建筑。小城故事里中华与多元文化和谐共生。</div><div class="cul-do">📍 必体验：大三巴 · 恋爱巷 · 官也街 · 路环</div></div>
       <div class="cul-card"><div class="cul-head"><span class="cul-ico">🍲</span><span class="cul-name">顺德</span><span class="cul-badge food">🍜 美食之都</span></div><div class="cul-theme">世界美食之都 · 岭南水乡</div><div class="cul-desc">清晖园、逢简水乡、桑基鱼塘。一盅两件里品岭南烟火与匠心。</div><div class="cul-do">📍 必体验：清晖园 · 鱼生 · 双皮奶 · 桑拿鸡</div></div>
       <div class="cul-card"><div class="cul-head"><span class="cul-ico">🏙️</span><span class="cul-name">广州</span><span class="cul-badge culture">🌊 海丝预备</span></div><div class="cul-theme">千年商都 · 广府源流</div><div class="cul-desc">南越王墓、陈家祠、海上丝路。从千年商都读懂开放务实的广府精神。</div><div class="cul-do">📍 必体验：陈家祠 · 南越王宫 · 沙面 · 早茶</div></div>
-      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🏔️</span><span class="cul-name">丽江</span><span class="cul-badge wh">🏛️ 世界遗产</span></div><div class="cul-theme">纳西东巴 · 雪山秘境</div><div class="cul-desc">丽江古城、东巴象形文字、纳西古乐。雪山下的活着的千年文明。</div><div class="cul-do">📍 必体验：古城 · 玉龙雪山 · 束河 · 纳西古乐</div></div>
-      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🌶️</span><span class="cul-name">重庆</span><span class="cul-badge wh">🏛️ 世遗×2</span></div><div class="cul-theme">巴渝山水 · 英雄之城</div><div class="cul-desc">洪崖洞吊脚楼、大足石刻、川江号子。山水之城里的巴渝刚毅与家国担当。</div><div class="cul-do">📍 必体验：洪崖洞 · 大足石刻 · 火锅 · 长江索道</div></div>
+      <div class="cul-card wh-card"><div class="cul-head"><span class="cul-ico">🏔️</span><span class="cul-wh-ico">🏛️</span><span class="cul-name">丽江</span><span class="cul-badge wh">世界遗产</span></div><div class="cul-theme">纳西东巴 · 雪山秘境</div><div class="cul-desc">丽江古城、东巴象形文字、纳西古乐。雪山下的活着的千年文明。</div><div class="cul-do">📍 必体验：古城 · 玉龙雪山 · 束河 · 纳西古乐</div></div>
+      <div class="cul-card wh-card"><div class="cul-head"><span class="cul-ico">🌶️</span><span class="cul-wh-ico">🏛️</span><span class="cul-name">重庆</span><span class="cul-badge wh">世遗×2</span></div><div class="cul-theme">巴渝山水 · 英雄之城</div><div class="cul-desc">洪崖洞吊脚楼、大足石刻、川江号子。山水之城里的巴渝刚毅与家国担当。</div><div class="cul-do">📍 必体验：洪崖洞 · 大足石刻 · 火锅 · 长江索道</div></div>
     </div>
     <p class="culture-legend">🏛️ 世界遗产 = UNESCO 世界遗产；📜 世界记忆 = 世界记忆名录；🍜 美食之都 = UNESCO 创意城市网络；其余为特色文化荣誉。广州为"海上丝绸之路"中国段联合申遗预备项目，尚未入选。</p>
   </section>
