@@ -119,16 +119,7 @@
       <span class="t-body">
         <span class="route-badge">✅ 主路线 · 已确定</span>
         <span class="t-name">闽粤港澳·滇渝环线</span>
-        <span class="t-sub">10/5–10/22 · 9 城环线 · 行程 / 预算 / 看板</span>
-      </span>
-      <span class="t-arrow">›</span>
-    </a>
-    <a class="tool-card alt" href="travel-planner.html#backup">
-      <span class="t-ico">🔄</span>
-      <span class="t-body">
-        <span class="route-badge">⬜ 历史方案 · 已弃用</span>
-        <span class="t-name">喀什线 &amp; 旧备选（对比）</span>
-        <span class="t-sub">10/5–10/25 / 10/4–10/24 · 仅供对比参考</span>
+        <span class="t-sub">10/5–10/19 · 9 城环线 · 行程 / 预算 / 看板</span>
       </span>
       <span class="t-arrow">›</span>
     </a>
@@ -157,7 +148,7 @@
 <script>
   // ===== 日历模块（月历 + 今日高亮 + 行程标注）=====
   (function(){
-    const TRIP_START=new Date(2026,9,5), TRIP_END=new Date(2026,9,22); // 十月行程 10/5–10/22
+    const TRIP_START=new Date(2026,9,5), TRIP_END=new Date(2026,9,19); // 十月行程 10/5–10/19
     const grid=document.getElementById('calGrid');
     const title=document.getElementById('calTitle');
     const today=new Date();
@@ -193,7 +184,7 @@
 
     document.getElementById('calToday').innerHTML=
       `<span>今天 ${today.getMonth()+1}月${today.getDate()}日 ${WEEKS[today.getDay()]}</span>`+
-      `<span class="trip-legend">🧳 行程 10/5–10/22</span>`;
+      `<span class="trip-legend">🧳 行程 10/5–10/19</span>`;
     document.getElementById('date').textContent=`${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}`;
     render();
   })();
