@@ -84,6 +84,28 @@
 
   /* 离线提示条 */
   .offline-tip{font-size:12px;color:#c08a00;background:#fff8e1;padding:6px 12px;border-radius:8px;margin-bottom:12px;display:none}
+
+  /* 文旅嘱托 · 顶部引言横幅 */
+  .hero-quote{position:relative;background:linear-gradient(135deg,#9b1c1c,#c0392b 55%,#e07a3f);border-radius:16px;box-shadow:var(--shadow);padding:24px 26px 22px;color:#fff;margin-bottom:24px;overflow:hidden}
+  .hero-quote::before{content:'”';position:absolute;right:14px;top:-18px;font-size:120px;line-height:1;color:rgba(255,255,255,.13);font-family:Georgia,serif}
+  .hero-quote .flag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;margin-bottom:12px;letter-spacing:.5px}
+  .hero-quote .q-text{font-size:20px;font-weight:700;line-height:1.55;letter-spacing:.5px;max-width:780px}
+  .hero-quote .q-text .hl{color:#ffd76e}
+  .hero-quote .q-from{margin-top:12px;font-size:13px;opacity:.92;text-align:right}
+  .hero-quote .q-ribbon{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .hero-quote .q-ribbon span{font-size:12px;background:rgba(255,255,255,.14);padding:4px 10px;border-radius:8px}
+
+  /* 以文塑旅 · 九城文化打开方式 */
+  .culture{margin-bottom:22px}
+  .culture-title{font-size:17px;font-weight:600;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .culture-title .accent{color:#c0392b;font-size:18px}
+  .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:760px){.culture-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.culture-grid{grid-template-columns:1fr}}
+  .cul-card{background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:15px 16px;border:1px solid #eef0f6;border-top:3px solid #c0392b}
+  .cul-card .c-city{font-size:15px;font-weight:700;color:#c0392b;display:flex;align-items:center;gap:6px}
+  .cul-card .c-tag{font-size:11px;color:var(--sub);background:#f3f4f8;padding:2px 8px;border-radius:10px;margin-left:auto;white-space:nowrap}
+  .cul-card .c-desc{font-size:12.5px;color:var(--sub);line-height:1.55;margin-top:8px}
 </style>
 </head>
 <body>
@@ -91,6 +113,16 @@
     <h1>我的主页 <span id="date"></span></h1>
     <div class="meta">由 WorkBuddy 自动部署 · GitHub Pages</div>
   </header>
+
+  <!-- 文旅嘱托 · 总书记关于文化和旅游融合发展的殷殷嘱托 -->
+  <section class="hero-quote">
+    <span class="flag">🏛️ 文旅融合 · 殷殷嘱托</span>
+    <div class="q-text">“让旅游成为人们感悟<span class="hl">中华文化</span>、增强<span class="hl">文化自信</span>的过程。”</div>
+    <div class="q-from">—— 习近平（关于文化和旅游融合发展的嘱托）</div>
+    <div class="q-ribbon">
+      <span>📜 以文塑旅</span><span>🧭 以旅彰文</span><span>🏯 读城读史</span><span>🌏 文明对话</span>
+    </div>
+  </section>
 
   <!-- 信息条：日期 + 天气 -->
   <div class="infobar">
@@ -138,6 +170,22 @@
           <span class="t-sub">旅行 · 特价</span>
         </span>
       </a>
+    </div>
+  </section>
+
+  <!-- 以文塑旅 · 九城文化打开方式 -->
+  <section class="culture">
+    <h2 class="culture-title"><span class="accent">◆</span> 以文塑旅 · 九城文化打开方式</h2>
+    <div class="culture-grid">
+      <div class="cul-card"><div class="c-city">🏯 泉州 <span class="c-tag">世遗·海丝</span></div><div class="c-desc">宋元中国世界海洋商贸中心、南音古乐、蟳埔簪花。读懂"涨海声中万国商"的中华海洋文明。</div></div>
+      <div class="cul-card"><div class="c-city">🌊 汕头 <span class="c-tag">侨乡·开埠</span></div><div class="c-desc">小公园骑楼、侨批（世界记忆）、潮剧工夫茶。一封侨批里的家国情怀与向海而生。</div></div>
+      <div class="cul-card"><div class="c-city">🐚 汕尾 <span class="c-tag">渔歌·红土</span></div><div class="c-desc">渔家文化、正字戏、红宫红场。听一段渔歌，看红土地上的坚守与温情。</div></div>
+      <div class="cul-card"><div class="c-city">🦁 香港 <span class="c-tag">中西·包容</span></div><div class="c-desc">维港天际、历史建筑、狮子山精神。看东方之珠兼容并蓄的中华气度。</div></div>
+      <div class="cul-card"><div class="c-city">⛪ 澳门 <span class="c-tag">世遗·交融</span></div><div class="c-desc">澳门历史城区、大三巴、中西合璧。小城故事里多元文化和谐共生。</div></div>
+      <div class="cul-card"><div class="c-city">🍲 顺德 <span class="c-tag">美食·水乡</span></div><div class="c-desc">世界美食之都、清晖园、桑基鱼塘。一盅两件里品岭南烟火与匠心。</div></div>
+      <div class="cul-card"><div class="c-city">🏙️ 广州 <span class="c-tag">商都·广府</span></div><div class="c-desc">南越王墓、陈家祠、海上丝路。从千年商都读懂开放务实的广府精神。</div></div>
+      <div class="cul-card"><div class="c-city">🏔️ 丽江 <span class="c-tag">东巴·雪山</span></div><div class="c-desc">丽江古城、东巴象形文字、纳西古乐。雪山下的活着的千年文明。</div></div>
+      <div class="cul-card"><div class="c-city">🌶️ 重庆 <span class="c-tag">巴渝·英雄</span></div><div class="c-desc">洪崖洞吊脚楼、抗战陪都、川江号子。山水之城里的巴渝刚毅与家国担当。</div></div>
     </div>
   </section>
 
