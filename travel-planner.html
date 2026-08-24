@@ -329,6 +329,37 @@ body{-webkit-tap-highlight-color:transparent}
 .backup-sub2{font-size:14px;font-weight:600;color:#334155;margin:18px 0 10px}
 
 @media(max-width:768px){.dir-cards{grid-template-columns:1fr}.route-flow{font-size:11px}.rf-node{padding:5px 9px}}
+
+  /* 行程日历 + 实时天气（与主页/工作台配色统一） */
+  .wb-cw{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;margin-bottom:16px}
+  @media(max-width:680px){.wb-cw{grid-template-columns:1fr}}
+  .cw-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;position:relative}
+  .cw-card.cal{border-top:4px solid var(--primary)}
+  .cw-card.wth{border-top:4px solid var(--success)}
+  .cw-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+  .cw-title{font-size:15px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px}
+  .cw-nav{display:flex;align-items:center;gap:6px}
+  .cw-nav button{width:28px;height:28px;border-radius:8px;background:var(--primary-light);color:var(--primary);font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center}
+  .cw-nav button:hover{background:var(--primary);color:#fff}
+  .cw-nav .cw-m{font-size:13px;font-weight:600;color:var(--text);min-width:74px;text-align:center}
+  .cw-week{display:grid;grid-template-columns:repeat(7,1fr);font-size:11px;color:var(--text-light);text-align:center;margin-bottom:4px}
+  .cw-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .cw-cell{height:38px;border-radius:8px;background:#F4F6F9;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:var(--text);position:relative;overflow:hidden}
+  .cw-cell.dim{visibility:hidden}
+  .cw-cell.wk{color:var(--text-light)}
+  .cw-cell.today{outline:2px solid var(--info);outline-offset:-2px;font-weight:700}
+  .cw-cell .cw-d{line-height:1.1}
+  .cw-cell .cw-e{font-size:11px;line-height:1;margin-top:1px}
+  .cw-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--text-light)}
+  .cw-foot .trip-span{color:var(--primary);font-weight:600}
+  .cw-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .cw-leg{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--text);background:#F4F6F9;border-radius:10px;padding:2px 8px}
+  .cw-leg i{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .cw-wth-body{padding-top:2px}
+  .cw-temp{font-size:36px;font-weight:800;color:var(--success);line-height:1.1}
+  .cw-temp small{font-size:15px;font-weight:600;color:var(--text-light)}
+  .cw-desc{font-size:13px;color:var(--text-light);margin-top:4px}
+  .cw-hint{margin-top:12px;font-size:12px;color:#1E7A4F;background:var(--success-light);border-radius:10px;padding:8px 10px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -386,6 +417,34 @@ body{-webkit-tap-highlight-color:transparent}
     <div class="ci-from">—— 习近平（关于文化和旅游融合发展的嘱托）</div>
     <div class="ci-desc">本次环线串起海丝起点泉州、潮汕侨乡、中西交融的港澳、世界美食之都顺德、千年商都广州、纳西东巴丽江与巴渝重庆。愿这一路不只是"打卡"，更能读城读史、以文塑旅——在每一处烟火与古迹里，感悟中华文化的博大精深，增强我们共同的文化自信。</div>
     <div class="ci-heritage">🏛️ 本线串起 <b>4 处世界遗产</b>：泉州（宋元海丝）· 澳门（历史城区）· 丽江（古城）· 重庆（大足石刻 / 武隆喀斯特 ×2），另有汕头侨批（世界记忆）、顺德（美食之都）等中华文明活态印记。</div>
+  </section>
+
+  <!-- 行程日历 + 实时天气 -->
+  <section class="wb-cw">
+    <div class="cw-card cal">
+      <div class="cw-head">
+        <span class="cw-title">📅 行程日历</span>
+        <div class="cw-nav">
+          <button id="wb-calPrev" title="上个月">‹</button>
+          <span class="cw-m" id="wb-calTitle">—</span>
+          <button id="wb-calNext" title="下个月">›</button>
+        </div>
+      </div>
+      <div class="cw-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+      <div class="cw-grid" id="wb-calGrid"></div>
+      <div class="cw-foot"><span class="trip-span">🧳 10/5–10/19 · 15天14晚</span><span>安庆 → 9城 → 安庆</span></div>
+      <div class="cw-legend" id="wb-calLegend"></div>
+    </div>
+    <div class="cw-card wth">
+      <div class="cw-head">
+        <span class="cw-title">🌤️ <span id="wb-wthLabel">实时天气</span></span>
+      </div>
+      <div class="cw-wth-body">
+        <div class="cw-temp" id="wb-wthTemp">—</div>
+        <div class="cw-desc" id="wb-wthDesc">定位中…</div>
+        <div class="cw-hint">🧳 10月华南/西南多晴 23–29°C；丽江、重庆山区早晚凉，备薄外套</div>
+      </div>
+    </div>
   </section>
 
   <!-- Today Section -->
@@ -1059,16 +1118,16 @@ var FERRY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 
 // 城市文化元数据：图标 + 世界遗产/荣誉徽章（渲染行程与看板时按城市名注入，不改动种子数据）
 var CITY_META = {
-  "安庆":   { icon:"🎭", badge:"黄梅戏之乡",     btype:"culture" , must:"" },
-  "泉州":   { icon:"🏯", badge:"🏛️ 世界遗产",   btype:"wh" , must:"开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围" },
-  "汕头":   { icon:"🌊", badge:"📜 世界记忆",   btype:"memory" , must:"小公园骑楼 · 侨批文物馆 · 牛肉火锅 · 生腌" },
-  "汕尾":   { icon:"🐚", badge:"🎭 渔歌非遗",   btype:"culture" , must:"红海湾遮浪半岛 · 金町湾 · 二马路夜市" },
-  "香港":   { icon:"🦁", badge:"🌐 中西交融",   btype:"culture" , must:"太平山顶 · 维港夜景 · 叮叮车 · 庙街" },
-  "澳门":   { icon:"⛪", badge:"🏛️ 世界遗产",   btype:"wh" , must:"大三巴 · 恋爱巷 · 官也街 · 路环" },
-  "顺德":   { icon:"🍲", badge:"🍜 美食之都",   btype:"food" , must:"清晖园 · 鱼生 · 双皮奶 · 桑拿鸡" },
-  "广州":   { icon:"🏙️", badge:"🌊 海丝预备",   btype:"culture" , must:"陈家祠 · 南越王宫 · 沙面 · 早茶" },
-  "丽江":   { icon:"🏔️", badge:"🏛️ 世界遗产",   btype:"wh" , must:"古城 · 玉龙雪山 · 束河 · 纳西古乐" },
-  "重庆":   { icon:"🌶️", badge:"🏛️ 世遗×2",    btype:"wh" , must:"洪崖洞 · 大足石刻 · 火锅 · 长江索道" }
+  "安庆":   { icon:"🎭", badge:"黄梅戏之乡",     btype:"culture" , must:"" , color:"#8A94A6" },
+  "泉州":   { icon:"🏯", badge:"🏛️ 世界遗产",   btype:"wh" , must:"开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围" , color:"#C0392B" },
+  "汕头":   { icon:"🌊", badge:"📜 世界记忆",   btype:"memory" , must:"小公园骑楼 · 侨批文物馆 · 牛肉火锅 · 生腌" , color:"#E67E22" },
+  "汕尾":   { icon:"🐚", badge:"🎭 渔歌非遗",   btype:"culture" , must:"红海湾遮浪半岛 · 金町湾 · 二马路夜市" , color:"#17A2B8" },
+  "香港":   { icon:"🦁", badge:"🌐 中西交融",   btype:"culture" , must:"太平山顶 · 维港夜景 · 叮叮车 · 庙街" , color:"#2980B9" },
+  "澳门":   { icon:"⛪", badge:"🏛️ 世界遗产",   btype:"wh" , must:"大三巴 · 恋爱巷 · 官也街 · 路环" , color:"#9B59B6" },
+  "顺德":   { icon:"🍲", badge:"🍜 美食之都",   btype:"food" , must:"清晖园 · 鱼生 · 双皮奶 · 桑拿鸡" , color:"#F39C12" },
+  "广州":   { icon:"🏙️", badge:"🌊 海丝预备",   btype:"culture" , must:"陈家祠 · 南越王宫 · 沙面 · 早茶" , color:"#27AE60" },
+  "丽江":   { icon:"🏔️", badge:"🏛️ 世界遗产",   btype:"wh" , must:"古城 · 玉龙雪山 · 束河 · 纳西古乐" , color:"#5DADE2" },
+  "重庆":   { icon:"🌶️", badge:"🏛️ 世遗×2",    btype:"wh" , must:"洪崖洞 · 大足石刻 · 火锅 · 长江索道" , color:"#A93226" }
 };
 function cityMetaOf(title){
   if(!title) return null;
@@ -1800,5 +1859,104 @@ if (document.readyState === "loading") {
   init();
 }
 </script>
+  <!-- 行程日历 + 实时天气 -->
+  <script>
+  (function(){
+    // ===== 城市逐日映射（来自 ROUTE_STOPS；home 城市最后写，保留出发/到家日）=====
+    function buildCityByDay(){
+      var map={};
+      var stops=ROUTE_STOPS.slice().sort(function(a,b){return (a.home?1:0)-(b.home?1:0);});
+      stops.forEach(function(s){
+        var m=String(s.dates).match(/(\d+)\/(\d+)(?:-(\d+))?/);
+        if(!m) return;
+        var mo=parseInt(m[1],10), start=parseInt(m[2],10), end=m[3]?parseInt(m[3],10):start;
+        for(var d=start; d<=end; d++){ map[mo+'/'+d]=s.city; }
+      });
+      return map;
+    }
+    var CITY_BY_DAY=buildCityByDay();
+    function cityColor(city){ var m=CITY_META[city]; return m&&m.color?m.color:'#E67E22'; }
+    function cityIcon(city){ var m=CITY_META[city]; return m&&m.icon?m.icon:'📍'; }
+
+    // ===== 日历 =====
+    var TRIP_START=new Date(2026,9,5), TRIP_END=new Date(2026,9,19);
+    var grid=document.getElementById('wb-calGrid');
+    var titleEl=document.getElementById('wb-calTitle');
+    var legendEl=document.getElementById('wb-calLegend');
+    var today=new Date();
+    var view=new Date(2026,9,1); // 默认显示行程月（10月）
+    function inTrip(d){ return d>=TRIP_START && d<=TRIP_END; }
+    function isToday(d){ return d.getFullYear()===today.getFullYear()&&d.getMonth()===today.getMonth()&&d.getDate()===today.getDate(); }
+    function hexA(hex,a){ var h=hex.replace('#',''); var r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16); return 'rgba('+r+','+g+','+b+','+a+')'; }
+    function renderCal(){
+      var y=view.getFullYear(), mo=view.getMonth();
+      titleEl.textContent=y+'年'+(mo+1)+'月';
+      grid.innerHTML='';
+      var first=new Date(y,mo,1).getDay();
+      var days=new Date(y,mo+1,0).getDate();
+      for(var i=0;i<first;i++){ var dc=document.createElement('div'); dc.className='cw-cell dim'; grid.appendChild(dc); }
+      for(var d=1; d<=days; d++){
+        var cur=new Date(y,mo,d);
+        var cell=document.createElement('div');
+        cell.className='cw-cell'+(((cur.getDay()===0)||(cur.getDay()===6))?' wk':'');
+        var num=document.createElement('span'); num.className='cw-d'; num.textContent=d; cell.appendChild(num);
+        if(isToday(cur)) cell.classList.add('today');
+        if(inTrip(cur)){
+          var city=CITY_BY_DAY[(mo+1)+'/'+d];
+          var col=cityColor(city);
+          cell.style.background=hexA(col,0.14);
+          cell.style.boxShadow='inset 0 -3px 0 '+col;
+          if(city){
+            var e=document.createElement('span'); e.className='cw-e'; e.textContent=cityIcon(city); cell.appendChild(e);
+            cell.title=city;
+          }
+        }
+        grid.appendChild(cell);
+      }
+    }
+    (function renderLegend(){
+      var seen={};
+      ROUTE_STOPS.forEach(function(s){
+        if(seen[s.city]) return; seen[s.city]=1;
+        var leg=document.createElement('span'); leg.className='cw-leg';
+        var dot=document.createElement('i'); dot.style.background=cityColor(s.city);
+        var txt=document.createElement('span'); txt.textContent=cityIcon(s.city)+' '+s.city;
+        leg.appendChild(dot); leg.appendChild(txt); legendEl.appendChild(leg);
+      });
+    })();
+    document.getElementById('wb-calPrev').onclick=function(){ view.setMonth(view.getMonth()-1); renderCal(); };
+    document.getElementById('wb-calNext').onclick=function(){ view.setMonth(view.getMonth()+1); renderCal(); };
+    renderCal();
+
+    // ===== 天气（Open-Meteo 免费接口 + 浏览器自动定位，与主页同逻辑）=====
+    var WMO={0:'晴',1:'大致晴朗',2:'局部多云',3:'阴',45:'雾',48:'雾凇',51:'小毛毛雨',53:'毛毛雨',55:'大毛毛雨',61:'小雨',63:'中雨',65:'大雨',71:'小雪',73:'中雪',75:'大雪',80:'阵雨',81:'强阵雨',82:'暴雨',95:'雷阵雨',96:'雷阵雨伴冰雹',99:'强雷暴伴冰雹'};
+    var wLabel=document.getElementById('wb-wthLabel');
+    var wTemp=document.getElementById('wb-wthTemp');
+    var wDesc=document.getElementById('wb-wthDesc');
+    var DEFAULT={lat:30.51,lon:117.05,name:'安徽 · 安庆'};
+    wLabel.textContent=DEFAULT.name+' 实时天气';
+    function loadWeather(lat,lon,name){
+      var url='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto';
+      fetch(url).then(function(r){return r.json();}).then(function(d){
+        var c=d.current||{};
+        wTemp.innerHTML=Math.round(c.temperature_2m)+'<small>°C</small>';
+        wDesc.textContent=(WMO[c.weather_code]||'未知')+' · 湿度 '+c.relative_humidity_2m+'% · 风速 '+c.wind_speed_10m+' km/h';
+        if(name) wLabel.textContent=name+' 实时天气';
+      }).catch(function(){ wTemp.textContent='—'; wDesc.textContent='网络受限，刷新重试'; });
+    }
+    loadWeather(DEFAULT.lat,DEFAULT.lon,null);
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(pos){
+        var la=pos.coords.latitude, lo=pos.coords.longitude;
+        wLabel.textContent='定位中…';
+        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+la+'&longitude='+lo+'&localityLanguage=zh').then(function(r){return r.json();}).then(function(g){
+          var city=g.city||g.locality||''; var name=city||(g.principalSubdivision||'当前位置');
+          loadWeather(la.toFixed(3),lo.toFixed(3),name);
+        }).catch(function(){ loadWeather(la.toFixed(3),lo.toFixed(3),'当前位置'); });
+      }, function(){ /* 定位失败保持默认安庆 */ }, {timeout:8000,maximumAge:300000});
+    }
+  })();
+  </script>
+
 </body>
 </html>
