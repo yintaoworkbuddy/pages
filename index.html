@@ -2,1797 +2,303 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>十月旅行规划</title>
-<!-- 本工作台通过 WorkBuddy 资料库能力（library skill）搭建、存储和部署 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的主页 · 日期 / 天气 / 常用工具 / 旅行路线</title>
 <style>
-:root{
-  --primary:#E67E22;--primary-light:#FDF2E9;--primary-dark:#D35400;
-  --bg:#F5F6FA;--card-bg:#FFFFFF;--text:#2C3E50;--text-light:#95A5A6;--text-muted:#BDC3C7;
-  --border:#E8E8E8;--danger:#E74C3C;--danger-light:#FDEDEC;--success:#27AE60;--success-light:#EAFAF1;
-  --warning:#F39C12;--info:#3498DB;--radius:10px;--shadow:0 2px 8px rgba(0,0,0,.06);
-  --shadow-lg:0 4px 16px rgba(0,0,0,.1);
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{font-size:16px}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
-button{font-family:inherit;cursor:pointer;border:none;outline:none;transition:all .2s}
-input,select,textarea{font-family:inherit;font-size:16px;outline:none;border:none}
-input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
+  :root{
+    --bg:#f5f6fa; --col:#ffffff; --txt:#1f2330; --sub:#8a90a2;
+    --blue:#3d7bff; --green:#22c08a; --red:#ff5a52;
+    --shadow:0 4px 18px rgba(31,35,48,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--txt); padding:28px; min-height:100vh;
+  }
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}
+  header h1{font-size:22px;letter-spacing:.5px}
+  header h1 span{color:var(--sub);font-weight:400;font-size:14px;margin-left:8px}
+  .meta{color:var(--sub);font-size:13px}
 
-/* Header */
-.app-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(230,126,34,.3)}
-.app-header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px}
-.header-actions{display:flex;align-items:center;gap:8px}
-.sync-badge{display:flex;align-items:center;gap:5px;font-size:12px;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;white-space:nowrap}
-.sync-badge.offline{background:rgba(231,76,60,.3)}
-.sync-badge.online{background:rgba(39,174,96,.3)}
-.sync-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
-.sync-badge.offline .sync-dot{background:#E74C3C;animation:none}
-.sync-badge.online .sync-dot{background:#2ECC71}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.icon-btn{background:rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.icon-btn:hover{background:rgba(255,255,255,.3)}
-.icon-btn svg{width:18px;height:18px}
+  /* 信息条：日期 + 天气 */
+  .infobar{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+  @media(max-width:760px){.infobar{grid-template-columns:1fr}}
+  .info-card{background:linear-gradient(135deg,#3d7bff,#6aa1ff);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;display:flex;flex-direction:column;gap:6px}
+  .info-card.weather{background:linear-gradient(135deg,#22c08a,#4fd6a6)}
+  .info-card .label{font-size:13px;opacity:.85;display:flex;align-items:center;gap:6px}
+  .info-card .big{font-size:26px;font-weight:700;line-height:1.2}
+  .info-card .small{font-size:13px;opacity:.9}
+  .info-card .icon{font-size:22px}
 
-/* Container */
-.container{max-width:960px;margin:0 auto;padding:12px 16px}
+  /* 日历卡 */
+  .cal-card{gap:8px}
+  .cal-head{display:flex;align-items:center;justify-content:space-between}
+  .cal-title{font-size:17px;font-weight:700;letter-spacing:.5px}
+  .cal-nav{width:28px;height:28px;border-radius:8px;border:none;background:rgba(255,255,255,.22);color:#fff;font-size:17px;cursor:pointer;line-height:1;transition:.15s;padding:0}
+  .cal-nav:hover{background:rgba(255,255,255,.4)}
+  .cal-week{display:grid;grid-template-columns:repeat(7,1fr);font-size:11px;opacity:.85;text-align:center;margin-top:2px}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+  .cal-cell{height:26px;display:flex;align-items:center;justify-content:center;font-size:12.5px;border-radius:7px;position:relative}
+  .cal-cell.dim{visibility:hidden}
+  .cal-cell.wk{opacity:.75}
+  .cal-cell.today{background:#fff;color:var(--blue);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+  .cal-cell.trip{background:rgba(255,255,255,.28);font-weight:600}
+  .cal-cell.trip::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#ffd76e}
+  .cal-cell.today.trip{color:#e67e22}
+  .cal-today{font-size:12px;opacity:.92;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
+  .cal-today .trip-legend{opacity:.95}
 
-/* Today Section */
-.today-section{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
-.today-section h2{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.today-section h2 svg{width:18px;height:18px;color:var(--primary)}
-.today-empty{color:var(--text-light);font-size:14px;padding:8px 0}
-.today-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;margin-bottom:6px;transition:background .2s}
-.today-item:last-child{margin-bottom:0}
-.today-item.overdue{background:var(--danger-light);border-left:3px solid var(--danger)}
-.today-item.today{background:var(--primary-light);border-left:3px solid var(--primary)}
-.today-item.upcoming{background:#F0F7FD;border-left:3px solid var(--info)}
-.today-item-info{flex:1;min-width:0}
-.today-item-title{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.today-item-meta{font-size:12px;color:var(--text-light);display:flex;gap:8px;align-items:center}
-.today-item-badge{font-size:11px;padding:2px 6px;border-radius:4px;white-space:nowrap}
-.badge-overdue{background:#E74C3C;color:#fff}
-.badge-today{background:var(--primary);color:#fff}
-.badge-upcoming{background:var(--info);color:#fff}
-.today-action{flex-shrink:0;background:#fff;border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text)}
-.today-action:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+  /* 旅行工作台入口 */
+  .trip-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#e67e22,#f0932b);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;text-decoration:none;margin-bottom:22px;transition:transform .15s,box-shadow .15s}
+  .trip-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(230,126,34,.35)}
+  .trip-card .t-icon{font-size:26px;flex:0 0 auto}
+  .trip-card .t-body{flex:1;min-width:0}
+  .trip-card .t-title{font-size:17px;font-weight:700;line-height:1.3}
+  .trip-card .t-sub{font-size:12px;opacity:.9;margin-top:3px}
+  .trip-card .t-arrow{font-size:24px;opacity:.85;flex:0 0 auto}
 
-/* Tabs */
-.tabs{display:flex;gap:0;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
-.tab-btn{flex:1;padding:12px 8px;font-size:14px;font-weight:500;color:var(--text-light);background:transparent;display:flex;flex-direction:column;align-items:center;gap:4px;border-bottom:3px solid transparent}
-.tab-btn svg{width:20px;height:20px}
-.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);background:var(--primary-light)}
-.tab-btn:hover:not(.active){color:var(--text)}
+  /* 工具跳转区 */
+  .tools{margin-bottom:22px}
+  .tools-title{font-size:17px;font-weight:600;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .tool-card{display:flex;align-items:center;gap:12px;background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;color:var(--txt);text-decoration:none;transition:transform .15s,box-shadow .15s;border:1px solid #eef0f6}
+  .tool-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(31,35,48,.12)}
+  .tool-card .t-ico{font-size:26px;flex:0 0 auto}
+  .tool-card .t-body{flex:1;min-width:0}
+  .tool-card .t-name{font-size:15px;font-weight:600;line-height:1.3}
+  .tool-card .t-sub{font-size:12px;color:var(--sub);margin-top:2px}
+  .tool-card .t-arrow{font-size:22px;color:var(--sub);flex:0 0 auto}
+  .tool-card.main{background:linear-gradient(135deg,#e67e22,#f0932b);color:#fff;border:none;margin-bottom:12px}
+  .tool-card.main .t-sub{color:rgba(255,255,255,.9)}
+  .tool-card.main .t-arrow{color:rgba(255,255,255,.85)}
+  .tool-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:520px){.tool-row{grid-template-columns:1fr}}
+  .tool-card.xhs .t-ico{color:#ff2e4d}
+  .tool-card.fan .t-ico{color:#ff8c00}
+  .tool-card.alt{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border:none}
+  .tool-card.alt .t-sub{color:rgba(255,255,255,.9)}
+  .tool-card.alt .t-arrow{color:rgba(255,255,255,.85)}
+  .route-badge{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px;letter-spacing:.5px;background:rgba(255,255,255,.22);color:#fff}
+  .tool-card.main .t-name{font-size:18px}
+  .tool-card.alt .t-name{font-size:17px;font-weight:700}
+  footer{color:var(--sub);font-size:12px;text-align:center}
 
-/* Module */
-.module{display:none}
-.module.active{display:block}
+  /* 离线提示条 */
+  .offline-tip{font-size:12px;color:#c08a00;background:#fff8e1;padding:6px 12px;border-radius:8px;margin-bottom:12px;display:none}
 
-/* Cards */
-.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
-.card-title{font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
-.card-title svg{width:20px;height:20px;color:var(--primary)}
+  /* 文旅嘱托 · 顶部引言横幅 */
+  .hero-quote{position:relative;background:linear-gradient(135deg,#9b1c1c,#c0392b 55%,#e07a3f);border-radius:16px;box-shadow:var(--shadow);padding:24px 26px 22px;color:#fff;margin-bottom:24px;overflow:hidden}
+  .hero-quote::before{content:'”';position:absolute;right:14px;top:-18px;font-size:120px;line-height:1;color:rgba(255,255,255,.13);font-family:Georgia,serif}
+  .hero-quote .flag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;margin-bottom:12px;letter-spacing:.5px}
+  .hero-quote .q-text{font-size:20px;font-weight:700;line-height:1.55;letter-spacing:.5px;max-width:780px}
+  .hero-quote .q-text .hl{color:#ffd76e}
+  .hero-quote .q-from{margin-top:12px;font-size:13px;opacity:.92;text-align:right}
+  .hero-quote .q-ribbon{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .hero-quote .q-ribbon span{font-size:12px;background:rgba(255,255,255,.14);padding:4px 10px;border-radius:8px}
 
-/* Add Form */
-.add-form{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
-.add-form-header{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.add-form-header svg{width:18px;height:18px;color:var(--primary)}
-.form-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-.form-field{flex:1;min-width:140px}
-.form-field label{display:block;font-size:12px;color:var(--text-light);margin-bottom:4px;font-weight:500}
-.form-field input,.form-field select,.form-field textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:16px;background:var(--bg);color:var(--text)}
-.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--primary);background:#fff}
-.form-field textarea{resize:vertical;min-height:40px}
-.btn-add{background:var(--primary);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;min-height:44px}
-.btn-add:hover{background:var(--primary-dark)}
-.btn-add svg{width:18px;height:18px}
-
-/* List items */
-.list-item{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;transition:box-shadow .2s}
-.list-item:hover{box-shadow:var(--shadow-lg)}
-.list-item-body{flex:1;min-width:0}
-.list-item-title{font-size:14px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.list-item-meta{font-size:12px;color:var(--text-light);display:flex;gap:10px;flex-wrap:wrap;margin-top:3px;align-items:center}
-.list-item-notes{font-size:12px;color:var(--text-light);margin-top:4px;font-style:italic}
-.list-item-actions{display:flex;gap:6px;flex-shrink:0}
-.list-item-actions button{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--bg)}
-.list-item-actions button:hover{background:var(--primary-light);border-color:var(--primary)}
-.list-item-actions button svg{width:16px;height:16px}
-.list-item-actions .btn-delete:hover{background:var(--danger-light);border-color:var(--danger)}
-.list-item-actions .btn-delete:hover svg{color:var(--danger)}
-.list-item-actions .btn-delete svg{color:var(--text-light)}
-.list-item-actions .btn-check:hover{background:var(--success-light);border-color:var(--success)}
-.list-item-actions .btn-check svg{color:var(--text-light)}
-.list-item-actions .btn-check:hover svg{color:var(--success)}
-.list-item.done .list-item-title{text-decoration:line-through;color:var(--text-light)}
-.list-item.done{opacity:.65}
-.tag{font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg);color:var(--text-light)}
-.tag-expense{background:var(--danger-light);color:var(--danger)}
-.tag-income{background:var(--success-light);color:var(--success)}
-.tag-transport{background:#E8F0FE;color:#1A73E8}
-.tag-hotel{background:#FCE8E6;color:#D93025}
-.tag-food{background:#FEF7E0;color:#F9AB00}
-.tag-ticket{background:#F3E8FD;color:#9334C9}
-.tag-shopping{background:#E6F4EA;color:#137333}
-.tag-other{background:#F1F3F4;color:#5F6368}
-.amount-expense{color:var(--danger);font-weight:600}
-.amount-income{color:var(--success);font-weight:600}
-.priority-high{color:var(--danger)}
-.priority-medium{color:var(--warning)}
-.priority-low{color:var(--text-light)}
-
-/* Budget Summary */
-.budget-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.budget-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;text-align:center}
-.budget-card .label{font-size:12px;color:var(--text-light);margin-bottom:4px}
-.budget-card .value{font-size:22px;font-weight:700}
-.budget-card.expense .value{color:var(--danger)}
-.budget-card.income .value{color:var(--success)}
-.budget-card.balance .value{color:var(--primary)}
-
-/* Pie chart */
-.chart-section{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
-.chart-section h3{font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.chart-section h3 svg{width:18px;height:18px;color:var(--primary)}
-.pie-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.pie-chart{flex-shrink:0}
-.pie-legend{flex:1;min-width:180px}
-.pie-legend-item{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px}
-.pie-legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
-.pie-legend-amount{margin-left:auto;font-weight:600}
-
-/* Destination Board */
-.dest-board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.dest-column{background:var(--bg);border-radius:var(--radius);padding:10px;min-height:120px}
-.dest-column h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.dest-column .count{font-size:11px;color:var(--text-light);background:var(--card-bg);padding:1px 6px;border-radius:10px}
-.dest-card{background:var(--card-bg);border-radius:8px;padding:10px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:pointer;transition:box-shadow .2s}
-.dest-card:hover{box-shadow:var(--shadow)}
-.dest-card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
-.dest-card-meta{font-size:11px;color:var(--text-light)}
-.dest-card-priority{display:inline-block;font-size:11px;font-weight:600;margin-right:6px}
-
-  /* 城市图标 + 世界遗产/荣誉徽章（看板 & 行程） */
-  .dest-card-icon{font-size:14px;margin-right:5px;line-height:1}
-  .dest-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;color:#fff;white-space:nowrap}
-  .dest-badge.wh{background:#c0392b}
-  .dest-badge.memory{background:#7c5cbf}
-  .dest-badge.food{background:#e67e22}
-  .dest-badge.culture{background:#5b7c99}
-  .itin-icon{font-size:14px;margin-right:2px;line-height:1}
-  .itin-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;color:#fff;white-space:nowrap}
-  .itin-badge.wh{background:#c0392b}
-  .itin-badge.memory{background:#7c5cbf}
-  .itin-badge.food{background:#e67e22}
-  .itin-badge.culture{background:#5b7c99}
-
-/* Empty state */
-.empty-state{text-align:center;padding:24px 16px;color:var(--text-light)}
-.empty-state svg{width:48px;height:48px;color:var(--text-muted);margin-bottom:8px}
-.empty-state p{font-size:14px}
-
-/* Backup reminder */
-.backup-reminder{background:#FEF7E0;border:1px solid #F9D972;border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:13px;color:#7A5C00;display:flex;align-items:center;gap:8px}
-.backup-reminder svg{width:18px;height:18px;flex-shrink:0}
-
-/* Modal */
-.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:200;justify-content:center;align-items:flex-start;padding:20px;padding-top:10vh}
-.modal-overlay.show{display:flex}
-.modal{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);width:100%;max-width:480px;max-height:80vh;overflow-y:auto}
-.modal-header{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.modal-header h3{font-size:16px;font-weight:600}
-.modal-close{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--border)}
-.modal-close:hover{background:var(--danger-light)}
-.modal-close svg{width:16px;height:16px;color:var(--text-light)}
-.modal-body{padding:16px}
-.modal-body .form-field{margin-bottom:12px}
-.modal-footer{padding:16px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
-.btn-save{background:var(--primary);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;min-height:44px}
-.btn-save:hover{background:var(--primary-dark)}
-.btn-cancel{background:var(--bg);color:var(--text);padding:10px 20px;border-radius:8px;font-size:14px;border:1px solid var(--border);min-height:44px}
-.btn-cancel:hover{background:var(--border)}
-
-/* Confirm dialog */
-.confirm-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:300;justify-content:center;align-items:center;padding:20px}
-.confirm-overlay.show{display:flex}
-.confirm-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-lg);width:100%;max-width:340px;padding:24px;text-align:center}
-.confirm-box h3{font-size:16px;font-weight:600;margin-bottom:8px}
-.confirm-box p{font-size:14px;color:var(--text-light);margin-bottom:16px}
-.confirm-box .confirm-actions{display:flex;gap:10px;justify-content:center}
-.confirm-box .btn-confirm-danger{background:var(--danger);color:#fff}
-.confirm-box .btn-confirm-danger:hover{background:#C0392B}
-
-/* ===== Overview 行程总览 ===== */
-.overview{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
-.overview h2{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.overview h2 svg{width:18px;height:18px;color:var(--primary)}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-.stat-card{background:var(--bg);border-radius:8px;padding:9px 4px;text-align:center}
-.stat-value{font-size:18px;font-weight:700;color:var(--primary);line-height:1.3;white-space:nowrap}
-.stat-value small{font-size:11px;font-weight:600}
-.stat-label{font-size:11px;color:var(--text-light)}
-.route-scroll{overflow-x:auto;padding:6px 2px 8px;-webkit-overflow-scrolling:touch}
-.route-map{display:flex;align-items:flex-start;min-width:max-content}
-.route-stop{width:68px;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
-.route-dot{width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--primary);flex-shrink:0}
-.route-stop.daytrip .route-dot{border-color:var(--info)}
-.route-stop.home .route-dot{background:var(--primary)}
-.route-city{font-size:12px;font-weight:600;color:var(--text);margin-top:5px;white-space:nowrap}
-.route-dates{font-size:10px;color:var(--text-light);white-space:nowrap;margin-top:1px}
-.route-nights{font-size:10px;color:var(--primary);font-weight:600;white-space:nowrap}
-.route-seg{width:44px;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
-.seg-line{width:100%;border-top:2px dashed var(--text-muted);margin-top:8px}
-.seg-icon{display:flex;background:var(--card-bg);padding:0 2px;margin-top:-9px}
-.seg-icon svg{width:14px;height:14px}
-.seg-icon.plane{color:var(--info)}
-.seg-icon.train{color:var(--success)}
-.seg-date{font-size:9px;color:var(--text-light);margin-top:2px;white-space:nowrap}
-.route-legend{display:flex;gap:14px;margin-top:6px;padding-top:8px;border-top:1px dashed var(--border);font-size:11px;color:var(--text-light)}
-.route-legend span{display:flex;align-items:center;gap:4px}
-.route-legend svg{width:13px;height:13px}
-.legend-plane{color:var(--info)}
-.legend-train{color:var(--success)}
-.overview-todos{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
-
-  /* 文化之旅 · 总书记文旅嘱托 */
-  .culture-intro{background:linear-gradient(135deg,#9b1c1c,#c0392b 60%,#e07a3f);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden}
-  .culture-intro::before{content:'”';position:absolute;right:10px;top:-14px;font-size:90px;line-height:1;color:rgba(255,255,255,.12);font-family:Georgia,serif}
-  .culture-intro .ci-flag{display:inline-block;font-size:11px;font-weight:700;background:rgba(255,255,255,.18);padding:3px 10px;border-radius:20px;margin-bottom:8px;letter-spacing:.5px}
-  .culture-intro .ci-q{font-size:17px;font-weight:700;line-height:1.5;letter-spacing:.3px}
-  .culture-intro .ci-q .hl{color:#ffd76e}
-  .culture-intro .ci-from{font-size:12px;opacity:.9;margin-top:6px;text-align:right}
-  .culture-intro .ci-desc{font-size:13px;line-height:1.65;margin-top:12px;background:rgba(255,255,255,.1);padding:10px 12px;border-radius:8px}
-  .culture-intro .ci-heritage{font-size:12px;line-height:1.6;margin-top:8px;background:rgba(255,215,110,.16);padding:8px 12px;border-radius:8px;border-left:3px solid #ffd76e}
-  .culture-intro .ci-heritage b{color:#ffd76e}
-.ot-label{font-size:11px;color:var(--text-light);font-weight:600}
-.todo-chip{font-size:11px;background:#FEF7E0;color:#7A5C00;border:1px solid #F9D972;padding:3px 9px;border-radius:12px;white-space:nowrap}
-
-/* Responsive */
-body{-webkit-tap-highlight-color:transparent}
-@media(max-width:768px){
-  .stats-row{grid-template-columns:repeat(2,1fr)}
-  .app-header{padding:12px 14px}
-  .app-header h1{font-size:17px}
-  .container{padding:10px 12px}
-  .tabs{position:sticky;top:0;z-index:60;border-radius:0 0 var(--radius) var(--radius)}
-  .route-scroll::after{content:"← 左右滑动查看全程路线 →";display:block;text-align:center;font-size:11px;color:var(--text-light);padding-top:4px}
-  .list-item{padding:12px;gap:8px}
-  .list-item-actions button{width:38px;height:38px}
-  .modal-close{width:38px;height:38px}
-  .budget-summary{grid-template-columns:1fr 1fr 1fr;gap:8px}
-  .budget-card .value{font-size:18px}
-  .dest-board{grid-template-columns:1fr 1fr}
-  .form-row{flex-direction:column}
-  .form-field{min-width:100%}
-  .list-item{flex-wrap:wrap}
-  .tab-btn{font-size:12px;padding:10px 4px}
-  .tab-btn span{font-size:11px}
-  .pie-wrap{flex-direction:column;align-items:center}
-}
-@media(max-width:480px){
-  .budget-summary{grid-template-columns:1fr}
-  .dest-board{grid-template-columns:1fr}
-  .app-header h1{font-size:15px}
-  .header-actions{gap:4px}
-  .sync-badge{font-size:11px;padding:3px 6px}
-}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--text-muted);border-radius:3px}
-
-/* Backup Route 备选路线 */
-.backup-wrap{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
-.backup-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
-.backup-sub{font-size:12px;color:var(--text-light);margin-bottom:12px}
-.backup-note{font-size:12px;color:#B26A00;background:#FFF8F0;border:1px dashed #FFB877;padding:8px 12px;border-radius:8px;margin-bottom:16px;line-height:1.5}
-.route-flow{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:18px;padding:12px;background:#F8FAFC;border-radius:10px}
-.rf-node{padding:6px 11px;border-radius:18px;background:#fff;border:1px solid #E2E8F0;font-size:12.5px;font-weight:500;color:#334155;white-space:nowrap}
-.rf-node.start{background:#FF7A45;color:#fff;border-color:#FF7A45}
-.rf-node.end{background:#2ECC71;color:#fff;border-color:#2ECC71}
-.rf-arrow{color:#94A3B8;font-size:13px}
-.dir-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.dir-card{border:1px solid #E2E8F0;border-radius:12px;padding:14px;background:#fff;position:relative}
-.dir-card.recommended{border:2px solid #FF7A45;box-shadow:0 4px 14px rgba(255,122,69,.15)}
-.dir-card h3{font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:6px;color:var(--text)}
-.dir-tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#FF7A45;color:#fff;font-weight:600}
-.dir-card ul{list-style:none;font-size:12.5px;color:#475569;line-height:1.75;padding:0;margin:0}
-.dir-card li{margin-bottom:3px}
-.dir-card li:before{content:"·";color:#FF7A45;font-weight:700;margin-right:6px}
-.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.cmp-table th,.cmp-table td{padding:9px 11px;text-align:left;border-bottom:1px solid #F1F5F9;vertical-align:top}
-.cmp-table th{background:#F8FAFC;font-weight:600;color:#334155}
-.cmp-table td:first-child{color:#64748B;font-weight:500;width:28%}
-.cmp-table .best{color:#16A34A;font-weight:600}
-.rec-banner{background:linear-gradient(135deg,#FF7A45,#FF9A6B);color:#fff;border-radius:12px;padding:15px 16px;margin-bottom:16px}
-.rec-banner h3{font-size:15px;margin-bottom:6px;font-weight:700}
-.rec-banner p{font-size:12.5px;line-height:1.65;opacity:.96;margin:0}
-.anchor-list{font-size:12.5px;color:#475569;background:#F8FAFC;border-radius:10px;padding:12px 14px;line-height:1.9}
-.anchor-list b{color:#334155}
-  .budget-cmp{margin-top:18px}
-  .budget-cmp-title{font-size:15px;font-weight:600;color:#1e293b;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-  .budget-note{margin-top:12px;font-size:12.5px;line-height:1.7;color:#64748b;background:#f8fafc;border-radius:10px;padding:12px 14px}
-  .budget-note b{color:#334155}
-.hist-card{border:1px solid #E2E8F0;border-left:4px solid #94A3B8;background:#F8FAFC;border-radius:12px;padding:14px;margin-bottom:16px}
-.hist-card h3{font-size:15px;margin:0 0 6px;color:#334155}
-.hist-card .hist-meta{font-size:12px;color:#64748B;margin-bottom:8px}
-.hist-card ul{margin:6px 0;padding-left:18px}
-.hist-card li{font-size:13px;color:#475569;line-height:1.6;margin-bottom:3px}
-.hist-card .hist-cmp{font-size:13px;color:#B45309;background:#FFF8F0;padding:8px 10px;border-radius:8px;margin-top:8px;font-weight:600}
-.backup-sub2{font-size:14px;font-weight:600;color:#334155;margin:18px 0 10px}
-
-@media(max-width:768px){.dir-cards{grid-template-columns:1fr}.route-flow{font-size:11px}.rf-node{padding:5px 9px}}
+  /* 以文塑旅 · 九城文化打开方式 */
+  .culture{margin-bottom:22px}
+  .culture-title{font-size:17px;font-weight:600;color:var(--txt);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .culture-title .accent{color:#c0392b;font-size:18px}
+  .culture-sub{font-size:13px;color:var(--sub);margin-bottom:14px;line-height:1.6}
+  .culture-sub b{color:#c0392b}
+  .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:760px){.culture-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.culture-grid{grid-template-columns:1fr}}
+  .cul-card{background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:14px 15px;border:1px solid #eef0f6;border-top:3px solid #c0392b;display:flex;flex-direction:column;gap:6px}
+  .cul-head{display:flex;align-items:center;gap:6px}
+  .cul-ico{font-size:18px;line-height:1}
+  .cul-name{font-size:15px;font-weight:700;color:#c0392b}
+  .cul-badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:auto;white-space:nowrap;color:#fff}
+  .cul-badge.wh{background:#c0392b}
+  .cul-badge.memory{background:#7c5cbf}
+  .cul-badge.food{background:#e67e22}
+  .cul-badge.culture{background:#5b7c99}
+  .cul-theme{font-size:12px;font-weight:600;color:var(--txt);opacity:.85}
+  .cul-desc{font-size:12px;color:var(--sub);line-height:1.55}
+  .cul-do{font-size:11.5px;color:#c0392b;background:#fdf3ef;padding:6px 8px;border-radius:8px;line-height:1.5}
+  .culture-legend{font-size:11px;color:var(--sub);margin-top:12px;line-height:1.7;background:#f7f8fa;padding:10px 12px;border-radius:8px}
 </style>
 </head>
 <body>
+  <header>
+    <h1>我的主页 <span id="date"></span></h1>
+    <div class="meta">由 WorkBuddy 自动部署 · GitHub Pages</div>
+  </header>
 
-<!-- Header -->
-<header class="app-header">
-  <h1>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    十月旅行规划
-  </h1>
-  <div class="header-actions">
-    <div class="sync-badge offline" id="syncBadge">
-      <span class="sync-dot"></span>
-      <span id="syncText">离线模式</span>
-    </div>
-    <button class="icon-btn" id="btnExport" title="导出JSON备份">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    </button>
-    <button class="icon-btn" id="btnImport" title="导入恢复">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-    </button>
-    <input type="file" id="importFile" accept=".json" style="display:none">
-  </div>
-</header>
-
-<div class="container">
-
-  <!-- Overview 行程总览 -->
-  <section class="overview">
-    <h2>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h7"/></svg>
-      行程总览 · 10/5 出发 → 10/19 到家
-    </h2>
-    <div class="stats-row" id="statsRow"></div>
-    <div class="route-scroll">
-      <div class="route-map" id="routeMap"></div>
-      <div class="route-legend">
-        <span><svg class="legend-plane" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 19.5l19-7.5L2.5 4.5 2.5 10l13 2-13 2z"/></svg>飞机 5 段</span>
-        <span><svg class="legend-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 10h16"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/><path d="M6 16l-2 4M18 16l2 4"/></svg>高铁 6 段</span>
-      </div>
-    </div>
-    <div class="overview-todos" id="overviewTodos">
-      <span class="ot-label">出行前待办：</span>
-      <span class="todo-chip">港澳通行证签注（2人）</span>
-      <span class="todo-chip">GS7634 出票确认班期</span>
-      <span class="todo-chip">玉龙雪山索道票提前抢</span>
-      <span class="todo-chip">鼓浪屿轮渡票</span>
+  <!-- 文旅嘱托 · 总书记关于文化和旅游融合发展的殷殷嘱托 -->
+  <section class="hero-quote">
+    <span class="flag">🏛️ 文旅融合 · 殷殷嘱托</span>
+    <div class="q-text">“让旅游成为人们感悟<span class="hl">中华文化</span>、增强<span class="hl">文化自信</span>的过程。”</div>
+    <div class="q-from">—— 习近平（关于文化和旅游融合发展的嘱托）</div>
+    <div class="q-ribbon">
+      <span>📜 以文塑旅</span><span>🧭 以旅彰文</span><span>🏯 读城读史</span><span>🌏 文明对话</span>
     </div>
   </section>
 
-  <!-- 文化之旅 · 总书记文旅嘱托（路线介绍下方） -->
-  <section class="culture-intro">
-    <span class="ci-flag">🏛️ 文旅融合 · 殷殷嘱托</span>
-    <div class="ci-q">“让旅游成为人们感悟<span class="hl">中华文化</span>、增强<span class="hl">文化自信</span>的过程。”</div>
-    <div class="ci-from">—— 习近平（关于文化和旅游融合发展的嘱托）</div>
-    <div class="ci-desc">本次环线串起海丝起点泉州、潮汕侨乡、中西交融的港澳、世界美食之都顺德、千年商都广州、纳西东巴丽江与巴渝重庆。愿这一路不只是"打卡"，更能读城读史、以文塑旅——在每一处烟火与古迹里，感悟中华文化的博大精深，增强我们共同的文化自信。</div>
-    <div class="ci-heritage">🏛️ 本线串起 <b>4 处世界遗产</b>：泉州（宋元海丝）· 澳门（历史城区）· 丽江（古城）· 重庆（大足石刻 / 武隆喀斯特 ×2），另有汕头侨批（世界记忆）、顺德（美食之都）等中华文明活态印记。</div>
+  <!-- 信息条：日期 + 天气 -->
+  <div class="infobar">
+    <div class="info-card date cal-card">
+      <div class="cal-head">
+        <button class="cal-nav" id="calPrev" title="上个月">‹</button>
+        <div class="cal-title" id="calTitle">加载中…</div>
+        <button class="cal-nav" id="calNext" title="下个月">›</button>
+      </div>
+      <div class="cal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-today" id="calToday"></div>
+    </div>
+    <div class="info-card weather">
+      <div class="label"><span class="icon">🌤️</span> 安徽 · 安庆 实时天气</div>
+      <div class="big" id="weatherTemp">加载中…</div>
+      <div class="small" id="weatherDesc"></div>
+    </div>
+  </div>
+
+  <!-- 工具跳转区 -->
+  <section class="tools">
+    <h2 class="tools-title">🧰 常用工具</h2>
+    <a class="tool-card main" href="travel-planner.html">
+      <span class="t-ico">🧳</span>
+      <span class="t-body">
+        <span class="route-badge">✅ 主路线 · 已确定</span>
+        <span class="t-name">闽粤港澳·滇渝环线</span>
+        <span class="t-sub">10/5–10/19 · 9 城环线 · 行程 / 预算 / 看板</span>
+      </span>
+      <span class="t-arrow">›</span>
+    </a>
+    <div class="tool-row">
+      <a class="tool-card xhs" href="https://www.xiaohongshu.com" target="_blank" rel="noopener">
+        <span class="t-ico">📕</span>
+        <span class="t-body">
+          <span class="t-name">小红书</span>
+          <span class="t-sub">攻略 · 种草</span>
+        </span>
+      </a>
+      <a class="tool-card fan" href="https://www.16fan.com" target="_blank" rel="noopener">
+        <span class="t-ico">🧭</span>
+        <span class="t-body">
+          <span class="t-name">十六番</span>
+          <span class="t-sub">旅行 · 特价</span>
+        </span>
+      </a>
+    </div>
   </section>
 
-  <!-- Today Section -->
-  <section class="today-section">
-    <h2>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      今天要处理
-    </h2>
-    <div id="todayList"></div>
+  <!-- 以文塑旅 · 九城文化打开方式 -->
+  <section class="culture">
+    <h2 class="culture-title"><span class="accent">◆</span> 以文塑旅 · 九城文化打开方式</h2>
+    <p class="culture-sub">循着总书记"感悟中华文化、增强文化自信"的嘱托，这趟环线串起 <b>4 处世界遗产</b> 与多处中华文明活态印记——读懂它们，便是读懂中国。</p>
+    <div class="culture-grid">
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🏯</span><span class="cul-name">泉州</span><span class="cul-badge wh">🏛️ 世界遗产</span></div><div class="cul-theme">宋元中国的世界海洋商贸中心</div><div class="cul-desc">22 处遗产点、南音古乐、蟳埔簪花。从"涨海声中万国商"读懂中华海洋文明与世界对话。</div><div class="cul-do">📍 必体验：开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围</div></div>
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🌊</span><span class="cul-name">汕头</span><span class="cul-badge memory">📜 世界记忆</span></div><div class="cul-theme">潮汕侨乡 · 开埠风云</div><div class="cul-desc">小公园骑楼、侨批（世界记忆名录）、潮剧工夫茶。一封侨批里的家国情怀与向海而生。</div><div class="cul-do">📍 必体验：小公园骑楼 · 侨批文物馆 · 牛肉火锅 · 生腌</div></div>
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🐚</span><span class="cul-name">汕尾</span><span class="cul-badge culture">🎭 渔歌非遗</span></div><div class="cul-theme">渔歌故里 · 红土风情</div><div class="cul-desc">渔家文化、正字戏、红宫红场。听一段渔歌，看红土地上的坚守与温情。</div><div class="cul-do">📍 必体验：红海湾遮浪半岛 · 金町湾 · 二马路夜市</div></div>
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🦁</span><span class="cul-name">香港</span><span class="cul-badge culture">🌐 中西交融</span></div><div class="cul-theme">东方之珠 · 狮子山下</div><div class="cul-desc">维港天际、历史建筑、狮子山精神。看中华文明兼容并蓄、开放包容的当代气度。</div><div class="cul-do">📍 必体验：太平山顶 · 维港夜景 · 叮叮车 · 庙街</div></div>
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">⛪</span><span class="cul-name">澳门</span><span class="cul-badge wh">🏛️ 世界遗产</span></div><div class="cul-theme">澳门历史城区</div><div class="cul-desc">大三巴、妈阁庙、中西合璧建筑。小城故事里中华与多元文化和谐共生。</div><div class="cul-do">📍 必体验：大三巴 · 恋爱巷 · 官也街 · 路环</div></div>
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🍲</span><span class="cul-name">顺德</span><span class="cul-badge food">🍜 美食之都</span></div><div class="cul-theme">世界美食之都 · 岭南水乡</div><div class="cul-desc">清晖园、逢简水乡、桑基鱼塘。一盅两件里品岭南烟火与匠心。</div><div class="cul-do">📍 必体验：清晖园 · 鱼生 · 双皮奶 · 桑拿鸡</div></div>
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🏙️</span><span class="cul-name">广州</span><span class="cul-badge culture">🌊 海丝预备</span></div><div class="cul-theme">千年商都 · 广府源流</div><div class="cul-desc">南越王墓、陈家祠、海上丝路。从千年商都读懂开放务实的广府精神。</div><div class="cul-do">📍 必体验：陈家祠 · 南越王宫 · 沙面 · 早茶</div></div>
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🏔️</span><span class="cul-name">丽江</span><span class="cul-badge wh">🏛️ 世界遗产</span></div><div class="cul-theme">纳西东巴 · 雪山秘境</div><div class="cul-desc">丽江古城、东巴象形文字、纳西古乐。雪山下的活着的千年文明。</div><div class="cul-do">📍 必体验：古城 · 玉龙雪山 · 束河 · 纳西古乐</div></div>
+      <div class="cul-card"><div class="cul-head"><span class="cul-ico">🌶️</span><span class="cul-name">重庆</span><span class="cul-badge wh">🏛️ 世遗×2</span></div><div class="cul-theme">巴渝山水 · 英雄之城</div><div class="cul-desc">洪崖洞吊脚楼、大足石刻、川江号子。山水之城里的巴渝刚毅与家国担当。</div><div class="cul-do">📍 必体验：洪崖洞 · 大足石刻 · 火锅 · 长江索道</div></div>
+    </div>
+    <p class="culture-legend">🏛️ 世界遗产 = UNESCO 世界遗产；📜 世界记忆 = 世界记忆名录；🍜 美食之都 = UNESCO 创意城市网络；其余为特色文化荣誉。广州为"海上丝绸之路"中国段联合申遗预备项目，尚未入选。</p>
   </section>
 
-  <!-- Tabs -->
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="itinerary">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="15" r="2"/></svg>
-      <span>行程规划</span>
-    </button>
-    <button class="tab-btn" data-tab="budget">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      <span>预算管理</span>
-    </button>
-    <button class="tab-btn" data-tab="destinations">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-      <span>目的地看板</span>
-    </button>
-    <button class="tab-btn" data-tab="backup">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-      <span>备选路线</span>
-    </button>
-  </nav>
-
-  <!-- Module: Itinerary -->
-  <div class="module active" id="module-itinerary">
-    <div class="add-form">
-      <div class="add-form-header">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        添加行程
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>日期</label>
-          <input type="date" id="itin-date">
-        </div>
-        <div class="form-field">
-          <label>活动/景点</label>
-          <input type="text" id="itin-title" placeholder="如：故宫博物院">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>交通方式</label>
-          <select id="itin-transport">
-            <option value="">选择交通</option>
-            <option value="地铁">地铁</option>
-            <option value="公交">公交</option>
-            <option value="出租车">出租车</option>
-            <option value="步行">步行</option>
-            <option value="自驾">自驾</option>
-            <option value="高铁">高铁</option>
-            <option value="飞机">飞机</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label>状态</label>
-          <select id="itin-status">
-            <option value="待办">待办</option>
-            <option value="进行中">进行中</option>
-            <option value="已完成">已完成</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>备注</label>
-          <textarea id="itin-notes" placeholder="如：上午9点入园，预留3小时"></textarea>
-        </div>
-      </div>
-      <button class="btn-add" id="btnAddItinerary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        添加行程
-      </button>
-    </div>
-    <div id="itineraryList"></div>
-  </div>
-
-  <!-- Module: Budget -->
-  <div class="module" id="module-budget">
-    <div class="budget-summary">
-      <div class="budget-card expense">
-        <div class="label">总支出</div>
-        <div class="value" id="totalExpense">¥0</div>
-      </div>
-      <div class="budget-card income">
-        <div class="label">总收入</div>
-        <div class="value" id="totalIncome">¥0</div>
-      </div>
-      <div class="budget-card balance">
-        <div class="label">结余</div>
-        <div class="value" id="balance">¥0</div>
-      </div>
-    </div>
-
-    <div class="chart-section" id="chartSection">
-      <h3>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
-        支出分类
-      </h3>
-      <div class="pie-wrap" id="pieWrap"></div>
-    </div>
-
-    <div class="add-form">
-      <div class="add-form-header">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        添加收支
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>日期</label>
-          <input type="date" id="bud-date">
-        </div>
-        <div class="form-field">
-          <label>项目名称</label>
-          <input type="text" id="bud-title" placeholder="如：住宿费">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>金额</label>
-          <input type="number" id="bud-amount" placeholder="0" min="0" step="0.01">
-        </div>
-        <div class="form-field">
-          <label>分类</label>
-          <select id="bud-category">
-            <option value="交通">交通</option>
-            <option value="住宿">住宿</option>
-            <option value="餐饮">餐饮</option>
-            <option value="门票">门票</option>
-            <option value="购物">购物</option>
-            <option value="其他">其他</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label>类型</label>
-          <select id="bud-type">
-            <option value="支出">支出</option>
-            <option value="收入">收入</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>备注</label>
-          <textarea id="bud-notes" placeholder="可选"></textarea>
-        </div>
-      </div>
-      <button class="btn-add" id="btnAddBudget">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        添加收支
-      </button>
-    </div>
-    <div id="budgetList"></div>
-  </div>
-
-  <!-- Module: Destinations -->
-  <div class="module" id="module-destinations">
-    <div class="add-form">
-      <div class="add-form-header">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        添加目的地
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>地点名称</label>
-          <input type="text" id="dest-title" placeholder="如：八达岭长城">
-        </div>
-        <div class="form-field">
-          <label>优先级</label>
-          <select id="dest-priority">
-            <option value="高">高</option>
-            <option value="中">中</option>
-            <option value="低">低</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>推荐理由</label>
-          <input type="text" id="dest-reason" placeholder="如：秋季赏叶最佳">
-        </div>
-        <div class="form-field">
-          <label>状态</label>
-          <select id="dest-status">
-            <option value="想去">想去</option>
-            <option value="计划中">计划中</option>
-            <option value="已去">已去</option>
-            <option value="已放弃">已放弃</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>备注</label>
-          <textarea id="dest-notes" placeholder="可选"></textarea>
-        </div>
-      </div>
-      <button class="btn-add" id="btnAddDest">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        添加目的地
-      </button>
-    </div>
-    <div class="dest-board" id="destBoard"></div>
-  </div>
-
-  <!-- Module: Backup Route 备选路线 -->
-  <div class="module" id="module-backup">
-    <div class="backup-wrap">
-      <div class="backup-title">🧭 历史方案对比（已弃用 · 仅供对比参考）</div>
-      <div class="backup-sub">主路线已确定为新线（安庆→泉州→汕头→汕尾→港澳→顺德→广州→丽江→重庆→安庆，10/5–10/19）；以下两个为曾考虑但已弃用的旧方案：① 喀什线（原主路线）② 闽粤滇渝环线（旧备选）。</div>
-      <div class="backup-note">⚠️ 本栏为已弃用的历史方案，仅供参考，不进入行程 / 预算 / 看板。</div>
-
-      <div class="hist-card">
-        <h3>① 喀什·西南行（原主路线 · 已弃用）</h3>
-        <div class="hist-meta">20天 · 10/5–10/25 · 跑得最远（新疆+西南）</div>
-        <ul>
-          <li>路线：安庆→喀什→重庆→丽江→南宁→广州→顺德→澳门→香港→汕尾→汕头→厦门→安庆</li>
-          <li>2人总花费约 ¥23,000（交通¥9,070 + 酒店¥5,700 + 喀什小团¥2,400 + 餐饮门票¥6,000）</li>
-          <li>特点：喀什段往返机票溢价高 + 需报当地小团（约¥1,200/人），路程最远最累</li>
-          <li>弃用原因：太远太赶、喀什小团不确定、花费最高 → 改走更近的福建沿海线</li>
-        </ul>
-        <div class="hist-cmp">vs 当前主路线（新线）：省约 ¥6,000+/2人、少跑 2,000+km、15天 vs 20天</div>
-      </div>
-
-      <div class="backup-sub2">② 闽粤滇渝环线（旧备选 · 已弃用）</div>
-
-      <div class="route-flow">
-        <span class="rf-node start">安庆</span><span class="rf-arrow">→</span>
-        <span class="rf-node">泉州</span><span class="rf-arrow">→</span>
-        <span class="rf-node">厦门</span><span class="rf-arrow">→</span>
-        <span class="rf-node">汕头·汕尾</span><span class="rf-arrow">→</span>
-        <span class="rf-node">香港·澳门</span><span class="rf-arrow">→</span>
-        <span class="rf-node">广州</span><span class="rf-arrow">→</span>
-        <span class="rf-node">南宁</span><span class="rf-arrow">→</span>
-        <span class="rf-node">丽江</span><span class="rf-arrow">→</span>
-        <span class="rf-node">重庆</span><span class="rf-arrow">→</span>
-        <span class="rf-node end">安庆</span>
-      </div>
-
-      <div class="dir-cards">
-        <div class="dir-card recommended">
-          <h3>正走 <span class="dir-tag">推荐</span></h3>
-          <ul>
-            <li>安庆→泉州(动车直达)→厦门→…→重庆→安庆(飞机)</li>
-            <li>两个锚点航班都落便宜窗口：出发在价格洼地、返程在节后</li>
-            <li>日期完美契合：10/4(周日)出发→10/24(周六)返，两段都有班</li>
-            <li>福建/港澳略早(10/4–14)，已避开 10/1–3 最高峰</li>
-          </ul>
-        </div>
-        <div class="dir-card">
-          <h3>反走</h3>
-          <ul>
-            <li>安庆→重庆(飞机)→…→厦门→安庆(飞机)</li>
-            <li>人流更优：福建/港澳放到 10/14–24 节后，人最少</li>
-            <li>但最贵的重庆段落在假期出发日，反而更贵</li>
-            <li>安庆→重庆仅周二/四/六有班，最早 10/6(周二)出发</li>
-          </ul>
-        </div>
-      </div>
-
-      <table class="cmp-table">
-        <thead><tr><th>对比维度</th><th>正走</th><th>反走</th></tr></thead>
-        <tbody>
-          <tr><td>2人交通总花费</td><td class="best">约 ¥6000–6500</td><td>约 ¥7000–7500</td></tr>
-          <tr><td>国庆机票洼地利用</td><td class="best">出发10/4洼地+返程节后</td><td>出发10/6 略过洼地</td></tr>
-          <tr><td>福建/港澳人流</td><td>10/4–14 假期尾巴</td><td class="best">10/14–24 节后最空</td></tr>
-          <tr><td>航班日期可行性</td><td class="best">10/4→10/24 两段都有班</td><td>须 10/6(周二)出发</td></tr>
-          <tr><td>与主路线差异</td><td colspan="2" style="text-align:center;color:#64748B">去掉喀什(省¥2000+)，改走福建沿海</td></tr>
-        </tbody>
-      </table>
-
-      <div class="rec-banner">
-        <h3>✅ 推荐：正走 · 10/4（周日）出发，10/24（周六）返回</h3>
-        <p>出发日正好落在国庆机票价格洼地（比 10/1–2 便宜 30–50%）；第一段改安庆→泉州动车直达（零回头、省¥170），最贵的重庆段放在节后返程（PN6235 周六有班），整体最省。若极端怕人，可选反走 10/6 出发，代价是多花约 ¥800–1000 且晚回 2 天。</p>
-      </div>
-
-      <div class="anchor-list">
-        <b>🔑 两个关键锚点航班（决定正反走可行性）：</b><br>
-        · 第一段（推荐动车）：安庆→泉州 中转1次，G7150 安庆07:08→铜陵07:49 换乘 G1669 铜陵北09:30→泉州东14:11，全程约 7h，约 ¥425/人；比「飞厦门+动车泉州」省¥170且零回头<br>
-        · 返程锚点：重庆→安庆 西部航空 PN6235，17:45→19:40，1h55m，约 ¥700/人，班期 <b>周二·四·六</b>（10/24 周六✓ 硬约束）<br>
-        · 环线其余段（厦门→汕头¥106、汕尾→香港¥134、广州→南宁¥200、南宁→丽江¥370、丽江→重庆¥480）正反走一致<br>
-        · 备选：安庆↔厦门 GS7633/GS7634（¥480、周1/3/5/7）可作应急；或飞福州（PN6235 安庆→福州 1h20m）再动车南下，同样零回头
-      </div>
-
-      <div class="day-list">
-        <div class="day-list-title">📅 逐日行程（正走 · 推荐 10/4 出发 → 10/24 返回，共 21 天）</div>
-
-        <div class="day-item"><div class="d-head">D1 · 10/4 周日 · 安庆→泉州</div><div class="d-body"><span class="d-trans">高铁</span>动车直达（中转1次）：G7150 安庆 07:08→铜陵 07:49，换乘 G1669 铜陵北 09:30→泉州东 14:11，全程约 7h，约 ¥425/人。比飞厦门省约 ¥170 且零回头。宿泉州。</div></div>
-
-        <div class="day-item"><div class="d-head">D2 · 10/5 周一 · 泉州→厦门</div><div class="d-body"><span class="d-trans">游玩</span>开元寺、西街、清净寺、洛阳桥。下午动车泉州→厦门（约 30min，¥25–30/人）。宿厦门。</div></div>
-
-        <div class="day-item"><div class="d-head">D3 · 10/6 周二 · 厦门</div><div class="d-body"><span class="d-trans">游玩</span>鼓浪屿一日（轮渡需提前购票）。傍晚中山路 / 沙坡尾。宿厦门。</div></div>
-
-        <div class="day-item"><div class="d-head">D4 · 10/7 周三 · 厦门→汕头</div><div class="d-body"><span class="d-trans">高铁</span>厦门→汕头（约 1.5h，¥106/人）。下午小公园骑楼、西堤公园日落、牛肉火锅。宿汕头。</div></div>
-
-        <div class="day-item"><div class="d-head">D5 · 10/8 周四 · 汕头→南澳岛</div><div class="d-body"><span class="d-trans">海岛</span>早 7 点前过跨海大桥避堵；环岛路→青澳湾（北回归线自然之门）→风车山。宿汕头。</div></div>
-
-        <div class="day-item"><div class="d-head">D6 · 10/9 周五 · 汕头→汕尾</div><div class="d-body"><span class="d-trans">高铁</span>汕头→汕尾（约 1h，¥79-94/人）。红海湾、金町湾。宿汕尾。</div></div>
-
-        <div class="day-item"><div class="d-head">D7 · 10/10 周六 · 汕尾</div><div class="d-body"><span class="d-trans">休闲</span>二马路夜市、风车岛、金町湾。宿汕尾。</div></div>
-
-        <div class="day-item"><div class="d-head">D8 · 10/11 周日 · 汕尾→香港</div><div class="d-body"><span class="d-trans">高铁</span>汕尾→香港西九龙（经深圳北，约 1.5-2h，¥130-160/人）。宿香港。</div></div>
-
-        <div class="day-item"><div class="d-head">D9 · 10/12 周一 · 香港</div><div class="d-body"><span class="d-trans">游玩</span>太平山顶、维港、尖沙咀 / 旺角。宿香港。</div></div>
-
-        <div class="day-item"><div class="d-head">D10 · 10/13 周二 · 香港→澳门</div><div class="d-body"><span class="d-trans">巴士</span>港珠澳大桥金巴（约 40min，¥65/人）。大三巴、路环、官也街。宿澳门。</div></div>
-
-        <div class="day-item"><div class="d-head">D11 · 10/14 周三 · 澳门→广州</div><div class="d-body"><span class="d-trans">高铁</span>港珠澳大桥→珠海口岸，珠海站→广州南 高铁（约 1h，¥70-80/人）。宿广州。</div></div>
-
-        <div class="day-item"><div class="d-head">D12 · 10/15 周四 · 广州</div><div class="d-body"><span class="d-trans">主题</span>长隆欢乐世界 / 野生动物世界。宿广州。</div></div>
-
-        <div class="day-item"><div class="d-head">D13 · 10/16 周五 · 广州→南宁</div><div class="d-body"><span class="d-trans">高铁</span>G2955 广州→南宁（约 3-4h，¥200/人）。宿南宁。</div></div>
-
-        <div class="day-item"><div class="d-head">D14 · 10/17 周六 · 南宁</div><div class="d-body"><span class="d-trans">游玩</span>青秀山、三街两巷、中山路夜市。宿南宁。</div></div>
-
-        <div class="day-item"><div class="d-head">D15 · 10/18 周日 · 南宁→丽江</div><div class="d-body"><span class="d-trans">飞机</span>JD5387 南宁→丽江（07:00→08:45，¥370/人）。下午丽江古城。宿丽江。</div></div>
-
-        <div class="day-item"><div class="d-head">D16 · 10/19 周一 · 丽江</div><div class="d-body"><span class="d-trans">雪山</span>玉龙雪山、蓝月谷，晚上菌子火锅。宿丽江。</div></div>
-
-        <div class="day-item"><div class="d-head">D17 · 10/20 周二 · 丽江</div><div class="d-body"><span class="d-trans">休闲</span>拉市海 / 束河古镇 或 休整。宿丽江。</div></div>
-
-        <div class="day-item"><div class="d-head">D18 · 10/21 周三 · 丽江→重庆</div><div class="d-body"><span class="d-trans">飞机</span>3U8011 丽江→重庆（21:20→22:50，¥480/人）。宿重庆。</div></div>
-
-        <div class="day-item"><div class="d-head">D19 · 10/22 周四 · 重庆</div><div class="d-body"><span class="d-trans">游玩</span>洪崖洞、解放碑、李子坝、火锅。宿重庆。</div></div>
-
-        <div class="day-item"><div class="d-head">D20 · 10/23 周五 · 重庆</div><div class="d-body"><span class="d-trans">游玩</span>武隆 / 磁器口 或 休整。宿重庆。</div></div>
-
-        <div class="day-item"><div class="d-head">D21 · 10/24 周六 · 重庆→安庆</div><div class="d-body"><span class="d-trans">飞机</span>PN6235 重庆→安庆（17:45→19:40，周二/四/六班，约 ¥700/人）。回到安庆，行程结束。</div></div>
-      </div>
-
-      <!-- 预算对比：主路线 vs 备选 -->
-      <div class="budget-cmp">
-        <div class="budget-cmp-title">💰 预算对比（主路线 vs 备选 · 按 2 人估算）</div>
-        <table class="cmp-table">
-          <thead><tr><th>费用项</th><th>主路线 · 喀什线</th><th>备选 · 闽粤滇渝环线</th></tr></thead>
-          <tbody>
-            <tr><td>大交通（机票+高铁，2人）</td><td>¥9,070</td><td class="best">¥5,462</td></tr>
-            <tr><td>酒店（全季档·2人1间·约18晚）</td><td>¥5,700</td><td class="best">¥5,390</td></tr>
-            <tr><td>喀什小团（2人·4天包车导）</td><td>¥2,400</td><td class="best">— 不走喀什</td></tr>
-            <tr><td>餐饮 / 门票 / 市内交通</td><td>约¥6,000</td><td>约¥6,000</td></tr>
-            <tr><td><b>合计（2人）</b></td><td><b>约¥23,170</b></td><td class="best"><b>约¥16,852</b></td></tr>
-            <tr><td><b>人均</b></td><td><b>约¥11,585</b></td><td class="best"><b>约¥8,426</b></td></tr>
-          </tbody>
-        </table>
-        <div class="budget-note">说明：① 酒店按全季/同档次连锁（2人合住1间，均价约¥280/晚，港澳·喀什旺季上浮）估算；② 喀什小团按¥1,200/人×2估算，实际报价浮动较大；③ 餐饮门票按日均¥300/人估算，两边相近未计入核心差异；④ 机票为当前查询价，出票前请复核实时价。备选比主路线省约 <b>¥6,300/2人（人均省约¥3,160）</b>，主要来自免去喀什往返大交通溢价与喀什小团。</div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- Edit Modal -->
-<div class="modal-overlay" id="editModal">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 id="editModalTitle">编辑</h3>
-      <button class="modal-close" id="btnCloseModal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </div>
-    <div class="modal-body" id="editModalBody"></div>
-    <div class="modal-footer">
-      <button class="btn-cancel" id="btnCancelEdit">取消</button>
-      <button class="btn-save" id="btnSaveEdit">保存</button>
-    </div>
-  </div>
-</div>
-
-<!-- Confirm Dialog -->
-<div class="confirm-overlay" id="confirmDialog">
-  <div class="confirm-box">
-    <h3 id="confirmTitle">确认</h3>
-    <p id="confirmMsg">确定要删除吗？</p>
-    <div class="confirm-actions">
-      <button class="btn-cancel" id="btnConfirmCancel">取消</button>
-      <button class="btn-save btn-confirm-danger" id="btnConfirmOk" style="background:var(--danger);color:#fff">确认</button>
-    </div>
-  </div>
-</div>
+  <footer>
+    本页含月历、实时天气与常用工具跳转 · 部署于 GitHub Pages
+  </footer>
 
 <script>
-// ==================== Constants ====================
-var DATABASE_ID = "qcCorYe9Ga8ydRwaecinCX";
-var OPTIONS_MAP = {
-  "类型": {
-    "行程规划": { "text": "行程规划", "id": "CsVDtK59O0d7" },
-    "预算管理": { "text": "预算管理", "id": "9blsFJpIbYCE" },
-    "目的地看板": { "text": "目的地看板", "id": "43GUwpsWENMT" }
-  }
-};
-var STORAGE_KEY = "wb_travel_planner_data_v13";
-var syncMode = "offline";
-var allRecords = [];
-var editTarget = null;
-var confirmCallback = null;
+  // ===== 日历模块（月历 + 今日高亮 + 行程标注）=====
+  (function(){
+    const TRIP_START=new Date(2026,9,5), TRIP_END=new Date(2026,9,19); // 十月行程 10/5–10/19
+    const grid=document.getElementById('calGrid');
+    const title=document.getElementById('calTitle');
+    const today=new Date();
+    const view=new Date(today.getFullYear(),today.getMonth(),1);
+    const WEEKS=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
 
-// Category colors for pie chart
-var CATEGORY_COLORS = {
-  "交通": "#3498DB",
-  "住宿": "#E74C3C",
-  "餐饮": "#F39C12",
-  "门票": "#9B59B6",
-  "购物": "#27AE60",
-  "其他": "#95A5A6"
-};
+    function isToday(d){return d.getFullYear()===today.getFullYear()&&d.getMonth()===today.getMonth()&&d.getDate()===today.getDate();}
+    function inTrip(d){return d>=TRIP_START&&d<=TRIP_END;}
 
-// ==================== Utilities ====================
-function getTodayStr() {
-  var d = new Date();
-  var y = d.getFullYear();
-  var m = String(d.getMonth() + 1).padStart(2, "0");
-  var day = String(d.getDate()).padStart(2, "0");
-  return y + "-" + m + "-" + day;
-}
-function getDateStr(days) {
-  var d = new Date();
-  d.setDate(d.getDate() + days);
-  var y = d.getFullYear();
-  var m = String(d.getMonth() + 1).padStart(2, "0");
-  var day = String(d.getDate()).padStart(2, "0");
-  return y + "-" + m + "-" + day;
-}
-function normalizeDate(dateStr) {
-  if (!dateStr) return "";
-  if (typeof dateStr === "string") {
-    return dateStr.substring(0, 10);
-  }
-  return "";
-}
-function formatDate(dateStr) {
-  var d = normalizeDate(dateStr);
-  if (!d) return "";
-  var parts = d.split("-");
-  return parts[1] + "月" + parts[2] + "日";
-}
-function formatMoney(amount) {
-  var n = Number(amount) || 0;
-  return "¥" + n.toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1");
-}
-function escapeHtml(str) {
-  if (!str) return "";
-  var div = document.createElement("div");
-  div.textContent = String(str);
-  return div.innerHTML;
-}
-function genId() {
-  return "local_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6);
-}
+    function render(){
+      const y=view.getFullYear(),m=view.getMonth();
+      title.textContent=`${y}年${m+1}月`;
+      grid.innerHTML='';
+      const firstDay=new Date(y,m,1).getDay();
+      const days=new Date(y,m+1,0).getDate();
+      for(let i=0;i<firstDay;i++){
+        const c=document.createElement('div');c.className='cal-cell dim';grid.appendChild(c);
+      }
+      for(let d=1;d<=days;d++){
+        const cur=new Date(y,m,d);
+        const wd=cur.getDay();
+        const c=document.createElement('div');
+        c.className='cal-cell'+((wd===0||wd===6)?' wk':'');
+        if(isToday(cur))c.classList.add('today');
+        if(inTrip(cur))c.classList.add('trip');
+        c.textContent=d;
+        grid.appendChild(c);
+      }
+    }
 
-// ==================== Data Layer ====================
-function isSdkAvailable() {
-  return typeof window.__SMART_PAGE__ !== "undefined" &&
-         window.__SMART_PAGE__ !== null &&
-         typeof window.__SMART_PAGE__.database !== "undefined" &&
-         window.__SMART_PAGE__.database !== null;
-}
+    document.getElementById('calPrev').onclick=()=>{view.setMonth(view.getMonth()-1);render();};
+    document.getElementById('calNext').onclick=()=>{view.setMonth(view.getMonth()+1);render();};
 
-function setSyncMode(mode) {
-  syncMode = mode;
-  var badge = document.getElementById("syncBadge");
-  var text = document.getElementById("syncText");
-  if (mode === "online") {
-    badge.className = "sync-badge online";
-    text.textContent = "已同步";
-  } else if (mode === "syncing") {
-    badge.className = "sync-badge";
-    text.textContent = "同步中";
-  } else {
-    badge.className = "sync-badge offline";
-    text.textContent = "离线模式";
-  }
-}
+    document.getElementById('calToday').innerHTML=
+      `<span>今天 ${today.getMonth()+1}月${today.getDate()}日 ${WEEKS[today.getDay()]}</span>`+
+      `<span class="trip-legend">🧳 行程 10/5–10/19</span>`;
+    document.getElementById('date').textContent=`${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}`;
+    render();
+  })();
 
-// Load data: try SDK first, fallback to localStorage
-async function loadData() {
-  setSyncMode("syncing");
-  if (isSdkAvailable()) {
-    try {
-      var db = window.__SMART_PAGE__.database;
-      var result = await db.query({ databaseId: DATABASE_ID, pageSize: 500 });
-      var records = [];
-      if (result && result.results) {
-        for (var i = 0; i < result.results.length; i++) {
-          var row = result.results[i];
-          records.push({
-            id: row._id || row.id || genId(),
-            rid: row._id || row.id || "",
-            type: row["类型"] || "",
-            date: normalizeDate(row["日期"]),
-            title: row["标题"] || "",
-            amount: Number(row["金额"]) || 0,
-            category: row["分类"] || "",
-            status: row["状态"] || "",
-            priority: row["优先级"] || "",
-            notes: row["备注"] || ""
-          });
+  // ===== 天气模块（Open-Meteo 免费 API + 浏览器自动定位）=====
+  const WMO={0:'晴',1:'大致晴朗',2:'局部多云',3:'阴',45:'雾',48:'雾凇',51:'小毛毛雨',53:'毛毛雨',55:'大毛毛雨',56:'冻毛毛雨',57:'强冻毛毛雨',61:'小雨',63:'中雨',65:'大雨',66:'冻雨',67:'强冻雨',71:'小雪',73:'中雪',75:'大雪',77:'雪粒',80:'阵雨',81:'强阵雨',82:'暴雨',85:'阵雪',86:'强阵雪',95:'雷阵雨',96:'雷阵雨伴冰雹',99:'强雷暴伴冰雹'};
+  (function(){
+    const DEFAULT={lat:30.51, lon:117.05, name:'安徽 · 安庆'};
+    const lbl=document.querySelector('.info-card.weather .label');
+    const tempEl=document.getElementById('weatherTemp');
+    const descEl=document.getElementById('weatherDesc');
+
+    function loadWeather(lat,lon,locationName){
+      const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto`;
+      fetch(url).then(r=>r.json()).then(d=>{
+        const c=d.current||{};
+        const temp=Math.round(c.temperature_2m);
+        tempEl.textContent=`${temp}°C`;
+        descEl.textContent=`${WMO[c.weather_code]||'未知'} · 湿度 ${c.relative_humidity_2m}% · 风速 ${c.wind_speed_10m} km/h`;
+        if(locationName){
+          lbl.innerHTML=`<span class="icon">📍</span> ${locationName} 实时天气`;
         }
-      }
-      allRecords = records;
-      setSyncMode("online");
-      if (allRecords.length === 0) {
-        var cached = localStorage.getItem(STORAGE_KEY);
-        if (cached) {
-          try { allRecords = JSON.parse(cached); } catch(e2) { allRecords = getExampleData(); saveLocal(); }
-        } else {
-          allRecords = getExampleData();
-          saveLocal();
-        }
-      }
-      return;
-    } catch (e) {
-      console.error("SDK query failed, falling back to localStorage", e);
-    }
-  }
-  // Fallback: localStorage
-  var stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      allRecords = JSON.parse(stored);
-    } catch (e2) {
-      allRecords = getExampleData();
-    }
-  } else {
-    allRecords = getExampleData();
-    saveLocal();
-  }
-  setSyncMode("offline");
-}
-
-// Save to localStorage
-function saveLocal() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(allRecords));
-}
-
-// Add record
-async function addRecord(record) {
-  if (isSdkAvailable() && syncMode === "online") {
-    try {
-      var db = window.__SMART_PAGE__.database;
-      var properties = buildProperties(record);
-      var result = await db.addRecord({ databaseId: DATABASE_ID, properties: properties });
-      if (result && result.id) {
-        record.id = result.id;
-        record.rid = result.id;
-      }
-    } catch (e) {
-      console.error("SDK addRecord failed", e);
-      record.id = genId();
-    }
-  } else {
-    record.id = genId();
-  }
-  allRecords.push(record);
-  saveLocal();
-  renderAll();
-}
-
-// Update record
-async function updateRecord(id, fields) {
-  var rec = allRecords.find(function(r) { return r.id === id; });
-  if (!rec) return;
-  Object.assign(rec, fields);
-  saveLocal();
-  if (isSdkAvailable() && syncMode === "online" && rec.rid) {
-    try {
-      var db = window.__SMART_PAGE__.database;
-      var properties = buildProperties(rec);
-      await db.updateRecord({ databaseId: DATABASE_ID, recordId: rec.rid, properties: properties });
-    } catch (e) {
-      console.error("SDK updateRecord failed", e);
-    }
-  }
-  renderAll();
-}
-
-// Delete record
-async function deleteRecord(id) {
-  var rec = allRecords.find(function(r) { return r.id === id; });
-  if (!rec) return;
-  allRecords = allRecords.filter(function(r) { return r.id !== id; });
-  saveLocal();
-  if (isSdkAvailable() && syncMode === "online" && rec.rid) {
-    try {
-      var db = window.__SMART_PAGE__.database;
-      await db.deleteRecord({ databaseId: DATABASE_ID, recordId: rec.rid });
-    } catch (e) {
-      console.error("SDK deleteRecord failed", e);
-    }
-  }
-  renderAll();
-}
-
-// Build properties for SDK
-function buildProperties(rec) {
-  var props = {};
-  props["类型"] = { select: OPTIONS_MAP["类型"][rec.type] ? OPTIONS_MAP["类型"][rec.type].id : rec.type };
-  if (rec.date) {
-    props["日期"] = { date: rec.date };
-  } else {
-    props["日期"] = { date: "1970-01-01" };
-  }
-  props["标题"] = { text: rec.title || "" };
-  props["金额"] = { number: rec.amount || 0 };
-  props["分类"] = { text: rec.category || "" };
-  props["状态"] = { text: rec.status || "" };
-  props["优先级"] = { text: rec.priority || "" };
-  props["备注"] = { text: rec.notes || "" };
-  return props;
-}
-
-// ==================== Example Data ====================
-function getExampleData() {
-  var todayStr = getTodayStr();
-  return [
-    // ===== 行程规划（新确认线 · 安庆-泉州-汕头-汕尾-港澳-顺德-广州-丽江-重庆-安庆 · 10/5-10/19） =====
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-05", title: "安庆→泉州（动车中转）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "G7150 安庆07:08→铜陵07:49 换乘 G1669 铜陵北09:30→泉州东14:11，约7h，¥425/人（2人¥850）；买联程票铜陵北站内换乘；晚到泉州，西街初步逛吃" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-06", title: "泉州：闽南古韵·美食一日", amount: 0, category: "古城", status: "已确定", priority: "中", notes: "开元寺、西街、清净寺、洛阳桥、蟳埔村簪花围；吃：面线糊、土笋冻、姜母鸭、润饼、四果汤" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-07", title: "泉州→汕头（高铁G3041）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "泉州南08:22→汕头10:11，1h49m，¥142/人（2人¥284）；中午到汕头，下午小公园骑楼群、西堤公园；晚上牛肉火锅（八合里/福合埕）、生腌初体验" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-08", title: "汕头→汕尾（高铁）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "高铁约1h，¥79-94/人（2人¥170）；下午到汕尾，红海湾遮浪半岛看海、金町湾沙滩；晚上二马路夜市（薄饼、菜茶、生腌、牛腩）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-09", title: "汕尾→香港西九龙（高铁）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "高铁约1h15m，¥134/人（2人¥268）；下午到香港，太平山顶、中环、尖沙咀；晚上维港夜景+庙街夜市；带港澳通行证" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-10", title: "香港：维港都市二日", amount: 0, category: "都市", status: "已确定", priority: "高", notes: "旺角/铜锣湾购物、迪士尼或海洋公园（二选一）、叮叮车；茶餐厅：菠萝油、丝袜奶茶、烧腊、蛋挞；晚上幻彩咏香江" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-11", title: "香港→澳门（船）→顺德", amount: 0, category: "船", status: "已确定", priority: "高", notes: "上环港澳码头→澳门外港，喷射飞航60min，每30min一班，平日HKD194/周末HKD212；澳门大三巴、恋爱巷、官也街、路环、葡挞/猪扒包/杏仁饼；傍晚拱北过关+广珠城轨→顺德（约1h5m，¥65-90/人）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-12", title: "顺德：美食之都一日", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "清晖园、逢简水乡、华盖路步行街；吃：鱼生、双皮奶（仁信/民信）、伦教糕、桑拿鸡、毋米粥、烧鹅、陈村粉" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-13", title: "顺德→广州（城轨）· 长隆Day1", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "顺德站→广州南约20-30min，¥10-25/人；下午长隆欢乐世界或野生动物世界；晚上北京路/珠江夜游" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "广州：长隆二日", amount: 0, category: "亲子", status: "已确定", priority: "中", notes: "长隆水上乐园/大马戏（二选一）、广州塔、沙面、早茶（点都德/陶陶居）；亲子友好" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-15", title: "广州→丽江（南航CZ6603直飞）· 古城", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "CZ6603 白云07:05→丽江三义09:55，2h50m，约¥600-700/人（2人¥1300），准点率97%；下午丽江古城、束河古镇休整适应海拔" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-16", title: "丽江·玉龙雪山大索道·蓝月谷", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "上午大索道→4506m冰川公园（提前抢票），备氧气瓶+厚外套；下午蓝月谷；晚上菌子火锅；注意高原反应" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-17", title: "丽江→重庆（川航3U8011直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "3U8011 丽江21:20→重庆22:50，1h30m，¥480/人（2人¥960）；晚班机，夜抵重庆" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-18", title: "重庆：火锅江湖菜一日", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "洪崖洞、解放碑、千厮门大桥夜景；吃：重庆火锅（珮姐/周师兄）、小面、酸辣粉、毛血旺、江湖菜" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-19", title: "重庆→安庆（西部航空PN6235直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "上午补吃（烧烤、抄手、山城小汤圆）；PN6235 重庆15:50→安庆17:45，1h55m，¥700/人（2人¥1400）；当前执飞周一/周五，10月班次请出发前复核（若恢复周二四六则改10/20返程）；行程结束" },
-
-    // ===== 预算管理（新确认线交通段 · 10/5-10/19） =====
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-05", title: "动车：安庆→泉州（2人，G7150+G1669）", amount: 850, category: "交通", status: "支出", priority: "", notes: "¥425/人×2；约7h中转" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-07", title: "高铁：泉州→汕头（2人，G3041）", amount: 284, category: "交通", status: "支出", priority: "", notes: "¥142/人×2；1h49m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-08", title: "高铁：汕头→汕尾（2人）", amount: 170, category: "交通", status: "支出", priority: "", notes: "¥79-94/人×2，约1h" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-09", title: "高铁：汕尾→香港西九龙（2人）", amount: 268, category: "交通", status: "支出", priority: "", notes: "¥134/人×2，约1h15m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-11", title: "船票：香港→澳门（2人，喷射飞航）", amount: 370, category: "交通", status: "支出", priority: "", notes: "HKD194/人×2≈¥370；60min" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-11", title: "城轨：澳门→顺德（2人，拱北+广珠城轨）", amount: 130, category: "交通", status: "支出", priority: "", notes: "¥65/人×2；过关+约1h5m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-13", title: "城轨：顺德→广州（2人）", amount: 40, category: "交通", status: "支出", priority: "", notes: "¥10-25/人×2，约30min" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-15", title: "机票：广州→丽江（2人，南航CZ6603）", amount: 1300, category: "交通", status: "支出", priority: "", notes: "¥600-700/人×2；07:05→09:55" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-17", title: "机票：丽江→重庆（2人，川航3U8011）", amount: 960, category: "交通", status: "支出", priority: "", notes: "¥480/人×2；21:20→22:50" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-19", title: "机票：重庆→安庆（2人，西部航空PN6235）", amount: 1400, category: "交通", status: "支出", priority: "", notes: "¥700/人×2；15:50→17:45；当前执飞周一/周五，10月班次请复核" },
-
-    // ===== 目的地看板（新确认线） =====
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "泉州", amount: 0, category: "闽南古韵", status: "已确定", priority: "中", notes: "开元寺、西街、清净寺、洛阳桥、蟳埔村；美食：面线糊、土笋冻、姜母鸭、润饼" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕头", amount: 0, category: "侨乡美食", status: "已确定", priority: "高", notes: "小公园骑楼、牛肉火锅、生腌、南澳岛环岛；侨乡美食之都" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕尾", amount: 0, category: "粤东海滨", status: "已确定", priority: "中", notes: "红海湾、金町湾、二马路夜市；美食：薄饼、菜茶、生腌、牛腩" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "香港", amount: 0, category: "维港都市", status: "已确定", priority: "高", notes: "太平山、中环、维港、迪士尼可选；美食：茶餐厅、菠萝油、烧腊、蛋挞" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "澳门", amount: 0, category: "中西街区", status: "已确定", priority: "中", notes: "大三巴、官也街、路环、威尼斯人；美食：葡挞、猪扒包、杏仁饼" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "顺德", amount: 0, category: "美食之都", status: "已确定", priority: "高", notes: "清晖园、逢简水乡；美食：鱼生、双皮奶、桑拿鸡、陈村粉、烧鹅" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "广州", amount: 0, category: "花城枢纽", status: "已确定", priority: "中", notes: "长隆、广州塔、沙面、早茶、珠江夜景" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "丽江·玉龙雪山", amount: 0, category: "雪山古城", status: "已确定", priority: "高", notes: "玉龙雪山大索道、蓝月谷、丽江古城、菌子火锅；注意高原反应" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "重庆", amount: 0, category: "山城美食", status: "已确定", priority: "高", notes: "洪崖洞、长江索道、李子坝、火锅、小面、江湖菜" }
-  ];
-}
-
-// ==================== Overview 行程总览 ====================
-var TRIP_START = "2026-10-05";
-var TRIP_END = "2026-10-19";
-var PLANE_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 19.5l19-7.5L2.5 4.5 2.5 10l13 2-13 2z"/></svg>';
-var TRAIN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 10h16"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/><path d="M6 16l-2 4M18 16l2 4"/></svg>';
-var FERRY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h16l-2 5H6z"/><path d="M12 3v10"/><path d="M9 3h6"/></svg>';
-
-// 城市文化元数据：图标 + 世界遗产/荣誉徽章（渲染行程与看板时按城市名注入，不改动种子数据）
-var CITY_META = {
-  "安庆":   { icon:"🎭", badge:"黄梅戏之乡",     btype:"culture" },
-  "泉州":   { icon:"🏯", badge:"🏛️ 世界遗产",   btype:"wh" },
-  "汕头":   { icon:"🌊", badge:"📜 世界记忆",   btype:"memory" },
-  "汕尾":   { icon:"🐚", badge:"🎭 渔歌非遗",   btype:"culture" },
-  "香港":   { icon:"🦁", badge:"🌐 中西交融",   btype:"culture" },
-  "澳门":   { icon:"⛪", badge:"🏛️ 世界遗产",   btype:"wh" },
-  "顺德":   { icon:"🍲", badge:"🍜 美食之都",   btype:"food" },
-  "广州":   { icon:"🏙️", badge:"🌊 海丝预备",   btype:"culture" },
-  "丽江":   { icon:"🏔️", badge:"🏛️ 世界遗产",   btype:"wh" },
-  "重庆":   { icon:"🌶️", badge:"🏛️ 世遗×2",    btype:"wh" }
-};
-function cityMetaOf(title){
-  if(!title) return null;
-  for (var k in CITY_META){ if (title.indexOf(k) >= 0) return { key:k, m:CITY_META[k] }; }
-  return null;
-}
-
-var ROUTE_STOPS = [
-  { city: "安庆", dates: "10/5 出发", home: true },
-  { city: "泉州", dates: "10/5-7", nights: "2晚" },
-  { city: "汕头", dates: "10/7-8", nights: "1晚" },
-  { city: "汕尾", dates: "10/8-9", nights: "1晚" },
-  { city: "香港", dates: "10/9-11", nights: "2晚" },
-  { city: "澳门", dates: "10/11", nights: "当日" },
-  { city: "顺德", dates: "10/11-13", nights: "2晚" },
-  { city: "广州", dates: "10/13-15", nights: "2晚" },
-  { city: "丽江", dates: "10/15-17", nights: "2晚" },
-  { city: "重庆", dates: "10/17-19", nights: "2晚" },
-  { city: "安庆", dates: "10/19 到家", home: true }
-];
-var ROUTE_SEGS = [
-  { type: "train", date: "10/5" },
-  { type: "train", date: "10/7" },
-  { type: "train", date: "10/8" },
-  { type: "train", date: "10/9" },
-  { type: "ferry", date: "10/11" },
-  { type: "train", date: "10/11" },
-  { type: "train", date: "10/13" },
-  { type: "plane", date: "10/15" },
-  { type: "plane", date: "10/17" },
-  { type: "plane", date: "10/19" }
-];
-
-function renderOverview() {
-  var today = new Date(getTodayStr() + "T00:00:00");
-  var start = new Date(TRIP_START + "T00:00:00");
-  var end = new Date(TRIP_END + "T00:00:00");
-  var oneDay = 86400000;
-  var countHtml;
-  if (today < start) {
-    countHtml = Math.ceil((start - today) / oneDay) + '<small> 天后出发</small>';
-  } else if (today <= end) {
-    countHtml = '<small>Day </small>' + (Math.floor((today - start) / oneDay) + 1) + '<small>/15</small>';
-  } else {
-    countHtml = '<small>行程已收官</small>';
-  }
-
-  var transportSum = 0, transportCount = 0;
-  for (var i = 0; i < allRecords.length; i++) {
-    var r = allRecords[i];
-    if (r.type === "预算管理" && r.category === "交通" && r.status === "支出") {
-      transportSum += r.amount || 0;
-      transportCount++;
-    }
-  }
-
-  document.getElementById("statsRow").innerHTML =
-    '<div class="stat-card"><div class="stat-value">' + countHtml + '</div><div class="stat-label">倒计时</div></div>' +
-    '<div class="stat-card"><div class="stat-value">15<small>天14晚</small></div><div class="stat-label">9 城环线</div></div>' +
-    '<div class="stat-card"><div class="stat-value">' + transportCount + '<small> 段</small></div><div class="stat-label">已定价大交通</div></div>' +
-    '<div class="stat-card"><div class="stat-value">¥' + transportSum.toLocaleString() + '</div><div class="stat-label">2人交通支出</div></div>';
-
-  var html = "";
-  for (var j = 0; j < ROUTE_STOPS.length; j++) {
-    var s = ROUTE_STOPS[j];
-    var cls = "route-stop" + (s.home ? " home" : "") + (s.daytrip ? " daytrip" : "");
-    html += '<div class="' + cls + '" title="' + s.city + ' ' + s.dates + (s.nights ? " " + s.nights : "") + '">';
-    html += '<div class="route-dot"></div>';
-    html += '<div class="route-city">' + s.city + '</div>';
-    html += '<div class="route-dates">' + s.dates + '</div>';
-    if (s.nights) html += '<div class="route-nights">' + s.nights + '</div>';
-    html += '</div>';
-    if (j < ROUTE_SEGS.length) {
-      var g = ROUTE_SEGS[j];
-      html += '<div class="route-seg"><div class="seg-line"></div><div class="seg-icon ' + g.type + '">' + (g.type === "plane" ? PLANE_ICON : (g.type === "ferry" ? FERRY_ICON : TRAIN_ICON)) + '</div><div class="seg-date">' + g.date + '</div></div>';
-    }
-  }
-  document.getElementById("routeMap").innerHTML = html;
-}
-
-// ==================== Render Functions ====================
-function renderAll() {
-  renderOverview();
-  renderToday();
-  renderItinerary();
-  renderBudget();
-  renderDestinations();
-  checkBackupReminder();
-}
-
-function renderToday() {
-  var container = document.getElementById("todayList");
-  var today = getTodayStr();
-  var upcoming = getDateStr(3);
-  var items = [];
-
-  for (var i = 0; i < allRecords.length; i++) {
-    var r = allRecords[i];
-    if (r.type !== "行程规划") continue;
-    if (!r.date || r.date === "1970-01-01") continue;
-    if (r.status === "已完成" || r.status === "已去" || r.status === "已放弃") continue;
-    if (r.type === "预算管理") continue;
-
-    var cls = "";
-    var badge = "";
-    var badgeText = "";
-    if (r.date < today) {
-      cls = "overdue";
-      badge = "badge-overdue";
-      badgeText = "逾期";
-    } else if (r.date === today) {
-      cls = "today";
-      badge = "badge-today";
-      badgeText = "今天";
-    } else if (r.date <= upcoming) {
-      cls = "upcoming";
-      badge = "badge-upcoming";
-      badgeText = "即将到期";
-    } else {
-      continue;
-    }
-    items.push({ record: r, cls: cls, badge: badge, badgeText: badgeText });
-  }
-
-  items.sort(function(a, b) {
-    return a.record.date.localeCompare(b.record.date);
-  });
-
-  if (items.length === 0) {
-    container.innerHTML = '<div class="today-empty">暂无待处理事项，一切就绪！</div>';
-    return;
-  }
-
-  var html = "";
-  for (var j = 0; j < items.length; j++) {
-    var item = items[j];
-    var r = item.record;
-    var actionText = r.status === "待办" ? "开始" : "完成";
-    html += '<div class="today-item ' + item.cls + '">'
-      + '<div class="today-item-info">'
-      +   '<div class="today-item-title">' + escapeHtml(r.title) + '</div>'
-      +   '<div class="today-item-meta">'
-      +     '<span class="today-item-badge ' + item.badge + '">' + item.badgeText + '</span>'
-      +     '<span>' + formatDate(r.date) + '</span>'
-      +     (r.category ? '<span>· ' + escapeHtml(r.category) + '</span>' : '')
-      +   '</div>'
-      + '</div>'
-      + '<button class="today-action" data-id="' + r.id + '" data-action="quick">' + actionText + '</button>'
-      + '</div>';
-  }
-  container.innerHTML = html;
-
-  var btns = container.querySelectorAll(".today-action");
-  for (var k = 0; k < btns.length; k++) {
-    btns[k].addEventListener("click", function(e) {
-      var id = this.getAttribute("data-id");
-      var rec = allRecords.find(function(r) { return r.id === id; });
-      if (!rec) return;
-      if (rec.status === "待办") {
-        updateRecord(id, { status: "进行中" });
-      } else if (rec.status === "进行中") {
-        updateRecord(id, { status: "已完成" });
-      } else {
-        updateRecord(id, { status: "待办" });
-      }
-    });
-  }
-}
-
-function renderItinerary() {
-  var container = document.getElementById("itineraryList");
-  var items = allRecords.filter(function(r) { return r.type === "行程规划"; });
-  items.sort(function(a, b) {
-    return (a.date || "9999").localeCompare(b.date || "9999");
-  });
-
-  if (items.length === 0) {
-    container.innerHTML = '<div class="empty-state">'
-      + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
-      + '<p>还没有行程，点击上方添加</p></div>';
-    return;
-  }
-
-  var html = "";
-  for (var i = 0; i < items.length; i++) {
-    var r = items[i];
-    var done = r.status === "已完成";
-    var cm = cityMetaOf(r.title);
-    var itinIcon = cm ? '<span class="itin-icon">' + cm.m.icon + '</span>' : '';
-    var itinPill = cm ? '<span class="itin-badge ' + cm.m.btype + '">' + escapeHtml(cm.m.badge) + '</span>' : '';
-    html += '<div class="list-item' + (done ? " done" : "") + '">'
-      + '<div class="list-item-body">'
-      +   '<div class="list-item-title">'
-      +     itinIcon
-      +     escapeHtml(r.title)
-      +     itinPill
-      +     (r.status === "待办" ? '<span class="tag">待办</span>' : "")
-      +     (r.status === "进行中" ? '<span class="tag" style="background:var(--warning);color:#fff">进行中</span>' : "")
-      +     (done ? '<span class="tag" style="background:var(--success-light);color:var(--success)">已完成</span>' : "")
-      +   '</div>'
-      +   '<div class="list-item-meta">'
-      +     (r.date ? '<span>' + formatDate(r.date) + '</span>' : '')
-      +     (r.category ? '<span>类型: ' + escapeHtml(r.category) + '</span>' : '')
-      +   '</div>'
-      +   (r.notes ? '<div class="list-item-notes">' + escapeHtml(r.notes) + '</div>' : '')
-      + '</div>'
-      + '<div class="list-item-actions">'
-      +   '<button class="btn-check" data-id="' + r.id + '" data-action="toggle" title="标记完成">'
-      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
-      +   '</button>'
-      +   '<button data-id="' + r.id + '" data-action="edit-itin" title="编辑">'
-      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'
-      +   '</button>'
-      +   '<button class="btn-delete" data-id="' + r.id + '" data-action="delete" title="删除">'
-      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
-      +   '</button>'
-      + '</div>'
-      + '</div>';
-  }
-  container.innerHTML = html;
-  bindListActions(container, "itinerary");
-}
-
-function renderBudget() {
-  var items = allRecords.filter(function(r) { return r.type === "预算管理"; });
-  items.sort(function(a, b) {
-    return (b.date || "").localeCompare(a.date || "");
-  });
-
-  var totalExp = 0, totalInc = 0;
-  var catTotals = {};
-  for (var i = 0; i < items.length; i++) {
-    var r = items[i];
-    if (r.status === "支出") {
-      totalExp += r.amount;
-      if (!catTotals[r.category]) catTotals[r.category] = 0;
-      catTotals[r.category] += r.amount;
-    } else if (r.status === "收入") {
-      totalInc += r.amount;
-    }
-  }
-  document.getElementById("totalExpense").textContent = formatMoney(totalExp);
-  document.getElementById("totalIncome").textContent = formatMoney(totalInc);
-  document.getElementById("balance").textContent = formatMoney(totalInc - totalExp);
-
-  renderPieChart(catTotals, totalExp);
-
-  var container = document.getElementById("budgetList");
-  if (items.length === 0) {
-    container.innerHTML = '<div class="empty-state">'
-      + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>'
-      + '<p>还没有收支记录，点击上方添加</p></div>';
-    return;
-  }
-
-  var html = "";
-  for (var j = 0; j < items.length; j++) {
-    var r = items[j];
-    var isExp = r.status === "支出";
-    var catClass = "tag-other";
-    var catLower = (r.category || "").toLowerCase();
-    if (catLower.indexOf("交通") >= 0 || catLower.indexOf("机票") >= 0) catClass = "tag-transport";
-    else if (catLower.indexOf("住宿") >= 0 || catLower.indexOf("酒店") >= 0) catClass = "tag-hotel";
-    else if (catLower.indexOf("餐饮") >= 0 || catLower.indexOf("吃") >= 0) catClass = "tag-food";
-    else if (catLower.indexOf("门票") >= 0) catClass = "tag-ticket";
-    else if (catLower.indexOf("购物") >= 0) catClass = "tag-shopping";
-
-    html += '<div class="list-item">'
-      + '<div class="list-item-body">'
-      +   '<div class="list-item-title">'
-      +     escapeHtml(r.title)
-      +     '<span class="tag ' + (isExp ? "tag-expense" : "tag-income") + '">' + escapeHtml(r.status) + '</span>'
-      +     '<span class="tag ' + catClass + '">' + escapeHtml(r.category) + '</span>'
-      +   '</div>'
-      +   '<div class="list-item-meta">'
-      +     (r.date ? '<span>' + formatDate(r.date) + '</span>' : '')
-      +     '<span class="' + (isExp ? "amount-expense" : "amount-income") + '">' + (isExp ? "-" : "+") + formatMoney(r.amount) + '</span>'
-      +   '</div>'
-      +   (r.notes ? '<div class="list-item-notes">' + escapeHtml(r.notes) + '</div>' : '')
-      + '</div>'
-      + '<div class="list-item-actions">'
-      +   '<button data-id="' + r.id + '" data-action="edit-bud" title="编辑">'
-      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'
-      +   '</button>'
-      +   '<button class="btn-delete" data-id="' + r.id + '" data-action="delete" title="删除">'
-      +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
-      +   '</button>'
-      + '</div>'
-      + '</div>';
-  }
-  container.innerHTML = html;
-  bindListActions(container, "budget");
-}
-
-function renderPieChart(catTotals, total) {
-  var wrap = document.getElementById("pieWrap");
-  if (total <= 0) {
-    wrap.innerHTML = '<div class="empty-state" style="padding:12px"><p>暂无支出数据</p></div>';
-    return;
-  }
-
-  var cats = Object.keys(catTotals).filter(function(c) { return catTotals[c] > 0; });
-  if (cats.length === 0) {
-    wrap.innerHTML = '<div class="empty-state" style="padding:12px"><p>暂无支出数据</p></div>';
-    return;
-  }
-
-  var radius = 60;
-  var cx = 70, cy = 70;
-  var circumference = 2 * Math.PI * radius;
-  var offset = 0;
-  var svgParts = '<svg class="pie-chart" width="140" height="140" viewBox="0 0 140 140">';
-  var legendHtml = "";
-
-  for (var i = 0; i < cats.length; i++) {
-    var cat = cats[i];
-    var val = catTotals[cat];
-    var pct = val / total;
-    var color = CATEGORY_COLORS[cat] || "#95A5A6";
-    var dashLen = circumference * pct;
-    svgParts += '<circle cx="' + cx + '" cy="' + cy + '" r="' + radius + '" fill="none" stroke="' + color + '" stroke-width="20" stroke-dasharray="' + dashLen + ' ' + (circumference - dashLen) + '" stroke-dashoffset="' + (-offset) + '" transform="rotate(-90 ' + cx + ' ' + cy + ')"/>';
-    offset += dashLen;
-    legendHtml += '<div class="pie-legend-item">'
-      + '<div class="pie-legend-dot" style="background:' + color + '"></div>'
-      + '<span>' + escapeHtml(cat) + '</span>'
-      + '<span class="pie-legend-amount">' + formatMoney(val) + ' (' + (pct * 100).toFixed(1) + '%)</span>'
-      + '</div>';
-  }
-  svgParts += '<text x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle" font-size="14" font-weight="700" fill="#2C3E50">' + formatMoney(total).replace("¥", "¥") + '</text>';
-  svgParts += '</svg>';
-
-  wrap.innerHTML = '<div class="pie-chart">' + svgParts + '</div><div class="pie-legend">' + legendHtml + '</div>';
-}
-
-function renderDestinations() {
-  var container = document.getElementById("destBoard");
-  var items = allRecords.filter(function(r) { return r.type === "目的地看板"; });
-  var columns = {
-    "想去": [],
-    "计划中": [],
-    "已去": [],
-    "已放弃": []
-  };
-  for (var i = 0; i < items.length; i++) {
-    var r = items[i];
-    var col = columns[r.status] || columns["想去"];
-    col.push(r);
-  }
-
-  var html = "";
-  var colKeys = ["想去", "计划中", "已去", "已放弃"];
-  for (var ci = 0; ci < colKeys.length; ci++) {
-    var key = colKeys[ci];
-    var colItems = columns[key];
-    html += '<div class="dest-column">'
-      + '<h4>' + key + ' <span class="count">' + colItems.length + '</span></h4>';
-    for (var j = 0; j < colItems.length; j++) {
-      var r = colItems[j];
-      var priClass = r.priority === "高" ? "priority-high" : (r.priority === "中" ? "priority-medium" : "priority-low");
-      var cm = cityMetaOf(r.title);
-      var destIcon = cm ? '<span class="dest-card-icon">' + cm.m.icon + '</span>' : '';
-      var destBadge = cm ? '<span class="dest-badge ' + cm.m.btype + '">' + escapeHtml(cm.m.badge) + '</span>' : '';
-      html += '<div class="dest-card" data-id="' + r.id + '" data-action="edit-dest">'
-        + '<div class="dest-card-title">'
-        +   '<span class="dest-card-priority ' + priClass + '">' + escapeHtml(r.priority) + '</span>'
-        +   destIcon
-        +   escapeHtml(r.title)
-        +   destBadge
-        + '</div>'
-        + '<div class="dest-card-meta">' + escapeHtml(r.category || "") + '</div>'
-        + (r.notes ? '<div class="dest-card-meta">' + escapeHtml(r.notes) + '</div>' : '')
-        + '</div>';
-    }
-    html += '</div>';
-  }
-  container.innerHTML = html;
-
-  var cards = container.querySelectorAll(".dest-card");
-  for (var k = 0; k < cards.length; k++) {
-    cards[k].addEventListener("click", function() {
-      var id = this.getAttribute("data-id");
-      openEditModal(id, "dest");
-    });
-  }
-}
-
-// ==================== List Actions ====================
-function bindListActions(container, moduleType) {
-  var btns = container.querySelectorAll("button[data-action]");
-  for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", function(e) {
-      e.stopPropagation();
-      var id = this.getAttribute("data-id");
-      var action = this.getAttribute("data-action");
-
-      if (action === "toggle") {
-        var rec = allRecords.find(function(r) { return r.id === id; });
-        if (!rec) return;
-        if (rec.status === "已完成") {
-          updateRecord(id, { status: "待办" });
-        } else {
-          updateRecord(id, { status: "已完成" });
-        }
-      } else if (action === "edit-itin") {
-        openEditModal(id, "itinerary");
-      } else if (action === "edit-bud") {
-        openEditModal(id, "budget");
-      } else if (action === "edit-dest") {
-        openEditModal(id, "dest");
-      } else if (action === "delete") {
-        showConfirm("删除确认", "确定要删除这条记录吗？此操作不可撤销。", function() {
-          deleteRecord(id);
-        });
-      }
-    });
-  }
-}
-
-// ==================== Edit Modal ====================
-function openEditModal(id, type) {
-  var rec = allRecords.find(function(r) { return r.id === id; });
-  if (!rec) return;
-  editTarget = rec;
-
-  var body = document.getElementById("editModalBody");
-  var title = document.getElementById("editModalTitle");
-  title.textContent = "编辑" + (type === "itinerary" ? "行程" : type === "budget" ? "收支" : "目的地");
-
-  var html = "";
-  if (type === "itinerary") {
-    html = '<div class="form-field"><label>日期</label><input type="date" id="edit-date" value="' + escapeHtml(rec.date) + '"></div>'
-      + '<div class="form-field"><label>活动/景点</label><input type="text" id="edit-title" value="' + escapeHtml(rec.title) + '"></div>'
-      + '<div class="form-field"><label>交通方式</label><select id="edit-category">'
-      + transportOptions(rec.category)
-      + '</select></div>'
-      + '<div class="form-field"><label>状态</label><select id="edit-status">'
-      + '<option value="待办"' + (rec.status === "待办" ? " selected" : "") + '>待办</option>'
-      + '<option value="进行中"' + (rec.status === "进行中" ? " selected" : "") + '>进行中</option>'
-      + '<option value="已完成"' + (rec.status === "已完成" ? " selected" : "") + '>已完成</option>'
-      + '</select></div>'
-      + '<div class="form-field"><label>备注</label><textarea id="edit-notes">' + escapeHtml(rec.notes) + '</textarea></div>';
-  } else if (type === "budget") {
-    html = '<div class="form-field"><label>日期</label><input type="date" id="edit-date" value="' + escapeHtml(rec.date) + '"></div>'
-      + '<div class="form-field"><label>项目名称</label><input type="text" id="edit-title" value="' + escapeHtml(rec.title) + '"></div>'
-      + '<div class="form-row">'
-      + '<div class="form-field"><label>金额</label><input type="number" id="edit-amount" value="' + rec.amount + '" min="0" step="0.01"></div>'
-      + '<div class="form-field"><label>分类</label><select id="edit-category">'
-      + budgetCategoryOptions(rec.category)
-      + '</select></div>'
-      + '</div>'
-      + '<div class="form-field"><label>类型</label><select id="edit-status">'
-      + '<option value="支出"' + (rec.status === "支出" ? " selected" : "") + '>支出</option>'
-      + '<option value="收入"' + (rec.status === "收入" ? " selected" : "") + '>收入</option>'
-      + '</select></div>'
-      + '<div class="form-field"><label>备注</label><textarea id="edit-notes">' + escapeHtml(rec.notes) + '</textarea></div>';
-  } else {
-    html = '<div class="form-field"><label>地点名称</label><input type="text" id="edit-title" value="' + escapeHtml(rec.title) + '"></div>'
-      + '<div class="form-row">'
-      + '<div class="form-field"><label>优先级</label><select id="edit-priority">'
-      + '<option value="高"' + (rec.priority === "高" ? " selected" : "") + '>高</option>'
-      + '<option value="中"' + (rec.priority === "中" ? " selected" : "") + '>中</option>'
-      + '<option value="低"' + (rec.priority === "低" ? " selected" : "") + '>低</option>'
-      + '</select></div>'
-      + '<div class="form-field"><label>状态</label><select id="edit-status">'
-      + '<option value="想去"' + (rec.status === "想去" ? " selected" : "") + '>想去</option>'
-      + '<option value="计划中"' + (rec.status === "计划中" ? " selected" : "") + '>计划中</option>'
-      + '<option value="已去"' + (rec.status === "已去" ? " selected" : "") + '>已去</option>'
-      + '<option value="已放弃"' + (rec.status === "已放弃" ? " selected" : "") + '>已放弃</option>'
-      + '</select></div>'
-      + '</div>'
-      + '<div class="form-field"><label>推荐理由</label><input type="text" id="edit-category" value="' + escapeHtml(rec.category) + '"></div>'
-      + '<div class="form-field"><label>备注</label><textarea id="edit-notes">' + escapeHtml(rec.notes) + '</textarea></div>';
-  }
-
-  body.innerHTML = html;
-  document.getElementById("editModal").classList.add("show");
-
-  document.getElementById("btnSaveEdit").onclick = function() {
-    var fields = {};
-    var editDate = document.getElementById("edit-date");
-    var editTitle = document.getElementById("edit-title");
-    var editCategory = document.getElementById("edit-category");
-    var editStatus = document.getElementById("edit-status");
-    var editNotes = document.getElementById("edit-notes");
-
-    if (editDate) fields.date = editDate.value;
-    if (editTitle) fields.title = editTitle.value;
-    if (editCategory) fields.category = editCategory.value;
-    if (editStatus) fields.status = editStatus.value;
-    if (editNotes) fields.notes = editNotes.value;
-
-    if (type === "budget") {
-      var editAmount = document.getElementById("edit-amount");
-      if (editAmount) fields.amount = Number(editAmount.value) || 0;
-    }
-    if (type === "dest") {
-      var editPriority = document.getElementById("edit-priority");
-      if (editPriority) fields.priority = editPriority.value;
-    }
-
-    updateRecord(editTarget.id, fields);
-    closeEditModal();
-  };
-}
-
-function closeEditModal() {
-  document.getElementById("editModal").classList.remove("show");
-  editTarget = null;
-}
-
-function transportOptions(selected) {
-  var opts = ["地铁", "公交", "出租车", "步行", "自驾", "高铁", "飞机"];
-  var html = "";
-  for (var i = 0; i < opts.length; i++) {
-    html += '<option value="' + opts[i] + '"' + (selected === opts[i] ? " selected" : "") + '>' + opts[i] + '</option>';
-  }
-  return html;
-}
-function budgetCategoryOptions(selected) {
-  var opts = ["交通", "住宿", "餐饮", "门票", "购物", "其他"];
-  var html = "";
-  for (var i = 0; i < opts.length; i++) {
-    html += '<option value="' + opts[i] + '"' + (selected === opts[i] ? " selected" : "") + '>' + opts[i] + '</option>';
-  }
-  return html;
-}
-
-// ==================== Confirm Dialog ====================
-function showConfirm(title, msg, callback) {
-  document.getElementById("confirmTitle").textContent = title;
-  document.getElementById("confirmMsg").textContent = msg;
-  confirmCallback = callback;
-  document.getElementById("confirmDialog").classList.add("show");
-}
-
-// ==================== Backup Reminder ====================
-function checkBackupReminder() {
-  var existing = document.querySelector(".backup-reminder");
-  if (allRecords.length >= 30 && !existing) {
-    var reminder = document.createElement("div");
-    reminder.className = "backup-reminder";
-    reminder.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg>数据已积累 ' + allRecords.length + ' 条，建议导出备份';
-    var container = document.querySelector(".container");
-    container.insertBefore(reminder, container.firstChild);
-  } else if (allRecords.length < 30 && existing) {
-    existing.remove();
-  }
-}
-
-// ==================== Export / Import ====================
-function exportData() {
-  var data = JSON.stringify(allRecords, null, 2);
-  var blob = new Blob([data], { type: "application/json" });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement("a");
-  a.href = url;
-  a.download = "travel_planner_backup_" + getTodayStr() + ".json";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function importData(file) {
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      var data = JSON.parse(e.target.result);
-      if (!Array.isArray(data)) {
-        alert("文件格式不正确：需要JSON数组");
-        return;
-      }
-      showConfirm("导入确认", "导入将覆盖当前所有数据（" + allRecords.length + "条），确定继续吗？", function() {
-        allRecords = data.map(function(r) {
-          return {
-            id: r.id || genId(),
-            rid: r.rid || "",
-            type: r.type || "",
-            date: r.date || "",
-            title: r.title || "",
-            amount: Number(r.amount) || 0,
-            category: r.category || "",
-            status: r.status || "",
-            priority: r.priority || "",
-            notes: r.notes || ""
-          };
-        });
-        saveLocal();
-        renderAll();
+      }).catch(()=>{
+        tempEl.textContent='获取失败';
+        descEl.textContent='网络受限，请检查网络后刷新';
       });
-    } catch (err) {
-      alert("导入失败：文件解析错误");
     }
-  };
-  reader.readAsText(file);
-}
 
-// ==================== Init ====================
-function init() {
-  // Set default dates
-  var today = getTodayStr();
-  document.getElementById("itin-date").value = "2026-10-01";
-  document.getElementById("bud-date").value = today;
+    // 1) 先加载默认位置（安庆），保证秒开不空白
+    loadWeather(DEFAULT.lat, DEFAULT.lon, null);
 
-  // Tab switching
-  var tabBtns = document.querySelectorAll(".tab-btn");
-  for (var i = 0; i < tabBtns.length; i++) {
-    tabBtns[i].addEventListener("click", function() {
-      for (var j = 0; j < tabBtns.length; j++) {
-        tabBtns[j].classList.remove("active");
-      }
-      this.classList.add("active");
-      var tab = this.getAttribute("data-tab");
-      var modules = document.querySelectorAll(".module");
-      for (var k = 0; k < modules.length; k++) {
-        modules[k].classList.remove("active");
-      }
-      document.getElementById("module-" + tab).classList.add("active");
-    });
-  }
-
-  // 深度链接：URL 带 #backup 时自动切到「备选路线」标签
-  if (location.hash === "#backup") {
-    var allBtns = document.querySelectorAll(".tab-btn");
-    for (var bi = 0; bi < allBtns.length; bi++) {
-      allBtns[bi].classList.toggle("active", allBtns[bi].getAttribute("data-tab") === "backup");
+    // 2) 尝试浏览器定位，成功后自动更新为当前位置天气
+    if(navigator.geolocation){
+      lbl.innerHTML='<span class="icon">📍</span> 正在定位…';
+      navigator.geolocation.getCurrentPosition(pos=>{
+        const la=pos.coords.latitude, lo=pos.coords.longitude;
+        // 逆地理编码：经纬度 → 中文城市名（BigDataCloud 免费接口，无需 key）
+        fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${la}&longitude=${lo}&localityLanguage=zh`)
+          .then(r=>r.json())
+          .then(g=>{
+            const city=g.city||g.locality||'';
+            const prov=g.principalSubdivision||'';
+            const name=city||(prov||'当前位置');
+            loadWeather(la.toFixed(3), lo.toFixed(3), name);
+          })
+          .catch(()=>loadWeather(la.toFixed(3), lo.toFixed(3), '当前位置'));
+      }, err=>{
+        // 定位失败/被拒绝：保持默认安庆
+        lbl.innerHTML=`<span class="icon">🌤️</span> 安徽 · 安庆 实时天气`;
+      }, {timeout:8000, maximumAge:300000});
     }
-    var allMods = document.querySelectorAll(".module");
-    for (var mi = 0; mi < allMods.length; mi++) allMods[mi].classList.remove("active");
-    document.getElementById("module-backup").classList.add("active");
-    setTimeout(function(){ document.getElementById("module-backup").scrollIntoView({behavior:"smooth",block:"start"}); }, 200);
-  }
+  })();
 
-  // Add buttons
-  document.getElementById("btnAddItinerary").addEventListener("click", function() {
-    var date = document.getElementById("itin-date").value;
-    var title = document.getElementById("itin-title").value.trim();
-    var transport = document.getElementById("itin-transport").value;
-    var status = document.getElementById("itin-status").value;
-    var notes = document.getElementById("itin-notes").value.trim();
-    if (!title) { alert("请输入活动/景点名称"); return; }
-    addRecord({
-      type: "行程规划", date: date, title: title, amount: 0,
-      category: transport, status: status, priority: "", notes: notes
-    });
-    document.getElementById("itin-title").value = "";
-    document.getElementById("itin-notes").value = "";
-    document.getElementById("itin-transport").selectedIndex = 0;
-    document.getElementById("itin-status").selectedIndex = 0;
-  });
-
-  document.getElementById("btnAddBudget").addEventListener("click", function() {
-    var date = document.getElementById("bud-date").value;
-    var title = document.getElementById("bud-title").value.trim();
-    var amount = Number(document.getElementById("bud-amount").value) || 0;
-    var category = document.getElementById("bud-category").value;
-    var type = document.getElementById("bud-type").value;
-    var notes = document.getElementById("bud-notes").value.trim();
-    if (!title) { alert("请输入项目名称"); return; }
-    if (amount <= 0) { alert("请输入有效金额"); return; }
-    addRecord({
-      type: "预算管理", date: date, title: title, amount: amount,
-      category: category, status: type, priority: "", notes: notes
-    });
-    document.getElementById("bud-title").value = "";
-    document.getElementById("bud-amount").value = "";
-    document.getElementById("bud-notes").value = "";
-  });
-
-  document.getElementById("btnAddDest").addEventListener("click", function() {
-    var title = document.getElementById("dest-title").value.trim();
-    var reason = document.getElementById("dest-reason").value.trim();
-    var priority = document.getElementById("dest-priority").value;
-    var status = document.getElementById("dest-status").value;
-    var notes = document.getElementById("dest-notes").value.trim();
-    if (!title) { alert("请输入地点名称"); return; }
-    addRecord({
-      type: "目的地看板", date: "", title: title, amount: 0,
-      category: reason, status: status, priority: priority, notes: notes
-    });
-    document.getElementById("dest-title").value = "";
-    document.getElementById("dest-reason").value = "";
-    document.getElementById("dest-notes").value = "";
-    document.getElementById("dest-status").selectedIndex = 0;
-  });
-
-  // Export/Import
-  document.getElementById("btnExport").addEventListener("click", exportData);
-  document.getElementById("btnImport").addEventListener("click", function() {
-    document.getElementById("importFile").click();
-  });
-  document.getElementById("importFile").addEventListener("change", function() {
-    if (this.files.length > 0) {
-      importData(this.files[0]);
-      this.value = "";
-    }
-  });
-
-  // Modal close
-  document.getElementById("btnCloseModal").addEventListener("click", closeEditModal);
-  document.getElementById("btnCancelEdit").addEventListener("click", closeEditModal);
-  document.getElementById("editModal").addEventListener("click", function(e) {
-    if (e.target === this) closeEditModal();
-  });
-
-  // Confirm dialog
-  document.getElementById("btnConfirmCancel").addEventListener("click", function() {
-    document.getElementById("confirmDialog").classList.remove("show");
-    confirmCallback = null;
-  });
-  document.getElementById("btnConfirmOk").addEventListener("click", function() {
-    document.getElementById("confirmDialog").classList.remove("show");
-    if (confirmCallback) confirmCallback();
-    confirmCallback = null;
-  });
-
-  // Load data and render
-  loadData().then(function() {
-    renderAll();
-  });
-}
-
-// Start
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
-  init();
-}
 </script>
 </body>
 </html>
