@@ -565,7 +565,7 @@ body{-webkit-tap-highlight-color:transparent}
   <div class="module" id="module-backup">
     <div class="backup-wrap">
       <div class="backup-title">🧭 历史方案对比（已弃用 · 仅供对比参考）</div>
-      <div class="backup-sub">主路线已确定为新线（安庆→泉州→汕头→汕尾→港澳→顺德→广州→丽江→重庆→安庆，10/5–10/22）；以下两个为曾考虑但已弃用的旧方案：① 喀什线（原主路线）② 闽粤滇渝环线（旧备选）。</div>
+      <div class="backup-sub">主路线已确定为新线（安庆→泉州→汕头→汕尾→港澳→顺德→广州→丽江→重庆→安庆，10/5–10/19）；以下两个为曾考虑但已弃用的旧方案：① 喀什线（原主路线）② 闽粤滇渝环线（旧备选）。</div>
       <div class="backup-note">⚠️ 本栏为已弃用的历史方案，仅供参考，不进入行程 / 预算 / 看板。</div>
 
       <div class="hist-card">
@@ -577,7 +577,7 @@ body{-webkit-tap-highlight-color:transparent}
           <li>特点：喀什段往返机票溢价高 + 需报当地小团（约¥1,200/人），路程最远最累</li>
           <li>弃用原因：太远太赶、喀什小团不确定、花费最高 → 改走更近的福建沿海线</li>
         </ul>
-        <div class="hist-cmp">vs 当前主路线（新线）：省约 ¥6,000+/2人、少跑 2,000+km、18天 vs 20天</div>
+        <div class="hist-cmp">vs 当前主路线（新线）：省约 ¥6,000+/2人、少跑 2,000+km、15天 vs 20天</div>
       </div>
 
       <div class="backup-sub2">② 闽粤滇渝环线（旧备选 · 已弃用）</div>
@@ -746,7 +746,7 @@ var OPTIONS_MAP = {
     "目的地看板": { "text": "目的地看板", "id": "43GUwpsWENMT" }
   }
 };
-var STORAGE_KEY = "wb_travel_planner_data_v12";
+var STORAGE_KEY = "wb_travel_planner_data_v13";
 var syncMode = "offline";
 var allRecords = [];
 var editTarget = null;
@@ -970,81 +970,78 @@ function buildProperties(rec) {
 function getExampleData() {
   var todayStr = getTodayStr();
   return [
-    // ===== 行程规划（新确认线 · 安庆-泉州-汕头-汕尾-港澳-顺德-广州-丽江-重庆-安庆） =====
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-05", title: "【已确定】安庆→泉州（动车中转）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "G7150 安庆07:08→铜陵07:49 换乘 G1669 铜陵北09:30→泉州东14:11，约7h，¥425/人（2人¥850）。买联程票，铜陵北站内换乘" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-06", title: "泉州：闽南古韵一日", amount: 0, category: "古城", status: "已确定", priority: "中", notes: "开元寺、西街、清净寺、洛阳桥；晚上西街小吃（面线糊、土笋冻）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-07", title: "【已确定】泉州→汕头（高铁G3041）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "泉州南08:22→汕头10:11，1h49m，¥142/人（2人¥284）；中午到汕头，下午小公园骑楼" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-08", title: "汕头：小公园老城日", amount: 0, category: "城区", status: "已确定", priority: "中", notes: "小公园骑楼群、老妈宫粽球、西堤公园看礐石大桥日落；晚上牛肉火锅（八合里海记）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-09", title: "【已确定】汕头→汕尾（高铁）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "高铁约1h，¥79-94/人（2人¥170）；下午到汕尾，晚上二马路夜市" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-10", title: "汕尾：红海湾+金町湾", amount: 0, category: "海滨", status: "已确定", priority: "中", notes: "红海湾遮浪半岛（南海观世音、海边栈道）→金町湾沙滩；二马路夜市（海鲜、薄饼、菜粿）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-11", title: "【已确定】汕尾→香港（高铁西九龙）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "白天班高铁汕尾→香港西九龙，约1h15m，¥134/人（2人¥268）；下午到香港，晚上维港夜景" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-12", title: "香港：维港都市一日", amount: 0, category: "都市", status: "已确定", priority: "高", notes: "太平山顶、中环、旺角、维多利亚港；晚上幻彩咏香江/庙街夜市" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-13", title: "【已确定】香港→澳门（喷射飞航船）", amount: 0, category: "船", status: "已确定", priority: "高", notes: "上环港澳码头→澳门外港，60min，每30min一班，平日HKD194/周末HKD212；上午船，到澳门玩" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "澳门：中西交融一日", amount: 0, category: "城区", status: "已确定", priority: "高", notes: "大三巴、恋爱巷、官也街、路环渔村、威尼斯人；带港澳通行证！" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-15", title: "【已确定】澳门→顺德（拱北过关+广珠城轨）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "拱北口岸过关（15-30min）→珠海站乘广珠城轨到顺德站，约1h5m，¥65-90/人；下午到顺德" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-16", title: "顺德：美食之都一日", amount: 0, category: "美食", status: "已确定", priority: "中", notes: "清晖园、逢简水乡、华盖路步行街；双皮奶、伦教糕、烧鹅、毋米粥、鱼生" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-17", title: "【已确定】顺德→广州（广珠城轨）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "顺德站→广州南站约20-30min，¥10-25/人；下午到广州，晚上北京路/珠江夜游" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-18", title: "广州：花城枢纽一日", amount: 0, category: "都市", status: "已确定", priority: "中", notes: "广州塔、沙面、早茶（点都德）、陈家祠；晚上珠江夜景" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-19", title: "【已确定】广州→丽江（南航CZ6603直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "CZ6603 白云07:05→丽江三义09:55，2h50m，约¥600-700/人（2人¥1300）；准点率97%，早到玩整天" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-20", title: "丽江·玉龙雪山大索道·蓝月谷·菌子火锅", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "上午大索道→4506m冰川公园（提前抢票），备氧气瓶+厚外套；下午蓝月谷；晚上菌子火锅" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-21", title: "【已确定】丽江→重庆（川航3U8011直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "21:20→22:50，1h30m，¥480/人（2人¥960）；晚班机，住重庆" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-22", title: "【已确定】重庆→安庆（西部航空PN6235直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "17:45→19:40，1h55m，¥700/人（2人¥1400）；仅周二/四/六执飞，10/22周四有班，回到安庆行程结束" },
+    // ===== 行程规划（新确认线 · 安庆-泉州-汕头-汕尾-港澳-顺德-广州-丽江-重庆-安庆 · 10/5-10/19） =====
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-05", title: "安庆→泉州（动车中转）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "G7150 安庆07:08→铜陵07:49 换乘 G1669 铜陵北09:30→泉州东14:11，约7h，¥425/人（2人¥850）；买联程票铜陵北站内换乘；晚到泉州，西街初步逛吃" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-06", title: "泉州：闽南古韵·美食一日", amount: 0, category: "古城", status: "已确定", priority: "中", notes: "开元寺、西街、清净寺、洛阳桥、蟳埔村簪花围；吃：面线糊、土笋冻、姜母鸭、润饼、四果汤" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-07", title: "泉州→汕头（高铁G3041）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "泉州南08:22→汕头10:11，1h49m，¥142/人（2人¥284）；中午到汕头，下午小公园骑楼群、西堤公园；晚上牛肉火锅（八合里/福合埕）、生腌初体验" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-08", title: "汕头→汕尾（高铁）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "高铁约1h，¥79-94/人（2人¥170）；下午到汕尾，红海湾遮浪半岛看海、金町湾沙滩；晚上二马路夜市（薄饼、菜茶、生腌、牛腩）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-09", title: "汕尾→香港西九龙（高铁）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "高铁约1h15m，¥134/人（2人¥268）；下午到香港，太平山顶、中环、尖沙咀；晚上维港夜景+庙街夜市；带港澳通行证" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-10", title: "香港：维港都市二日", amount: 0, category: "都市", status: "已确定", priority: "高", notes: "旺角/铜锣湾购物、迪士尼或海洋公园（二选一）、叮叮车；茶餐厅：菠萝油、丝袜奶茶、烧腊、蛋挞；晚上幻彩咏香江" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-11", title: "香港→澳门（船）→顺德", amount: 0, category: "船", status: "已确定", priority: "高", notes: "上环港澳码头→澳门外港，喷射飞航60min，每30min一班，平日HKD194/周末HKD212；澳门大三巴、恋爱巷、官也街、路环、葡挞/猪扒包/杏仁饼；傍晚拱北过关+广珠城轨→顺德（约1h5m，¥65-90/人）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-12", title: "顺德：美食之都一日", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "清晖园、逢简水乡、华盖路步行街；吃：鱼生、双皮奶（仁信/民信）、伦教糕、桑拿鸡、毋米粥、烧鹅、陈村粉" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-13", title: "顺德→广州（城轨）· 长隆Day1", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "顺德站→广州南约20-30min，¥10-25/人；下午长隆欢乐世界或野生动物世界；晚上北京路/珠江夜游" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "广州：长隆二日", amount: 0, category: "亲子", status: "已确定", priority: "中", notes: "长隆水上乐园/大马戏（二选一）、广州塔、沙面、早茶（点都德/陶陶居）；亲子友好" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-15", title: "广州→丽江（南航CZ6603直飞）· 古城", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "CZ6603 白云07:05→丽江三义09:55，2h50m，约¥600-700/人（2人¥1300），准点率97%；下午丽江古城、束河古镇休整适应海拔" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-16", title: "丽江·玉龙雪山大索道·蓝月谷", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "上午大索道→4506m冰川公园（提前抢票），备氧气瓶+厚外套；下午蓝月谷；晚上菌子火锅；注意高原反应" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-17", title: "丽江→重庆（川航3U8011直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "3U8011 丽江21:20→重庆22:50，1h30m，¥480/人（2人¥960）；晚班机，夜抵重庆" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-18", title: "重庆：火锅江湖菜一日", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "洪崖洞、解放碑、千厮门大桥夜景；吃：重庆火锅（珮姐/周师兄）、小面、酸辣粉、毛血旺、江湖菜" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-19", title: "重庆→安庆（西部航空PN6235直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "上午补吃（烧烤、抄手、山城小汤圆）；PN6235 重庆15:50→安庆17:45，1h55m，¥700/人（2人¥1400）；当前执飞周一/周五，10月班次请出发前复核（若恢复周二四六则改10/20返程）；行程结束" },
 
-    // ===== 预算管理（新确认线交通段） =====
+    // ===== 预算管理（新确认线交通段 · 10/5-10/19） =====
     { id: genId(), rid: "", type: "预算管理", date: "2026-10-05", title: "动车：安庆→泉州（2人，G7150+G1669）", amount: 850, category: "交通", status: "支出", priority: "", notes: "¥425/人×2；约7h中转" },
     { id: genId(), rid: "", type: "预算管理", date: "2026-10-07", title: "高铁：泉州→汕头（2人，G3041）", amount: 284, category: "交通", status: "支出", priority: "", notes: "¥142/人×2；1h49m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-09", title: "高铁：汕头→汕尾（2人）", amount: 170, category: "交通", status: "支出", priority: "", notes: "¥79-94/人×2，约1h" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-11", title: "高铁：汕尾→香港西九龙（2人）", amount: 268, category: "交通", status: "支出", priority: "", notes: "¥134/人×2，约1h15m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-13", title: "船票：香港→澳门（2人，喷射飞航）", amount: 370, category: "交通", status: "支出", priority: "", notes: "HKD194/人×2≈¥370；60min" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-15", title: "城轨：澳门→顺德（2人，拱北+广珠城轨）", amount: 130, category: "交通", status: "支出", priority: "", notes: "¥65/人×2；过关+约1h5m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-17", title: "城轨：顺德→广州（2人）", amount: 40, category: "交通", status: "支出", priority: "", notes: "¥10-25/人×2，约30min" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-19", title: "机票：广州→丽江（2人，南航CZ6603）", amount: 1300, category: "交通", status: "支出", priority: "", notes: "¥600-700/人×2；07:05→09:55" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-21", title: "机票：丽江→重庆（2人，川航3U8011）", amount: 960, category: "交通", status: "支出", priority: "", notes: "¥480/人×2；21:20→22:50" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-22", title: "机票：重庆→安庆（2人，西部航空PN6235）", amount: 1400, category: "交通", status: "支出", priority: "", notes: "¥700/人×2；17:45→19:40；仅周二/四/六" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-08", title: "高铁：汕头→汕尾（2人）", amount: 170, category: "交通", status: "支出", priority: "", notes: "¥79-94/人×2，约1h" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-09", title: "高铁：汕尾→香港西九龙（2人）", amount: 268, category: "交通", status: "支出", priority: "", notes: "¥134/人×2，约1h15m" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-11", title: "船票：香港→澳门（2人，喷射飞航）", amount: 370, category: "交通", status: "支出", priority: "", notes: "HKD194/人×2≈¥370；60min" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-11", title: "城轨：澳门→顺德（2人，拱北+广珠城轨）", amount: 130, category: "交通", status: "支出", priority: "", notes: "¥65/人×2；过关+约1h5m" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-13", title: "城轨：顺德→广州（2人）", amount: 40, category: "交通", status: "支出", priority: "", notes: "¥10-25/人×2，约30min" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-15", title: "机票：广州→丽江（2人，南航CZ6603）", amount: 1300, category: "交通", status: "支出", priority: "", notes: "¥600-700/人×2；07:05→09:55" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-17", title: "机票：丽江→重庆（2人，川航3U8011）", amount: 960, category: "交通", status: "支出", priority: "", notes: "¥480/人×2；21:20→22:50" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-19", title: "机票：重庆→安庆（2人，西部航空PN6235）", amount: 1400, category: "交通", status: "支出", priority: "", notes: "¥700/人×2；15:50→17:45；当前执飞周一/周五，10月班次请复核" },
 
     // ===== 目的地看板（新确认线） =====
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "泉州", amount: 0, category: "闽南古韵", status: "已确定", priority: "中", notes: "开元寺、西街、清净寺、洛阳桥；闽南小吃" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕头", amount: 0, category: "侨乡美食", status: "已确定", priority: "高", notes: "小公园骑楼、牛肉火锅、南澳岛环岛" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕尾", amount: 0, category: "粤东海滨", status: "已确定", priority: "中", notes: "红海湾、金町湾、二马路夜市" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "香港", amount: 0, category: "维港都市", status: "已确定", priority: "高", notes: "太平山、中环、维港夜景、迪士尼可选" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "澳门", amount: 0, category: "中西街区", status: "已确定", priority: "中", notes: "大三巴、官也街、路环、威尼斯人" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "顺德", amount: 0, category: "美食之都", status: "已确定", priority: "高", notes: "清晖园、逢简水乡、双皮奶、鱼生" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "广州", amount: 0, category: "花城枢纽", status: "已确定", priority: "中", notes: "广州塔、沙面、早茶、珠江夜景" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "丽江·玉龙雪山", amount: 0, category: "雪山古城", status: "已确定", priority: "高", notes: "玉龙雪山大索道、蓝月谷、丽江古城、菌子火锅" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "重庆", amount: 0, category: "山城美食", status: "已确定", priority: "高", notes: "洪崖洞、长江索道、李子坝、火锅" }
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "泉州", amount: 0, category: "闽南古韵", status: "已确定", priority: "中", notes: "开元寺、西街、清净寺、洛阳桥、蟳埔村；美食：面线糊、土笋冻、姜母鸭、润饼" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕头", amount: 0, category: "侨乡美食", status: "已确定", priority: "高", notes: "小公园骑楼、牛肉火锅、生腌、南澳岛环岛；侨乡美食之都" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕尾", amount: 0, category: "粤东海滨", status: "已确定", priority: "中", notes: "红海湾、金町湾、二马路夜市；美食：薄饼、菜茶、生腌、牛腩" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "香港", amount: 0, category: "维港都市", status: "已确定", priority: "高", notes: "太平山、中环、维港、迪士尼可选；美食：茶餐厅、菠萝油、烧腊、蛋挞" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "澳门", amount: 0, category: "中西街区", status: "已确定", priority: "中", notes: "大三巴、官也街、路环、威尼斯人；美食：葡挞、猪扒包、杏仁饼" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "顺德", amount: 0, category: "美食之都", status: "已确定", priority: "高", notes: "清晖园、逢简水乡；美食：鱼生、双皮奶、桑拿鸡、陈村粉、烧鹅" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "广州", amount: 0, category: "花城枢纽", status: "已确定", priority: "中", notes: "长隆、广州塔、沙面、早茶、珠江夜景" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "丽江·玉龙雪山", amount: 0, category: "雪山古城", status: "已确定", priority: "高", notes: "玉龙雪山大索道、蓝月谷、丽江古城、菌子火锅；注意高原反应" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "重庆", amount: 0, category: "山城美食", status: "已确定", priority: "高", notes: "洪崖洞、长江索道、李子坝、火锅、小面、江湖菜" }
   ];
 }
 
 // ==================== Overview 行程总览 ====================
 var TRIP_START = "2026-10-05";
-var TRIP_END = "2026-10-22";
+var TRIP_END = "2026-10-19";
 var PLANE_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 19.5l19-7.5L2.5 4.5 2.5 10l13 2-13 2z"/></svg>';
 var TRAIN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 10h16"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/><path d="M6 16l-2 4M18 16l2 4"/></svg>';
 var FERRY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h16l-2 5H6z"/><path d="M12 3v10"/><path d="M9 3h6"/></svg>';
 var ROUTE_STOPS = [
   { city: "安庆", dates: "10/5 出发", home: true },
   { city: "泉州", dates: "10/5-7", nights: "2晚" },
-  { city: "汕头", dates: "10/7-9", nights: "2晚" },
-  { city: "汕尾", dates: "10/9-11", nights: "2晚" },
-  { city: "香港", dates: "10/11-13", nights: "2晚" },
-  { city: "澳门", dates: "10/13-15", nights: "2晚" },
-  { city: "顺德", dates: "10/15-17", nights: "2晚" },
-  { city: "广州", dates: "10/17-19", nights: "2晚" },
-  { city: "丽江", dates: "10/19-21", nights: "2晚" },
-  { city: "重庆", dates: "10/21-22", nights: "1晚" },
-  { city: "安庆", dates: "10/22 到家", home: true }
+  { city: "汕头", dates: "10/7-8", nights: "1晚" },
+  { city: "汕尾", dates: "10/8-9", nights: "1晚" },
+  { city: "香港", dates: "10/9-11", nights: "2晚" },
+  { city: "澳门", dates: "10/11", nights: "当日" },
+  { city: "顺德", dates: "10/11-13", nights: "2晚" },
+  { city: "广州", dates: "10/13-15", nights: "2晚" },
+  { city: "丽江", dates: "10/15-17", nights: "2晚" },
+  { city: "重庆", dates: "10/17-19", nights: "2晚" },
+  { city: "安庆", dates: "10/19 到家", home: true }
 ];
 var ROUTE_SEGS = [
   { type: "train", date: "10/5" },
   { type: "train", date: "10/7" },
+  { type: "train", date: "10/8" },
   { type: "train", date: "10/9" },
+  { type: "ferry", date: "10/11" },
   { type: "train", date: "10/11" },
-  { type: "ferry", date: "10/13" },
-  { type: "train", date: "10/15" },
-  { type: "train", date: "10/17" },
-  { type: "plane", date: "10/19" },
-  { type: "plane", date: "10/21" },
-  { type: "plane", date: "10/22" }
+  { type: "train", date: "10/13" },
+  { type: "plane", date: "10/15" },
+  { type: "plane", date: "10/17" },
+  { type: "plane", date: "10/19" }
 ];
 
 function renderOverview() {
@@ -1056,7 +1053,7 @@ function renderOverview() {
   if (today < start) {
     countHtml = Math.ceil((start - today) / oneDay) + '<small> 天后出发</small>';
   } else if (today <= end) {
-    countHtml = '<small>Day </small>' + (Math.floor((today - start) / oneDay) + 1) + '<small>/18</small>';
+    countHtml = '<small>Day </small>' + (Math.floor((today - start) / oneDay) + 1) + '<small>/15</small>';
   } else {
     countHtml = '<small>行程已收官</small>';
   }
@@ -1072,7 +1069,7 @@ function renderOverview() {
 
   document.getElementById("statsRow").innerHTML =
     '<div class="stat-card"><div class="stat-value">' + countHtml + '</div><div class="stat-label">倒计时</div></div>' +
-    '<div class="stat-card"><div class="stat-value">18<small>天17晚</small></div><div class="stat-label">9 城环线</div></div>' +
+    '<div class="stat-card"><div class="stat-value">15<small>天14晚</small></div><div class="stat-label">9 城环线</div></div>' +
     '<div class="stat-card"><div class="stat-value">' + transportCount + '<small> 段</small></div><div class="stat-label">已定价大交通</div></div>' +
     '<div class="stat-card"><div class="stat-value">¥' + transportSum.toLocaleString() + '</div><div class="stat-label">2人交通支出</div></div>';
 
