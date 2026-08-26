@@ -360,6 +360,29 @@ body{-webkit-tap-highlight-color:transparent}
   .cw-temp small{font-size:15px;font-weight:600;color:var(--text-light)}
   .cw-desc{font-size:13px;color:var(--text-light);margin-top:4px}
   .cw-hint{margin-top:12px;font-size:12px;color:#1E7A4F;background:var(--success-light);border-radius:10px;padding:8px 10px;line-height:1.5}
+
+  /* Ticket & Weather module 票况·天气 */
+  .tw-h2{font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .tw-tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;color:#fff;vertical-align:middle;white-space:nowrap}
+  .tw-blue{background:var(--info)} .tw-green{background:var(--success)} .tw-brand{background:var(--primary)} .tw-red{background:var(--danger)}
+  .tw-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+  .tw-table th,.tw-table td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top}
+  .tw-table th{background:#F1F5F9;font-weight:600;color:var(--text)}
+  .tw-table tr:nth-child(even) td{background:#FAFCFE}
+  .tw-seg{font-weight:600;color:var(--text)}
+  .tw-price{color:var(--danger);font-weight:700;white-space:nowrap}
+  .tw-tight{color:var(--danger);font-weight:600}
+  .tw-easy{color:var(--success);font-weight:600}
+  .tw-mid{color:var(--primary);font-weight:600}
+  .tw-note{font-size:12px;color:var(--text-light);margin-top:8px;line-height:1.5}
+  .tw-warn{background:var(--danger-light);border-left:4px solid var(--danger);padding:10px 12px;border-radius:8px;font-size:13px;margin-top:8px;line-height:1.5}
+  .tw-sum{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+  .tw-sum .box{flex:1;min-width:140px;background:#F5F9FF;border:1px solid #D8E6F7;border-radius:10px;padding:12px}
+  .tw-sum .box b{font-size:20px;color:var(--info);display:block}
+  .tw-sum .box span{font-size:12px;color:var(--text-light)}
+  .tw-list{margin:6px 0 0 18px;font-size:13px;line-height:1.6}
+  .tw-link{display:inline-flex;align-items:center;gap:6px;margin-top:4px;color:var(--info);font-size:13px;font-weight:600;text-decoration:none}
+  .tw-link:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -473,6 +496,10 @@ body{-webkit-tap-highlight-color:transparent}
     <button class="tab-btn" data-tab="backup">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
       <span>备选路线</span>
+    </button>
+    <button class="tab-btn" data-tab="ticket">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v4a2 2 0 0 0 0 4v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0 0-4V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M13 5v14"/></svg>
+      <span>票况·天气</span>
     </button>
   </nav>
 
@@ -799,6 +826,80 @@ body{-webkit-tap-highlight-color:transparent}
         </table>
         <div class="budget-note">说明：① 酒店按全季/同档次连锁（2人合住1间，均价约¥280/晚，港澳·喀什旺季上浮）估算；② 喀什小团按¥1,200/人×2估算，实际报价浮动较大；③ 餐饮门票按日均¥300/人估算，两边相近未计入核心差异；④ 机票为当前查询价，出票前请复核实时价。备选比主路线省约 <b>¥6,300/2人（人均省约¥3,160）</b>，主要来自免去喀什往返大交通溢价与喀什小团。</div>
       </div>
+    </div>
+  </div>
+
+  <!-- Module: Ticket & Weather 票况·天气 -->
+  <div class="module" id="module-ticket">
+    <!-- 关键窗口 -->
+    <div class="card">
+      <div class="tw-h2"><span class="tw-tag tw-brand">关键窗口</span> 国庆放假与抢票节奏</div>
+      <p style="font-size:13px;line-height:1.6">2026 国庆 <b>10/1(周四)–10/7(周三)</b> 放假 7 天，9/20(周日)、10/10(周六) 补班；中秋已结束。</p>
+      <ul class="tw-list">
+        <li><b>10/5–10/7</b> 仍在国庆假期末尾 → <span class="tw-tight">前 3 天票最难抢</span></li>
+        <li><b>10/8 起</b> 假期结束进入平峰 → 票变松、机票回落</li>
+        <li>铁路 15 天预售：<b>约 9/20 开售 10/5 票</b>，现买不到，用近期 8 月真实价作基线，国庆浮动另计</li>
+      </ul>
+    </div>
+
+    <!-- 10段票价比对 -->
+    <div class="card">
+      <div class="tw-h2"><span class="tw-tag tw-blue">逐段比对</span> 10 段交通票价基线（近期真实票价）</div>
+      <table class="tw-table">
+        <thead><tr><th>段</th><th>车次 / 航班</th><th>近期票价(人)</th><th>时长</th><th>国庆难度</th><th>购票建议</th></tr></thead>
+        <tbody>
+          <tr><td class="tw-seg">① 安庆→泉州</td><td>动车联运 G7150(安庆07:08→铜陵07:49)+G1669(铜陵北09:30→泉州东14:11)</td><td class="tw-price">¥425.5</td><td>~7h</td><td class="tw-tight">紧张</td><td>9/20 开售即抢；G1669 到"泉州东"非泉州站</td></tr>
+          <tr><td class="tw-seg">② 泉州→汕头</td><td>G3041 泉州南08:22→汕头10:11（另有晚班 D3113）</td><td class="tw-price">¥142</td><td>1h49m</td><td class="tw-tight">偏紧</td><td>沿海热门短途，开售抢二等座</td></tr>
+          <tr><td class="tw-seg">③ 汕头→汕尾</td><td>多车次（G6576 等，150+班/日）</td><td class="tw-price">¥79–94</td><td>~1h</td><td class="tw-easy">宽松</td><td>车次极密，可候补</td></tr>
+          <tr><td class="tw-seg">④ 汕尾→香港西九龙</td><td>G925/G923/G6577 汕尾16:xx→香港西九龙18:xx</td><td class="tw-price">¥134–210</td><td>~1.5h</td><td class="tw-tight">极紧张</td><td><b>全程最难点</b>：需港澳通行证及签注</td></tr>
+          <tr><td class="tw-seg">⑤ 香港→澳门</td><td>喷射飞航（上环→外港）</td><td class="tw-price">HK$194 / 212周末</td><td>60min</td><td class="tw-mid">偏紧</td><td>船班国庆易满，提前 1–2 天订；10/5 周一按平日价</td></tr>
+          <tr><td class="tw-seg">⑥ 澳门→顺德</td><td>拱北过关 + 广珠城轨（珠海→顺德）</td><td class="tw-price">¥60</td><td>~1h</td><td class="tw-easy">宽松</td><td>城轨班次密，随到随走</td></tr>
+          <tr><td class="tw-seg">⑦ 顺德→广州</td><td>广珠城轨（顺德→广州南）</td><td class="tw-price">¥10</td><td>12–20min</td><td class="tw-easy">极松</td><td>随到随走</td></tr>
+          <tr><td class="tw-seg">⑧ 广州→丽江</td><td>CZ6603 07:00→09:55 / JD5131 / PN6352</td><td class="tw-price">¥680–1020</td><td>~2h55m</td><td class="tw-mid">偏紧</td><td>约 10/13–15 国庆后机票回落</td></tr>
+          <tr><td class="tw-seg">⑨ 丽江→重庆</td><td>3U8011 等</td><td class="tw-price">¥447–510</td><td>~2h</td><td class="tw-easy">宽松</td><td>约 10/15–17 平峰，票量足</td></tr>
+          <tr><td class="tw-seg">⑩ 重庆→安庆</td><td>PN6235 重庆15:50→安庆17:45（仅周一/周五）</td><td class="tw-price">¥680–770</td><td>~1h55m</td><td class="tw-mid">锁定</td><td><b>10/19 周一完美对齐</b>，直接锁</td></tr>
+        </tbody>
+      </table>
+      <div class="tw-note">注：铁路为浮动票价，国庆二等座或上浮 10–30%；机票 8 月为暑期限高，国庆后(10/8 后)通常回落。以上为"近期真实成交价"基线，非 10 月实付价。</div>
+    </div>
+
+    <!-- 天气预估 -->
+    <div class="card">
+      <div class="tw-h2"><span class="tw-tag tw-green">天气预估</span> 各目的地 10 月历史气候 + 台风尾声</div>
+      <table class="tw-table">
+        <thead><tr><th>区域 / 城市</th><th>10 月气候（历史同期）</th><th>行程时段</th><th>穿衣 / 装备</th></tr></thead>
+        <tbody>
+          <tr><td class="tw-seg">华南沿海<br>泉州·汕头·汕尾·<br>香港·澳门·顺德·广州</td><td>均温 24–27℃，温暖少雨；<b>但处台风季尾声</b>：10 月有 1–2 个热带气旋，集中上旬及中旬末至下旬初。</td><td>10/5–10/14</td><td>短袖+薄长袖、晴雨伞、防晒；<b>重点盯台风</b></td></tr>
+          <tr><td class="tw-seg">丽江</td><td>黄金季：白天 18–21℃、夜间 5–11℃，<b>昼夜大温差</b>；降水骤减，秋高气爽。</td><td>约 10/15–17</td><td>白天薄衫+夜间厚外套/冲锋衣</td></tr>
+          <tr><td class="tw-seg">重庆</td><td>入秋均温约 18℃；<b>雨日多</b>（近 16 天/月），连阴雨风险，体感湿凉。</td><td>约 10/17–19</td><td>薄毛衣/外套 + 雨伞</td></tr>
+          <tr><td class="tw-seg">安庆</td><td>沿江 10 月均温约 18–20℃，秋高气爽为主，偶连阴雨。</td><td>10/5 出发 · 10/19 返回</td><td>出发短袖薄外套，返回加长袖</td></tr>
+        </tbody>
+      </table>
+      <div class="tw-warn">⚠️ 预报时效：距出行 40+ 天，逐日精确预报暂不可靠。建议 <b>9 月底</b>再看中央气象台 / 香港天文台 / 澳门气象局；华南段(10/5–14)属台风可能窗口，需重点防。</div>
+    </div>
+
+    <!-- 行动清单 -->
+    <div class="card">
+      <div class="tw-h2"><span class="tw-tag tw-red">行动清单</span> 购票时机与待办</div>
+      <ul class="tw-list">
+        <li><b>现在</b>：确认港澳通行证+香港/澳门签注已办（否则买不了跨境高铁与过关）</li>
+        <li><b>9/20 起</b>：铁路开售优先抢 <b>④汕尾→香港</b>（最难），再抢 ①、②、⑥⑦城内段</li>
+        <li><b>9 月初–中</b>：盯机票 ⑧⑨，国庆后价格回落时锁低价；<b>⑩重庆→安庆 PN6235 仅周一五，直接锁定 10/19</b></li>
+        <li><b>出发前 1–2 天</b>：订 ⑤香港→澳门 船票（国庆船班满）</li>
+        <li><b>9 月底</b>：看精确天气预报，华南段备台风预案（船班停航可改港珠澳大桥金巴/深圳北中转）</li>
+      </ul>
+    </div>
+
+    <!-- 费用小结 -->
+    <div class="card">
+      <div class="tw-h2"><span class="tw-tag tw-blue">费用小结</span> 2 人交通总支出预估</div>
+      <div class="tw-sum">
+        <div class="box"><b>≈¥6,200–6,400</b><span>/ 2人（含 HK$388 船票≈¥360）</span></div>
+        <div class="box"><b>+10–30%</b><span>国庆铁路浮动+假期机票</span></div>
+        <div class="box"><b>⑧⑨⑩ 机票</b><span>约占总额 60%</span></div>
+      </div>
+      <div class="tw-note">与工作台预算管理已写入的"2人交通约 ¥6,372"高度吻合，基线可靠。实际以购票当日实付为准。</div>
+      <a class="tw-link" href="https://yintaoworkbuddy.github.io/pages/ticket-weather-report.html" target="_blank">📄 查看完整报告（含明细与台风预案）→</a>
     </div>
   </div>
 
