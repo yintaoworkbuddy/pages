@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>十月旅行 · 票况与天气预估报告</title>
+<style>
+  :root{
+    --txt:#2c3e50; --blue:#3498db; --green:#27ae60; --brand:#e67e22; --china:#c0392b;
+    --bg:#f7f9fb; --card:#ffffff; --line:#e3e8ee; --muted:#7f8c9a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.65;padding:24px;max-width:960px;margin:0 auto}
+  h1{font-size:24px;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:18px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .card h2{font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;color:#fff}
+  .t-blue{background:var(--blue)} .t-green{background:var(--green)} .t-brand{background:var(--brand)} .t-china{background:var(--china)}
+  .kp{background:linear-gradient(135deg,#fff7ef,#fff);border:1px solid #f3d9bf;border-left:4px solid var(--brand)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;font-weight:600}
+  tr:nth-child(even) td{background:#fafcfe}
+  .seg{font-weight:600;color:#1f2d3d}
+  .price{color:var(--china);font-weight:700;white-space:nowrap}
+  .tight{color:var(--china);font-weight:600}
+  .easy{color:var(--green);font-weight:600}
+  .mid{color:var(--brand);font-weight:600}
+  ul{margin:6px 0 0 18px;font-size:13px}
+  li{margin:4px 0}
+  .note{font-size:12px;color:var(--muted);margin-top:8px}
+  .sum{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+  .sum .box{flex:1;min-width:150px;background:#f5f9ff;border:1px solid #d8e6f7;border-radius:10px;padding:12px}
+  .sum .box b{font-size:20px;color:var(--blue)}
+  .warn{background:#fff5f4;border:1px solid #f3c9c4;border-left:4px solid var(--china);padding:12px 14px;border-radius:10px;font-size:13px}
+  .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:8px}
+</style>
+</head>
+<body>
+<h1>十月旅行 · 票况与天气预估报告</h1>
+<div class="sub">路线：安庆→泉州→汕头→汕尾→香港→澳门→顺德→广州→丽江→重庆→安庆　|　10/5 出发 → 10/19 到家（15天14晚·2人）</div>
+
+<div class="card kp">
+  <h2><span class="tag t-brand">关键窗口</span>国庆放假与抢票节奏</h2>
+  <p>2026 国庆 <b>10/1(周四)–10/7(周三)</b> 放假 7 天，9/20(周日)、10/10(周六) 补班；中秋 9/25–27 已结束。</p>
+  <ul>
+    <li><b>10/5–10/7</b>：仍在国庆假期内（假期尾声，客流仍大）→ <span class="tight">前 3 天票最难抢</span>。</li>
+    <li><b>10/8 起</b>：假期结束进入节后平峰 → 此后各段票明显变松、机票也回落。</li>
+    <li>铁路 15 天预售：<b>约 9/20 开售 10/5 的票</b>，现在(8/26)还买不到 10 月票，下面用<b>近期 8 月真实票价作基线</b>，国庆浮动另计。</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2><span class="tag t-blue">逐段比对</span>10 段交通票价基线（近期真实票价）</h2>
+  <table>
+    <tr><th>段</th><th>车次 / 航班</th><th>近期票价(人)</th><th>时长</th><th>国庆难度</th><th>购票建议</th></tr>
+    <tr>
+      <td class="seg">① 安庆→泉州</td>
+      <td>动车联运 G7150(安庆07:08→铜陵07:49)+G1669(铜陵北09:30→泉州东14:11)</td>
+      <td class="price">¥425.5</td><td>~7h</td>
+      <td class="tight">紧张</td>
+      <td>9/20 开售即抢；G1669 到"泉州东"非泉州站，离清源山/台商区近</td>
+    </tr>
+    <tr>
+      <td class="seg">② 泉州→汕头</td>
+      <td>G3041 泉州南08:22→汕头10:11（另有 G3047 / 晚班 D3113）</td>
+      <td class="price">¥142（晚班¥133）</td><td>1h49m</td>
+      <td class="tight">偏紧</td>
+      <td>沿海热门短途，开售抢二等座；¥284/2人</td>
+    </tr>
+    <tr>
+      <td class="seg">③ 汕头→汕尾</td>
+      <td>多车次（G6576 汕头15:09→汕尾16:23 等，150+班/日）</td>
+      <td class="price">¥79–94</td><td>~1h</td>
+      <td class="easy">宽松</td>
+      <td>车次极密，可候补；¥158–188/2人</td>
+    </tr>
+    <tr>
+      <td class="seg">④ 汕尾→香港西九龙</td>
+      <td>G925/G923/G6577 汕尾16:xx→香港西九龙18:xx</td>
+      <td class="price">¥134–210</td><td>~1.5h</td>
+      <td class="tight">极紧张</td>
+      <td><b>全程最难点</b>：需提前购票+港澳通行证及签注；¥268–420/2人</td>
+    </tr>
+    <tr>
+      <td class="seg">⑤ 香港→澳门</td>
+      <td>喷射飞航（上环→外港）</td>
+      <td class="price">HK$194平日 / 212周末</td><td>60min</td>
+      <td class="mid">偏紧</td>
+      <td>船班国庆易满，提前 1–2 天订；10/5 周一按平日价；HK$388/2人≈¥360</td>
+    </tr>
+    <tr>
+      <td class="seg">⑥ 澳门→顺德</td>
+      <td>拱北过关 + 广珠城轨（珠海→顺德）</td>
+      <td class="price">¥60</td><td>~1h(含过关)</td>
+      <td class="easy">宽松</td>
+      <td>城轨班次密，随到随走；¥120/2人</td>
+    </tr>
+    <tr>
+      <td class="seg">⑦ 顺德→广州</td>
+      <td>广珠城轨（顺德→广州南）</td>
+      <td class="price">¥10</td><td>12–20min</td>
+      <td class="easy">极松</td>
+      <td>随到随走；¥20/2人</td>
+    </tr>
+    <tr>
+      <td class="seg">⑧ 广州→丽江</td>
+      <td>CZ6603 07:00→09:55 / JD5131 11:35→14:20 / PN6352</td>
+      <td class="price">¥680–1020</td><td>~2h55m</td>
+      <td class="mid">偏紧</td>
+      <td>约 10/13–15（国庆后平峰）机票回落；现在盯 9 月低价；¥1360–2040/2人</td>
+    </tr>
+    <tr>
+      <td class="seg">⑨ 丽江→重庆</td>
+      <td>3U8011 等（含反向及同公司早班）</td>
+      <td class="price">¥447–510</td><td>~2h</td>
+      <td class="easy">宽松</td>
+      <td>约 10/15–17 平峰，票量足；¥894–1020/2人</td>
+    </tr>
+    <tr>
+      <td class="seg">⑩ 重庆→安庆</td>
+      <td>PN6235 重庆15:50→安庆17:45（仅周一/周五执飞）</td>
+      <td class="price">¥680–770</td><td>~1h55m</td>
+      <td class="mid">锁定</td>
+      <td><b>10/19 周一完美对齐</b>；仅周一五有直飞，直接锁 10/19；¥1360–1540/2人</td>
+    </tr>
+  </table>
+  <div class="note">注：铁路为浮动票价，国庆期间二等座可能上浮 10–30%；机票 8 月为暑期限高，国庆后(10/8 后)通常回落。以上为"近期真实成交价"基线，非 10 月实付价。</div>
+</div>
+
+<div class="card">
+  <h2><span class="tag t-green">天气预估</span>各目的地 10 月历史气候 + 台风尾声</h2>
+  <table>
+    <tr><th>区域 / 城市</th><th>10 月气候（历史同期）</th><th>行程时段</th><th>穿衣 / 装备</th></tr>
+    <tr>
+      <td class="seg">华南沿海<br>泉州·汕头·汕尾·<br>香港·澳门·顺德·广州</td>
+      <td>均温 24–27℃，温暖；月雨日 4–9 天，总体少雨。<br><b>但处台风季尾声</b>：广州气象预测 10 月有 1–2 个热带气旋影响，集中在<b>上旬及中旬末至下旬初</b>。</td>
+      <td>10/5–10/14<br>(覆盖台风窗口)</td>
+      <td>短袖+薄长袖(空调/夜)、晴雨两用伞、防晒；<b>重点盯台风</b></td>
+    </tr>
+    <tr>
+      <td class="seg">丽江</td>
+      <td>黄金季：白天 18–21℃，夜间 5–11℃，<b>昼夜大温差</b>；降水骤减(月初81mm→月末24mm)，秋高气爽。</td>
+      <td>约 10/15–17</td>
+      <td>白天薄衫+夜间厚外套/冲锋衣；上玉龙雪山需更保暖</td>
+    </tr>
+    <tr>
+      <td class="seg">重庆</td>
+      <td>入秋，均温约 18℃；但<b>雨日多</b>（主城近 16 天/月），连阴雨风险，体感湿凉。</td>
+      <td>约 10/17–19</td>
+      <td>薄毛衣/外套 + 雨伞</td>
+    </tr>
+    <tr>
+      <td class="seg">安庆</td>
+      <td>安徽沿江，10 月均温约 18–20℃，秋高气爽为主，偶连阴雨（与重庆相近略暖）。</td>
+      <td>10/5 出发 · 10/19 返回</td>
+      <td>出发短袖薄外套，返回加一件长袖</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ 天气预报时效：现在(8/26)离出行 40+ 天，<b>10 月逐日精确预报目前不可靠</b>。建议 <b>9 月底</b>再看中央气象台 / 香港天文台 / 澳门气象局精确预报；华南段(尤其 10/5–14)属台风可能窗口，需重点防。</div>
+</div>
+
+<div class="card">
+  <h2><span class="tag t-china">行动清单</span>购票时机与待办</h2>
+  <ul>
+    <li><b>现在</b>：确认港澳通行证+香港/澳门签注已办（否则买不了跨境高铁与过关）。</li>
+    <li><b>9/20 起</b>：铁路 15 天预售开，优先抢 <b>④汕尾→香港</b>（最难），再抢 ①安庆→泉州、②泉州→汕头、⑦城内段。</li>
+    <li><b>9 月初–中</b>：盯机票 ⑧广州→丽江、⑨丽江→重庆，国庆后价格回落时锁低价；<b>⑩重庆→安庆 PN6235 仅周一五，直接锁定 10/19</b>。</li>
+    <li><b>出发前 1–2 天</b>：喷射飞航官网/携程订 ⑤香港→澳门 船票（国庆船班满）。</li>
+    <li><b>9 月底</b>：看精确天气预报，华南段备台风预案（如船班停航可改港珠澳大桥金巴/深圳北中转）。</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2><span class="tag t-blue">费用小结</span>2 人交通总支出预估</h2>
+  <div class="sum">
+    <div class="box">基线合计<b>≈¥6,200–6,400</b><span style="font-weight:400;font-size:12px;color:var(--muted)"> / 2人（含 HK$388 船票≈¥360）</span></div>
+    <div class="box">国庆上浮<b>+10–30%</b><span style="font-weight:400;font-size:12px;color:var(--muted)"> 铁路浮动+假期机票</span></div>
+    <div class="box">最贵两段<b>⑧⑨⑩机票</b><span style="font-weight:400;font-size:12px;color:var(--muted)"> 约占总额 60%</span></div>
+  </div>
+  <div class="note">与工作台预算管理已写入的"2人交通约 ¥6,372"高度吻合，说明基线可靠。实际以 9–10 月购票时价格为准。</div>
+</div>
+
+<div class="footer">报告基于 2026-08-26 联网核查的近期票价与历年 10 月气候数据整理 · 仅供参考，请以购票当日实付与临近天气预报为准</div>
+</body>
+</html>
