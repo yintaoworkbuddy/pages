@@ -6,36 +6,37 @@
 <title>十月旅行 · 票况与天气预估报告</title>
 <style>
   :root{
-    --txt:#2c3e50; --blue:#3498db; --green:#27ae60; --brand:#e67e22; --china:#c0392b;
-    --bg:#f7f9fb; --card:#ffffff; --line:#e3e8ee; --muted:#7f8c9a;
+    --txt:#1E293B; --blue:#0EA5E9; --green:#10B981; --teal:#0D9488; --sky:#38BDF8;
+    --brand:#F59E0B; --yellow:#FBBF24; --amber:#D97706; --alert:#DC2626; --price:#0F766E;
+    --bg:#F4F9FA; --card:#ffffff; --line:#E6EEF2; --muted:#64748B;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:var(--bg);color:var(--txt);line-height:1.65;padding:24px;max-width:960px;margin:0 auto}
-  h1{font-size:24px;margin-bottom:4px}
+    background:linear-gradient(135deg,#F0FDF4 0%,#EFF6FF 45%,#FEFCE8 100%) fixed;color:var(--txt);line-height:1.65;padding:24px;max-width:960px;margin:0 auto}
+  h1{font-size:24px;margin-bottom:4px;background:linear-gradient(90deg,#0EA5E9,#10B981);-webkit-background-clip:text;background-clip:text;color:transparent}
   .sub{color:var(--muted);font-size:13px;margin-bottom:20px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:18px;
-    box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    box-shadow:0 2px 10px rgba(15,42,66,.06)}
   .card h2{font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
   .tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;color:#fff}
-  .t-blue{background:var(--blue)} .t-green{background:var(--green)} .t-brand{background:var(--brand)} .t-china{background:var(--china)}
-  .kp{background:linear-gradient(135deg,#fff7ef,#fff);border:1px solid #f3d9bf;border-left:4px solid var(--brand)}
+  .t-blue{background:var(--blue)} .t-green{background:var(--green)} .t-brand{background:var(--brand)} .t-china{background:var(--teal)}
+  .kp{background:linear-gradient(135deg,#FFFBEB,#fff);border:1px solid #FDE68A;border-left:4px solid var(--brand)}
   table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
   th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
-  th{background:#f1f5f9;font-weight:600}
-  tr:nth-child(even) td{background:#fafcfe}
-  .seg{font-weight:600;color:#1f2d3d}
-  .price{color:var(--china);font-weight:700;white-space:nowrap}
-  .tight{color:var(--china);font-weight:600}
-  .easy{color:var(--green);font-weight:600}
-  .mid{color:var(--brand);font-weight:600}
+  th{background:#F1F7FA;font-weight:600;color:var(--txt)}
+  tr:nth-child(even) td{background:#F7FBFC}
+  .seg{font-weight:600;color:#0F172A}
+  .price{color:var(--price);font-weight:700;white-space:nowrap}
+  .tight{color:var(--alert);font-weight:600}
+  .easy{color:#059669;font-weight:600}
+  .mid{color:var(--amber);font-weight:600}
   ul{margin:6px 0 0 18px;font-size:13px}
   li{margin:4px 0}
   .note{font-size:12px;color:var(--muted);margin-top:8px}
   .sum{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
-  .sum .box{flex:1;min-width:150px;background:#f5f9ff;border:1px solid #d8e6f7;border-radius:10px;padding:12px}
-  .sum .box b{font-size:20px;color:var(--blue)}
-  .warn{background:#fff5f4;border:1px solid #f3c9c4;border-left:4px solid var(--china);padding:12px 14px;border-radius:10px;font-size:13px}
+  .sum .box{flex:1;min-width:150px;background:#F0FDFA;border:1px solid #99F6E4;border-radius:10px;padding:12px}
+  .sum .box b{font-size:20px;color:var(--teal)}
+  .warn{background:#FFFBEB;border:1px solid #FDE68A;border-left:4px solid var(--brand);padding:12px 14px;border-radius:10px;font-size:13px}
   .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:8px}
 </style>
 </head>
