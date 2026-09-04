@@ -6,26 +6,26 @@
 <title>我的主页 · 日期 / 天气 / 常用工具 / 旅行路线</title>
 <style>
   :root{
-    --bg:#f5f6fa; --col:#ffffff; --txt:#2c3e50; --sub:#95a5a6;
-    --blue:#3498db; --green:#27ae60; --red:#e74c3c;
-    --brand:#e67e22; --china:#c0392b;
-    --shadow:0 4px 18px rgba(31,35,48,.08);
+    --bg:#fdf3fb; --bg2:#eef2ff; --col:#ffffff; --txt:#2b2440; --sub:#8b7aa8;
+    --pink:#FF4D9D; --coral:#FF7A45; --yellow:#FFC93C; --mint:#06D6A0;
+    --blue:#4D8DFF; --purple:#9B5DE5; --teal:#2EC4B6;
+    --shadow:0 6px 22px rgba(155,93,229,.16);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:var(--bg); color:var(--txt); padding:28px; min-height:100vh;
+    background:linear-gradient(135deg,#fff0f7 0%,#eef3ff 45%,#fff9e6 100%) fixed; color:var(--txt); padding:28px; min-height:100vh;
   }
   header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}
-  header h1{font-size:22px;letter-spacing:.5px}
+  header h1{font-size:22px;letter-spacing:.5px;background:linear-gradient(90deg,#FF4D9D,#9B5DE5,#4D8DFF);-webkit-background-clip:text;background-clip:text;color:transparent}
   header h1 span{color:var(--sub);font-weight:400;font-size:14px;margin-left:8px}
   .meta{color:var(--sub);font-size:13px}
 
   /* 信息条：日期 + 天气 */
   .infobar{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
   @media(max-width:760px){.infobar{grid-template-columns:1fr}}
-  .info-card{background:linear-gradient(135deg,#2980b9,#4aa3e0);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;display:flex;flex-direction:column;gap:6px}
-  .info-card.weather{background:linear-gradient(135deg,#27ae60,#43c98a)}
+  .info-card{background:linear-gradient(135deg,#9B5DE5,#4D8DFF);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;display:flex;flex-direction:column;gap:6px}
+  .info-card.weather{background:linear-gradient(135deg,#06D6A0,#2EC4B6)}
   .info-card .label{font-size:13px;opacity:.85;display:flex;align-items:center;gap:6px}
   .info-card .big{font-size:26px;font-weight:700;line-height:1.2}
   .info-card .small{font-size:13px;opacity:.9}
@@ -42,16 +42,16 @@
   .cal-cell{height:26px;display:flex;align-items:center;justify-content:center;font-size:12.5px;border-radius:7px;position:relative}
   .cal-cell.dim{visibility:hidden}
   .cal-cell.wk{opacity:.75}
-  .cal-cell.today{background:#fff;color:var(--blue);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+  .cal-cell.today{background:#fff;color:var(--pink);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.15)}
   .cal-cell.trip{background:rgba(255,255,255,.28);font-weight:600}
-  .cal-cell.trip::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#ffd76e}
-  .cal-cell.today.trip{color:#e67e22}
+  .cal-cell.trip::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--yellow)}
+  .cal-cell.today.trip{color:var(--coral)}
   .cal-today{font-size:12px;opacity:.92;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
   .cal-today .trip-legend{opacity:.95}
 
   /* 旅行工作台入口 */
-  .trip-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#e67e22,#f0932b);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;text-decoration:none;margin-bottom:22px;transition:transform .15s,box-shadow .15s}
-  .trip-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(230,126,34,.35)}
+  .trip-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#FF7A45,#FF4D9D);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;text-decoration:none;margin-bottom:22px;transition:transform .15s,box-shadow .15s}
+  .trip-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(255,77,157,.35)}
   .trip-card .t-icon{font-size:26px;flex:0 0 auto}
   .trip-card .t-body{flex:1;min-width:0}
   .trip-card .t-title{font-size:17px;font-weight:700;line-height:1.3}
@@ -68,14 +68,14 @@
   .tool-card .t-name{font-size:15px;font-weight:600;line-height:1.3}
   .tool-card .t-sub{font-size:12px;color:var(--sub);margin-top:2px}
   .tool-card .t-arrow{font-size:22px;color:var(--sub);flex:0 0 auto}
-  .tool-card.main{background:linear-gradient(135deg,#e67e22,#f0932b);color:#fff;border:none;margin-bottom:12px}
+  .tool-card.main{background:linear-gradient(135deg,#FF4D9D,#9B5DE5);color:#fff;border:none;margin-bottom:12px}
   .tool-card.main .t-sub{color:rgba(255,255,255,.9)}
   .tool-card.main .t-arrow{color:rgba(255,255,255,.85)}
   .tool-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:520px){.tool-row{grid-template-columns:1fr}}
-  .tool-card.xhs .t-ico{color:#ff2e4d}
-  .tool-card.fan .t-ico{color:#ff8c00}
-  .tool-card.alt{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border:none}
+  .tool-card.xhs .t-ico{color:#FF4D9D}
+  .tool-card.fan .t-ico{color:#FF7A45}
+  .tool-card.alt{background:linear-gradient(135deg,#4D8DFF,#06D6A0);color:#fff;border:none}
   .tool-card.alt .t-sub{color:rgba(255,255,255,.9)}
   .tool-card.alt .t-arrow{color:rgba(255,255,255,.85)}
   .route-badge{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px;letter-spacing:.5px;background:rgba(255,255,255,.22);color:#fff}
@@ -84,46 +84,36 @@
   footer{color:var(--sub);font-size:12px;text-align:center}
 
   /* 离线提示条 */
-  .offline-tip{font-size:12px;color:#c08a00;background:#fff8e1;padding:6px 12px;border-radius:8px;margin-bottom:12px;display:none}
-
-  /* 文旅嘱托 · 顶部引言横幅 */
-  .hero-quote{position:relative;background:linear-gradient(135deg,#9b1c1c,#c0392b 55%,#e07a3f);border-radius:16px;box-shadow:var(--shadow);padding:24px 26px 22px;color:#fff;margin-bottom:24px;overflow:hidden}
-  .hero-quote::before{content:'”';position:absolute;right:14px;top:-18px;font-size:120px;line-height:1;color:rgba(255,255,255,.13);font-family:Georgia,serif}
-  .hero-quote .flag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;margin-bottom:12px;letter-spacing:.5px}
-  .hero-quote .q-text{font-size:20px;font-weight:700;line-height:1.55;letter-spacing:.5px;max-width:780px}
-  .hero-quote .q-text .hl{color:#ffd76e}
-  .hero-quote .q-from{margin-top:12px;font-size:13px;opacity:.92;text-align:right}
-  .hero-quote .q-ribbon{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
-  .hero-quote .q-ribbon span{font-size:12px;background:rgba(255,255,255,.14);padding:4px 10px;border-radius:8px}
+  .offline-tip{font-size:12px;color:#9B5DE5;background:#f3eaff;padding:6px 12px;border-radius:8px;margin-bottom:12px;display:none}
 
   /* 以文塑旅 · 九城文化打开方式 */
   .culture{margin-bottom:22px}
   .culture-title{font-size:17px;font-weight:600;color:var(--txt);margin-bottom:6px;display:flex;align-items:center;gap:8px}
-  .culture-title .accent{color:#c0392b;font-size:18px}
+  .culture-title .accent{color:#9B5DE5;font-size:18px}
   .culture-sub{font-size:13px;color:var(--sub);margin-bottom:14px;line-height:1.6}
-  .culture-sub b{color:#c0392b}
+  .culture-sub b{color:#9B5DE5}
   .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
   @media(max-width:760px){.culture-grid{grid-template-columns:1fr 1fr}}
   @media(max-width:480px){.culture-grid{grid-template-columns:1fr}}
-  .cul-card{background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:14px 15px;border:1px solid #eef0f6;border-top:3px solid #c0392b;display:flex;flex-direction:column;gap:6px}
+  .cul-card{background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:14px 15px;border:1px solid #eef0f6;border-top:3px solid #9B5DE5;display:flex;flex-direction:column;gap:6px}
   .cul-head{display:flex;align-items:center;gap:6px}
   .cul-ico{font-size:18px;line-height:1}
-  .cul-name{font-size:15px;font-weight:700;color:#c0392b}
+  .cul-name{font-size:15px;font-weight:700;color:#9B5DE5}
   .cul-badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:auto;white-space:nowrap;color:#fff}
-  .cul-badge.wh{background:#c0392b}
-  .cul-badge.memory{background:#7c5cbf}
-  .cul-badge.food{background:#e67e22}
-  .cul-badge.culture{background:#5b7c99}
+  .cul-badge.wh{background:#FF4D9D}
+  .cul-badge.memory{background:#9B5DE5}
+  .cul-badge.food{background:#FF7A45}
+  .cul-badge.culture{background:#4D8DFF}
   .cul-theme{font-size:12px;font-weight:600;color:var(--txt);opacity:.85}
   .cul-desc{font-size:12px;color:var(--sub);line-height:1.55}
-  .cul-do{font-size:11.5px;color:#c0392b;background:#fdf3ef;padding:6px 8px;border-radius:8px;line-height:1.5}
-  .culture-legend{font-size:11px;color:var(--sub);margin-top:12px;line-height:1.7;background:#f7f8fa;padding:10px 12px;border-radius:8px}
+  .cul-do{font-size:11.5px;color:#FF4D9D;background:#fdeef7;padding:6px 8px;border-radius:8px;line-height:1.5}
+  .culture-legend{font-size:11px;color:var(--sub);margin-top:12px;line-height:1.7;background:#f6f0ff;padding:10px 12px;border-radius:8px}
 
-  /* 卡片悬浮美化 + 世遗卡视觉强调（与工作台红色系呼应） */
+  /* 卡片悬浮美化 + 世遗卡视觉强调（多巴胺色系） */
   .cul-card{transition:transform .18s ease,box-shadow .18s ease}
-  .cul-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(31,35,48,.16)}
-  .cul-card.wh-card{border-left:4px solid var(--china);background:linear-gradient(180deg,#ffffff,#fdf3ef)}
-  .cul-wh-ico{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--china);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;margin-right:2px}
+  .cul-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(155,93,229,.18)}
+  .cul-card.wh-card{border-left:4px solid #9B5DE5;background:linear-gradient(180deg,#ffffff,#fdeef7)}
+  .cul-wh-ico{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:#FF4D9D;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;margin-right:2px}
 </style>
 </head>
 <body>
@@ -131,16 +121,6 @@
     <h1>我的主页 <span id="date"></span></h1>
     <div class="meta">由 WorkBuddy 自动部署 · GitHub Pages</div>
   </header>
-
-  <!-- 文旅嘱托 · 总书记关于文化和旅游融合发展的殷殷嘱托 -->
-  <section class="hero-quote">
-    <span class="flag">🏛️ 文旅融合 · 殷殷嘱托</span>
-    <div class="q-text">“让旅游成为人们感悟<span class="hl">中华文化</span>、增强<span class="hl">文化自信</span>的过程。”</div>
-    <div class="q-from">—— 习近平（关于文化和旅游融合发展的嘱托）</div>
-    <div class="q-ribbon">
-      <span>📜 以文塑旅</span><span>🧭 以旅彰文</span><span>🏯 读城读史</span><span>🌏 文明对话</span>
-    </div>
-  </section>
 
   <!-- 信息条：日期 + 天气 -->
   <div class="infobar">
