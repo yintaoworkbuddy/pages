@@ -7,11 +7,11 @@
 <!-- 本工作台通过 WorkBuddy 资料库能力（library skill）搭建、存储和部署 -->
 <style>
 :root{
-  --primary:#0D9488;--primary-light:#F0FDFA;--primary-dark:#065F46;
-  --bg:#F4F9FA;--card-bg:#FFFFFF;--text:#1E293B;--text-light:#64748B;--text-muted:#94A3B8;
-  --border:#E6EEF2;--danger:#DC2626;--danger-light:#FEF2F2;--success:#059669;--success-light:#ECFDF5;
-  --warning:#D97706;--info:#0EA5E9;--radius:10px;--shadow:0 2px 8px rgba(15,42,66,.06);
-  --shadow-lg:0 4px 16px rgba(15,42,66,.1);
+  --primary:#B5821F;--primary-light:#FDF6E3;--primary-dark:#8C5E12;
+  --bg:#FDF8F0;--card-bg:#FFFFFF;--text:#4A4038;--text-light:#8B7E6E;--text-muted:#B5A896;
+  --border:#EFE4D4;--danger:#C9553F;--danger-light:#FBEDE8;--success:#6F9C5C;--success-light:#F2F6EA;
+  --warning:#C9852B;--info:#7BA7CE;--radius:10px;--shadow:0 2px 8px rgba(90,70,45,.06);
+  --shadow-lg:0 4px 16px rgba(90,70,45,.1);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{font-size:16px}
@@ -21,15 +21,15 @@ input,select,textarea{font-family:inherit;font-size:16px;outline:none;border:non
 input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 
 /* Header */
-.app-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(13,148,136,.25)}
+.app-header{background:linear-gradient(135deg,#F2C87E,#DFA04E);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(185,130,31,.25)}
 .app-header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px}
 .header-actions{display:flex;align-items:center;gap:8px}
 .sync-badge{display:flex;align-items:center;gap:5px;font-size:12px;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;white-space:nowrap}
-.sync-badge.offline{background:rgba(220,38,38,.25)}
-.sync-badge.online{background:rgba(5,150,105,.25)}
+.sync-badge.offline{background:rgba(201,85,63,.25)}
+.sync-badge.online{background:rgba(111,156,92,.25)}
 .sync-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
-.sync-badge.offline .sync-dot{background:#DC2626;animation:none}
-.sync-badge.online .sync-dot{background:#10B981}
+.sync-badge.offline .sync-dot{background:#C9553F;animation:none}
+.sync-badge.online .sync-dot{background:#7FA86A}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .icon-btn{background:rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .icon-btn:hover{background:rgba(255,255,255,.3)}
@@ -47,12 +47,12 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .today-item:last-child{margin-bottom:0}
 .today-item.overdue{background:var(--danger-light);border-left:3px solid var(--danger)}
 .today-item.today{background:var(--primary-light);border-left:3px solid var(--primary)}
-.today-item.upcoming{background:#F0F9FF;border-left:3px solid var(--info)}
+.today-item.upcoming{background:#FDF6E3;border-left:3px solid var(--info)}
 .today-item-info{flex:1;min-width:0}
 .today-item-title{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .today-item-meta{font-size:12px;color:var(--text-light);display:flex;gap:8px;align-items:center}
 .today-item-badge{font-size:11px;padding:2px 6px;border-radius:4px;white-space:nowrap}
-.badge-overdue{background:#DC2626;color:#fff}
+.badge-overdue{background:#C9553F;color:#fff}
 .badge-today{background:var(--primary);color:#fff}
 .badge-upcoming{background:var(--info);color:#fff}
 .today-action{flex-shrink:0;background:#fff;border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text)}
@@ -111,12 +111,12 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .tag{font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg);color:var(--text-light)}
 .tag-expense{background:var(--danger-light);color:var(--danger)}
 .tag-income{background:var(--success-light);color:var(--success)}
-.tag-transport{background:#E0F2FE;color:#0369A1}
-.tag-hotel{background:#FEE2E2;color:#DC2626}
-.tag-food{background:#FFFBEB;color:#D97706}
-.tag-ticket{background:#CFFAFE;color:#0E7490}
-.tag-shopping{background:#DCFCE7;color:#15803D}
-.tag-other{background:#F1F5F9;color:#64748B}
+.tag-transport{background:#EAF0F7;color:#5A87B5}
+.tag-hotel{background:#FBE9E4;color:#C9553F}
+.tag-food{background:#FDF6E3;color:#C9852B}
+.tag-ticket{background:#EAF1F6;color:#5C8CA6}
+.tag-shopping{background:#EFF4E9;color:#6F9C5C}
+.tag-other{background:#F7F2E8;color:#8B7E6E}
 .amount-expense{color:var(--danger);font-weight:600}
 .amount-income{color:var(--success);font-weight:600}
 .priority-high{color:var(--danger)}
@@ -157,20 +157,20 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
   /* 城市图标 + 世界遗产/荣誉徽章（看板 & 行程） */
   .dest-card-icon{font-size:14px;margin-right:5px;line-height:1}
   .dest-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;color:#fff;white-space:nowrap}
-  .dest-badge.wh{background:#0EA5E9}
-  .dest-badge.memory{background:#10B981}
-  .dest-badge.food{background:#F59E0B}
-  .dest-badge.culture{background:#06B6D4}
+  .dest-badge.wh{background:#7BA7CE}
+  .dest-badge.memory{background:#7FA86A}
+  .dest-badge.food{background:#E2A35C}
+  .dest-badge.culture{background:#8AA9C0}
   .itin-icon{font-size:14px;margin-right:2px;line-height:1}
   .itin-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;color:#fff;white-space:nowrap}
-  .itin-badge.wh{background:#0EA5E9}
-  .itin-badge.memory{background:#10B981}
-  .itin-badge.food{background:#F59E0B}
-  .itin-badge.culture{background:#06B6D4}
+  .itin-badge.wh{background:#7BA7CE}
+  .itin-badge.memory{background:#7FA86A}
+  .itin-badge.food{background:#E2A35C}
+  .itin-badge.culture{background:#8AA9C0}
 
   /* 必体验高亮条（与主页九城卡 .cul-do 同色系，清爽黄绿蓝） */
-  .list-item-must{font-size:12px;color:#0F766E;background:#F0FDFA;padding:6px 10px;border-radius:8px;margin-top:7px;line-height:1.55;border-left:3px solid #5EEAD4}
-  .dest-card-must{font-size:11.5px;color:#0F766E;background:#F0FDFA;padding:5px 9px;border-radius:8px;margin-top:6px;line-height:1.5}
+  .list-item-must{font-size:12px;color:#96651C;background:#FDF6E3;padding:6px 10px;border-radius:8px;margin-top:7px;line-height:1.55;border-left:3px solid #F7D98E}
+  .dest-card-must{font-size:11.5px;color:#96651C;background:#FDF6E3;padding:5px 9px;border-radius:8px;margin-top:6px;line-height:1.5}
 
 /* Empty state */
 .empty-state{text-align:center;padding:24px 16px;color:var(--text-light)}
@@ -178,7 +178,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .empty-state p{font-size:14px}
 
 /* Backup reminder */
-.backup-reminder{background:#FFFBEB;border:1px solid #FDE68A;border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:13px;color:#92400E;display:flex;align-items:center;gap:8px}
+.backup-reminder{background:#FDF6E3;border:1px solid #F0DCB4;border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:13px;color:#8A6A2A;display:flex;align-items:center;gap:8px}
 .backup-reminder svg{width:18px;height:18px;flex-shrink:0}
 
 /* Modal */
@@ -240,18 +240,8 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .legend-train{color:var(--success)}
 .overview-todos{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
 
-  /* 文化之旅 · 总书记文旅嘱托 */
-  .culture-intro{background:linear-gradient(135deg,#0F766E,#0D9488 60%,#14B8A6);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden}
-  .culture-intro::before{content:'”';position:absolute;right:10px;top:-14px;font-size:90px;line-height:1;color:rgba(255,255,255,.12);font-family:Georgia,serif}
-  .culture-intro .ci-flag{display:inline-block;font-size:11px;font-weight:700;background:rgba(255,255,255,.18);padding:3px 10px;border-radius:20px;margin-bottom:8px;letter-spacing:.5px}
-  .culture-intro .ci-q{font-size:17px;font-weight:700;line-height:1.5;letter-spacing:.3px}
-  .culture-intro .ci-q .hl{color:#FBBF24}
-  .culture-intro .ci-from{font-size:12px;opacity:.9;margin-top:6px;text-align:right}
-  .culture-intro .ci-desc{font-size:13px;line-height:1.65;margin-top:12px;background:rgba(255,255,255,.1);padding:10px 12px;border-radius:8px}
-  .culture-intro .ci-heritage{font-size:12px;line-height:1.6;margin-top:8px;background:rgba(251,191,36,.16);padding:8px 12px;border-radius:8px;border-left:3px solid #FBBF24}
-  .culture-intro .ci-heritage b{color:#FBBF24}
 .ot-label{font-size:11px;color:var(--text-light);font-weight:600}
-.todo-chip{font-size:11px;background:#FFFBEB;color:#92400E;border:1px solid #FDE68A;padding:3px 9px;border-radius:12px;white-space:nowrap}
+.todo-chip{font-size:11px;background:#FDF6E3;color:#8A6A2A;border:1px solid #F0DCB4;padding:3px 9px;border-radius:12px;white-space:nowrap}
 
 /* Responsive */
 body{-webkit-tap-highlight-color:transparent}
@@ -292,41 +282,41 @@ body{-webkit-tap-highlight-color:transparent}
 .backup-wrap{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
 .backup-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
 .backup-sub{font-size:12px;color:var(--text-light);margin-bottom:12px}
-.backup-note{font-size:12px;color:#92400E;background:#FFFBEB;border:1px dashed #FCD34D;padding:8px 12px;border-radius:8px;margin-bottom:16px;line-height:1.5}
-.route-flow{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:18px;padding:12px;background:#F8FAFC;border-radius:10px}
-.rf-node{padding:6px 11px;border-radius:18px;background:#fff;border:1px solid #E2E8F0;font-size:12.5px;font-weight:500;color:#334155;white-space:nowrap}
-.rf-node.start{background:#14B8A6;color:#fff;border-color:#14B8A6}
-.rf-node.end{background:#10B981;color:#fff;border-color:#10B981}
-.rf-arrow{color:#94A3B8;font-size:13px}
+.backup-note{font-size:12px;color:#8A6A2A;background:#FDF6E3;border:1px dashed #E8C88E;padding:8px 12px;border-radius:8px;margin-bottom:16px;line-height:1.5}
+.route-flow{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:18px;padding:12px;background:#FAF6EF;border-radius:10px}
+.rf-node{padding:6px 11px;border-radius:18px;background:#fff;border:1px solid #EDE4D6;font-size:12.5px;font-weight:500;color:#4A4038;white-space:nowrap}
+.rf-node.start{background:#E9A94E;color:#fff;border-color:#E9A94E}
+.rf-node.end{background:#7FA86A;color:#fff;border-color:#7FA86A}
+.rf-arrow{color:#B5A896;font-size:13px}
 .dir-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.dir-card{border:1px solid #E2E8F0;border-radius:12px;padding:14px;background:#fff;position:relative}
-.dir-card.recommended{border:2px solid #14B8A6;box-shadow:0 4px 14px rgba(20,184,166,.15)}
+.dir-card{border:1px solid #EDE4D6;border-radius:12px;padding:14px;background:#fff;position:relative}
+.dir-card.recommended{border:2px solid #E9A94E;box-shadow:0 4px 14px rgba(233,169,78,.18)}
 .dir-card h3{font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:6px;color:var(--text)}
-.dir-tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#14B8A6;color:#fff;font-weight:600}
-.dir-card ul{list-style:none;font-size:12.5px;color:#475569;line-height:1.75;padding:0;margin:0}
+.dir-tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#E9A94E;color:#fff;font-weight:600}
+.dir-card ul{list-style:none;font-size:12.5px;color:#6B6155;line-height:1.75;padding:0;margin:0}
 .dir-card li{margin-bottom:3px}
-.dir-card li:before{content:"·";color:#14B8A6;font-weight:700;margin-right:6px}
+.dir-card li:before{content:"·";color:#E9A94E;font-weight:700;margin-right:6px}
 .cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.cmp-table th,.cmp-table td{padding:9px 11px;text-align:left;border-bottom:1px solid #F1F5F9;vertical-align:top}
-.cmp-table th{background:#F8FAFC;font-weight:600;color:#334155}
-.cmp-table td:first-child{color:#64748B;font-weight:500;width:28%}
-.cmp-table .best{color:#059669;font-weight:600}
-.rec-banner{background:linear-gradient(135deg,#14B8A6,#5EEAD4);color:#fff;border-radius:12px;padding:15px 16px;margin-bottom:16px}
+.cmp-table th,.cmp-table td{padding:9px 11px;text-align:left;border-bottom:1px solid #F7F2E8;vertical-align:top}
+.cmp-table th{background:#FAF6EF;font-weight:600;color:#4A4038}
+.cmp-table td:first-child{color:#8B7E6E;font-weight:500;width:28%}
+.cmp-table .best{color:#6F9C5C;font-weight:600}
+.rec-banner{background:linear-gradient(135deg,#E9A94E,#F7D98E);color:#fff;border-radius:12px;padding:15px 16px;margin-bottom:16px}
 .rec-banner h3{font-size:15px;margin-bottom:6px;font-weight:700}
 .rec-banner p{font-size:12.5px;line-height:1.65;opacity:.96;margin:0}
-.anchor-list{font-size:12.5px;color:#475569;background:#F8FAFC;border-radius:10px;padding:12px 14px;line-height:1.9}
-.anchor-list b{color:#334155}
+.anchor-list{font-size:12.5px;color:#6B6155;background:#FAF6EF;border-radius:10px;padding:12px 14px;line-height:1.9}
+.anchor-list b{color:#4A4038}
   .budget-cmp{margin-top:18px}
-  .budget-cmp-title{font-size:15px;font-weight:600;color:#1e293b;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-  .budget-note{margin-top:12px;font-size:12.5px;line-height:1.7;color:#64748b;background:#f8fafc;border-radius:10px;padding:12px 14px}
-  .budget-note b{color:#334155}
-.hist-card{border:1px solid #E2E8F0;border-left:4px solid #94A3B8;background:#F8FAFC;border-radius:12px;padding:14px;margin-bottom:16px}
-.hist-card h3{font-size:15px;margin:0 0 6px;color:#334155}
-.hist-card .hist-meta{font-size:12px;color:#64748B;margin-bottom:8px}
+  .budget-cmp-title{font-size:15px;font-weight:600;color:#4A4038;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+  .budget-note{margin-top:12px;font-size:12.5px;line-height:1.7;color:#8B7E6E;background:#FAF6EF;border-radius:10px;padding:12px 14px}
+  .budget-note b{color:#4A4038}
+.hist-card{border:1px solid #EDE4D6;border-left:4px solid #B5A896;background:#FAF6EF;border-radius:12px;padding:14px;margin-bottom:16px}
+.hist-card h3{font-size:15px;margin:0 0 6px;color:#4A4038}
+.hist-card .hist-meta{font-size:12px;color:#8B7E6E;margin-bottom:8px}
 .hist-card ul{margin:6px 0;padding-left:18px}
-.hist-card li{font-size:13px;color:#475569;line-height:1.6;margin-bottom:3px}
-.hist-card .hist-cmp{font-size:13px;color:#92400E;background:#FFFBEB;padding:8px 10px;border-radius:8px;margin-top:8px;font-weight:600}
-.backup-sub2{font-size:14px;font-weight:600;color:#334155;margin:18px 0 10px}
+.hist-card li{font-size:13px;color:#6B6155;line-height:1.6;margin-bottom:3px}
+.hist-card .hist-cmp{font-size:13px;color:#8A6A2A;background:#FDF6E3;padding:8px 10px;border-radius:8px;margin-top:8px;font-weight:600}
+.backup-sub2{font-size:14px;font-weight:600;color:#4A4038;margin:18px 0 10px}
 
 @media(max-width:768px){.dir-cards{grid-template-columns:1fr}.route-flow{font-size:11px}.rf-node{padding:5px 9px}}
 
@@ -344,7 +334,7 @@ body{-webkit-tap-highlight-color:transparent}
   .cw-nav .cw-m{font-size:13px;font-weight:600;color:var(--text);min-width:74px;text-align:center}
   .cw-week{display:grid;grid-template-columns:repeat(7,1fr);font-size:11px;color:var(--text-light);text-align:center;margin-bottom:4px}
   .cw-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-  .cw-cell{height:38px;border-radius:8px;background:#F1F7FA;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:var(--text);position:relative;overflow:hidden}
+  .cw-cell{height:38px;border-radius:8px;background:#FAF5EA;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:var(--text);position:relative;overflow:hidden}
   .cw-cell.dim{visibility:hidden}
   .cw-cell.wk{color:var(--text-light)}
   .cw-cell.today{outline:2px solid var(--info);outline-offset:-2px;font-weight:700}
@@ -353,13 +343,13 @@ body{-webkit-tap-highlight-color:transparent}
   .cw-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--text-light)}
   .cw-foot .trip-span{color:var(--primary);font-weight:600}
   .cw-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-  .cw-leg{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--text);background:#F1F7FA;border-radius:10px;padding:2px 8px}
+  .cw-leg{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--text);background:#FAF5EA;border-radius:10px;padding:2px 8px}
   .cw-leg i{width:8px;height:8px;border-radius:50%;display:inline-block}
   .cw-wth-body{padding-top:2px}
   .cw-temp{font-size:36px;font-weight:800;color:var(--success);line-height:1.1}
   .cw-temp small{font-size:15px;font-weight:600;color:var(--text-light)}
   .cw-desc{font-size:13px;color:var(--text-light);margin-top:4px}
-  .cw-hint{margin-top:12px;font-size:12px;color:#065F46;background:var(--success-light);border-radius:10px;padding:8px 10px;line-height:1.5}
+  .cw-hint{margin-top:12px;font-size:12px;color:#8C5E12;background:var(--success-light);border-radius:10px;padding:8px 10px;line-height:1.5}
 
   /* Ticket & Weather module 票况·天气 */
   .tw-h2{font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
@@ -367,8 +357,8 @@ body{-webkit-tap-highlight-color:transparent}
   .tw-blue{background:var(--info)} .tw-green{background:var(--success)} .tw-brand{background:var(--primary)} .tw-red{background:var(--danger)}
   .tw-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
   .tw-table th,.tw-table td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top}
-  .tw-table th{background:#F1F5F9;font-weight:600;color:var(--text)}
-  .tw-table tr:nth-child(even) td{background:#F7FBFC}
+  .tw-table th{background:#F7F2E8;font-weight:600;color:var(--text)}
+  .tw-table tr:nth-child(even) td{background:#FDFBF5}
   .tw-seg{font-weight:600;color:var(--text)}
   .tw-price{color:var(--danger);font-weight:700;white-space:nowrap}
   .tw-tight{color:var(--danger);font-weight:600}
@@ -377,7 +367,7 @@ body{-webkit-tap-highlight-color:transparent}
   .tw-note{font-size:12px;color:var(--text-light);margin-top:8px;line-height:1.5}
   .tw-warn{background:var(--danger-light);border-left:4px solid var(--danger);padding:10px 12px;border-radius:8px;font-size:13px;margin-top:8px;line-height:1.5}
   .tw-sum{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-  .tw-sum .box{flex:1;min-width:140px;background:#F0FDFA;border:1px solid #99F6E4;border-radius:10px;padding:12px}
+  .tw-sum .box{flex:1;min-width:140px;background:#FDF6E3;border:1px solid #F0DCB4;border-radius:10px;padding:12px}
   .tw-sum .box b{font-size:20px;color:var(--info);display:block}
   .tw-sum .box span{font-size:12px;color:var(--text-light)}
   .tw-list{margin:6px 0 0 18px;font-size:13px;line-height:1.6}
@@ -431,15 +421,6 @@ body{-webkit-tap-highlight-color:transparent}
       <span class="todo-chip">玉龙雪山索道票提前抢</span>
       <span class="todo-chip">鼓浪屿轮渡票</span>
     </div>
-  </section>
-
-  <!-- 文化之旅 · 总书记文旅嘱托（路线介绍下方） -->
-  <section class="culture-intro">
-    <span class="ci-flag">🏛️ 文旅融合 · 殷殷嘱托</span>
-    <div class="ci-q">“让旅游成为人们感悟<span class="hl">中华文化</span>、增强<span class="hl">文化自信</span>的过程。”</div>
-    <div class="ci-from">—— 习近平（关于文化和旅游融合发展的嘱托）</div>
-    <div class="ci-desc">本次环线串起海丝起点泉州、潮汕侨乡、中西交融的港澳、世界美食之都顺德、千年商都广州、纳西东巴丽江与巴渝重庆。愿这一路不只是"打卡"，更能读城读史、以文塑旅——在每一处烟火与古迹里，感悟中华文化的博大精深，增强我们共同的文化自信。</div>
-    <div class="ci-heritage">🏛️ 本线串起 <b>4 处世界遗产</b>：泉州（宋元海丝）· 澳门（历史城区）· 丽江（古城）· 重庆（大足石刻 / 武隆喀斯特 ×2），另有汕头侨批（世界记忆）、顺德（美食之都）等中华文明活态印记。</div>
   </section>
 
   <!-- 行程日历 + 实时天气 -->
@@ -747,7 +728,7 @@ body{-webkit-tap-highlight-color:transparent}
           <tr><td>国庆机票洼地利用</td><td class="best">出发10/4洼地+返程节后</td><td>出发10/6 略过洼地</td></tr>
           <tr><td>福建/港澳人流</td><td>10/4–14 假期尾巴</td><td class="best">10/14–24 节后最空</td></tr>
           <tr><td>航班日期可行性</td><td class="best">10/4→10/24 两段都有班</td><td>须 10/6(周二)出发</td></tr>
-          <tr><td>与主路线差异</td><td colspan="2" style="text-align:center;color:#64748B">去掉喀什(省¥2000+)，改走福建沿海</td></tr>
+          <tr><td>与主路线差异</td><td colspan="2" style="text-align:center;color:#8B7E6E">去掉喀什(省¥2000+)，改走福建沿海</td></tr>
         </tbody>
       </table>
 
@@ -952,12 +933,12 @@ var confirmCallback = null;
 
 // Category colors for pie chart
 var CATEGORY_COLORS = {
-  "交通": "#0EA5E9",
-  "住宿": "#F59E0B",
-  "餐饮": "#10B981",
-  "门票": "#06B6D4",
-  "购物": "#84CC16",
-  "其他": "#94A3B8"
+  "交通": "#7BA7CE",
+  "住宿": "#E2A35C",
+  "餐饮": "#7FA86A",
+  "门票": "#8AA9C0",
+  "购物": "#D9C05A",
+  "其他": "#B5A896"
 };
 
 // ==================== Utilities ====================
@@ -1219,16 +1200,16 @@ var FERRY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 
 // 城市文化元数据：图标 + 世界遗产/荣誉徽章（渲染行程与看板时按城市名注入，不改动种子数据）
 var CITY_META = {
-  "安庆":   { icon:"🎭", badge:"黄梅戏之乡",     btype:"culture" , must:"" , color:"#64748B" },
-  "泉州":   { icon:"🏯", badge:"🏛️ 世界遗产",   btype:"wh" , must:"开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围" , color:"#0EA5E9" },
-  "汕头":   { icon:"🌊", badge:"📜 世界记忆",   btype:"memory" , must:"小公园骑楼 · 侨批文物馆 · 牛肉火锅 · 生腌" , color:"#F59E0B" },
-  "汕尾":   { icon:"🐚", badge:"🎭 渔歌非遗",   btype:"culture" , must:"红海湾遮浪半岛 · 金町湾 · 二马路夜市" , color:"#06B6D4" },
-  "香港":   { icon:"🦁", badge:"🌐 中西交融",   btype:"culture" , must:"太平山顶 · 维港夜景 · 叮叮车 · 庙街" , color:"#0284C7" },
-  "澳门":   { icon:"⛪", badge:"🏛️ 世界遗产",   btype:"wh" , must:"大三巴 · 恋爱巷 · 官也街 · 路环" , color:"#10B981" },
-  "顺德":   { icon:"🍲", badge:"🍜 美食之都",   btype:"food" , must:"清晖园 · 鱼生 · 双皮奶 · 桑拿鸡" , color:"#FBBF24" },
-  "广州":   { icon:"🏙️", badge:"🌊 海丝预备",   btype:"culture" , must:"陈家祠 · 南越王宫 · 沙面 · 早茶" , color:"#059669" },
-  "丽江":   { icon:"🏔️", badge:"🏛️ 世界遗产",   btype:"wh" , must:"古城 · 玉龙雪山 · 束河 · 纳西古乐" , color:"#38BDF8" },
-  "重庆":   { icon:"🌶️", badge:"🏛️ 世遗×2",    btype:"wh" , must:"洪崖洞 · 大足石刻 · 火锅 · 长江索道" , color:"#14B8A6" }
+  "安庆":   { icon:"🎭", badge:"黄梅戏之乡",     btype:"culture" , must:"" , color:"#8B7E6E" },
+  "泉州":   { icon:"🏯", badge:"🏛️ 世界遗产",   btype:"wh" , must:"开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围" , color:"#7BA7CE" },
+  "汕头":   { icon:"🌊", badge:"📜 世界记忆",   btype:"memory" , must:"小公园骑楼 · 侨批文物馆 · 牛肉火锅 · 生腌" , color:"#E2A35C" },
+  "汕尾":   { icon:"🐚", badge:"🎭 渔歌非遗",   btype:"culture" , must:"红海湾遮浪半岛 · 金町湾 · 二马路夜市" , color:"#8AA9C0" },
+  "香港":   { icon:"🦁", badge:"🌐 中西交融",   btype:"culture" , must:"太平山顶 · 维港夜景 · 叮叮车 · 庙街" , color:"#6C9AC4" },
+  "澳门":   { icon:"⛪", badge:"🏛️ 世界遗产",   btype:"wh" , must:"大三巴 · 恋爱巷 · 官也街 · 路环" , color:"#7FA86A" },
+  "顺德":   { icon:"🍲", badge:"🍜 美食之都",   btype:"food" , must:"清晖园 · 鱼生 · 双皮奶 · 桑拿鸡" , color:"#E8C46A" },
+  "广州":   { icon:"🏙️", badge:"🌊 海丝预备",   btype:"culture" , must:"陈家祠 · 南越王宫 · 沙面 · 早茶" , color:"#6F9C5C" },
+  "丽江":   { icon:"🏔️", badge:"🏛️ 世界遗产",   btype:"wh" , must:"古城 · 玉龙雪山 · 束河 · 纳西古乐" , color:"#A3C4DE" },
+  "重庆":   { icon:"🌶️", badge:"🏛️ 世遗×2",    btype:"wh" , must:"洪崖洞 · 大足石刻 · 火锅 · 长江索道" , color:"#E9A94E" }
 };
 function cityMetaOf(title){
   if(!title) return null;
@@ -1548,7 +1529,7 @@ function renderPieChart(catTotals, total) {
     var cat = cats[i];
     var val = catTotals[cat];
     var pct = val / total;
-    var color = CATEGORY_COLORS[cat] || "#64748B";
+    var color = CATEGORY_COLORS[cat] || "#8B7E6E";
     var dashLen = circumference * pct;
     svgParts += '<circle cx="' + cx + '" cy="' + cy + '" r="' + radius + '" fill="none" stroke="' + color + '" stroke-width="20" stroke-dasharray="' + dashLen + ' ' + (circumference - dashLen) + '" stroke-dashoffset="' + (-offset) + '" transform="rotate(-90 ' + cx + ' ' + cy + ')"/>';
     offset += dashLen;
@@ -1558,7 +1539,7 @@ function renderPieChart(catTotals, total) {
       + '<span class="pie-legend-amount">' + formatMoney(val) + ' (' + (pct * 100).toFixed(1) + '%)</span>'
       + '</div>';
   }
-  svgParts += '<text x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle" font-size="14" font-weight="700" fill="#1E293B">' + formatMoney(total).replace("¥", "¥") + '</text>';
+  svgParts += '<text x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle" font-size="14" font-weight="700" fill="#4A4038">' + formatMoney(total).replace("¥", "¥") + '</text>';
   svgParts += '</svg>';
 
   wrap.innerHTML = '<div class="pie-chart">' + svgParts + '</div><div class="pie-legend">' + legendHtml + '</div>';
@@ -1976,7 +1957,7 @@ if (document.readyState === "loading") {
       return map;
     }
     var CITY_BY_DAY=buildCityByDay();
-    function cityColor(city){ var m=CITY_META[city]; return m&&m.color?m.color:'#0D9488'; }
+    function cityColor(city){ var m=CITY_META[city]; return m&&m.color?m.color:'#B5821F'; }
     function cityIcon(city){ var m=CITY_META[city]; return m&&m.icon?m.icon:'📍'; }
 
     // ===== 日历 =====
