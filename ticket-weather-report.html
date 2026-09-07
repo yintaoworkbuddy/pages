@@ -6,38 +6,58 @@
 <title>十月旅行 · 票况与天气预估报告</title>
 <style>
   :root{
-    --txt:#4A4038; --blue:#7BA7CE; --green:#7FA86A; --teal:#B5821F; --sky:#A3C4DE;
-    --brand:#E2A35C; --yellow:#E8C46A; --amber:#C9852B; --alert:#C9553F; --price:#96651C;
-    --bg:#FDF8F0; --card:#ffffff; --line:#EFE4D4; --muted:#8B7E6E;
+    --txt:#2C3650; --blue:#4D96FF; --green:#2ED9B7; --teal:#4D96FF; --sky:#8FC0FF;
+    --brand:#FF9A3C; --yellow:#FFD93D; --amber:#FF9A3C; --alert:#FF5A5F; --price:#1D4FD0;
+    --bg:#FDFBF7; --card:#FFFFFF; --line:#E7EDF7; --muted:#78849B;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:linear-gradient(135deg,#FFFBF2 0%,#FDF6E9 45%,#FDF3EE 100%) fixed;color:var(--txt);line-height:1.65;padding:24px;max-width:960px;margin:0 auto}
-  h1{font-size:24px;margin-bottom:4px;background:linear-gradient(90deg,#D9A03C,#C97B4E);-webkit-background-clip:text;background-clip:text;color:transparent}
+    background:linear-gradient(135deg,#FFFDF8 0%,#F1F9FF 45%,#FFF6FB 100%) fixed;color:var(--txt);line-height:1.65;padding:24px;max-width:960px;margin:0 auto}
+  h1{font-size:24px;margin-bottom:4px;background:linear-gradient(90deg,#FF6B6B,#A66CFF 45%,#4D96FF);-webkit-background-clip:text;background-clip:text;color:transparent}
   .sub{color:var(--muted);font-size:13px;margin-bottom:20px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:18px;
-    box-shadow:0 2px 10px rgba(90,70,45,.06)}
+    box-shadow:0 2px 10px rgba(44,54,80,.06)}
   .card h2{font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
   .tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;color:#fff}
   .t-blue{background:var(--blue)} .t-green{background:var(--green)} .t-brand{background:var(--brand)} .t-china{background:var(--teal)}
-  .kp{background:linear-gradient(135deg,#FDF6E3,#fff);border:1px solid #F0DCB4;border-left:4px solid var(--brand)}
+  .kp{background:linear-gradient(135deg,#FFF6E5,#ffffff);border:1px solid #FFE6A8;border-left:4px solid var(--brand)}
   table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
   th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
-  th{background:#FAF5EA;font-weight:600;color:var(--txt)}
-  tr:nth-child(even) td{background:#FDFBF5}
+  th{background:#F8FBFF;font-weight:600;color:var(--txt)}
+  tr:nth-child(even) td{background:#F4FFFC}
   .seg{font-weight:600;color:#0F172A}
   .price{color:var(--price);font-weight:700;white-space:nowrap}
   .tight{color:var(--alert);font-weight:600}
-  .easy{color:#6F9C5C;font-weight:600}
+  .easy{color:#12B886;font-weight:600}
   .mid{color:var(--amber);font-weight:600}
   ul{margin:6px 0 0 18px;font-size:13px}
   li{margin:4px 0}
   .note{font-size:12px;color:var(--muted);margin-top:8px}
   .sum{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
-  .sum .box{flex:1;min-width:150px;background:#FDF6E3;border:1px solid #F0DCB4;border-radius:10px;padding:12px}
+  .sum .box{flex:1;min-width:150px;background:#E9F2FF;border:1px solid #FFE6A8;border-radius:10px;padding:12px}
   .sum .box b{font-size:20px;color:var(--teal)}
-  .warn{background:#FBEDE8;border:1px solid #F0D5CB;border-left:4px solid #C9553F;padding:12px 14px;border-radius:10px;font-size:13px}
+  .warn{background:#FFEDEF;border:1px solid #FFDDD3;border-left:4px solid #FF5A5F;padding:12px 14px;border-radius:10px;font-size:13px}
   .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:8px}
+
+  /* 背景柔光斑：低透明度彩色晕染，增加层次但不抢内容 */
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background:
+      radial-gradient(420px 320px at 8% 4%, rgba(255,107,107,.10), transparent 62%),
+      radial-gradient(400px 300px at 92% 10%, rgba(77,150,255,.10), transparent 62%),
+      radial-gradient(480px 340px at 50% 98%, rgba(166,108,255,.09), transparent 64%);}
+
+  /* 小结卡片：三块各用一种糖果色，避免整页一个色调 */
+  .sum .box{border-radius:12px}
+  .sum .box:nth-of-type(1){background:#EAF2FF;border:1px solid #C9DEFF}
+  .sum .box:nth-of-type(1) b{color:#2E6BE6}
+  .sum .box:nth-of-type(2){background:#EAFBF3;border:1px solid #B9F0D8}
+  .sum .box:nth-of-type(2) b{color:#0F9A7E}
+  .sum .box:nth-of-type(3){background:#FFF3E4;border:1px solid #FFDCAE}
+  .sum .box:nth-of-type(3) b{color:#D2791B}
+  h2{border-left:4px solid #4D96FF;padding-left:9px}
+  h2:nth-of-type(2){border-left-color:#FF9A3C}
+  h2:nth-of-type(3){border-left-color:#2ED9B7}
+  h2:nth-of-type(4){border-left-color:#A66CFF}
 </style>
 </head>
 <body>
