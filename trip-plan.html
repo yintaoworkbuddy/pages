@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>十月环线 · 完整行程计划</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  :root{
+    --coral:#FF6B6B; --orange:#FF9A3C; --lemon:#FFD93D; --lime:#A0E548;
+    --mint:#2ED9B7; --blue:#4D96FF; --purple:#A66CFF; --pink:#FF7EB6;
+    --txt:#2C3650; --sub:#78849B; --faint:#A9B3C6;
+    --line:#E7EDF7; --card:#FFFFFF; --price:#1D4FD0;
+    --sh:0 2px 10px rgba(44,54,80,.06); --sh2:0 6px 20px rgba(44,54,80,.1);
+  }
+  body{
+    margin:0; padding:0 0 40px;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:linear-gradient(135deg,#FFFDF8 0%,#F1F9FF 45%,#FFF6FB 100%) fixed;
+    color:var(--txt); line-height:1.6; font-size:14px;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(420px 300px at 8% 4%, rgba(255,107,107,.10), transparent 60%),
+      radial-gradient(400px 300px at 92% 22%, rgba(77,150,255,.10), transparent 60%),
+      radial-gradient(380px 280px at 20% 88%, rgba(46,217,183,.09), transparent 60%);
+  }
+  .wrap{position:relative; z-index:1; max-width:900px; margin:0 auto; padding:0 16px}
+
+  /* ---------- header ---------- */
+  header{padding:26px 0 14px}
+  h1{
+    font-size:25px; margin:0 0 6px; letter-spacing:.5px;
+    background:linear-gradient(90deg,#FF6B6B,#A66CFF 45%,#4D96FF);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sub{font-size:13px; color:var(--sub); margin:0}
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px}
+  @media(max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{
+    background:var(--card); border-radius:16px; box-shadow:var(--sh);
+    padding:12px 14px; border-top:3px solid var(--blue);
+  }
+  .kpi:nth-child(2){border-top-color:var(--coral)}
+  .kpi:nth-child(3){border-top-color:var(--mint)}
+  .kpi:nth-child(4){border-top-color:var(--orange)}
+  .kpi .k-l{font-size:11px; color:var(--sub); font-weight:600}
+  .kpi .k-v{font-size:19px; font-weight:800; margin-top:2px; letter-spacing:-.3px}
+  .kpi .k-u{font-size:11px; color:var(--faint); font-weight:600; margin-left:2px}
+
+  /* ---------- section ---------- */
+  section{margin-top:26px}
+  .sec-h{display:flex; align-items:center; gap:8px; margin-bottom:12px}
+  .sec-h .dot{width:9px; height:9px; border-radius:50%; background:var(--purple); flex:0 0 auto}
+  .sec-h h2{font-size:17px; margin:0; font-weight:800}
+  .sec-h .tag{font-size:11px; color:var(--sub); font-weight:600; margin-left:auto}
+
+  /* ---------- route ---------- */
+  .route{
+    background:var(--card); border-radius:16px; box-shadow:var(--sh);
+    padding:16px 14px; overflow-x:auto;
+  }
+  .route-inner{display:flex; align-items:stretch; gap:0; min-width:760px}
+  .rnode{display:flex; flex-direction:column; align-items:center; flex:1; min-width:78px; position:relative}
+  .rnode .rdot{
+    width:38px; height:38px; border-radius:12px; display:flex; align-items:center;
+    justify-content:center; font-size:17px; color:#fff; font-weight:700; flex:0 0 auto;
+  }
+  .rnode .rname{font-size:12.5px; font-weight:700; margin-top:7px; white-space:nowrap}
+  .rnode .rdate{font-size:10.5px; color:var(--faint); font-weight:600; margin-top:1px}
+  .rnode .rnights{font-size:10px; color:var(--sub); margin-top:2px}
+  .rlink{flex:0 0 auto; width:26px; display:flex; align-items:center; justify-content:center; padding-bottom:26px}
+  .rlink span{font-size:12px; color:var(--faint)}
+
+  /* ---------- table ---------- */
+  .tbl-wrap{background:var(--card); border-radius:16px; box-shadow:var(--sh); overflow:hidden}
+  .tbl-scroll{overflow-x:auto}
+  table{width:100%; border-collapse:collapse; font-size:12.5px; min-width:660px}
+  th{
+    background:#F4F8FF; font-weight:700; text-align:left; padding:10px 12px;
+    color:var(--sub); font-size:11.5px; white-space:nowrap; border-bottom:1px solid var(--line);
+  }
+  td{padding:11px 12px; border-bottom:1px solid #F2F6FC; vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:#FBFCFF}
+  .seg{font-weight:700; white-space:nowrap}
+  .price{color:var(--price); font-weight:800; white-space:nowrap}
+  .mode{
+    display:inline-block; font-size:10.5px; font-weight:700; padding:2px 8px;
+    border-radius:9px; color:#fff; white-space:nowrap;
+  }
+  .m-flight{background:var(--blue)}
+  .m-train{background:var(--mint)}
+  .m-local{background:var(--orange)}
+  .warn{color:var(--coral); font-size:11.5px; font-weight:600}
+  .ok{color:#12B886; font-size:11.5px; font-weight:600}
+
+  /* ---------- day cards ---------- */
+  .city-block{margin-bottom:18px}
+  .city-h{
+    display:flex; align-items:center; gap:9px; margin-bottom:10px; padding:0 2px;
+  }
+  .city-h .cico{
+    width:32px; height:32px; border-radius:10px; display:flex; align-items:center;
+    justify-content:center; font-size:16px; color:#fff; flex:0 0 auto;
+  }
+  .city-h .cname{font-size:16px; font-weight:800}
+  .city-h .cdate{font-size:11.5px; color:var(--sub); font-weight:600; margin-left:2px}
+  .city-h .ctheme{
+    margin-left:auto; font-size:11px; font-weight:700; padding:3px 10px;
+    border-radius:11px; color:#fff; white-space:nowrap;
+  }
+  .day{
+    background:var(--card); border-radius:14px; box-shadow:var(--sh);
+    padding:13px 15px; margin-bottom:9px; border-left:4px solid var(--blue);
+    transition:transform .16s, box-shadow .16s;
+  }
+  .day:hover{transform:translateY(-2px); box-shadow:var(--sh2)}
+  .day .dh{display:flex; align-items:baseline; gap:8px; margin-bottom:7px; flex-wrap:wrap}
+  .day .dnum{font-size:12.5px; font-weight:800; color:#fff; background:var(--blue); padding:2px 9px; border-radius:9px}
+  .day .dd{font-size:11.5px; color:var(--faint); font-weight:600}
+  .day .dt{font-size:13.5px; font-weight:700}
+  .day ul{margin:0; padding-left:17px}
+  .day li{font-size:12.5px; color:var(--sub); line-height:1.75}
+  .day li b{color:var(--txt); font-weight:700}
+  .food{
+    display:inline-block; font-size:11.5px; font-weight:600; margin:5px 5px 0 0;
+    padding:3px 9px; border-radius:9px; background:#FFF6EF; color:#C2570A; border:1px solid #FFE0C4;
+  }
+  .tip{
+    font-size:11.5px; line-height:1.6; margin-top:8px; padding:7px 10px;
+    border-radius:9px; background:#EAF4FF; color:#1F4E9C; border-left:3px solid var(--blue);
+  }
+  .tip.warn-t{background:#FFF0F0; color:#C0363F; border-left-color:var(--coral)}
+  .tip.ok-t{background:#EAFBF3; color:#0E7A55; border-left-color:var(--mint)}
+
+  /* ---------- budget ---------- */
+  .budget{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+  .bcard{
+    background:var(--card); border-radius:14px; box-shadow:var(--sh);
+    padding:13px 15px; border-top:3px solid var(--blue);
+  }
+  .bcard:nth-child(2){border-top-color:var(--coral)}
+  .bcard:nth-child(3){border-top-color:var(--orange)}
+  .bcard:nth-child(4){border-top-color:var(--purple)}
+  .bcard .bl{font-size:11.5px; color:var(--sub); font-weight:600}
+  .bcard .bv{font-size:20px; font-weight:800; margin-top:3px; letter-spacing:-.4px}
+  .bcard .bn{font-size:11px; color:var(--faint); margin-top:2px}
+
+  /* ---------- notes ---------- */
+  .note{
+    background:var(--card); border-radius:14px; box-shadow:var(--sh);
+    padding:14px 16px; margin-bottom:10px; border-left:4px solid var(--orange);
+  }
+  .note:nth-child(even){border-left-color:var(--mint)}
+  .note h3{font-size:13.5px; margin:0 0 6px; font-weight:800}
+  .note ul{margin:0; padding-left:17px}
+  .note li{font-size:12.5px; color:var(--sub); line-height:1.75}
+  .note li b{color:var(--txt)}
+
+  /* ---------- footer ---------- */
+  .footlinks{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-top:24px}
+  .flink{
+    display:flex; align-items:center; gap:10px; background:var(--card);
+    border-radius:14px; box-shadow:var(--sh); padding:12px 14px;
+    text-decoration:none; color:var(--txt); border-top:3px solid var(--blue);
+  }
+  .flink:nth-child(2){border-top-color:var(--orange)}
+  .flink:nth-child(3){border-top-color:var(--purple)}
+  .flink .fi{width:34px; height:34px; border-radius:11px; display:flex; align-items:center;
+    justify-content:center; font-size:16px; background:#E9F2FF; flex:0 0 auto}
+  .flink:nth-child(2) .fi{background:#FFF2E6}
+  .flink:nth-child(3) .fi{background:#F5EDFF}
+  .flink .ft{font-size:13px; font-weight:700}
+  .flink .fs{font-size:11px; color:var(--sub); font-weight:600}
+  .upd{text-align:center; font-size:11px; color:var(--faint); margin-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🍜 十月环线 · 完整行程计划</h1>
+  <p class="sub">安庆 → 重庆 → 丽江 → 广州 → 汕尾 → 汕头 → 福州 → 安庆 · 单人交通方案 + 逐日安排</p>
+  <div class="kpis">
+    <div class="kpi"><div class="k-l">总时长</div><div class="k-v">15<span class="k-u">天14晚</span></div></div>
+    <div class="kpi"><div class="k-l">途经城市</div><div class="k-v">7<span class="k-u">城</span></div></div>
+    <div class="kpi"><div class="k-l">交通合计</div><div class="k-v">¥2,850<span class="k-u">≈</span></div></div>
+    <div class="kpi"><div class="k-l">往返日期</div><div class="k-v">10/3<span class="k-u">→ 10/17</span></div></div>
+  </div>
+</header>
+
+<!-- 路线 -->
+<section>
+  <div class="sec-h"><span class="dot"></span><h2>路线总览</h2><span class="tag">零回头环线</span></div>
+  <div class="route">
+    <div class="route-inner">
+      <div class="rnode"><div class="rdot" style="background:#9AA5B8">庆</div><div class="rname">安庆</div><div class="rdate">10/03 六</div><div class="rnights">出发</div></div>
+      <div class="rlink"><span>›</span></div>
+      <div class="rnode"><div class="rdot" style="background:#FF5A5F">渝</div><div class="rname">重庆</div><div class="rdate">10/04-06</div><div class="rnights">3天</div></div>
+      <div class="rlink"><span>›</span></div>
+      <div class="rnode"><div class="rdot" style="background:#FF7EB6">丽</div><div class="rname">丽江</div><div class="rdate">10/07-09</div><div class="rnights">3天</div></div>
+      <div class="rlink"><span>›</span></div>
+      <div class="rnode"><div class="rdot" style="background:#A66CFF">穗</div><div class="rname">广州</div><div class="rdate">10/10-13</div><div class="rnights">4天</div></div>
+      <div class="rlink"><span>›</span></div>
+      <div class="rnode"><div class="rdot" style="background:#FFD93D">汕</div><div class="rname">汕尾</div><div class="rdate">10/14-15</div><div class="rnights">1.5天</div></div>
+      <div class="rlink"><span>›</span></div>
+      <div class="rnode"><div class="rdot" style="background:#FF9A3C">头</div><div class="rname">汕头</div><div class="rdate">10/15-16</div><div class="rnights">1.5天</div></div>
+      <div class="rlink"><span>›</span></div>
+      <div class="rnode"><div class="rdot" style="background:#2ED9B7">榕</div><div class="rname">福州</div><div class="rdate">10/16-17</div><div class="rnights">1天</div></div>
+      <div class="rlink"><span>›</span></div>
+      <div class="rnode"><div class="rdot" style="background:#4D96FF">庆</div><div class="rname">安庆</div><div class="rdate">10/17 夜</div><div class="rnights">到家</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 交通 -->
+<section>
+  <div class="sec-h"><span class="dot" style="background:var(--blue)"></span><h2>逐段交通方案</h2><span class="tag">票面价 · 未含机建燃油</span></div>
+  <div class="tbl-wrap"><div class="tbl-scroll">
+  <table>
+    <thead><tr>
+      <th>#</th><th>路段</th><th>方式</th><th>推荐班次</th><th>时刻</th><th>时长</th><th>票价</th><th>备注</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td><td class="seg">安庆 → 重庆</td>
+        <td><span class="mode m-flight">✈️ 飞机</span></td>
+        <td><b>PN6236</b> 西部航空</td><td>10/03 22:20 → 10/04 00:30</td><td>2h10m</td>
+        <td class="price">¥450</td><td><span class="ok">周六班 ✓ 最便宜</span></td>
+      </tr>
+      <tr>
+        <td>2</td><td class="seg">重庆 → 丽江</td>
+        <td><span class="mode m-flight">✈️ 飞机</span></td>
+        <td><b>PN6261</b> 西部航空</td><td>10/07 06:25 → 08:10</td><td>1h45m</td>
+        <td class="price">¥350</td><td>早班，05:00 需到机场</td>
+      </tr>
+      <tr>
+        <td>3</td><td class="seg">丽江 → 广州</td>
+        <td><span class="mode m-flight">✈️ 飞机</span></td>
+        <td><b>JD5132</b> 首都航空</td><td>10/10 08:10 → 10:30</td><td>2h20m</td>
+        <td class="price">¥660</td><td>直飞最早班，准点 93%</td>
+      </tr>
+      <tr>
+        <td>4</td><td class="seg">广州 → 顺德</td>
+        <td><span class="mode m-train">🚄 城际</span></td>
+        <td>广州南 → 顺德站</td><td>全天多班</td><td>约 15m</td>
+        <td class="price">¥20</td><td>往返，当天来回</td>
+      </tr>
+      <tr>
+        <td>5</td><td class="seg">广州 → 汕尾</td>
+        <td><span class="mode m-train">🚄 高铁</span></td>
+        <td><b>G6301</b> 等（173 班/天）</td><td>10/14 07:41 → 09:13</td><td>1h32m</td>
+        <td class="price">¥143</td><td>广州南直达，最早班之一</td>
+      </tr>
+      <tr>
+        <td>6</td><td class="seg">汕尾 → 汕头</td>
+        <td><span class="mode m-train">🚄 高铁</span></td>
+        <td>厦深线（100+ 班/天）</td><td>10/15 中午</td><td>38–55m</td>
+        <td class="price">¥79</td><td>顺路，不绕</td>
+      </tr>
+      <tr>
+        <td>7</td><td class="seg">汕头 → 福州</td>
+        <td><span class="mode m-train">🚄 高铁</span></td>
+        <td><b>G3048</b></td><td>10/16 15:17 → 17:50</td><td>2h33m</td>
+        <td class="price">¥214</td><td>午后走，上午还能吃</td>
+      </tr>
+      <tr>
+        <td>8</td><td class="seg">福州 → 安庆</td>
+        <td><span class="mode m-flight">✈️ 飞机</span></td>
+        <td><b>PN6236</b> 西部航空</td><td>10/17 21:35 → 23:00</td><td>1h25m</td>
+        <td class="price">¥430</td><td><span class="warn">⚠ 仅周二/四/六</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div></div>
+  <div class="tip warn-t" style="margin-top:10px">
+    <b>硬约束：PN6236 只有周二 / 周四 / 周六有班。</b> 10/18 是周日没航班，所以回程必须锁在 <b>10/17（周六）</b> 或 10/15（周四）。本方案按 10/17 回，23:00 落地安庆。
+  </div>
+  <div class="tip ok-t">
+    <b>彩蛋：PN6236 本身就是「福州 → 经停安庆 → 重庆」。</b> 你这一趟出发坐它的后段、回家坐它的前段，整条环线用同一班机首尾闭环。
+  </div>
+</section>
+
+<!-- 逐日行程 -->
+<section>
+  <div class="sec-h"><span class="dot" style="background:var(--coral)"></span><h2>逐日行程</h2><span class="tag">含必吃清单</span></div>
+
+  <!-- 重庆 -->
+  <div class="city-block">
+    <div class="city-h">
+      <div class="cico" style="background:#FF5A5F">🌶️</div>
+      <div class="cname">重庆</div><div class="cdate">10/04 – 10/06 · 3 天</div>
+      <div class="ctheme" style="background:#FF5A5F">火锅主场</div>
+    </div>
+    <div class="day" style="border-left-color:#FF5A5F">
+      <div class="dh"><span class="dnum" style="background:#FF5A5F">Day 1</span><span class="dd">10/04 周日</span><span class="dt">落地 → 解放碑 → 火锅开局</span></div>
+      <ul>
+        <li>00:30 落地江北机场，轻轨 10 号线约 40 分钟进市区</li>
+        <li>上午补觉，中午起：<b>解放碑 / 洪崖洞</b>周边溜达</li>
+        <li>晚餐：<b>珮姐老火锅</b> 或 <b>周师兄大刀腰片</b>（解放碑店，提前 2h 取号）</li>
+      </ul>
+      <span class="food">🍲 珮姐老火锅</span><span class="food">🌶️ 周师兄腰片</span><span class="food">🥘 楠火锅</span>
+    </div>
+    <div class="day" style="border-left-color:#FF5A5F">
+      <div class="dh"><span class="dnum" style="background:#FF5A5F">Day 2</span><span class="dd">10/05 周一</span><span class="dt">深度火锅日</span></div>
+      <ul>
+        <li>白天：<b>李子坝轻轨穿楼</b> → <b>鹅岭二厂</b> → <b>山城步道</b></li>
+        <li>傍晚：<b>长江索道</b>（南站排队人少）→ 南山一棵树看夜景</li>
+        <li>晚餐：<b>防空洞火锅</b>（如"洞子火锅"），体验山城特色场景</li>
+        <li>夜宵：<b>九街</b>烧烤 / 小面</li>
+      </ul>
+      <span class="food">🍜 花市豌杂面</span><span class="food">🍢 九街烧烤</span><span class="food">🥟 山城小汤圆</span>
+      <div class="tip">周一各大火锅店人最少，是全程最适合排队的一天。</div>
+    </div>
+    <div class="day" style="border-left-color:#FF5A5F">
+      <div class="dh"><span class="dnum" style="background:#FF5A5F">Day 3</span><span class="dd">10/06 周二</span><span class="dt">收尾 → 早睡赶早班机</span></div>
+      <ul>
+        <li>上午：<b>磁器口古镇</b>（商业化，快速过）或 三峡博物馆</li>
+        <li>午餐：最后一顿<b>老火锅</b>或 <b>酸辣粉 + 抄手</b></li>
+        <li>下午：采购伴手礼（火锅底料、陈麻花）</li>
+        <li><b>22:00 前必须睡</b>——明早 05:00 出发去机场</li>
+      </ul>
+      <div class="tip warn-t">PN6261 是 06:25 起飞，05:00 要到机场。重庆江北机场早班安检排队约 30 分钟，务必提前约车。</div>
+    </div>
+  </div>
+
+  <!-- 丽江 -->
+  <div class="city-block">
+    <div class="city-h">
+      <div class="cico" style="background:#FF7EB6">🏔️</div>
+      <div class="cname">丽江</div><div class="cdate">10/07 – 10/09 · 3 天</div>
+      <div class="ctheme" style="background:#FF7EB6">雪山 + 菌子</div>
+    </div>
+    <div class="day" style="border-left-color:#FF7EB6">
+      <div class="dh"><span class="dnum" style="background:#FF7EB6">Day 4</span><span class="dd">10/07 周三</span><span class="dt">落地 → 古城适应海拔</span></div>
+      <ul>
+        <li>08:10 落地三义机场，机场大巴约 40 分钟到古城</li>
+        <li>全天：<b>丽江古城</b>慢逛，四方街、木府、狮子山</li>
+        <li>晚餐：<b>阿婆腊排骨火锅</b>（丽江招牌，咸鲜口）</li>
+      </ul>
+      <span class="food">🍖 阿婆腊排骨</span><span class="food">🍄 滇记菌菇火锅</span><span class="food">🥘 黑山羊火锅</span>
+      <div class="tip">丽江海拔 2400m，<b>第一天不要洗澡、不要剧烈运动、别喝酒</b>，让身体适应。</div>
+    </div>
+    <div class="day" style="border-left-color:#FF7EB6">
+      <div class="dh"><span class="dnum" style="background:#FF7EB6">Day 5</span><span class="dd">10/08 周四</span><span class="dt">玉龙雪山 ⭐ 重头戏</span></div>
+      <ul>
+        <li>07:00 出发（包车或 101 路旅游专线，约 1h）</li>
+        <li><b>大索道</b>上冰川公园 4506m → 徒步栈道到 4680m 观景台</li>
+        <li>下午：<b>蓝月谷</b>（水呈蓝绿色，免费）+ <b>甘海子</b></li>
+        <li>晚上：回古城吃<b>野生菌火锅</b>庆功</li>
+      </ul>
+      <span class="food">🍄 松茸土鸡汤锅</span><span class="food">🍄 见手青（必须熟透）</span><span class="food">🍄 鸡油菌 / 牛肝菌</span>
+      <div class="tip warn-t">
+        <b>大索道票必须提前 3 天在「丽江旅游集团」小程序抢</b>，每日限流，国庆后依然紧张。羽绒服现场租 ¥50，氧气瓶古城买 ¥20（景区卖 ¥60）。
+      </div>
+    </div>
+    <div class="day" style="border-left-color:#FF7EB6">
+      <div class="dh"><span class="dnum" style="background:#FF7EB6">Day 6</span><span class="dd">10/09 周五</span><span class="dt">束河 → 缓冲日</span></div>
+      <ul>
+        <li>上午：<b>束河古镇</b>（比大研安静，青龙桥、九鼎龙潭）</li>
+        <li>下午：<b>白沙古镇</b>看壁画，远眺雪山</li>
+        <li>如果 Day5 雪山因天气没上去，<b>今天改补雪山</b></li>
+        <li>晚餐：<b>纳西烤肉 / 汽锅鸡</b></li>
+      </ul>
+      <div class="tip ok-t">留一天缓冲是给雪山的——10 月雪山索道常因大风停运，有备无患。</div>
+    </div>
+  </div>
+
+  <!-- 广州 -->
+  <div class="city-block">
+    <div class="city-h">
+      <div class="cico" style="background:#A66CFF">🏙️</div>
+      <div class="cname">广州 + 顺德</div><div class="cdate">10/10 – 10/13 · 4 天</div>
+      <div class="ctheme" style="background:#A66CFF">长隆 + 美食之都</div>
+    </div>
+    <div class="day" style="border-left-color:#A66CFF">
+      <div class="dh"><span class="dnum" style="background:#A66CFF">Day 7</span><span class="dd">10/10 周六</span><span class="dt">落地 → 早茶</span></div>
+      <ul>
+        <li>10:30 落地白云机场，3 号线直达市区</li>
+        <li>午餐：<b>点都德 / 陶陶居</b>广式早茶（虾饺、凤爪、肠粉、流沙包）</li>
+        <li>下午：<b>沙面岛</b> → <b>陈家祠</b> → 北京路</li>
+        <li>晚餐：<b>炳胜品味</b> 或 <b>广州酒家</b></li>
+      </ul>
+      <span class="food">🥟 点都德虾饺</span><span class="food">🍤 陶陶居凤爪</span><span class="food">🍮 双皮奶</span>
+    </div>
+    <div class="day" style="border-left-color:#A66CFF">
+      <div class="dh"><span class="dnum" style="background:#A66CFF">Day 8</span><span class="dd">10/11 周日</span><span class="dt">长隆 ⭐ 一整天</span></div>
+      <ul>
+        <li><b>长隆野生动物世界</b>（推荐，空中缆车 + 小火车，白虎/考拉/大熊猫）</li>
+        <li>或 <b>长隆欢乐世界</b>（刺激项目，垂直过山车）</li>
+        <li>两园联票更划算，但一天只能玩一个</li>
+        <li>晚上回市区吃<b>宵夜大排档</b>（宝业路 / 荔湾）</li>
+      </ul>
+      <div class="tip">周日长隆人多。<b>开园即入（09:30）、先坐小火车</b>，11 点后排队翻倍。门票提前在官方 App 买，比现场便宜 ¥30–50。</div>
+    </div>
+    <div class="day" style="border-left-color:#A66CFF">
+      <div class="dh"><span class="dnum" style="background:#A66CFF">Day 9</span><span class="dd">10/12 周一</span><span class="dt">顺德一日 ⭐ 重头戏</span></div>
+      <ul>
+        <li>广州南 → 顺德站 城际 15 分钟，¥10 单程</li>
+        <li>早：<b>清晖园</b>（岭南四大名园）</li>
+        <li>午：<b>鱼生</b>（顺德招牌，一鱼四吃）+ <b>桑拿鸡</b></li>
+        <li>下午：<b>逢简水乡</b> 或 顺峰山公园</li>
+        <li>傍晚：<b>双皮奶 / 姜撞奶</b>（民信、仁信老铺）</li>
+      </ul>
+      <span class="food">🐟 顺德鱼生</span><span class="food">🍗 桑拿鸡</span><span class="food">🥛 双皮奶</span><span class="food">🍲 毋米粥火锅</span><span class="food">🦐 均安蒸猪</span>
+      <div class="tip ok-t">周一顺德本地餐馆不排队，是"世界美食之都"体验最好的一天。</div>
+    </div>
+    <div class="day" style="border-left-color:#A66CFF">
+      <div class="dh"><span class="dnum" style="background:#A66CFF">Day 10</span><span class="dd">10/13 周二</span><span class="dt">收尾 → 早出发汕尾</span></div>
+      <ul>
+        <li>上午：最后一轮早茶 + <b>上下九 / 西关</b>老城区</li>
+        <li>采购：腊味、凉茶、鸡仔饼</li>
+        <li>晚：早睡，次日 07:41 高铁</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 汕尾 -->
+  <div class="city-block">
+    <div class="city-h">
+      <div class="cico" style="background:#FFD93D">🏖️</div>
+      <div class="cname">汕尾</div><div class="cdate">10/14 – 10/15 · 1.5 天</div>
+      <div class="ctheme" style="background:#E0A800">看海 + 海鲜自由</div>
+    </div>
+    <div class="day" style="border-left-color:#FFD93D">
+      <div class="dh"><span class="dnum" style="background:#E0A800">Day 11</span><span class="dd">10/14 周三</span><span class="dt">红海湾 → 二马路夜市</span></div>
+      <ul>
+        <li>07:41 广州南出发 → 09:13 到汕尾，酒店放行李</li>
+        <li>下午：<b>红海湾遮浪半岛</b>（一边波涛汹涌、一边风平浪静，中国唯一）+ <b>海上古堡</b>拍日落</li>
+        <li>晚上：<b>二马路夜市</b>——一道生腌（浅尝）→ 兄弟大排档海鲜 → 汕中冰室芒果冰</li>
+      </ul>
+      <span class="food">🦐 一道生腌</span><span class="food">🐟 兄弟大排档</span><span class="food">🥟 菜粿 / 薄饼</span><span class="food">🍜 鲍汁捞面</span><span class="food">🥭 汕中冰室</span>
+      <div class="tip ok-t">二马路大排档<b>明码标价</b>，人均 ¥50–80 就能实现海鲜自由，是全程海鲜性价比最高的一站。</div>
+    </div>
+    <div class="day" style="border-left-color:#FFD93D">
+      <div class="dh"><span class="dnum" style="background:#E0A800">Day 12</span><span class="dd">10/15 周四</span><span class="dt">金町湾 → 转场汕头</span></div>
+      <ul>
+        <li>上午：<b>金町湾</b>7km 白沙滩 或 <b>风车岛海上公路</b></li>
+        <li>中午：二马路最后一轮（菜粿、薄饼、牛腩火锅）</li>
+        <li>午后：高铁 38–55 分钟 → 汕头 ¥79</li>
+        <li>傍晚到汕头，直奔<b>龙眼南路夜市</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 汕头 -->
+  <div class="city-block">
+    <div class="city-h">
+      <div class="cico" style="background:#FF9A3C">🦀</div>
+      <div class="cname">汕头</div><div class="cdate">10/15 – 10/16 · 1.5 天</div>
+      <div class="ctheme" style="background:#FF9A3C">生腌朝圣</div>
+    </div>
+    <div class="day" style="border-left-color:#FF9A3C">
+      <div class="dh"><span class="dnum" style="background:#FF9A3C">Day 12 晚</span><span class="dd">10/15 周四</span><span class="dt">生腌 + 打冷 ⭐ 重头戏</span></div>
+      <ul>
+        <li><b>瑞娇嫲嫲生腌</b>（2026 必吃榜第一，非遗）：虾 ¥38 / 蟹 ¥88 / 生蚝 ¥38</li>
+        <li><b>配滚烫白粥 ¥2</b>——这是本地人标配，中和寒凉护胃</li>
+        <li>加：<b>小吴肠粉</b>、<b>细姨甜汤</b></li>
+      </ul>
+      <span class="food">🦀 瑞娇嫲嫲生腌</span><span class="food">🦐 金二顺</span><span class="food">🐟 吴记富苑打冷</span><span class="food">🍜 小吴肠粉</span><span class="food">🍮 细姨甜汤</span>
+      <div class="tip warn-t">
+        <b>生腌安全七条：</b>① 首次只尝 2–3 只虾，别直接上膏蟹 ② 必须配滚烫白粥 ③ <b>绝不配冰啤酒/冰饮</b> ④ 不空腹吃 ⑤ 只选明档现做、当日活鲜的老店 ⑥ 随身带蒙脱石散 + 口服补液盐 ⑦ 吃完当天别赶路。
+      </div>
+    </div>
+    <div class="day" style="border-left-color:#FF9A3C">
+      <div class="dh"><span class="dnum" style="background:#FF9A3C">Day 13</span><span class="dd">10/16 周五</span><span class="dt">潮汕小吃总纲 → 转场福州</span></div>
+      <ul>
+        <li>早：<b>粿条汤 / 肠粉</b></li>
+        <li>午：<b>杏花吴记</b> 或 <b>八合里海记</b>牛肉火锅（现切吊龙、匙仁）</li>
+        <li>加：<b>春梅里卤鹅</b>、<b>榕香蚝烙</b>、<b>广场老牌豆花</b>、甘草水果</li>
+        <li>15:17 <b>G3048</b> → 17:50 到福州</li>
+      </ul>
+      <span class="food">🥩 八合里牛肉火锅</span><span class="food">🦢 春梅里卤鹅</span><span class="food">🦪 榕香蚝烙</span><span class="food">🍡 广场豆花</span><span class="food">🍉 甘草水果</span>
+      <div class="tip">南澳岛本轮<b>降级为可选项</b>——在汕尾红海湾看完海后，南澳岛边际收益下降，而汕头这张小吃清单一天吃不完。</div>
+    </div>
+  </div>
+
+  <!-- 福州 -->
+  <div class="city-block">
+    <div class="city-h">
+      <div class="cico" style="background:#2ED9B7">🌿</div>
+      <div class="cname">福州</div><div class="cdate">10/16 – 10/17 · 1 天</div>
+      <div class="ctheme" style="background:#12A88F">顺路收尾</div>
+    </div>
+    <div class="day" style="border-left-color:#2ED9B7">
+      <div class="dh"><span class="dnum" style="background:#2ED9B7">Day 13 晚</span><span class="dd">10/16 周五</span><span class="dt">三坊七巷夜逛</span></div>
+      <ul>
+        <li>17:50 到福州站，地铁直达三坊七巷</li>
+        <li>晚餐：<b>佛跳墙</b>（可选小份）、<b>鱼丸 / 肉燕 / 拌面扁肉</b></li>
+      </ul>
+      <span class="food">🍲 佛跳墙</span><span class="food">🐟 福州鱼丸</span><span class="food">🥟 肉燕 / 扁肉</span><span class="food">🍜 拌面</span>
+    </div>
+    <div class="day" style="border-left-color:#2ED9B7">
+      <div class="dh"><span class="dnum" style="background:#2ED9B7">Day 14</span><span class="dd">10/17 周六</span><span class="dt">最后一整天 → 夜飞回家</span></div>
+      <ul>
+        <li>上午：<b>三坊七巷</b>（林则徐纪念馆、冰心故居）+ <b>西湖公园</b></li>
+        <li>午餐：<b>老福州</b> 或 达明路美食街</li>
+        <li>下午：<b>鼓山</b> 或 上下杭历史文化街区</li>
+        <li>19:00 出发去长乐机场（机场大巴约 1h，地铁约 1h20m）</li>
+        <li><b>21:35 PN6236 → 23:00 落地安庆</b></li>
+      </ul>
+      <div class="tip">福州站到长乐机场大巴在<b>阿波罗酒店</b>发车，约 30 分钟一班，车程 50–60 分钟，票价 ¥25。务必 19:00 前出发。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 预算 -->
+<section>
+  <div class="sec-h"><span class="dot" style="background:var(--mint)"></span><h2>单人交通预算</h2><span class="tag">票面价，实时以 App 为准</span></div>
+  <div class="budget">
+    <div class="bcard"><div class="bl">机票票面</div><div class="bv">¥1,890</div><div class="bn">4 段：庆渝 / 渝丽 / 丽穗 / 榕庆</div></div>
+    <div class="bcard"><div class="bl">高铁票面</div><div class="bv">¥436</div><div class="bn">4 段：广汕 / 汕汕 / 汕榕 + 顺德往返</div></div>
+    <div class="bcard"><div class="bl">机建 + 燃油</div><div class="bv">≈¥520</div><div class="bn">4 段飞行 × 约 ¥130</div></div>
+    <div class="bcard"><div class="bl">交通合计</div><div class="bv">≈¥2,850</div><div class="bn">不含市内交通与餐宿</div></div>
+  </div>
+</section>
+
+<!-- 注意事项 -->
+<section>
+  <div class="sec-h"><span class="dot" style="background:var(--orange)"></span><h2>购票时间与关键提醒</h2></div>
+
+  <div class="note">
+    <h3>🎫 购票时间表</h3>
+    <ul>
+      <li><b>现在就能买（4 段机票）</b>：国庆票只会涨不会跌，尤其是 PN6236 这种独苗航线。¥450 / ¥350 这种价位建议立刻锁。</li>
+      <li><b>9/29 起抢 10/14 高铁</b>：12306 预售 15 天，广州→汕尾在 9/29 开售。</li>
+      <li><b>10/1 起抢 10/16 高铁</b>：汕头→福州 G3048。</li>
+      <li><b>提前 3 天</b>：玉龙雪山索道票（「丽江旅游集团」小程序，每日 0 点放票）。</li>
+      <li><b>提前 1–2 天</b>：长隆门票（官方 App 比现场便宜 ¥30–50）。</li>
+    </ul>
+  </div>
+
+  <div class="note">
+    <h3>⚠️ 三个最容易翻车的点</h3>
+    <ul>
+      <li><b>PN6236 班期</b>：周二 / 周四 / 周六。10/17 是回程唯一能卡上的周六，错过就得改 10/15（周四）或走中转。</li>
+      <li><b>重庆→丽江 06:25 起飞</b>：前一晚必须早睡。西部航空是廉航，行李额需另购（约 ¥100–150）。</li>
+      <li><b>玉龙雪山索道</b>：国庆后仍限流，且 10 月常因大风停运。行程里 Day 9 留了缓冲日。</li>
+    </ul>
+  </div>
+
+  <div class="note">
+    <h3>🦀 10 月是吃海鲜的黄金窗口</h3>
+    <ul>
+      <li>南海伏季休渔 <b>8/16 结束</b>，"八月开海、九月十月最肥"——你 10 月中旬到，正当时。</li>
+      <li>膏蟹 <b>7–10 月</b>最肥，蟹膏如半融化冰淇淋；牛田洋青蟹中秋到春节最肥。</li>
+      <li>台风季已过，22–28℃，秋高气爽，看海光线最好。</li>
+      <li>暑期人流已回落，价格回到正常水平。</li>
+    </ul>
+  </div>
+
+  <div class="note">
+    <h3>🎒 行李与装备</h3>
+    <ul>
+      <li><b>雪山</b>：羽绒服（现场租 ¥50）、氧气瓶（古城买 ¥20）、墨镜、防晒霜（高原紫外线强）。</li>
+      <li><b>生腌</b>：蒙脱石散 + 口服补液盐，必带。</li>
+      <li><b>廉航</b>：西部航空 4 段飞行，行李额另购，建议全程只带一个 20 寸登机箱 + 背包。</li>
+      <li><b>温差</b>：丽江早晚 5–15℃，广州汕尾 25–30℃，需带薄外套 + 短袖。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 相关页面 -->
+<div class="footlinks">
+  <a class="flink" href="index.html">
+    <div class="fi">🏠</div>
+    <div><div class="ft">返回主页</div><div class="fs">行程总览入口</div></div>
+  </a>
+  <a class="flink" href="travel-planner.html">
+    <div class="fi">🧳</div>
+    <div><div class="ft">旅行工作台</div><div class="fs">行程 / 预算 / 看板</div></div>
+  </a>
+  <a class="flink" href="ticket-weather-report.html">
+    <div class="fi">🎫</div>
+    <div><div class="ft">票况 · 天气</div><div class="fs">票价基线与抢票窗口</div></div>
+  </a>
+</div>
+
+<div class="upd">数据检索于 2026-09-09 · 票价与班次为检索快照，下单前请以 12306 / 航司 App 实时核对</div>
+
+</div>
+</body>
+</html>
