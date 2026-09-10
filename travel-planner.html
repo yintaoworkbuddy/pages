@@ -7,10 +7,10 @@
 <!-- 本工作台通过 WorkBuddy 资料库能力（library skill）搭建、存储和部署 -->
 <style>
 :root{
-  --primary:#4D96FF;--primary-light:#E9F2FF;--primary-dark:#2E6BE6;
-  --bg:#F7FAFF;--card-bg:#FFFFFF;--text:#2C3650;--text-light:#78849B;--text-muted:#A9B3C6;
-  --border:#E7EDF7;--danger:#FF5A5F;--danger-light:#FFEDEF;--success:#12B886;--success-light:#EAFBF3;
-  --warning:#FF9A3C;--info:#4D96FF;--radius:14px;--shadow:0 2px 8px rgba(44,54,80,.06);
+  --primary:#7FA8D8;--primary-light:#F1F5FB;--primary-dark:#5A86C4;
+  --bg:#FAFBFC;--card-bg:#FFFFFF;--text:#333C4E;--text-light:#78849B;--text-muted:#AEB7C4;
+  --border:#E9EDF3;--danger:#D97C80;--danger-light:#FBEDED;--success:#5AA98C;--success-light:#EEF7F3;
+  --warning:#DFAE82;--info:#7FA8D8;--radius:14px;--shadow:0 2px 8px rgba(44,54,80,.06);
   --shadow-lg:0 4px 16px rgba(44,54,80,.1);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -21,15 +21,15 @@ input,select,textarea{font-family:inherit;font-size:16px;outline:none;border:non
 input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 
 /* Header */
-.app-header{background:linear-gradient(135deg,#5B7CFF,#9B6BFF);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(77,150,255,.25)}
+.app-header{background:linear-gradient(135deg,#7E9FDC,#9A94C9);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(127,168,216,.25)}
 .app-header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px}
 .header-actions{display:flex;align-items:center;gap:8px}
 .sync-badge{display:flex;align-items:center;gap:5px;font-size:12px;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;white-space:nowrap}
-.sync-badge.offline{background:rgba(255,90,95,.25)}
+.sync-badge.offline{background:rgba(217,124,128,.25)}
 .sync-badge.online{background:rgba(46,217,183,.25)}
 .sync-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
-.sync-badge.offline .sync-dot{background:#FF5A5F;animation:none}
-.sync-badge.online .sync-dot{background:#2ED9B7}
+.sync-badge.offline .sync-dot{background:#D97C80;animation:none}
+.sync-badge.online .sync-dot{background:#7FCBB8}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .icon-btn{background:rgba(255,255,255,.2);color:#fff;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .icon-btn:hover{background:rgba(255,255,255,.3)}
@@ -47,12 +47,12 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .today-item:last-child{margin-bottom:0}
 .today-item.overdue{background:var(--danger-light);border-left:3px solid var(--danger)}
 .today-item.today{background:var(--primary-light);border-left:3px solid var(--primary)}
-.today-item.upcoming{background:#E9F2FF;border-left:3px solid var(--info)}
+.today-item.upcoming{background:#F1F5FB;border-left:3px solid var(--info)}
 .today-item-info{flex:1;min-width:0}
 .today-item-title{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .today-item-meta{font-size:12px;color:var(--text-light);display:flex;gap:8px;align-items:center}
 .today-item-badge{font-size:11px;padding:2px 6px;border-radius:4px;white-space:nowrap}
-.badge-overdue{background:#FF5A5F;color:#fff}
+.badge-overdue{background:#D97C80;color:#fff}
 .badge-today{background:var(--primary);color:#fff}
 .badge-upcoming{background:var(--info);color:#fff}
 .today-action{flex-shrink:0;background:#fff;border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text)}
@@ -111,11 +111,11 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .tag{font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg);color:var(--text-light)}
 .tag-expense{background:var(--danger-light);color:var(--danger)}
 .tag-income{background:var(--success-light);color:var(--success)}
-.tag-transport{background:#E8F2FF;color:#2E6BE6}
-.tag-hotel{background:#FFE9EC;color:#FF5A5F}
-.tag-food{background:#E9F2FF;color:#FF9A3C}
+.tag-transport{background:#E8F2FF;color:#5A86C4}
+.tag-hotel{background:#FFE9EC;color:#D97C80}
+.tag-food{background:#F1F5FB;color:#DFAE82}
 .tag-ticket{background:#E6F7FB;color:#1FA8A0}
-.tag-shopping{background:#EDFBF2;color:#12B886}
+.tag-shopping{background:#EDFBF2;color:#5AA98C}
 .tag-other{background:#F4F7FC;color:#78849B}
 .amount-expense{color:var(--danger);font-weight:600}
 .amount-income{color:var(--success);font-weight:600}
@@ -157,20 +157,20 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
   /* 城市图标 + 世界遗产/荣誉徽章（看板 & 行程） */
   .dest-card-icon{font-size:14px;margin-right:5px;line-height:1}
   .dest-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;color:#fff;white-space:nowrap}
-  .dest-badge.wh{background:#FF6B6B}
-  .dest-badge.memory{background:#A66CFF}
-  .dest-badge.food{background:#FF9A3C}
-  .dest-badge.culture{background:#4D96FF}
+  .dest-badge.wh{background:#DE9090}
+  .dest-badge.memory{background:#AC9FD4}
+  .dest-badge.food{background:#DFAE82}
+  .dest-badge.culture{background:#7FA8D8}
   .itin-icon{font-size:14px;margin-right:2px;line-height:1}
   .itin-badge{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;color:#fff;white-space:nowrap}
-  .itin-badge.wh{background:#FF6B6B}
-  .itin-badge.memory{background:#A66CFF}
-  .itin-badge.food{background:#FF9A3C}
-  .itin-badge.culture{background:#4D96FF}
+  .itin-badge.wh{background:#DE9090}
+  .itin-badge.memory{background:#AC9FD4}
+  .itin-badge.food{background:#DFAE82}
+  .itin-badge.culture{background:#7FA8D8}
 
   /* 必体验高亮条（与主页九城卡 .cul-do 同色系，清爽黄绿蓝） */
-  .list-item-must{font-size:12px;color:#1D4FD0;background:#E9F2FF;padding:6px 10px;border-radius:8px;margin-top:7px;line-height:1.55;border-left:3px solid #FFD93D}
-  .dest-card-must{font-size:11.5px;color:#1D4FD0;background:#E9F2FF;padding:5px 9px;border-radius:8px;margin-top:6px;line-height:1.5}
+  .list-item-must{font-size:12px;color:#4A7CB8;background:#F1F5FB;padding:6px 10px;border-radius:8px;margin-top:7px;line-height:1.55;border-left:3px solid #D9C97E}
+  .dest-card-must{font-size:11.5px;color:#4A7CB8;background:#F1F5FB;padding:5px 9px;border-radius:8px;margin-top:6px;line-height:1.5}
 
 /* Empty state */
 .empty-state{text-align:center;padding:24px 16px;color:var(--text-light)}
@@ -178,7 +178,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .empty-state p{font-size:14px}
 
 /* Backup reminder */
-.backup-reminder{background:#E9F2FF;border:1px solid #FFE6A8;border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:13px;color:#B36B00;display:flex;align-items:center;gap:8px}
+.backup-reminder{background:#F1F5FB;border:1px solid #FFE6A8;border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:13px;color:#B36B00;display:flex;align-items:center;gap:8px}
 .backup-reminder svg{width:18px;height:18px;flex-shrink:0}
 
 /* Modal */
@@ -241,7 +241,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer}
 .overview-todos{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
 
 .ot-label{font-size:11px;color:var(--text-light);font-weight:600}
-.todo-chip{font-size:11px;background:#E9F2FF;color:#B36B00;border:1px solid #FFE6A8;padding:3px 9px;border-radius:12px;white-space:nowrap}
+.todo-chip{font-size:11px;background:#F1F5FB;color:#B36B00;border:1px solid #FFE6A8;padding:3px 9px;border-radius:12px;white-space:nowrap}
 
 /* Responsive */
 body{-webkit-tap-highlight-color:transparent}
@@ -282,41 +282,41 @@ body{-webkit-tap-highlight-color:transparent}
 .backup-wrap{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
 .backup-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
 .backup-sub{font-size:12px;color:var(--text-light);margin-bottom:12px}
-.backup-note{font-size:12px;color:#B36B00;background:#E9F2FF;border:1px dashed #FFE066;padding:8px 12px;border-radius:8px;margin-bottom:16px;line-height:1.5}
+.backup-note{font-size:12px;color:#B36B00;background:#F1F5FB;border:1px dashed #FFE066;padding:8px 12px;border-radius:8px;margin-bottom:16px;line-height:1.5}
 .route-flow{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:18px;padding:12px;background:#FAF7FF;border-radius:10px}
-.rf-node{padding:6px 11px;border-radius:18px;background:#fff;border:1px solid #E4EAF4;font-size:12.5px;font-weight:500;color:#2C3650;white-space:nowrap}
-.rf-node.start{background:#FF9A3C;color:#fff;border-color:#FF9A3C}
-.rf-node.end{background:#2ED9B7;color:#fff;border-color:#2ED9B7}
-.rf-arrow{color:#A9B3C6;font-size:13px}
+.rf-node{padding:6px 11px;border-radius:18px;background:#fff;border:1px solid #E4EAF4;font-size:12.5px;font-weight:500;color:#333C4E;white-space:nowrap}
+.rf-node.start{background:#DFAE82;color:#fff;border-color:#DFAE82}
+.rf-node.end{background:#7FCBB8;color:#fff;border-color:#7FCBB8}
+.rf-arrow{color:#AEB7C4;font-size:13px}
 .dir-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 .dir-card{border:1px solid #E4EAF4;border-radius:12px;padding:14px;background:#fff;position:relative}
-.dir-card.recommended{border:2px solid #FF9A3C;box-shadow:0 4px 14px rgba(255,154,60,.2)}
+.dir-card.recommended{border:2px solid #DFAE82;box-shadow:0 4px 14px rgba(223,174,130,.2)}
 .dir-card h3{font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:6px;color:var(--text)}
-.dir-tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#FF9A3C;color:#fff;font-weight:600}
+.dir-tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#DFAE82;color:#fff;font-weight:600}
 .dir-card ul{list-style:none;font-size:12.5px;color:#5C6779;line-height:1.75;padding:0;margin:0}
 .dir-card li{margin-bottom:3px}
-.dir-card li:before{content:"·";color:#FF9A3C;font-weight:700;margin-right:6px}
+.dir-card li:before{content:"·";color:#DFAE82;font-weight:700;margin-right:6px}
 .cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
 .cmp-table th,.cmp-table td{padding:9px 11px;text-align:left;border-bottom:1px solid #F4F7FC;vertical-align:top}
-.cmp-table th{background:#FAF7FF;font-weight:600;color:#2C3650}
+.cmp-table th{background:#FAF7FF;font-weight:600;color:#333C4E}
 .cmp-table td:first-child{color:#78849B;font-weight:500;width:28%}
-.cmp-table .best{color:#12B886;font-weight:600}
-.rec-banner{background:linear-gradient(135deg,#FF9A3C,#FFD93D);color:#fff;border-radius:12px;padding:15px 16px;margin-bottom:16px}
+.cmp-table .best{color:#5AA98C;font-weight:600}
+.rec-banner{background:linear-gradient(135deg,#DFAE82,#D9C97E);color:#fff;border-radius:12px;padding:15px 16px;margin-bottom:16px}
 .rec-banner h3{font-size:15px;margin-bottom:6px;font-weight:700}
 .rec-banner p{font-size:12.5px;line-height:1.65;opacity:.96;margin:0}
 .anchor-list{font-size:12.5px;color:#5C6779;background:#FAF7FF;border-radius:10px;padding:12px 14px;line-height:1.9}
-.anchor-list b{color:#2C3650}
+.anchor-list b{color:#333C4E}
   .budget-cmp{margin-top:18px}
-  .budget-cmp-title{font-size:15px;font-weight:600;color:#2C3650;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+  .budget-cmp-title{font-size:15px;font-weight:600;color:#333C4E;margin-bottom:12px;display:flex;align-items:center;gap:6px}
   .budget-note{margin-top:12px;font-size:12.5px;line-height:1.7;color:#78849B;background:#FAF7FF;border-radius:10px;padding:12px 14px}
-  .budget-note b{color:#2C3650}
-.hist-card{border:1px solid #E4EAF4;border-left:4px solid #A9B3C6;background:#FAF7FF;border-radius:12px;padding:14px;margin-bottom:16px}
-.hist-card h3{font-size:15px;margin:0 0 6px;color:#2C3650}
+  .budget-note b{color:#333C4E}
+.hist-card{border:1px solid #E4EAF4;border-left:4px solid #AEB7C4;background:#FAF7FF;border-radius:12px;padding:14px;margin-bottom:16px}
+.hist-card h3{font-size:15px;margin:0 0 6px;color:#333C4E}
 .hist-card .hist-meta{font-size:12px;color:#78849B;margin-bottom:8px}
 .hist-card ul{margin:6px 0;padding-left:18px}
 .hist-card li{font-size:13px;color:#5C6779;line-height:1.6;margin-bottom:3px}
-.hist-card .hist-cmp{font-size:13px;color:#B36B00;background:#E9F2FF;padding:8px 10px;border-radius:8px;margin-top:8px;font-weight:600}
-.backup-sub2{font-size:14px;font-weight:600;color:#2C3650;margin:18px 0 10px}
+.hist-card .hist-cmp{font-size:13px;color:#B36B00;background:#F1F5FB;padding:8px 10px;border-radius:8px;margin-top:8px;font-weight:600}
+.backup-sub2{font-size:14px;font-weight:600;color:#333C4E;margin:18px 0 10px}
 
 @media(max-width:768px){.dir-cards{grid-template-columns:1fr}.route-flow{font-size:11px}.rf-node{padding:5px 9px}}
 
@@ -349,7 +349,7 @@ body{-webkit-tap-highlight-color:transparent}
   .cw-temp{font-size:36px;font-weight:800;color:var(--success);line-height:1.1}
   .cw-temp small{font-size:15px;font-weight:600;color:var(--text-light)}
   .cw-desc{font-size:13px;color:var(--text-light);margin-top:4px}
-  .cw-hint{margin-top:12px;font-size:12px;color:#2E6BE6;background:var(--success-light);border-radius:10px;padding:8px 10px;line-height:1.5}
+  .cw-hint{margin-top:12px;font-size:12px;color:#5A86C4;background:var(--success-light);border-radius:10px;padding:8px 10px;line-height:1.5}
 
   /* Ticket & Weather module 票况·天气 */
   .tw-h2{font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
@@ -367,7 +367,7 @@ body{-webkit-tap-highlight-color:transparent}
   .tw-note{font-size:12px;color:var(--text-light);margin-top:8px;line-height:1.5}
   .tw-warn{background:var(--danger-light);border-left:4px solid var(--danger);padding:10px 12px;border-radius:8px;font-size:13px;margin-top:8px;line-height:1.5}
   .tw-sum{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-  .tw-sum .box{flex:1;min-width:140px;background:#E9F2FF;border:1px solid #FFE6A8;border-radius:10px;padding:12px}
+  .tw-sum .box{flex:1;min-width:140px;background:#F1F5FB;border:1px solid #FFE6A8;border-radius:10px;padding:12px}
   .tw-sum .box b{font-size:20px;color:var(--info);display:block}
   .tw-sum .box span{font-size:12px;color:var(--text-light)}
   .tw-list{margin:6px 0 0 18px;font-size:13px;line-height:1.6}
@@ -378,14 +378,14 @@ body{-webkit-tap-highlight-color:transparent}
   body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;
     background:
       radial-gradient(420px 320px at 8% 4%, rgba(255,107,107,.10), transparent 62%),
-      radial-gradient(400px 300px at 92% 10%, rgba(77,150,255,.10), transparent 62%),
+      radial-gradient(400px 300px at 92% 10%, rgba(127,168,216,.10), transparent 62%),
       radial-gradient(480px 340px at 50% 98%, rgba(166,108,255,.09), transparent 64%);}
 
   /* 行程节点：起点/终点用不同糖果色 */
-  .rf-node.start{background:#FF6B6B;border-color:#FF6B6B}
-  .rf-node.end{background:#2ED9B7;border-color:#2ED9B7}
+  .rf-node.start{background:#DE9090;border-color:#DE9090}
+  .rf-node.end{background:#7FCBB8;border-color:#7FCBB8}
   /* 必体验条：改为淡彩底 + 彩色左边条 */
-  .list-item-must{background:#EAF2FF;border-left:3px solid #4D96FF}
+  .list-item-must{background:#EAF2FF;border-left:3px solid #7FA8D8}
   .dest-card-must{background:#FFF3E4}
 </style>
 </head>
@@ -418,7 +418,7 @@ body{-webkit-tap-highlight-color:transparent}
   <section class="overview">
     <h2>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h7"/></svg>
-      行程总览 · 10/5 出发 → 10/19 到家
+      行程总览 · 10/3 出发 → 10/17 到家
     </h2>
     <div class="stats-row" id="statsRow"></div>
     <div class="route-scroll">
@@ -450,7 +450,7 @@ body{-webkit-tap-highlight-color:transparent}
       </div>
       <div class="cw-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
       <div class="cw-grid" id="wb-calGrid"></div>
-      <div class="cw-foot"><span class="trip-span">🧳 10/5–10/19 · 15天14晚</span><span>安庆 → 9城 → 安庆</span></div>
+      <div class="cw-foot"><span class="trip-span">🧳 10/3–10/17 · 15天14晚</span><span>安庆 → 7城 → 安庆</span></div>
       <div class="cw-legend" id="wb-calLegend"></div>
     </div>
     <div class="cw-card wth">
@@ -487,14 +487,6 @@ body{-webkit-tap-highlight-color:transparent}
     <button class="tab-btn" data-tab="destinations">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
       <span>目的地看板</span>
-    </button>
-    <button class="tab-btn" data-tab="backup">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-      <span>备选路线</span>
-    </button>
-    <button class="tab-btn" data-tab="ticket">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v4a2 2 0 0 0 0 4v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0 0-4V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M13 5v14"/></svg>
-      <span>票况·天气</span>
     </button>
   </nav>
 
@@ -680,223 +672,7 @@ body{-webkit-tap-highlight-color:transparent}
     <div class="dest-board" id="destBoard"></div>
   </div>
 
-  <!-- Module: Backup Route 备选路线 -->
-  <div class="module" id="module-backup">
-    <div class="backup-wrap">
-      <div class="backup-title">🧭 历史方案对比（已弃用 · 仅供对比参考）</div>
-      <div class="backup-sub">主路线已确定为新线（安庆→泉州→汕头→汕尾→港澳→顺德→广州→丽江→重庆→安庆，10/5–10/19）；以下两个为曾考虑但已弃用的旧方案：① 喀什线（原主路线）② 闽粤滇渝环线（旧备选）。</div>
-      <div class="backup-note">⚠️ 本栏为已弃用的历史方案，仅供参考，不进入行程 / 预算 / 看板。</div>
-
-      <div class="hist-card">
-        <h3>① 喀什·西南行（原主路线 · 已弃用）</h3>
-        <div class="hist-meta">20天 · 10/5–10/25 · 跑得最远（新疆+西南）</div>
-        <ul>
-          <li>路线：安庆→喀什→重庆→丽江→南宁→广州→顺德→澳门→香港→汕尾→汕头→厦门→安庆</li>
-          <li>2人总花费约 ¥23,000（交通¥9,070 + 酒店¥5,700 + 喀什小团¥2,400 + 餐饮门票¥6,000）</li>
-          <li>特点：喀什段往返机票溢价高 + 需报当地小团（约¥1,200/人），路程最远最累</li>
-          <li>弃用原因：太远太赶、喀什小团不确定、花费最高 → 改走更近的福建沿海线</li>
-        </ul>
-        <div class="hist-cmp">vs 当前主路线（新线）：省约 ¥6,000+/2人、少跑 2,000+km、15天 vs 20天</div>
-      </div>
-
-      <div class="backup-sub2">② 闽粤滇渝环线（旧备选 · 已弃用）</div>
-
-      <div class="route-flow">
-        <span class="rf-node start">安庆</span><span class="rf-arrow">→</span>
-        <span class="rf-node">泉州</span><span class="rf-arrow">→</span>
-        <span class="rf-node">厦门</span><span class="rf-arrow">→</span>
-        <span class="rf-node">汕头·汕尾</span><span class="rf-arrow">→</span>
-        <span class="rf-node">香港·澳门</span><span class="rf-arrow">→</span>
-        <span class="rf-node">广州</span><span class="rf-arrow">→</span>
-        <span class="rf-node">南宁</span><span class="rf-arrow">→</span>
-        <span class="rf-node">丽江</span><span class="rf-arrow">→</span>
-        <span class="rf-node">重庆</span><span class="rf-arrow">→</span>
-        <span class="rf-node end">安庆</span>
-      </div>
-
-      <div class="dir-cards">
-        <div class="dir-card recommended">
-          <h3>正走 <span class="dir-tag">推荐</span></h3>
-          <ul>
-            <li>安庆→泉州(动车直达)→厦门→…→重庆→安庆(飞机)</li>
-            <li>两个锚点航班都落便宜窗口：出发在价格洼地、返程在节后</li>
-            <li>日期完美契合：10/4(周日)出发→10/24(周六)返，两段都有班</li>
-            <li>福建/港澳略早(10/4–14)，已避开 10/1–3 最高峰</li>
-          </ul>
-        </div>
-        <div class="dir-card">
-          <h3>反走</h3>
-          <ul>
-            <li>安庆→重庆(飞机)→…→厦门→安庆(飞机)</li>
-            <li>人流更优：福建/港澳放到 10/14–24 节后，人最少</li>
-            <li>但最贵的重庆段落在假期出发日，反而更贵</li>
-            <li>安庆→重庆仅周二/四/六有班，最早 10/6(周二)出发</li>
-          </ul>
-        </div>
-      </div>
-
-      <table class="cmp-table">
-        <thead><tr><th>对比维度</th><th>正走</th><th>反走</th></tr></thead>
-        <tbody>
-          <tr><td>2人交通总花费</td><td class="best">约 ¥6000–6500</td><td>约 ¥7000–7500</td></tr>
-          <tr><td>国庆机票洼地利用</td><td class="best">出发10/4洼地+返程节后</td><td>出发10/6 略过洼地</td></tr>
-          <tr><td>福建/港澳人流</td><td>10/4–14 假期尾巴</td><td class="best">10/14–24 节后最空</td></tr>
-          <tr><td>航班日期可行性</td><td class="best">10/4→10/24 两段都有班</td><td>须 10/6(周二)出发</td></tr>
-          <tr><td>与主路线差异</td><td colspan="2" style="text-align:center;color:#78849B">去掉喀什(省¥2000+)，改走福建沿海</td></tr>
-        </tbody>
-      </table>
-
-      <div class="rec-banner">
-        <h3>✅ 推荐：正走 · 10/4（周日）出发，10/24（周六）返回</h3>
-        <p>出发日正好落在国庆机票价格洼地（比 10/1–2 便宜 30–50%）；第一段改安庆→泉州动车直达（零回头、省¥170），最贵的重庆段放在节后返程（PN6235 周六有班），整体最省。若极端怕人，可选反走 10/6 出发，代价是多花约 ¥800–1000 且晚回 2 天。</p>
-      </div>
-
-      <div class="anchor-list">
-        <b>🔑 两个关键锚点航班（决定正反走可行性）：</b><br>
-        · 第一段（推荐动车）：安庆→泉州 中转1次，G7150 安庆07:08→铜陵07:49 换乘 G1669 铜陵北09:30→泉州东14:11，全程约 7h，约 ¥425/人；比「飞厦门+动车泉州」省¥170且零回头<br>
-        · 返程锚点：重庆→安庆 西部航空 PN6235，17:45→19:40，1h55m，约 ¥700/人，班期 <b>周二·四·六</b>（10/24 周六✓ 硬约束）<br>
-        · 环线其余段（厦门→汕头¥106、汕尾→香港¥134、广州→南宁¥200、南宁→丽江¥370、丽江→重庆¥480）正反走一致<br>
-        · 备选：安庆↔厦门 GS7633/GS7634（¥480、周1/3/5/7）可作应急；或飞福州（PN6235 安庆→福州 1h20m）再动车南下，同样零回头
-      </div>
-
-      <div class="day-list">
-        <div class="day-list-title">📅 逐日行程（正走 · 推荐 10/4 出发 → 10/24 返回，共 21 天）</div>
-
-        <div class="day-item"><div class="d-head">D1 · 10/4 周日 · 安庆→泉州</div><div class="d-body"><span class="d-trans">高铁</span>动车直达（中转1次）：G7150 安庆 07:08→铜陵 07:49，换乘 G1669 铜陵北 09:30→泉州东 14:11，全程约 7h，约 ¥425/人。比飞厦门省约 ¥170 且零回头。宿泉州。</div></div>
-
-        <div class="day-item"><div class="d-head">D2 · 10/5 周一 · 泉州→厦门</div><div class="d-body"><span class="d-trans">游玩</span>开元寺、西街、清净寺、洛阳桥。下午动车泉州→厦门（约 30min，¥25–30/人）。宿厦门。</div></div>
-
-        <div class="day-item"><div class="d-head">D3 · 10/6 周二 · 厦门</div><div class="d-body"><span class="d-trans">游玩</span>鼓浪屿一日（轮渡需提前购票）。傍晚中山路 / 沙坡尾。宿厦门。</div></div>
-
-        <div class="day-item"><div class="d-head">D4 · 10/7 周三 · 厦门→汕头</div><div class="d-body"><span class="d-trans">高铁</span>厦门→汕头（约 1.5h，¥106/人）。下午小公园骑楼、西堤公园日落、牛肉火锅。宿汕头。</div></div>
-
-        <div class="day-item"><div class="d-head">D5 · 10/8 周四 · 汕头→南澳岛</div><div class="d-body"><span class="d-trans">海岛</span>早 7 点前过跨海大桥避堵；环岛路→青澳湾（北回归线自然之门）→风车山。宿汕头。</div></div>
-
-        <div class="day-item"><div class="d-head">D6 · 10/9 周五 · 汕头→汕尾</div><div class="d-body"><span class="d-trans">高铁</span>汕头→汕尾（约 1h，¥79-94/人）。红海湾、金町湾。宿汕尾。</div></div>
-
-        <div class="day-item"><div class="d-head">D7 · 10/10 周六 · 汕尾</div><div class="d-body"><span class="d-trans">休闲</span>二马路夜市、风车岛、金町湾。宿汕尾。</div></div>
-
-        <div class="day-item"><div class="d-head">D8 · 10/11 周日 · 汕尾→香港</div><div class="d-body"><span class="d-trans">高铁</span>汕尾→香港西九龙（经深圳北，约 1.5-2h，¥130-160/人）。宿香港。</div></div>
-
-        <div class="day-item"><div class="d-head">D9 · 10/12 周一 · 香港</div><div class="d-body"><span class="d-trans">游玩</span>太平山顶、维港、尖沙咀 / 旺角。宿香港。</div></div>
-
-        <div class="day-item"><div class="d-head">D10 · 10/13 周二 · 香港→澳门</div><div class="d-body"><span class="d-trans">巴士</span>港珠澳大桥金巴（约 40min，¥65/人）。大三巴、路环、官也街。宿澳门。</div></div>
-
-        <div class="day-item"><div class="d-head">D11 · 10/14 周三 · 澳门→广州</div><div class="d-body"><span class="d-trans">高铁</span>港珠澳大桥→珠海口岸，珠海站→广州南 高铁（约 1h，¥70-80/人）。宿广州。</div></div>
-
-        <div class="day-item"><div class="d-head">D12 · 10/15 周四 · 广州</div><div class="d-body"><span class="d-trans">主题</span>长隆欢乐世界 / 野生动物世界。宿广州。</div></div>
-
-        <div class="day-item"><div class="d-head">D13 · 10/16 周五 · 广州→南宁</div><div class="d-body"><span class="d-trans">高铁</span>G2955 广州→南宁（约 3-4h，¥200/人）。宿南宁。</div></div>
-
-        <div class="day-item"><div class="d-head">D14 · 10/17 周六 · 南宁</div><div class="d-body"><span class="d-trans">游玩</span>青秀山、三街两巷、中山路夜市。宿南宁。</div></div>
-
-        <div class="day-item"><div class="d-head">D15 · 10/18 周日 · 南宁→丽江</div><div class="d-body"><span class="d-trans">飞机</span>JD5387 南宁→丽江（07:00→08:45，¥370/人）。下午丽江古城。宿丽江。</div></div>
-
-        <div class="day-item"><div class="d-head">D16 · 10/19 周一 · 丽江</div><div class="d-body"><span class="d-trans">雪山</span>玉龙雪山、蓝月谷，晚上菌子火锅。宿丽江。</div></div>
-
-        <div class="day-item"><div class="d-head">D17 · 10/20 周二 · 丽江</div><div class="d-body"><span class="d-trans">休闲</span>拉市海 / 束河古镇 或 休整。宿丽江。</div></div>
-
-        <div class="day-item"><div class="d-head">D18 · 10/21 周三 · 丽江→重庆</div><div class="d-body"><span class="d-trans">飞机</span>3U8011 丽江→重庆（21:20→22:50，¥480/人）。宿重庆。</div></div>
-
-        <div class="day-item"><div class="d-head">D19 · 10/22 周四 · 重庆</div><div class="d-body"><span class="d-trans">游玩</span>洪崖洞、解放碑、李子坝、火锅。宿重庆。</div></div>
-
-        <div class="day-item"><div class="d-head">D20 · 10/23 周五 · 重庆</div><div class="d-body"><span class="d-trans">游玩</span>武隆 / 磁器口 或 休整。宿重庆。</div></div>
-
-        <div class="day-item"><div class="d-head">D21 · 10/24 周六 · 重庆→安庆</div><div class="d-body"><span class="d-trans">飞机</span>PN6235 重庆→安庆（17:45→19:40，周二/四/六班，约 ¥700/人）。回到安庆，行程结束。</div></div>
-      </div>
-
-      <!-- 预算对比：主路线 vs 备选 -->
-      <div class="budget-cmp">
-        <div class="budget-cmp-title">💰 预算对比（主路线 vs 备选 · 按 2 人估算）</div>
-        <table class="cmp-table">
-          <thead><tr><th>费用项</th><th>主路线 · 喀什线</th><th>备选 · 闽粤滇渝环线</th></tr></thead>
-          <tbody>
-            <tr><td>大交通（机票+高铁，2人）</td><td>¥9,070</td><td class="best">¥5,462</td></tr>
-            <tr><td>酒店（全季档·2人1间·约18晚）</td><td>¥5,700</td><td class="best">¥5,390</td></tr>
-            <tr><td>喀什小团（2人·4天包车导）</td><td>¥2,400</td><td class="best">— 不走喀什</td></tr>
-            <tr><td>餐饮 / 门票 / 市内交通</td><td>约¥6,000</td><td>约¥6,000</td></tr>
-            <tr><td><b>合计（2人）</b></td><td><b>约¥23,170</b></td><td class="best"><b>约¥16,852</b></td></tr>
-            <tr><td><b>人均</b></td><td><b>约¥11,585</b></td><td class="best"><b>约¥8,426</b></td></tr>
-          </tbody>
-        </table>
-        <div class="budget-note">说明：① 酒店按全季/同档次连锁（2人合住1间，均价约¥280/晚，港澳·喀什旺季上浮）估算；② 喀什小团按¥1,200/人×2估算，实际报价浮动较大；③ 餐饮门票按日均¥300/人估算，两边相近未计入核心差异；④ 机票为当前查询价，出票前请复核实时价。备选比主路线省约 <b>¥6,300/2人（人均省约¥3,160）</b>，主要来自免去喀什往返大交通溢价与喀什小团。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Module: Ticket & Weather 票况·天气 -->
-  <div class="module" id="module-ticket">
-    <!-- 关键窗口 -->
-    <div class="card">
-      <div class="tw-h2"><span class="tw-tag tw-brand">关键窗口</span> 国庆放假与抢票节奏</div>
-      <p style="font-size:13px;line-height:1.6">2026 国庆 <b>10/1(周四)–10/7(周三)</b> 放假 7 天，9/20(周日)、10/10(周六) 补班；中秋已结束。</p>
-      <ul class="tw-list">
-        <li><b>10/5–10/7</b> 仍在国庆假期末尾 → <span class="tw-tight">前 3 天票最难抢</span></li>
-        <li><b>10/8 起</b> 假期结束进入平峰 → 票变松、机票回落</li>
-        <li>铁路 15 天预售：<b>约 9/20 开售 10/5 票</b>，现买不到，用近期 8 月真实价作基线，国庆浮动另计</li>
-      </ul>
-    </div>
-
-    <!-- 10段票价比对 -->
-    <div class="card">
-      <div class="tw-h2"><span class="tw-tag tw-blue">逐段比对</span> 10 段交通票价基线（近期真实票价）</div>
-      <table class="tw-table">
-        <thead><tr><th>段</th><th>车次 / 航班</th><th>近期票价(人)</th><th>时长</th><th>国庆难度</th><th>购票建议</th></tr></thead>
-        <tbody>
-          <tr><td class="tw-seg">① 安庆→泉州</td><td>动车联运 G7150(安庆07:08→铜陵07:49)+G1669(铜陵北09:30→泉州东14:11)</td><td class="tw-price">¥425.5</td><td>~7h</td><td class="tw-tight">紧张</td><td>9/20 开售即抢；G1669 到"泉州东"非泉州站</td></tr>
-          <tr><td class="tw-seg">② 泉州→汕头</td><td>G3041 泉州南08:22→汕头10:11（另有晚班 D3113）</td><td class="tw-price">¥142</td><td>1h49m</td><td class="tw-tight">偏紧</td><td>沿海热门短途，开售抢二等座</td></tr>
-          <tr><td class="tw-seg">③ 汕头→汕尾</td><td>多车次（G6576 等，150+班/日）</td><td class="tw-price">¥79–94</td><td>~1h</td><td class="tw-easy">宽松</td><td>车次极密，可候补</td></tr>
-          <tr><td class="tw-seg">④ 汕尾→香港西九龙</td><td>G925/G923/G6577 汕尾16:xx→香港西九龙18:xx</td><td class="tw-price">¥134–210</td><td>~1.5h</td><td class="tw-tight">极紧张</td><td><b>全程最难点</b>：需港澳通行证及签注</td></tr>
-          <tr><td class="tw-seg">⑤ 香港→澳门</td><td>喷射飞航（上环→外港）</td><td class="tw-price">HK$194 / 212周末</td><td>60min</td><td class="tw-mid">偏紧</td><td>船班国庆易满，提前 1–2 天订；10/5 周一按平日价</td></tr>
-          <tr><td class="tw-seg">⑥ 澳门→顺德</td><td>拱北过关 + 广珠城轨（珠海→顺德）</td><td class="tw-price">¥60</td><td>~1h</td><td class="tw-easy">宽松</td><td>城轨班次密，随到随走</td></tr>
-          <tr><td class="tw-seg">⑦ 顺德→广州</td><td>广珠城轨（顺德→广州南）</td><td class="tw-price">¥10</td><td>12–20min</td><td class="tw-easy">极松</td><td>随到随走</td></tr>
-          <tr><td class="tw-seg">⑧ 广州→丽江</td><td>CZ6603 07:00→09:55 / JD5131 / PN6352</td><td class="tw-price">¥680–1020</td><td>~2h55m</td><td class="tw-mid">偏紧</td><td>约 10/13–15 国庆后机票回落</td></tr>
-          <tr><td class="tw-seg">⑨ 丽江→重庆</td><td>3U8011 等</td><td class="tw-price">¥447–510</td><td>~2h</td><td class="tw-easy">宽松</td><td>约 10/15–17 平峰，票量足</td></tr>
-          <tr><td class="tw-seg">⑩ 重庆→安庆</td><td>PN6235 重庆15:50→安庆17:45（仅周一/周五）</td><td class="tw-price">¥680–770</td><td>~1h55m</td><td class="tw-mid">锁定</td><td><b>10/19 周一完美对齐</b>，直接锁</td></tr>
-        </tbody>
-      </table>
-      <div class="tw-note">注：铁路为浮动票价，国庆二等座或上浮 10–30%；机票 8 月为暑期限高，国庆后(10/8 后)通常回落。以上为"近期真实成交价"基线，非 10 月实付价。</div>
-    </div>
-
-    <!-- 天气预估 -->
-    <div class="card">
-      <div class="tw-h2"><span class="tw-tag tw-green">天气预估</span> 各目的地 10 月历史气候 + 台风尾声</div>
-      <table class="tw-table">
-        <thead><tr><th>区域 / 城市</th><th>10 月气候（历史同期）</th><th>行程时段</th><th>穿衣 / 装备</th></tr></thead>
-        <tbody>
-          <tr><td class="tw-seg">华南沿海<br>泉州·汕头·汕尾·<br>香港·澳门·顺德·广州</td><td>均温 24–27℃，温暖少雨；<b>但处台风季尾声</b>：10 月有 1–2 个热带气旋，集中上旬及中旬末至下旬初。</td><td>10/5–10/14</td><td>短袖+薄长袖、晴雨伞、防晒；<b>重点盯台风</b></td></tr>
-          <tr><td class="tw-seg">丽江</td><td>黄金季：白天 18–21℃、夜间 5–11℃，<b>昼夜大温差</b>；降水骤减，秋高气爽。</td><td>约 10/15–17</td><td>白天薄衫+夜间厚外套/冲锋衣</td></tr>
-          <tr><td class="tw-seg">重庆</td><td>入秋均温约 18℃；<b>雨日多</b>（近 16 天/月），连阴雨风险，体感湿凉。</td><td>约 10/17–19</td><td>薄毛衣/外套 + 雨伞</td></tr>
-          <tr><td class="tw-seg">安庆</td><td>沿江 10 月均温约 18–20℃，秋高气爽为主，偶连阴雨。</td><td>10/5 出发 · 10/19 返回</td><td>出发短袖薄外套，返回加长袖</td></tr>
-        </tbody>
-      </table>
-      <div class="tw-warn">⚠️ 预报时效：距出行 40+ 天，逐日精确预报暂不可靠。建议 <b>9 月底</b>再看中央气象台 / 香港天文台 / 澳门气象局；华南段(10/5–14)属台风可能窗口，需重点防。</div>
-    </div>
-
-    <!-- 行动清单 -->
-    <div class="card">
-      <div class="tw-h2"><span class="tw-tag tw-red">行动清单</span> 购票时机与待办</div>
-      <ul class="tw-list">
-        <li><b>现在</b>：确认港澳通行证+香港/澳门签注已办（否则买不了跨境高铁与过关）</li>
-        <li><b>9/20 起</b>：铁路开售优先抢 <b>④汕尾→香港</b>（最难），再抢 ①、②、⑥⑦城内段</li>
-        <li><b>9 月初–中</b>：盯机票 ⑧⑨，国庆后价格回落时锁低价；<b>⑩重庆→安庆 PN6235 仅周一五，直接锁定 10/19</b></li>
-        <li><b>出发前 1–2 天</b>：订 ⑤香港→澳门 船票（国庆船班满）</li>
-        <li><b>9 月底</b>：看精确天气预报，华南段备台风预案（船班停航可改港珠澳大桥金巴/深圳北中转）</li>
-      </ul>
-    </div>
-
-    <!-- 费用小结 -->
-    <div class="card">
-      <div class="tw-h2"><span class="tw-tag tw-blue">费用小结</span> 2 人交通总支出预估</div>
-      <div class="tw-sum">
-        <div class="box"><b>≈¥6,200–6,400</b><span>/ 2人（含 HK$388 船票≈¥360）</span></div>
-        <div class="box"><b>+10–30%</b><span>国庆铁路浮动+假期机票</span></div>
-        <div class="box"><b>⑧⑨⑩ 机票</b><span>约占总额 60%</span></div>
-      </div>
-      <div class="tw-note">与工作台预算管理已写入的"2人交通约 ¥6,372"高度吻合，基线可靠。实际以购票当日实付为准。</div>
-      <a class="tw-link" href="https://yintaoworkbuddy.github.io/pages/ticket-weather-report.html" target="_blank">📄 查看完整报告（含明细与台风预案）→</a>
-    </div>
-  </div>
+  
 
 </div>
 
@@ -939,7 +715,7 @@ var OPTIONS_MAP = {
     "目的地看板": { "text": "目的地看板", "id": "43GUwpsWENMT" }
   }
 };
-var STORAGE_KEY = "wb_travel_planner_data_v13";
+var STORAGE_KEY = "wb_travel_planner_data_v14";
 var syncMode = "offline";
 var allRecords = [];
 var editTarget = null;
@@ -947,12 +723,12 @@ var confirmCallback = null;
 
 // Category colors for pie chart
 var CATEGORY_COLORS = {
-  "交通": "#4D96FF",
-  "住宿": "#FF6B6B",
-  "餐饮": "#FF9A3C",
-  "门票": "#A66CFF",
-  "购物": "#2ED9B7",
-  "其他": "#A0E548"
+  "交通": "#7FA8D8",
+  "住宿": "#DFA0A0",
+  "餐饮": "#E0B487",
+  "门票": "#B0A3D6",
+  "购物": "#7FC9B8",
+  "其他": "#B8CE8F"
 };
 
 // ==================== Utilities ====================
@@ -1163,67 +939,62 @@ function buildProperties(rec) {
 function getExampleData() {
   var todayStr = getTodayStr();
   return [
-    // ===== 行程规划（新确认线 · 安庆-泉州-汕头-汕尾-港澳-顺德-广州-丽江-重庆-安庆 · 10/5-10/19） =====
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-05", title: "安庆→泉州（动车中转）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "G7150 安庆07:08→铜陵07:49 换乘 G1669 铜陵北09:30→泉州东14:11，约7h，¥425/人（2人¥850）；买联程票铜陵北站内换乘；晚到泉州，西街初步逛吃" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-06", title: "泉州：闽南古韵·美食一日", amount: 0, category: "古城", status: "已确定", priority: "中", notes: "开元寺、西街、清净寺、洛阳桥、蟳埔村簪花围；吃：面线糊、土笋冻、姜母鸭、润饼、四果汤" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-07", title: "泉州→汕头（高铁G3041）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "泉州南08:22→汕头10:11，1h49m，¥142/人（2人¥284）；中午到汕头，下午小公园骑楼群、西堤公园；晚上牛肉火锅（八合里/福合埕）、生腌初体验" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-08", title: "汕头→汕尾（高铁）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "高铁约1h，¥79-94/人（2人¥170）；下午到汕尾，红海湾遮浪半岛看海、金町湾沙滩；晚上二马路夜市（薄饼、菜茶、生腌、牛腩）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-09", title: "汕尾→香港西九龙（高铁）", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "高铁约1h15m，¥134/人（2人¥268）；下午到香港，太平山顶、中环、尖沙咀；晚上维港夜景+庙街夜市；带港澳通行证" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-10", title: "香港：维港都市二日", amount: 0, category: "都市", status: "已确定", priority: "高", notes: "旺角/铜锣湾购物、迪士尼或海洋公园（二选一）、叮叮车；茶餐厅：菠萝油、丝袜奶茶、烧腊、蛋挞；晚上幻彩咏香江" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-11", title: "香港→澳门（船）→顺德", amount: 0, category: "船", status: "已确定", priority: "高", notes: "上环港澳码头→澳门外港，喷射飞航60min，每30min一班，平日HKD194/周末HKD212；澳门大三巴、恋爱巷、官也街、路环、葡挞/猪扒包/杏仁饼；傍晚拱北过关+广珠城轨→顺德（约1h5m，¥65-90/人）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-12", title: "顺德：美食之都一日", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "清晖园、逢简水乡、华盖路步行街；吃：鱼生、双皮奶（仁信/民信）、伦教糕、桑拿鸡、毋米粥、烧鹅、陈村粉" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-13", title: "顺德→广州（城轨）· 长隆Day1", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "顺德站→广州南约20-30min，¥10-25/人；下午长隆欢乐世界或野生动物世界；晚上北京路/珠江夜游" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "广州：长隆二日", amount: 0, category: "亲子", status: "已确定", priority: "中", notes: "长隆水上乐园/大马戏（二选一）、广州塔、沙面、早茶（点都德/陶陶居）；亲子友好" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-15", title: "广州→丽江（南航CZ6603直飞）· 古城", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "CZ6603 白云07:05→丽江三义09:55，2h50m，约¥600-700/人（2人¥1300），准点率97%；下午丽江古城、束河古镇休整适应海拔" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-16", title: "丽江·玉龙雪山大索道·蓝月谷", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "上午大索道→4506m冰川公园（提前抢票），备氧气瓶+厚外套；下午蓝月谷；晚上菌子火锅；注意高原反应" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-17", title: "丽江→重庆（川航3U8011直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "3U8011 丽江21:20→重庆22:50，1h30m，¥480/人（2人¥960）；晚班机，夜抵重庆" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-18", title: "重庆：火锅江湖菜一日", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "洪崖洞、解放碑、千厮门大桥夜景；吃：重庆火锅（珮姐/周师兄）、小面、酸辣粉、毛血旺、江湖菜" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-19", title: "重庆→安庆（西部航空PN6235直飞）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "上午补吃（烧烤、抄手、山城小汤圆）；PN6235 重庆15:50→安庆17:45，1h55m，¥700/人（2人¥1400）；当前执飞周一/周五，10月班次请出发前复核（若恢复周二四六则改10/20返程）；行程结束" },
+    // ===== 行程规划（最新定稿 · 安庆-重庆-丽江-广州-汕尾-汕头-福州-安庆 · 10/3-10/17 共15天14晚）=====
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-03", title: "安庆→重庆（PN6236 西部航空）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "PN6236 22:20→次日00:30（仅周二/四/六，10/3周六✓），¥450/人（2人¥900）；深夜落地，轻轨10号线约40分钟进市区，先补觉" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-04", title: "重庆Day1 · 解放碑/洪崖洞 + 火锅开局", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "00:30落地；上午补觉，中午解放碑/洪崖洞溜达；晚餐珮姐老火锅或周师兄大刀腰片（提前2h取号）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-05", title: "重庆Day2 · 李子坝→鹅岭二厂→长江索道→南山", amount: 0, category: "都市", status: "已确定", priority: "高", notes: "周一火锅店人最少；傍晚长江索道（南站排队少）→南山一棵树夜景；夜宵九街烧烤、花市豌杂面、山城小汤圆" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-06", title: "重庆Day3 · 磁器口收尾 + 采购伴手礼", amount: 0, category: "美食", status: "已确定", priority: "中", notes: "上午磁器口或三峡博物馆；午餐最后一顿老火锅/酸辣粉+抄手；采购火锅底料、陈麻花；22:00前睡，明早05:00出发" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-07", title: "重庆→丽江（PN6261）+ 古城适应海拔", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "PN6261 06:25→08:10，¥350/人（2人¥700）；05:00要到机场；落地后丽江古城慢逛四方街/木府/狮子山；晚餐阿婆腊排骨火锅；海拔2400m，首日不洗澡、不剧烈运动、别喝酒" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-08", title: "丽江 · 玉龙雪山大索道 + 蓝月谷 ⭐", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "07:00出发（101路旅游专线/包车约1h）；大索道上冰川公园4506m→徒步栈道4680m；下午蓝月谷、甘海子；晚上野生菌火锅；索道票提前3天在「丽江旅游集团」小程序抢" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-09", title: "丽江 · 束河/白沙 缓冲日", amount: 0, category: "古城", status: "已确定", priority: "中", notes: "上午束河古镇，下午白沙古镇壁画；若昨日雪山因大风停运，今天补上；晚餐纳西烤肉/汽锅鸡" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-10", title: "丽江→广州（JD5132）+ 早茶", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "JD5132 08:10→10:30，¥660/人（2人¥1320）；10:30落地白云机场，3号线进市区；午餐点都德/陶陶居早茶；下午沙面岛→陈家祠→北京路" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-11", title: "广州 · 长隆野生动物世界 ⭐", amount: 0, category: "亲子", status: "已确定", priority: "高", notes: "开园即入09:30、先坐小火车，11点后排队翻倍；空中缆车、白虎/考拉/大熊猫；晚上宝业路/荔湾宵夜大排档；门票官方App买比现场便宜¥30-50" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-12", title: "广州 · 顺德美食一日 ⭐", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "广州南→顺德站城际15分钟¥10/人；清晖园→鱼生（一鱼四吃）+桑拿鸡→逢简水乡→双皮奶/姜撞奶（民信、仁信老铺）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-13", title: "广州 · 西关收尾 + 采购", amount: 0, category: "美食", status: "已确定", priority: "中", notes: "最后一轮早茶；上下九/西关老城区；采购腊味、凉茶、鸡仔饼；早睡，次日07:41高铁" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "广州→汕尾（G6301）+ 红海湾看海", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "G6301 07:41→09:13，¥143/人（2人¥286）；下午红海湾遮浪半岛（一边汹涌一边平静）+海上古堡日落；晚上二马路夜市：一道生腌（浅尝）→兄弟大排档→汕中冰室芒果冰" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-15", title: "汕尾→汕头 · 生腌朝圣 ⭐", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "上午金町湾白沙滩或风车岛海上公路；中午二马路最后一轮；午后高铁38-55分钟→汕头¥79/人（2人¥158）；傍晚龙眼南路夜市：瑞娇嫲嫲生腌（虾¥38/蟹¥88/生蚝¥38）配滚烫白粥¥2、小吴肠粉、细姨甜汤" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-16", title: "汕头小吃总纲 → 转场福州", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "早粿条汤/肠粉；午杏花吴记或八合里海记牛肉火锅（吊龙、匙仁）+春梅里卤鹅+榕香蚝烙+广场老牌豆花+甘草水果；15:17 G3048→17:50福州，¥214/人（2人¥428）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-17", title: "福州顺路一日 → 飞回安庆", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "上午三坊七巷或鼓山（二选一）；下午上下杭/闽江边；PN6236 21:35→23:00，¥430/人（2人¥860）；⚠仅周二/四/六，10/17周六✓；23:00落地安庆，行程结束" },
 
-    // ===== 预算管理（新确认线交通段 · 10/5-10/19） =====
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-05", title: "动车：安庆→泉州（2人，G7150+G1669）", amount: 850, category: "交通", status: "支出", priority: "", notes: "¥425/人×2；约7h中转" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-07", title: "高铁：泉州→汕头（2人，G3041）", amount: 284, category: "交通", status: "支出", priority: "", notes: "¥142/人×2；1h49m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-08", title: "高铁：汕头→汕尾（2人）", amount: 170, category: "交通", status: "支出", priority: "", notes: "¥79-94/人×2，约1h" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-09", title: "高铁：汕尾→香港西九龙（2人）", amount: 268, category: "交通", status: "支出", priority: "", notes: "¥134/人×2，约1h15m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-11", title: "船票：香港→澳门（2人，喷射飞航）", amount: 370, category: "交通", status: "支出", priority: "", notes: "HKD194/人×2≈¥370；60min" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-11", title: "城轨：澳门→顺德（2人，拱北+广珠城轨）", amount: 130, category: "交通", status: "支出", priority: "", notes: "¥65/人×2；过关+约1h5m" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-13", title: "城轨：顺德→广州（2人）", amount: 40, category: "交通", status: "支出", priority: "", notes: "¥10-25/人×2，约30min" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-15", title: "机票：广州→丽江（2人，南航CZ6603）", amount: 1300, category: "交通", status: "支出", priority: "", notes: "¥600-700/人×2；07:05→09:55" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-17", title: "机票：丽江→重庆（2人，川航3U8011）", amount: 960, category: "交通", status: "支出", priority: "", notes: "¥480/人×2；21:20→22:50" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-19", title: "机票：重庆→安庆（2人，西部航空PN6235）", amount: 1400, category: "交通", status: "支出", priority: "", notes: "¥700/人×2；15:50→17:45；当前执飞周一/周五，10月班次请复核" },
+    // ===== 预算管理（2人交通 · 10/3-10/17）=====
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-03", title: "机票：安庆→重庆（2人，PN6236）", amount: 900, category: "交通", status: "支出", priority: "", notes: "¥450/人×2；22:20→00:30" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-07", title: "机票：重庆→丽江（2人，PN6261）", amount: 700, category: "交通", status: "支出", priority: "", notes: "¥350/人×2；06:25→08:10" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-10", title: "机票：丽江→广州（2人，JD5132）", amount: 1320, category: "交通", status: "支出", priority: "", notes: "¥660/人×2；08:10→10:30" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-12", title: "城际：广州↔顺德往返（2人）", amount: 40, category: "交通", status: "支出", priority: "", notes: "¥10/人×2×往返；15分钟" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-14", title: "高铁：广州→汕尾（2人，G6301）", amount: 286, category: "交通", status: "支出", priority: "", notes: "¥143/人×2；07:41→09:13" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-15", title: "高铁：汕尾→汕头（2人）", amount: 158, category: "交通", status: "支出", priority: "", notes: "¥79/人×2；38–55分钟" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-16", title: "高铁：汕头→福州（2人，G3048）", amount: 428, category: "交通", status: "支出", priority: "", notes: "¥214/人×2；15:17→17:50" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-17", title: "机票：福州→安庆（2人，PN6236）", amount: 860, category: "交通", status: "支出", priority: "", notes: "¥430/人×2；21:35→23:00" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-03", title: "机建+燃油附加（2人 · 4段）", amount: 1040, category: "交通", status: "支出", priority: "", notes: "约¥130/人/段×4段×2人；机票票面价不含此项" },
 
-    // ===== 目的地看板（新确认线） =====
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "泉州", amount: 0, category: "闽南古韵", status: "已确定", priority: "中", notes: "开元寺、西街、清净寺、洛阳桥、蟳埔村；美食：面线糊、土笋冻、姜母鸭、润饼" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕头", amount: 0, category: "侨乡美食", status: "已确定", priority: "高", notes: "小公园骑楼、牛肉火锅、生腌、南澳岛环岛；侨乡美食之都" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕尾", amount: 0, category: "粤东海滨", status: "已确定", priority: "中", notes: "红海湾、金町湾、二马路夜市；美食：薄饼、菜茶、生腌、牛腩" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "香港", amount: 0, category: "维港都市", status: "已确定", priority: "高", notes: "太平山、中环、维港、迪士尼可选；美食：茶餐厅、菠萝油、烧腊、蛋挞" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "澳门", amount: 0, category: "中西街区", status: "已确定", priority: "中", notes: "大三巴、官也街、路环、威尼斯人；美食：葡挞、猪扒包、杏仁饼" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "顺德", amount: 0, category: "美食之都", status: "已确定", priority: "高", notes: "清晖园、逢简水乡；美食：鱼生、双皮奶、桑拿鸡、陈村粉、烧鹅" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "广州", amount: 0, category: "花城枢纽", status: "已确定", priority: "中", notes: "长隆、广州塔、沙面、早茶、珠江夜景" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "丽江·玉龙雪山", amount: 0, category: "雪山古城", status: "已确定", priority: "高", notes: "玉龙雪山大索道、蓝月谷、丽江古城、菌子火锅；注意高原反应" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "重庆", amount: 0, category: "山城美食", status: "已确定", priority: "高", notes: "洪崖洞、长江索道、李子坝、火锅、小面、江湖菜" }
+    // ===== 目的地看板（最新 7 城）=====
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "重庆", amount: 0, category: "山城火锅", status: "已确定", priority: "高", notes: "洪崖洞、解放碑、李子坝、长江索道、南山一棵树；美食：珮姐老火锅、周师兄腰片、花市豌杂面、九街烧烤" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "丽江", amount: 0, category: "雪山古城", status: "已确定", priority: "高", notes: "玉龙雪山大索道、蓝月谷、束河、白沙古镇；美食：阿婆腊排骨、野生菌火锅；注意高原反应" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "广州", amount: 0, category: "花城长隆", status: "已确定", priority: "高", notes: "长隆野生动物世界、广州塔、沙面、陈家祠；美食：点都德/陶陶居早茶、炳胜品味" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "顺德", amount: 0, category: "美食之都", status: "已确定", priority: "高", notes: "清晖园、逢简水乡、顺峰山公园；美食：鱼生、桑拿鸡、双皮奶、毋米粥、均安蒸猪" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕尾", amount: 0, category: "粤东海滨", status: "已确定", priority: "中", notes: "红海湾遮浪半岛、金町湾、风车岛、二马路夜市；美食：生腌、海鲜大排档、菜粿薄饼" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕头", amount: 0, category: "生腌朝圣", status: "已确定", priority: "高", notes: "龙眼南路夜市、小公园骑楼、南澳岛（可选）；美食：瑞娇嫲嫲生腌、八合里牛肉火锅、春梅里卤鹅、榕香蚝烙" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "福州", amount: 0, category: "顺路收尾", status: "已确定", priority: "中", notes: "三坊七巷、上下杭、鼓山；美食：鱼丸、肉燕、拌面扁肉、佛跳墙" }
   ];
 }
 
 // ==================== Overview 行程总览 ====================
-var TRIP_START = "2026-10-05";
-var TRIP_END = "2026-10-19";
+var TRIP_START = "2026-10-03";
+var TRIP_END = "2026-10-17";
 var PLANE_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 19.5l19-7.5L2.5 4.5 2.5 10l13 2-13 2z"/></svg>';
 var TRAIN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 10h16"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/><path d="M6 16l-2 4M18 16l2 4"/></svg>';
 var FERRY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h16l-2 5H6z"/><path d="M12 3v10"/><path d="M9 3h6"/></svg>';
 
 // 城市文化元数据：图标 + 世界遗产/荣誉徽章（渲染行程与看板时按城市名注入，不改动种子数据）
 var CITY_META = {
-  "安庆":   { icon:"🎭", badge:"黄梅戏之乡",     btype:"culture" , must:"" , color:"#9AA5B8" },
-  "泉州":   { icon:"🏯", badge:"🏛️ 世界遗产",   btype:"wh" , must:"开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围" , color:"#FF6B6B" },
-  "汕头":   { icon:"🌊", badge:"📜 世界记忆",   btype:"memory" , must:"小公园骑楼 · 侨批文物馆 · 牛肉火锅 · 生腌" , color:"#FF9A3C" },
-  "汕尾":   { icon:"🐚", badge:"🎭 渔歌非遗",   btype:"culture" , must:"红海湾遮浪半岛 · 金町湾 · 二马路夜市" , color:"#FFD93D" },
-  "香港":   { icon:"🦁", badge:"🌐 中西交融",   btype:"culture" , must:"太平山顶 · 维港夜景 · 叮叮车 · 庙街" , color:"#A0E548" },
-  "澳门":   { icon:"⛪", badge:"🏛️ 世界遗产",   btype:"wh" , must:"大三巴 · 恋爱巷 · 官也街 · 路环" , color:"#2ED9B7" },
-  "顺德":   { icon:"🍲", badge:"🍜 美食之都",   btype:"food" , must:"清晖园 · 鱼生 · 双皮奶 · 桑拿鸡" , color:"#4D96FF" },
-  "广州":   { icon:"🏙️", badge:"🌊 海丝预备",   btype:"culture" , must:"陈家祠 · 南越王宫 · 沙面 · 早茶" , color:"#A66CFF" },
-  "丽江":   { icon:"🏔️", badge:"🏛️ 世界遗产",   btype:"wh" , must:"古城 · 玉龙雪山 · 束河 · 纳西古乐" , color:"#FF7EB6" },
-  "重庆":   { icon:"🌶️", badge:"🏛️ 世遗×2",    btype:"wh" , must:"洪崖洞 · 大足石刻 · 火锅 · 长江索道" , color:"#FF5A5F" }
+  "安庆":   { icon:"🏠", badge:"出发 / 归程",   btype:"culture" , must:"" , color:"#9AA5B8" },
+  "重庆":   { icon:"🌶️", badge:"火锅主场",     btype:"food" , must:"珮姐老火锅 · 周师兄腰片 · 长江索道 · 洪崖洞" , color:"#DE9090" },
+  "丽江":   { icon:"🏔️", badge:"雪山 + 菌子",  btype:"memory" , must:"玉龙雪山大索道 · 蓝月谷 · 束河 · 野生菌火锅" , color:"#8FB3D9" },
+  "广州":   { icon:"🏙️", badge:"长隆 + 早茶",  btype:"food" , must:"长隆野生动物世界 · 沙面 · 陈家祠 · 点都德早茶" , color:"#7FC4B0" },
+  "顺德":   { icon:"🍲", badge:"美食之都",     btype:"food" , must:"清晖园 · 鱼生 · 桑拿鸡 · 双皮奶" , color:"#D9C97E" },
+  "汕尾":   { icon:"🌊", badge:"看海 + 海鲜",  btype:"culture" , must:"红海湾遮浪半岛 · 金町湾 · 二马路夜市" , color:"#9AC8D9" },
+  "汕头":   { icon:"🦀", badge:"生腌朝圣",     btype:"memory" , must:"瑞娇嫲嫲生腌 · 八合里牛肉火锅 · 卤鹅 · 蚝烙" , color:"#DFAE82" },
+  "福州":   { icon:"🌿", badge:"顺路收尾",     btype:"culture" , must:"三坊七巷 · 上下杭 · 鱼丸肉燕" , color:"#AC9FD4" }
 };
 function cityMetaOf(title){
   if(!title) return null;
@@ -1232,29 +1003,23 @@ function cityMetaOf(title){
 }
 
 var ROUTE_STOPS = [
-  { city: "安庆", dates: "10/5 出发", home: true },
-  { city: "泉州", dates: "10/5-7", nights: "2晚" },
-  { city: "汕头", dates: "10/7-8", nights: "1晚" },
-  { city: "汕尾", dates: "10/8-9", nights: "1晚" },
-  { city: "香港", dates: "10/9-11", nights: "2晚" },
-  { city: "澳门", dates: "10/11", nights: "当日" },
-  { city: "顺德", dates: "10/11-13", nights: "2晚" },
-  { city: "广州", dates: "10/13-15", nights: "2晚" },
-  { city: "丽江", dates: "10/15-17", nights: "2晚" },
-  { city: "重庆", dates: "10/17-19", nights: "2晚" },
-  { city: "安庆", dates: "10/19 到家", home: true }
+  { city: "安庆", dates: "10/3 出发", home: true },
+  { city: "重庆", dates: "10/4-7", nights: "3晚" },
+  { city: "丽江", dates: "10/7-10", nights: "3晚" },
+  { city: "广州", dates: "10/10-14", nights: "4晚" },
+  { city: "汕尾", dates: "10/14-15", nights: "1晚" },
+  { city: "汕头", dates: "10/15-16", nights: "1晚" },
+  { city: "福州", dates: "10/16-17", nights: "1晚" },
+  { city: "安庆", dates: "10/17 到家", home: true }
 ];
 var ROUTE_SEGS = [
-  { type: "train", date: "10/5" },
-  { type: "train", date: "10/7" },
-  { type: "train", date: "10/8" },
-  { type: "train", date: "10/9" },
-  { type: "ferry", date: "10/11" },
-  { type: "train", date: "10/11" },
-  { type: "train", date: "10/13" },
-  { type: "plane", date: "10/15" },
-  { type: "plane", date: "10/17" },
-  { type: "plane", date: "10/19" }
+  { type: "plane", date: "10/3" },
+  { type: "plane", date: "10/7" },
+  { type: "plane", date: "10/10" },
+  { type: "train", date: "10/14" },
+  { type: "train", date: "10/15" },
+  { type: "train", date: "10/16" },
+  { type: "plane", date: "10/17" }
 ];
 
 function renderOverview() {
@@ -1553,7 +1318,7 @@ function renderPieChart(catTotals, total) {
       + '<span class="pie-legend-amount">' + formatMoney(val) + ' (' + (pct * 100).toFixed(1) + '%)</span>'
       + '</div>';
   }
-  svgParts += '<text x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle" font-size="14" font-weight="700" fill="#2C3650">' + formatMoney(total).replace("¥", "¥") + '</text>';
+  svgParts += '<text x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle" font-size="14" font-weight="700" fill="#333C4E">' + formatMoney(total).replace("¥", "¥") + '</text>';
   svgParts += '</svg>';
 
   wrap.innerHTML = '<div class="pie-chart">' + svgParts + '</div><div class="pie-legend">' + legendHtml + '</div>';
@@ -1847,18 +1612,6 @@ function init() {
     });
   }
 
-  // 深度链接：URL 带 #backup 时自动切到「备选路线」标签
-  if (location.hash === "#backup") {
-    var allBtns = document.querySelectorAll(".tab-btn");
-    for (var bi = 0; bi < allBtns.length; bi++) {
-      allBtns[bi].classList.toggle("active", allBtns[bi].getAttribute("data-tab") === "backup");
-    }
-    var allMods = document.querySelectorAll(".module");
-    for (var mi = 0; mi < allMods.length; mi++) allMods[mi].classList.remove("active");
-    document.getElementById("module-backup").classList.add("active");
-    setTimeout(function(){ document.getElementById("module-backup").scrollIntoView({behavior:"smooth",block:"start"}); }, 200);
-  }
-
   // Add buttons
   document.getElementById("btnAddItinerary").addEventListener("click", function() {
     var date = document.getElementById("itin-date").value;
@@ -1971,7 +1724,7 @@ if (document.readyState === "loading") {
       return map;
     }
     var CITY_BY_DAY=buildCityByDay();
-    function cityColor(city){ var m=CITY_META[city]; return m&&m.color?m.color:'#4D96FF'; }
+    function cityColor(city){ var m=CITY_META[city]; return m&&m.color?m.color:'#7FA8D8'; }
     function cityIcon(city){ var m=CITY_META[city]; return m&&m.icon?m.icon:'📍'; }
 
     // ===== 日历 =====
