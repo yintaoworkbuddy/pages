@@ -3,163 +3,72 @@
 <head data-page-node-id="NwBwaW0kp63AZnZKVLigCH">
 <meta charset="UTF-8" data-page-node-id="Dd8ncPuk12HEiutlA9iqZc">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="r3zrlmJBTHlD6mITt84lAR">
-<title>我的主页 · 日期 / 天气 / 常用工具 / 旅行路线</title>
+<title>我的主页 · 日期 / 天气 / 常用工具 / 旅行规划</title>
 <style>
   :root{
-    --bg:#FFF8F4; --bg2:#FDF3E6; --col:#ffffff; --txt:#2C3650; --sub:#78849B;
-    --sky:#8FC0FF; --blue:#4D96FF; --cyan:#4D96FF; --teal:#4D96FF;
-    --green:#2ED9B7; --lime:#A0E548; --yellow:#FFD93D; --amber:#FFB340;
-    --shadow:0 4px 16px rgba(44,54,80,.08);
+    --bg:#FAFBFC; --col:#ffffff; --txt:#333C4E; --sub:#78849B;
+    --line:#E9EDF3; --accent:#6E9BE0; --accent-soft:#EDF3FC;
+    --shadow:0 2px 10px rgba(44,54,80,.05);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:linear-gradient(135deg,#FFFDF8 0%,#F1F9FF 45%,#FFF6FB 100%) fixed; color:var(--txt); padding:28px; min-height:100vh;
+    background:var(--bg); color:var(--txt); padding:28px; min-height:100vh;
   }
   header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}
-  header h1{font-size:22px;letter-spacing:.5px;background:linear-gradient(90deg,#FF6B6B,#A66CFF 45%,#4D96FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+  header h1{font-size:22px;letter-spacing:.5px;color:var(--txt);font-weight:600}
   header h1 span{color:var(--sub);font-weight:400;font-size:14px;margin-left:8px}
   .meta{color:var(--sub);font-size:13px}
 
   /* 信息条：日期 + 天气 */
-  .infobar{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+  .infobar{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
   @media(max-width:760px){.infobar{grid-template-columns:1fr}}
-  .info-card{background:linear-gradient(135deg,#4D96FF,#A66CFF);border-radius:16px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;display:flex;flex-direction:column;gap:6px}
-  .info-card.weather{background:linear-gradient(135deg,#2ED9B7,#4D96FF)}
-  .info-card .label{font-size:13px;opacity:.85;display:flex;align-items:center;gap:6px}
-  .info-card .big{font-size:26px;font-weight:700;line-height:1.2}
-  .info-card .small{font-size:13px;opacity:.9}
+  .info-card{background:linear-gradient(135deg,#EDF3FC,#F5F3FB);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;color:var(--txt);display:flex;flex-direction:column;gap:6px}
+  .info-card.weather{background:linear-gradient(135deg,#E9F5F2,#EDF3FC)}
+  .info-card .label{font-size:13px;color:#6B7688;display:flex;align-items:center;gap:6px}
+  .info-card .big{font-size:26px;font-weight:700;line-height:1.2;letter-spacing:.5px}
+  .info-card .small{font-size:13px;color:#6B7688}
   .info-card .icon{font-size:22px}
 
   /* 日历卡 */
   .cal-card{gap:8px}
   .cal-head{display:flex;align-items:center;justify-content:space-between}
   .cal-title{font-size:17px;font-weight:700;letter-spacing:.5px}
-  .cal-nav{width:28px;height:28px;border-radius:8px;border:none;background:rgba(255,255,255,.22);color:#fff;font-size:17px;cursor:pointer;line-height:1;transition:.15s;padding:0}
-  .cal-nav:hover{background:rgba(255,255,255,.4)}
-  .cal-week{display:grid;grid-template-columns:repeat(7,1fr);font-size:11px;opacity:.85;text-align:center;margin-top:2px}
+  .cal-nav{width:28px;height:28px;border-radius:8px;border:1px solid rgba(44,54,80,.08);background:#fff;color:#5A6478;font-size:17px;cursor:pointer;line-height:1;transition:.15s;padding:0}
+  .cal-nav:hover{background:#F1F4F9}
+  .cal-week{display:grid;grid-template-columns:repeat(7,1fr);font-size:11px;color:#8A93A5;text-align:center;margin-top:2px}
   .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-  .cal-cell{height:26px;display:flex;align-items:center;justify-content:center;font-size:12.5px;border-radius:7px;position:relative}
+  .cal-cell{height:26px;display:flex;align-items:center;justify-content:center;font-size:12.5px;border-radius:7px;position:relative;color:#4A5468}
   .cal-cell.dim{visibility:hidden}
-  .cal-cell.wk{opacity:.75}
-  .cal-cell.today{background:#fff;color:var(--blue);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.15)}
-  .cal-cell.trip{background:rgba(255,255,255,.28);font-weight:600}
-  .cal-cell.trip::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--yellow)}
-  .cal-cell.today.trip{color:var(--amber)}
-  .cal-today{font-size:12px;opacity:.92;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
-  .cal-today .trip-legend{opacity:.95}
-
-  /* 旅行工作台入口 */
-  .trip-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#FF6B6B,#FF7EB6);border-radius:16px;box-shadow:var(--shadow);padding:18px 20px;color:#fff;text-decoration:none;margin-bottom:22px;transition:transform .15s,box-shadow .15s}
-  .trip-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(16,185,129,.28)}
-  .trip-card .t-icon{font-size:26px;flex:0 0 auto}
-  .trip-card .t-body{flex:1;min-width:0}
-  .trip-card .t-title{font-size:17px;font-weight:700;line-height:1.3}
-  .trip-card .t-sub{font-size:12px;opacity:.9;margin-top:3px}
-  .trip-card .t-arrow{font-size:24px;opacity:.85;flex:0 0 auto}
+  .cal-cell.wk{color:#98A2B3}
+  .cal-cell.today{background:#fff;color:var(--accent);font-weight:700;box-shadow:0 1px 4px rgba(44,54,80,.12)}
+  .cal-cell.trip{background:rgba(110,155,224,.18);font-weight:600;color:#3F6FB0}
+  .cal-cell.trip::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--accent)}
+  .cal-cell.today.trip{color:var(--accent)}
+  .cal-today{font-size:12px;color:#6B7688;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
 
   /* 工具跳转区 */
   .tools{margin-bottom:22px}
-  .tools-title{font-size:17px;font-weight:600;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-  .tool-card{display:flex;align-items:center;gap:12px;background:var(--col);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px;color:var(--txt);text-decoration:none;transition:transform .15s,box-shadow .15s;border:1px solid #E7EDF7}
-  .tool-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,42,66,.10)}
-  .tool-card .t-ico{font-size:26px;flex:0 0 auto}
-  .tool-card .t-body{flex:1;min-width:0}
+  .tools-title{font-size:16px;font-weight:600;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .tool-card{display:flex;align-items:center;gap:12px;background:var(--col);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;color:var(--txt);text-decoration:none;transition:transform .15s,box-shadow .15s;border:1px solid var(--line)}
+  .tool-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(44,54,80,.09)}
+  .tool-card .t-ico{width:38px;height:38px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;font-size:19px;flex:0 0 auto;background:#F2F5FA}
+  .tool-card .t-body{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
   .tool-card .t-name{font-size:15px;font-weight:600;line-height:1.3}
   .tool-card .t-sub{font-size:12px;color:var(--sub);margin-top:2px}
-  .tool-card .t-arrow{font-size:22px;color:var(--sub);flex:0 0 auto}
-  .tool-card.main{background:linear-gradient(135deg,#FF9A3C,#FFD93D);color:#fff;border:none;margin-bottom:12px}
-  .tool-card.main .t-sub{color:rgba(255,255,255,.9)}
-  .tool-card.main .t-arrow{color:rgba(255,255,255,.85)}
+  .tool-card .t-arrow{font-size:22px;color:#B4BCC9;flex:0 0 auto}
+  .tool-card.main{background:linear-gradient(135deg,#F5F8FD,#FFFFFF);border-left:3px solid var(--accent);margin-bottom:12px}
+  .tool-card.main .t-ico{background:var(--accent-soft)}
+  .tool-card.main .t-name{font-size:17px}
+  .route-badge{display:inline-block;align-self:flex-start;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:6px;letter-spacing:.5px;background:var(--accent-soft);color:#4A7BB5}
   .tool-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:520px){.tool-row{grid-template-columns:1fr}}
-  .tool-card.xhs .t-ico{color:#FF4D7E}
-  .tool-card.fan .t-ico{color:#FFB340}
-  .tool-card.alt{background:linear-gradient(135deg,#2ED9B7,#4D96FF);color:#fff;border:none;margin-bottom:12px}
-  .tool-card.alt .t-sub{color:rgba(255,255,255,.9)}
-  .tool-card.alt .t-arrow{color:rgba(255,255,255,.85)}
-  .route-badge{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px;letter-spacing:.5px;background:rgba(255,255,255,.22);color:#fff}
-  .tool-card.main .t-name{font-size:18px}
-  .tool-card.alt .t-name{font-size:17px;font-weight:700}
+  .tool-card.xhs .t-ico{background:#FBEEF1;color:#C4707F}
+  .tool-card.fan .t-ico{background:#FBF3E8;color:#C08A4E}
   footer{color:var(--sub);font-size:12px;text-align:center}
 
   /* 离线提示条 */
-  .offline-tip{font-size:12px;color:#1D4FD0;background:#E9F2FF;padding:6px 12px;border-radius:8px;margin-bottom:12px;display:none}
-
-  /* 以文塑旅 · 九城文化打开方式 */
-  .culture{margin-bottom:22px}
-  .culture-title{font-size:17px;font-weight:600;color:var(--txt);margin-bottom:6px;display:flex;align-items:center;gap:8px}
-  .culture-title .accent{color:#4D96FF;font-size:18px}
-  .culture-sub{font-size:13px;color:var(--sub);margin-bottom:14px;line-height:1.6}
-  .culture-sub b{color:#4D96FF}
-  .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  @media(max-width:760px){.culture-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:480px){.culture-grid{grid-template-columns:1fr}}
-  .cul-card{background:var(--col);border-radius:16px;box-shadow:var(--shadow);padding:14px 15px;border:1px solid #E7EDF7;border-top:3px solid #FFD93D;display:flex;flex-direction:column;gap:6px}
-  .cul-head{display:flex;align-items:center;gap:6px}
-  .cul-ico{font-size:18px;line-height:1}
-  .cul-name{font-size:15px;font-weight:700;color:#1D4FD0}
-  .cul-badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:auto;white-space:nowrap;color:#fff}
-  .cul-badge.wh{background:#FF6B6B}
-  .cul-badge.memory{background:#A66CFF}
-  .cul-badge.food{background:#FF9A3C}
-  .cul-badge.culture{background:#4D96FF}
-  .cul-theme{font-size:12px;font-weight:600;color:var(--txt);opacity:.85}
-  .cul-desc{font-size:12px;color:var(--sub);line-height:1.55}
-  .cul-do{font-size:11.5px;color:#1D4FD0;background:#E9F2FF;padding:6px 8px;border-radius:8px;line-height:1.5}
-  .culture-legend{font-size:11px;color:var(--sub);margin-top:12px;line-height:1.7;background:#F2FBFC;padding:10px 12px;border-radius:8px}
-
-  /* 卡片悬浮美化 + 世遗卡视觉强调（清爽黄绿蓝系） */
-  .cul-card{transition:transform .18s ease,box-shadow .18s ease}
-  .cul-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(77,150,255,.14)}
-  .cul-card.wh-card{border-left:4px solid #4D96FF;background:linear-gradient(180deg,#ffffff,#FFF1F4)}
-  .cul-wh-ico{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:#4D96FF;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;margin-right:2px}
-
-  /* 背景柔光斑：低透明度彩色晕染，增加层次但不抢内容 */
-  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;
-    background:
-      radial-gradient(420px 320px at 8% 4%, rgba(255,107,107,.10), transparent 62%),
-      radial-gradient(400px 300px at 92% 10%, rgba(77,150,255,.10), transparent 62%),
-      radial-gradient(480px 340px at 50% 98%, rgba(166,108,255,.09), transparent 64%);}
-
-  /* 卡片通用悬浮 */
-  .info-card,.tool-card{transition:transform .18s ease,box-shadow .18s ease}
-  .info-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(44,54,80,.16)}
-
-  /* 图标做成彩色圆角底片（多巴胺节奏的关键：小面积高饱和） */
-  .tool-card .t-ico{width:38px;height:38px;border-radius:12px;display:inline-flex;
-    align-items:center;justify-content:center;font-size:19px;flex:0 0 auto;background:#F1F5FB}
-  .tool-card.main .t-ico{background:rgba(255,255,255,.26);font-size:20px}
-  .tool-row .tool-card.xhs .t-ico{background:#FFE9EE;color:#E23A62}
-  .tool-row .tool-card.fan .t-ico{background:#FFF1DC;color:#D2791B}
-
-  /* 两张主卡做出区分：主路线=橘黄，票况天气=紫粉 */
-  .tool-card.main + .tool-card.main{background:linear-gradient(135deg,#A66CFF,#FF7EB6)}
-  .tool-card.main + .tool-card.main:hover{box-shadow:0 10px 26px rgba(166,108,255,.32)}
-
-  /* 九城卡彩虹循环：浅色底 + 彩色顶边 + 彩色标题，替代单一色 */
-  .culture-grid .cul-card:nth-child(6n+1){border-top-color:#FF6B6B;background:linear-gradient(180deg,#FFF6F6,#ffffff 58%)}
-  .culture-grid .cul-card:nth-child(6n+1) .cul-name{color:#E05A5A}
-  .culture-grid .cul-card:nth-child(6n+1) .cul-do{color:#E05A5A;background:#FFF6F6}
-  .culture-grid .cul-card:nth-child(6n+2){border-top-color:#FF9A3C;background:linear-gradient(180deg,#FFF8EF,#ffffff 58%)}
-  .culture-grid .cul-card:nth-child(6n+2) .cul-name{color:#D2791B}
-  .culture-grid .cul-card:nth-child(6n+2) .cul-do{color:#D2791B;background:#FFF8EF}
-  .culture-grid .cul-card:nth-child(6n+3){border-top-color:#FFD93D;background:linear-gradient(180deg,#FFFCE9,#ffffff 58%)}
-  .culture-grid .cul-card:nth-child(6n+3) .cul-name{color:#B99000}
-  .culture-grid .cul-card:nth-child(6n+3) .cul-do{color:#B99000;background:#FFFCE9}
-  .culture-grid .cul-card:nth-child(6n+4){border-top-color:#A0E548;background:linear-gradient(180deg,#F9FFEF,#ffffff 58%)}
-  .culture-grid .cul-card:nth-child(6n+4) .cul-name{color:#66A312}
-  .culture-grid .cul-card:nth-child(6n+4) .cul-do{color:#66A312;background:#F9FFEF}
-  .culture-grid .cul-card:nth-child(6n+5){border-top-color:#2ED9B7;background:linear-gradient(180deg,#EFFCFA,#ffffff 58%)}
-  .culture-grid .cul-card:nth-child(6n+5) .cul-name{color:#0F9A7E}
-  .culture-grid .cul-card:nth-child(6n+5) .cul-do{color:#0F9A7E;background:#EFFCFA}
-  .culture-grid .cul-card:nth-child(6n+6){border-top-color:#A66CFF;background:linear-gradient(180deg,#FBF6FF,#ffffff 58%)}
-  .culture-grid .cul-card:nth-child(6n+6) .cul-name{color:#7B3FE4}
-  .culture-grid .cul-card:nth-child(6n+6) .cul-do{color:#7B3FE4;background:#FBF6FF}
-
-  /* 世遗卡去掉额外左色条（避免和彩虹顶边打架），改用徽标与轻微阴影强调 */
-  .cul-card.wh-card{border-left:none;box-shadow:0 6px 20px rgba(44,54,80,.10)}
-  .cul-wh-ico{background:#FF6B6B}
+  .offline-tip{font-size:12px;color:#4A7CB8;background:#F1F5FB;padding:6px 12px;border-radius:8px;margin-bottom:12px;display:none}
 </style>
 </head>
 <body data-page-node-id="j6PwTGpGKhpNCgChPlte2v">
@@ -190,32 +99,14 @@
   <!-- 工具跳转区 -->
   <section class="tools" data-page-node-id="c8u661Ok9qikweInBhriA9">
     <h2 class="tools-title" data-page-node-id="pcCPJ8fbqjoW5N3JYBlsyV">🧰 常用工具</h2>
-    <a class="tool-card main" href="trip-plan.html" data-page-node-id="PyM8ppYOsFc6GqwL5SdAUc">
-      <span class="t-ico" data-page-node-id="zN92LpDfAGfAzajiimMh6M">🍜</span>
-      <span class="t-body" data-page-node-id="ReNmzUwVq0GT3mG7bW3J3M">
-        <span class="route-badge" data-page-node-id="RqsBEhOT1dtNlEGCp1CQwF">✅ 最新方案 · 已定</span>
-        <span class="t-name" data-page-node-id="iEnPBFJh0Z1IX1wdHlxDog">十月环线完整计划</span>
-        <span class="t-sub" data-page-node-id="2wOi4RQRaA7KCD1BFyiKHm">10/3–10/17 · 7 城 · 逐日行程 + 交通票价</span>
-      </span>
-      <span class="t-arrow" data-page-node-id="vMxzW783KCFCc3bnjxMh6M">›</span>
-    </a>
     <a class="tool-card main" href="travel-planner.html" data-page-node-id="4wmuEP9gE2VTX6lk9FrVOH">
       <span class="t-ico" data-page-node-id="6xvbFO9hQZObQkmhPMlJLs">🧳</span>
       <span class="t-body" data-page-node-id="jwtKonSAg9AU5eNpPw86Ts">
-        <span class="route-badge" data-page-node-id="RLkzzE6BGbpKFzwqMFKxck">🧰 可自行编辑</span>
+        <span class="route-badge" data-page-node-id="RLkzzE6BGbpKFzwqMFKxck">十月环线 · 10/3–10/17</span>
         <span class="t-name" data-page-node-id="1yKTNOrfFmgeg5rL5JjO3s">旅行规划工作台</span>
-        <span class="t-sub" data-page-node-id="Qzj81SApbAHEXg3xD8KFPN">行程 / 预算 / 看板 · 数据存本机</span>
+        <span class="t-sub" data-page-node-id="Qzj81SApbAHEXg3xD8KFPN">行程 / 预算 / 看板 · 可自行编辑 · 数据存本机</span>
       </span>
       <span class="t-arrow" data-page-node-id="Tr63o55b6MKT5aw9siY8Va">›</span>
-    </a>
-<a class="tool-card alt" href="ticket-weather-report.html" data-page-node-id="TwPlanTw3Node00001">
-      <span class="t-ico">🎫</span>
-      <span class="t-body">
-        <span class="route-badge">📊 票况 · 天气</span>
-        <span class="t-name">票况·天气预估</span>
-        <span class="t-sub">10 段票价基线 · 国庆抢票窗口 · 4 区域天气</span>
-      </span>
-      <span class="t-arrow">›</span>
     </a>
     <div class="tool-row" data-page-node-id="TgTktBogZhlG5MZ4XGOyF3">
       <a class="tool-card xhs" href="https://www.xiaohongshu.com" target="_blank" rel="noopener" data-page-node-id="X1NIFIqepsH2i83VHyJCaz">
@@ -235,24 +126,6 @@
     </div>
   </section>
 
-  <!-- 以文塑旅 · 九城文化打开方式 -->
-  <section class="culture" data-page-node-id="C9opHGVL4JjA6bpjMaBjyu">
-    <h2 class="culture-title" data-page-node-id="pNjsysy6YOsZxT8XOrddiO"><span class="accent" data-page-node-id="AaK4pp31zm3uD6rnCr5LsB">◆</span> 以文塑旅 · 九城文化打开方式</h2>
-    <p class="culture-sub" data-page-node-id="bGlB6nCoPww7xh50kMsGoQ">循着总书记"感悟中华文化、增强文化自信"的嘱托，这趟环线串起 <b data-page-node-id="cWrkFpNG5LN8D4BRNJBzVy">4 处世界遗产</b> 与多处中华文明活态印记——读懂它们，便是读懂中国。</p>
-    <div class="culture-grid" data-page-node-id="Dyi3LQObRn1PoJlRiUgEK4">
-      <div class="cul-card wh-card" data-page-node-id="iYea9DqMqzMq3Q0IVFhMBJ"><div class="cul-head" data-page-node-id="mWC8iv6ywvYBTO75pk6k35"><span class="cul-ico" data-page-node-id="DABsJrNIT56wIT3YS9PtF8">🏯</span><span class="cul-wh-ico" data-page-node-id="gMZ27mfx30Ygi1WTU55oEG">🏛️</span><span class="cul-name" data-page-node-id="zxrEOY4w2kPOp3wpb7BIEO">泉州</span><span class="cul-badge wh" data-page-node-id="BNqfKfY9w2gGATLxsvhOFB">世界遗产</span></div><div class="cul-theme" data-page-node-id="QQCEdJNw9jfbFwDDPUtPPC">宋元中国的世界海洋商贸中心</div><div class="cul-desc" data-page-node-id="01JvxRtUXBWT6rh2QFU1pA">22 处遗产点、南音古乐、蟳埔簪花。从"涨海声中万国商"读懂中华海洋文明与世界对话。</div><div class="cul-do" data-page-node-id="u278eSEKOXcMC8tYpwoucr">📍 必体验：开元寺 · 西街 · 洛阳桥 · 蟳埔簪花围</div></div>
-      <div class="cul-card" data-page-node-id="RMYgFcBOse8XDG02amx4XD"><div class="cul-head" data-page-node-id="t1yI1EzIdxPpwAOiQJiSnv"><span class="cul-ico" data-page-node-id="HicFLKiN017la62yVxm4HZ">🌊</span><span class="cul-name" data-page-node-id="u2lQqk46R0WAZhenGqSO7w">汕头</span><span class="cul-badge memory" data-page-node-id="kPGfQpJrsaXXXJawIBwmJL">📜 世界记忆</span></div><div class="cul-theme" data-page-node-id="wxz9Y2Dk8UtJCk2yRZ94i2">潮汕侨乡 · 开埠风云</div><div class="cul-desc" data-page-node-id="EOadnkhaFKT28ALwi5602X">小公园骑楼、侨批（世界记忆名录）、潮剧工夫茶。一封侨批里的家国情怀与向海而生。</div><div class="cul-do" data-page-node-id="vs56p6FPLYPsHql84mwKbo">📍 必体验：小公园骑楼 · 侨批文物馆 · 牛肉火锅 · 生腌</div></div>
-      <div class="cul-card" data-page-node-id="XacWHLrizLG0AQEIkrpD7R"><div class="cul-head" data-page-node-id="XnMBt6GM6cfI7v3m7uso9p"><span class="cul-ico" data-page-node-id="07Jo0tzvyPm8JdDh0HlXwT">🐚</span><span class="cul-name" data-page-node-id="h9F5hG0kIzU0auiUEYV8Gu">汕尾</span><span class="cul-badge culture" data-page-node-id="nv9pwc5ZBpVnm91Vb22iz3">🎭 渔歌非遗</span></div><div class="cul-theme" data-page-node-id="ThWesLjQvuBr21c3AqshUR">渔歌故里 · 红土风情</div><div class="cul-desc" data-page-node-id="IXMb6neGQlbHZ2CZzTdPri">渔家文化、正字戏、红宫红场。听一段渔歌，看红土地上的坚守与温情。</div><div class="cul-do" data-page-node-id="q2GB8d6hMXGcOPtKiTdYkV">📍 必体验：红海湾遮浪半岛 · 金町湾 · 二马路夜市</div></div>
-      <div class="cul-card" data-page-node-id="5kowuhueKmwoMNDUSgZxVw"><div class="cul-head" data-page-node-id="4sUYTSC62XV0lGOunmnH4a"><span class="cul-ico" data-page-node-id="essGuvo3jPudaCw9yp6zWQ">🦁</span><span class="cul-name" data-page-node-id="bEOHpkVy7p1hLSjmq2ln78">香港</span><span class="cul-badge culture" data-page-node-id="fNhbvg4LqHs1kZu4a6vMMc">🌐 中西交融</span></div><div class="cul-theme" data-page-node-id="K8eENCpiLJDxyLw2RpImal">东方之珠 · 狮子山下</div><div class="cul-desc" data-page-node-id="4lYHb1u0hrgskM8OAg8ezo">维港天际、历史建筑、狮子山精神。看中华文明兼容并蓄、开放包容的当代气度。</div><div class="cul-do" data-page-node-id="6mnfEh8yxzN3pw94ZzD2Ck">📍 必体验：太平山顶 · 维港夜景 · 叮叮车 · 庙街</div></div>
-      <div class="cul-card wh-card" data-page-node-id="cWOhOWlPSWAeM6l8qgNHz4"><div class="cul-head" data-page-node-id="IS7pPju0jmtsn8v9TuNwg5"><span class="cul-ico" data-page-node-id="jHerA4YmtE34SSNZEvLjgr">⛪</span><span class="cul-wh-ico" data-page-node-id="UMoZDHzhn3R1OmYzpMaWmk">🏛️</span><span class="cul-name" data-page-node-id="grjgzHErG1BafbheLGxtSZ">澳门</span><span class="cul-badge wh" data-page-node-id="oijXwAkTwemHuXfEu3HQGA">世界遗产</span></div><div class="cul-theme" data-page-node-id="YUjD5RlvW9z5PTGTTSITOq">澳门历史城区</div><div class="cul-desc" data-page-node-id="K5e8hqeHbGMUaNs4jBvAyF">大三巴、妈阁庙、中西合璧建筑。小城故事里中华与多元文化和谐共生。</div><div class="cul-do" data-page-node-id="WHUxytARYiSHnx5PvWwdm4">📍 必体验：大三巴 · 恋爱巷 · 官也街 · 路环</div></div>
-      <div class="cul-card" data-page-node-id="Y4KJPZUYz11VAE14IUqhGW"><div class="cul-head" data-page-node-id="7Yt73G59x5HSLeaJLDdg79"><span class="cul-ico" data-page-node-id="CttPs8AxIWEUzLFeo9O8KR">🍲</span><span class="cul-name" data-page-node-id="BfOzDZUmIVTsQ8oguRFzU0">顺德</span><span class="cul-badge food" data-page-node-id="Ktof57iArckzIJIHM6DPRM">🍜 美食之都</span></div><div class="cul-theme" data-page-node-id="A3YJyTKAYmO6kTGFl6drRI">世界美食之都 · 岭南水乡</div><div class="cul-desc" data-page-node-id="j2u0uX3bISEKxTEVNZr5Zy">清晖园、逢简水乡、桑基鱼塘。一盅两件里品岭南烟火与匠心。</div><div class="cul-do" data-page-node-id="jzuHC6m9x3waxTxDSFgBBL">📍 必体验：清晖园 · 鱼生 · 双皮奶 · 桑拿鸡</div></div>
-      <div class="cul-card" data-page-node-id="6Qy9Ap5s4YSG8y0dnsM9CL"><div class="cul-head" data-page-node-id="57TEafAFEP5PUq0CiKgJjT"><span class="cul-ico" data-page-node-id="ZRbpDtl2T9SUuOIVPQc6Gr">🏙️</span><span class="cul-name" data-page-node-id="fz1MuzAh5VvnewdnAgRU0w">广州</span><span class="cul-badge culture" data-page-node-id="MBodhmdo4IAUOsvJKseDIJ">🌊 海丝预备</span></div><div class="cul-theme" data-page-node-id="MmVHUOITmtspzfc9CJvZNO">千年商都 · 广府源流</div><div class="cul-desc" data-page-node-id="ixG9OXdeah18QX5jtdNhph">南越王墓、陈家祠、海上丝路。从千年商都读懂开放务实的广府精神。</div><div class="cul-do" data-page-node-id="J0cCTHfelpoK0PdYtK6qIQ">📍 必体验：陈家祠 · 南越王宫 · 沙面 · 早茶</div></div>
-      <div class="cul-card wh-card" data-page-node-id="witHvOpuj1c9aEhEo0LIgv"><div class="cul-head" data-page-node-id="NodcNhXmUq517nYWyMDTb1"><span class="cul-ico" data-page-node-id="MwoyUSG3qlJbvTWErrMJuC">🏔️</span><span class="cul-wh-ico" data-page-node-id="t5q38IbGpyNufOoj118n3f">🏛️</span><span class="cul-name" data-page-node-id="5m9YzeCKtJzCP1InKDPlcO">丽江</span><span class="cul-badge wh" data-page-node-id="J4QydHtMMm4aCbEwiWc4EX">世界遗产</span></div><div class="cul-theme" data-page-node-id="wCZb6ulPf5MnpdJG17oYjm">纳西东巴 · 雪山秘境</div><div class="cul-desc" data-page-node-id="zSX1fWUKKTdDQdEOe9cvjH">丽江古城、东巴象形文字、纳西古乐。雪山下的活着的千年文明。</div><div class="cul-do" data-page-node-id="YeCfadIlNBYqsjRBD0Ngw5">📍 必体验：古城 · 玉龙雪山 · 束河 · 纳西古乐</div></div>
-      <div class="cul-card wh-card" data-page-node-id="miwic9hdvipO09eOF7XG3c"><div class="cul-head" data-page-node-id="fdNUZG4dIHjex8NYvC0c35"><span class="cul-ico" data-page-node-id="TCZOGSk18prXhYiqqEaQbG">🌶️</span><span class="cul-wh-ico" data-page-node-id="mHyVl9dy15007upDSAu60C">🏛️</span><span class="cul-name" data-page-node-id="xJBhqGgwkWqIFgF45OGhtV">重庆</span><span class="cul-badge wh" data-page-node-id="iR5P35rEhQKiDS5FPx00Xc">世遗×2</span></div><div class="cul-theme" data-page-node-id="PXNjNRqkLuaUYzAfBgHWqC">巴渝山水 · 英雄之城</div><div class="cul-desc" data-page-node-id="YGxkJ2lV7Lf7noLYZ1fkJ7">洪崖洞吊脚楼、大足石刻、川江号子。山水之城里的巴渝刚毅与家国担当。</div><div class="cul-do" data-page-node-id="6YFJNgHecgWCRv96dEf3qO">📍 必体验：洪崖洞 · 大足石刻 · 火锅 · 长江索道</div></div>
-    </div>
-    <p class="culture-legend" data-page-node-id="M2FfEC85hb5TzV4VpchDhz">🏛️ 世界遗产 = UNESCO 世界遗产；📜 世界记忆 = 世界记忆名录；🍜 美食之都 = UNESCO 创意城市网络；其余为特色文化荣誉。广州为"海上丝绸之路"中国段联合申遗预备项目，尚未入选。</p>
-  </section>
-
   <footer data-page-node-id="B8W3uFkraJk2i7c8UZY4NF">
     本页含月历、实时天气与常用工具跳转 · 部署于 GitHub Pages
   </footer>
@@ -260,7 +133,7 @@
 <script>
   // ===== 日历模块（月历 + 今日高亮 + 行程标注）=====
   (function(){
-    const TRIP_START=new Date(2026,9,5), TRIP_END=new Date(2026,9,19); // 十月行程 10/5–10/19
+    const TRIP_START=new Date(2026,9,3), TRIP_END=new Date(2026,9,17); // 十月行程 10/3–10/17
     const grid=document.getElementById('calGrid');
     const title=document.getElementById('calTitle');
     const today=new Date();
@@ -296,7 +169,7 @@
 
     document.getElementById('calToday').innerHTML=
       `<span>今天 ${today.getMonth()+1}月${today.getDate()}日 ${WEEKS[today.getDay()]}</span>`+
-      `<span class="trip-legend">🧳 行程 10/5–10/19</span>`;
+      `<span class="trip-legend">🧳 行程 10/3–10/17</span>`;
     document.getElementById('date').textContent=`${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}`;
     render();
   })();
