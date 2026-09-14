@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>十月旅行完整攻略 · 重庆→丽江→贵阳→南宁→广州→汕尾→汕头→返程</title>
+<style>
+  :root{
+    --bg:#FAFBFC; --card:#FFFFFF; --border:#E9EDF3;
+    --text:#333C4E; --sub:#78849B; --weak:#AEB7C4;
+    --accent:#6E9BE0; --accent-d:#5A86C4; --accent-l:#EDF3FC;
+    --danger:#D97C80; --ok:#5AA98C; --warn:#DFAE82;
+    --c-trans:#7FA8D8; --c-stay:#DFA0A0; --c-food:#E0B487; --c-ticket:#B0A3D6; --c-shop:#7FC9B8; --c-other:#B8CE8F;
+    --shadow:0 2px 10px rgba(44,54,80,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  header{text-align:center;padding:18px 0 10px}
+  header h1{font-size:25px;font-weight:700;letter-spacing:.5px}
+  header .sub{color:var(--sub);font-size:14px;margin-top:6px}
+  .badge{display:inline-block;background:var(--accent-l);color:var(--accent-d);border:1px solid #DCE7F7;border-radius:20px;padding:3px 12px;font-size:12px;margin:10px 4px 0}
+  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin:16px 0;box-shadow:var(--shadow)}
+  h2{font-size:18px;font-weight:700;margin-bottom:14px;padding-left:11px;border-left:4px solid var(--accent);color:var(--text)}
+  h3{font-size:15px;font-weight:700;color:var(--accent-d);margin:16px 0 8px}
+  p,li{color:var(--text)}
+  .muted{color:var(--sub);font-size:13px}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--accent-l);color:var(--accent-d);font-weight:600}
+  tr:nth-child(even) td{background:#FCFDFE}
+  .route{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 4px}
+  .node{background:var(--accent-l);border:1px solid #DCE7F7;border-radius:10px;padding:7px 12px;font-size:13px;color:var(--text)}
+  .node b{color:var(--accent-d)}
+  .arrow{color:var(--weak);font-size:13px}
+  .day{border-left:3px solid var(--accent);background:#FCFDFE;border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0}
+  .day .dt{font-weight:700;color:var(--accent-d);font-size:14.5px}
+  .day .tag{display:inline-block;font-size:11px;color:#fff;background:var(--accent);border-radius:6px;padding:1px 7px;margin-left:8px;vertical-align:middle}
+  .slot{margin:7px 0}
+  .slot .k{font-weight:700;color:var(--sub);font-size:12.5px;display:inline-block;width:46px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .pill{display:inline-block;font-size:11px;border-radius:6px;padding:1px 7px;color:#fff;margin-right:4px}
+  .p-trans{background:var(--c-trans)} .p-stay{background:var(--c-stay)} .p-food{background:var(--c-food)} .p-ticket{background:var(--c-ticket)} .p-shop{background:var(--c-shop)} .p-other{background:var(--c-other)}
+  .branch{border:1px dashed var(--border);border-radius:12px;padding:14px 16px;margin:12px 0;background:#FCFDFE}
+  .branch.typhoon{border-color:#F0D2D4;background:#FDF4F4}
+  .branch.ok{border-color:#D3EADD;background:#F3FBF7}
+  .branch h3{margin-top:0}
+  .warnbox{background:#FBF6EE;border:1px solid #F2E2CC;border-radius:10px;padding:12px 14px;color:#8a6d3b;font-size:13.5px;margin:10px 0}
+  .okbox{background:#F1FAF5;border:1px solid #D3EADD;border-radius:10px;padding:12px 14px;color:#3c7a63;font-size:13.5px;margin:10px 0}
+  ul{padding-left:20px} li{margin:3px 0}
+  .tot{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+  .tot .c{flex:1;min-width:200px;border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:center}
+  .tot .c.econ{background:#FCFDFE} .tot .c.comf{background:var(--accent-l)}
+  .tot .c .big{font-size:22px;font-weight:700;color:var(--accent-d)}
+  .tot .c .lab{font-size:12px;color:var(--sub);margin-top:2px}
+  .foot{text-align:center;color:var(--weak);font-size:12px;margin-top:24px}
+  a{color:var(--accent-d);text-decoration:none}
+  .note{background:var(--accent-l);border-radius:10px;padding:11px 14px;font-size:13px;color:var(--accent-d);margin:10px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🍂 十月旅行完整攻略</h1>
+  <div class="sub">安庆出发 · 15天14晚 · 渝黔桂粤闽沿海大环线</div>
+  <div>
+    <span class="badge">10/3 周六 晚抵重庆</span>
+    <span class="badge">10/17 周六 返程</span>
+    <span class="badge">2人出行</span>
+  </div>
+</header>
+
+<!-- 路线总览 -->
+<section>
+  <h2>一、路线总览</h2>
+  <div class="route">
+    <span class="node"><b>重庆</b><br>10/3晚–10/6<br>3晚</span>
+    <span class="arrow">✈ 1h40m</span>
+    <span class="node"><b>丽江</b><br>10/6–10/8<br>2晚</span>
+    <span class="arrow">✈ 1h30m</span>
+    <span class="node"><b>贵阳</b><br>10/8–10/10<br>2晚</span>
+    <span class="arrow">🚄 2h50m</span>
+    <span class="node"><b>南宁</b><br>10/10–10/11<br>1晚</span>
+    <span class="arrow">🚄 3h</span>
+    <span class="node"><b>广州</b><br>10/11–10/12<br>1晚</span>
+    <span class="arrow">🚄 1h</span>
+    <span class="node"><b>汕尾</b><br>10/12–10/13<br>1晚</span>
+    <span class="arrow">🚄 1h20m</span>
+    <span class="node"><b>汕头</b><br>10/13–10/17<br>4晚</span>
+    <span class="arrow">↩</span>
+    <span class="node"><b>返程</b><br>10/17<br>福州/赣州</span>
+  </div>
+  <div class="note">节奏：前半段（渝→黔→桂）以山水+民族风情为主，节奏稍紧；后半段（粤东沿海）以美食+看海为主，汕头留 4 晚做缓冲，方便临行前看天气决定返程方式。</div>
+</section>
+
+<!-- 交通骨架 -->
+<section>
+  <h2>二、城际交通骨架（已核实时刻/票价）</h2>
+  <table>
+    <tr><th>段</th><th>方式</th><th>耗时</th><th>票价(二等/经济)</th><th>班次参考</th></tr>
+    <tr><td>安庆→重庆</td><td>✈ 飞机</td><td>约2h</td><td>约¥700/人</td><td>傍晚抵达，参考原线 PN6235 反向</td></tr>
+    <tr><td>重庆→丽江</td><td>✈ 飞机</td><td>约1h40m</td><td>¥200–500/人</td><td>西部航空PN6239 / 祥鹏8L9818 / 南航CZ2183（无直达高铁，经昆明中转约7–8h，飞机最优）</td></tr>
+    <tr><td>丽江→贵阳</td><td>✈ 飞机</td><td>约1h25–35m</td><td>¥300–600/人</td><td>多彩贵州航空直飞（火车经昆明中转约7–8h，飞机最优）</td></tr>
+    <tr><td>贵阳→南宁</td><td>🚄 贵南高铁</td><td>约2h43m–3h</td><td>¥210–290/人</td><td>D1723 贵阳北12:24→南宁北15:07 ¥210</td></tr>
+    <tr><td>南宁→广州</td><td>🚄 南广高铁</td><td>约3h</td><td>¥208–260/人</td><td>D3615 南宁东08:38→广州南12:24</td></tr>
+    <tr><td>广州→汕尾</td><td>🚄 广汕高铁</td><td>约1h</td><td>¥107–167/人</td><td>广州东/新塘→汕尾</td></tr>
+    <tr><td>汕尾→汕头</td><td>🚄 汕汕高铁</td><td>约1h18–28m</td><td>¥63–105/人</td><td>D7172 11:47→13:05 ¥79（2025年底全线贯通）</td></tr>
+    <tr><td>汕头→福州</td><td>🚄 甬广高铁</td><td>约2h30–51m</td><td>¥214–231/人</td><td>G3046 14:56→17:27 ¥231 / G3048 15:17→17:50 ¥214</td></tr>
+    <tr><td>福州→安庆</td><td>✈ 飞机</td><td>约1h25m</td><td>约¥400/人</td><td>西部航空 PN6324（10/17 晚班 20:10→21:35 已查有票）</td></tr>
+    <tr><td>汕头→赣州</td><td>🚄 赣深方向</td><td>约3h</td><td>¥237/人</td><td>G3690 汕头13:56→赣州西17:06</td></tr>
+    <tr><td>赣州→安庆</td><td>🚄 高铁</td><td>约3h37m–4h14m</td><td>¥322–357/人</td><td>G3066 10:55→14:32 ¥322 / G2790 08:49→12:26 ¥356</td></tr>
+  </table>
+  <p class="muted">注：以上为 2026-09 检索到的现行班次与票价，节假日/旺季会浮动，出票前请在 12306 / 航司 App 复核具体时刻。飞机票建议提前 30 天以上锁定，比临期便宜 30%–50%。</p>
+</section>
+
+<!-- 逐日行程 -->
+<section>
+  <h2>三、逐日行程</h2>
+
+  <div class="day">
+    <div class="dt">Day 1 · 10/3 周六 <span class="tag">重庆</span></div>
+    <div class="slot"><span class="k">傍晚</span>安庆飞重庆（约2h），抵达江北机场。机场→市区：轻轨10号线→6号线「小什字」站（约50–65min，¥5–7）；或大件行李选机场快线K01（¥15，直达解放碑）；深夜抵达网约车约¥60–100。</div>
+    <div class="slot"><span class="k">晚上</span>入住解放碑/洪崖洞附近，夜游洪崖洞、千厮门大桥看夜景，八一好吃街尝酸辣粉、山城小汤圆。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 2 · 10/4 周日 <span class="tag">重庆</span></div>
+    <div class="slot"><span class="k">上午</span>长江索道（新华路站，¥单程约20）→ 湖广会馆 → 弹子石老街。</div>
+    <div class="slot"><span class="k">下午</span>李子坝轻轨穿楼打卡 → 磁器口古镇（陈麻花、古镇鸡杂）。<span class="pill p-ticket">门票</span></div>
+    <div class="slot"><span class="k">晚上</span>解放碑商圈，吃重庆火锅（珮姐/周师兄等，人均¥100–150）。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 3 · 10/5 周一 <span class="tag">重庆</span></div>
+    <div class="slot"><span class="k">全天</span>武隆一日游（天生三桥+龙水峡地缝+仙女山，8人小团约¥150–530/人含车），或市区轻松版：鹅岭公园→二厂文创→山城步道。</div>
+    <div class="slot"><span class="k">晚上</span>补一顿地道老火锅/江湖菜，收拾行李。</div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 4 · 10/6 周二 <span class="tag">重庆→丽江</span></div>
+    <div class="slot"><span class="k">上午</span>重庆江北机场飞丽江（约1h40m，¥200–500）。机场→市区拼车/大巴约40min。</div>
+    <div class="slot"><span class="k">下午</span>入住丽江古城周边，逛大研古城、四方街、狮子山万古楼看全景。<span class="pill p-stay">住宿</span></div>
+    <div class="slot"><span class="k">晚上</span>古城内听民谣、吃腊排骨火锅、野生菌锅。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 5 · 10/7 周三 <span class="tag">丽江</span></div>
+    <div class="slot"><span class="k">上午</span>玉龙雪山（需提前预约：冰川公园大索道+蓝月谷，门票+索道约¥200–300/人，保暖衣物必备，海拔4506m注意高反）。<span class="pill p-ticket">门票</span></div>
+    <div class="slot"><span class="k">下午</span>蓝月谷拍照 → 束河古镇（比大研安静）。</div>
+    <div class="slot"><span class="k">晚上</span>《丽江千古情》演出（可选）或古城慢逛。</div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 6 · 10/8 周四 <span class="tag">丽江→贵阳</span></div>
+    <div class="slot"><span class="k">上午</span>丽江飞贵阳（约1h25–35m，多彩贵州航空）。龙洞堡机场→市区轻轨2号线约30min。</div>
+    <div class="slot"><span class="k">下午</span>入住贵阳，甲秀楼 + 黔灵山公园（看猕猴，门票约¥5）。<span class="pill p-ticket">门票</span></div>
+    <div class="slot"><span class="k">晚上</span>青云路/二七路小吃街：肠旺面、丝娃娃、酸汤鱼。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 7 · 10/9 周五 <span class="tag">贵阳</span></div>
+    <div class="slot"><span class="k">方案A</span>黄果树瀑布一日游（门票¥160+观光车¥50，需提前实名预约；距市区约2h车程，建议跟小团或自驾）。<span class="pill p-ticket">门票</span></div>
+    <div class="slot"><span class="k">方案B</span>青岩古镇（¥10/套票¥60）+ 贵州省博物馆（免费，需预约），轻松半日。</div>
+    <div class="slot"><span class="k">晚上</span>回贵阳吃酸汤牛肉/豆米火锅。</div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 8 · 10/10 周六 <span class="tag">贵阳→南宁</span></div>
+    <div class="slot"><span class="k">上午</span>贵南高铁 贵阳北→南宁北（约2h50m，¥210–290）。入住南宁。</div>
+    <div class="slot"><span class="k">下午</span>青秀山（5A，¥20，10月朱槿花期）→ 南湖公园。<span class="pill p-ticket">门票</span></div>
+    <div class="slot"><span class="k">晚上</span>中山路/水街夜市：老友粉、酸嘢、卷筒粉、柠檬鸭。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 9 · 10/11 周日 <span class="tag">南宁→广州</span></div>
+    <div class="slot"><span class="k">上午</span>广西民族博物馆（免费，周一闭馆，今天周日可去）或扬美古镇（¥10，左江边的明清古镇）。</div>
+    <div class="slot"><span class="k">中午</span>南广高铁 南宁东→广州南（约3h，¥208–260）。</div>
+    <div class="slot"><span class="k">下午</span>入住广州，北京路/珠江新城，傍晚珠江夜游（¥约50–100/人）。<span class="pill p-ticket">门票</span></div>
+    <div class="slot"><span class="k">晚上</span>早茶式晚餐或广州烧烤，为明日顺德美食养胃口。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 10 · 10/12 周一 <span class="tag">广州→汕尾</span></div>
+    <div class="slot"><span class="k">上午</span>可选顺德半日（广州南→顺德站约15min，吃双皮奶、顺德鱼生、桑拿鸡），或广州睡懒觉。</div>
+    <div class="slot"><span class="k">中午</span>广汕高铁 广州东/新塘→汕尾（约1h，¥107–167）。入住汕尾。</div>
+    <div class="slot"><span class="k">下午</span>红海湾（遮浪半岛，三面环海、风车岛）→ 二马路夜市吃海鲜、薄饼、菜茶。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 11 · 10/13 周二 <span class="tag">汕尾→汕头</span></div>
+    <div class="slot"><span class="k">上午</span>汕汕高铁 汕尾→汕头（约1h20m，¥63–105）。入住汕头（推荐金平区小公园/龙湖区）。</div>
+    <div class="slot"><span class="k">下午</span>小公园开埠区（南洋骑楼建筑）+ 老妈宫戏台 + 西堤公园（侨批纪念）。<span class="pill p-ticket">门票</span></div>
+    <div class="slot"><span class="k">晚上</span>汕头牛肉火锅（吊龙、匙柄现切，人均¥80–120）+ 夜粥。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 12 · 10/14 周三 <span class="tag">汕头</span></div>
+    <div class="slot"><span class="k">上午</span>南澳岛一日游（跨海大桥进岛，青澳湾、环岛路、风车群；岛内建议包车/租电动车）。<span class="pill p-other">交通</span></div>
+    <div class="slot"><span class="k">下午</span>青澳湾看海、北回归线标志塔。</div>
+    <div class="slot"><span class="k">晚上</span>回市区吃生腌（虾、蟹、血蛤，配白粥，选口碑老店注意卫生）。<span class="pill p-food">餐饮</span></div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 13 · 10/15 周四 <span class="tag">汕头</span></div>
+    <div class="slot"><span class="k">上午</span>礐石风景区（缆车看汕头内海湾）或陈慈黉故居（澄海，岭南第一侨宅）。</div>
+    <div class="slot"><span class="k">下午</span>逛潮汕工夫茶、买手信（牛肉丸、绿豆饼、老香黄）。<span class="pill p-shop">购物</span></div>
+    <div class="slot"><span class="k">晚上</span>潮汕夜糜/粿条，闲逛。</div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 14 · 10/16 周五 <span class="tag">汕头（机动）</span></div>
+    <div class="slot"><span class="k">全天</span><b>缓冲日</b>：可用于补南澳/潮州一日游（汕头→潮州高铁约20–30min，广济桥、牌坊街、潮汕牛肉丸发源地），或单纯海边躺平。今日也用来<b>最终确认返程方式</b>（看台风预报，见第六节）。</div>
+    <div class="okbox">10/16 是决策关键日：打开中央气象台/广东天气，确认 10/17 前后华南沿海是否有台风。无台风走福州飞机，有台风走赣州动车。</div>
+  </div>
+
+  <div class="day">
+    <div class="dt">Day 15 · 10/17 周六 <span class="tag">返程</span></div>
+    <div class="slot"><span class="k">无台风</span>汕头→福州高铁（G3046 14:56 / G3048 15:17，约2.5h）→ 福州长乐机场→安庆飞机（PN6324 晚班 20:10→21:35，约1h25m），当晚到家。</div>
+    <div class="slot"><span class="k">有台风</span>汕头→赣州西高铁（G3690 13:56→17:06，约3h）→ 赣州西→安庆西高铁（次日 G3066 10:55 / G2790 08:49，约3.5–4h），10/18 中午到家。</div>
+  </div>
+</section>
+
+<!-- 住宿 -->
+<section>
+  <h2>四、住宿区域建议</h2>
+  <div class="grid2">
+    <div>
+      <h3>重庆</h3>
+      <p>解放碑/洪崖洞（地铁便利、夜景近），经济 ¥200–280、舒适 ¥350–500/晚。</p>
+      <h3>丽江</h3>
+      <p>大研古城南门或束河（安静），注意古城维护费；舒适客栈 ¥300–450/晚。</p>
+      <h3>贵阳</h3>
+      <p>大十字/喷水池/甲秀楼一带，地铁2号线沿线，¥200–400/晚。</p>
+    </div>
+    <div>
+      <h3>南宁</h3>
+      <p>朝阳广场/东盟商务区，地铁1/2号线，¥200–350/晚。</p>
+      <h3>广州</h3>
+      <p>珠江新城/北京路/广州南站旁（赶高铁方便），¥300–500/晚。</p>
+      <h3>汕尾</h3>
+      <p>市区二马路或红海湾旁，¥200–350/晚。</p>
+      <h3>汕头</h3>
+      <p>金平区小公园（老城氛围）或龙湖区（新、近高铁），¥220–400/晚，连住4晚可谈长住价。</p>
+    </div>
+  </div>
+  <p class="muted">全程 14 晚（2人共用一间），国庆后 10 月中下旬属平季，价格较国庆假期回落，建议出行前 2 周在携程/美团锁定可免费取消的房源。</p>
+</section>
+
+<!-- 餐饮 -->
+<section>
+  <h2>五、必吃清单</h2>
+  <table>
+    <tr><th>城市</th><th>招牌</th></tr>
+    <tr><td>重庆</td><td>老火锅、江湖菜、酸辣粉、小面、山城汤圆</td></tr>
+    <tr><td>丽江</td><td>腊排骨火锅、野生菌锅、鸡豆凉粉、酥油茶</td></tr>
+    <tr><td>贵阳</td><td>酸汤鱼、肠旺面、丝娃娃、酸汤牛肉、豆腐圆子</td></tr>
+    <tr><td>南宁</td><td>老友粉、酸嘢、卷筒粉、柠檬鸭、六堡茶</td></tr>
+    <tr><td>广州/顺德</td><td>早茶、烧腊、顺德鱼生、双皮奶、桑拿鸡、肠粉</td></tr>
+    <tr><td>汕尾</td><td>海鲜、薄饼、菜茶、咸茶、牛肉丸</td></tr>
+    <tr><td>汕头</td><td>牛肉火锅、生腌、潮汕粿条、工夫茶、绿豆饼、老香黄</td></tr>
+  </table>
+</section>
+
+<!-- 返程分支 -->
+<section>
+  <h2>六、返程应急分支（台风决策）</h2>
+  <div class="warnbox"><b>决策时点：10/16（周五）。</b> 查看中央气象台台风网、广东天气、福建天气，确认 10/17 前后华南沿海（广汕/汕汕/厦深高铁沿线）是否有台风登陆或橙色以上预警。沿海高铁遇台风极易停运，必须提前切换内陆通道。</div>
+
+  <div class="branch ok">
+    <h3>✅ 无台风 → 汕头→福州→安庆（飞机）</h3>
+    <ul>
+      <li><span class="pill p-trans">高铁</span>汕头→福州：甬广高铁 G3046（14:56→17:27）或 G3048（15:17→17:50），约2.5h，¥214–231/人。</li>
+      <li><span class="pill p-trans">飞机</span>福州长乐机场→安庆天柱山机场：西部航空 PN6324 晚班 20:10→21:35，约1h25m，约¥400/人。当晚到家。</li>
+      <li>冗余：若错过晚班，10/18 上午仍有福州→安庆航班，福州住一晚即可。</li>
+    </ul>
+  </div>
+
+  <div class="branch typhoon">
+    <h3>🌪 有台风 → 汕头→赣州→安庆（全程动车）</h3>
+    <ul>
+      <li><span class="pill p-trans">高铁</span>汕头→赣州西：G3690 13:56→17:06，约3h，¥237/人（经潮汕可换乘）。</li>
+      <li><span class="pill p-trans">高铁</span>赣州西→安庆西：G3066（10:55→14:32 ¥322）/ G2790（08:49→12:26 ¥356）/ G2796（18:00→22:14 ¥325），约3.5–4h。</li>
+      <li>建议：10/17 白天汕头→赣州，赣州住一晚；10/18 上午赣州→安庆，中午到家。全程走赣深+京港内陆通道，绕开沿海台风影响区。</li>
+      <li>冗余：赣州西另有 G2787 直达安庆站（非安庆西），时间相近，二等座约¥325，可兜底。</li>
+    </ul>
+  </div>
+  <div class="okbox">两条通道都在 10/16 完成购票/占座。台风路径在 10/14–16 基本确定，10/16 当天按上面表格二选一执行即可，无需临时找票。</div>
+</section>
+
+<!-- 预算 -->
+<section>
+  <h2>七、预算估算（2人 · 人民币）</h2>
+  <table>
+    <tr><th>项目</th><th>经济档</th><th>舒适档</th><th>说明</th></tr>
+    <tr><td><span class="pill p-trans">交通</span>城际</td><td>¥6,570</td><td>¥6,670</td><td>含全部飞机+高铁（按无台风计，有台风略省¥100）；安庆→重庆去程机票约¥1,400/2人</td></tr>
+    <tr><td><span class="pill p-stay">住宿</span>14晚</td><td>¥3,360</td><td>¥5,880</td><td>经济¥240/晚 · 舒适¥420/晚（均按一间计）</td></tr>
+    <tr><td><span class="pill p-food">餐饮</span>15天</td><td>¥4,050</td><td>¥6,900</td><td>经济¥135/人/天 · 舒适¥230/人/天</td></tr>
+    <tr><td><span class="pill p-ticket">门票</span></td><td>¥1,800</td><td>¥2,500</td><td>黄果树/西江/玉龙雪山/青秀山等（部分免费景点未计入）</td></tr>
+    <tr><td><span class="pill p-other">市内+杂</span></td><td>¥800</td><td>¥1,500</td><td>打车、小吃、手信、行李托运等</td></tr>
+    <tr><th>合计</th><th>¥16,580</th><th>¥23,450</th><th>人均约 ¥8,290 / ¥11,725</th></tr>
+  </table>
+  <p class="muted">以上为 2 人平季估算，未含购物大额支出。机票占交通大头，提前 30 天锁价可再省 10%–20%。预算按 2 人口径，与工作台现有种子数据口径一致。</p>
+</section>
+
+<!-- 实用贴士 -->
+<section>
+  <h2>八、实用贴士 & 打包清单</h2>
+  <h3>预约提醒（务必提前）</h3>
+  <ul>
+    <li>黄果树、西江千户苗寨、荔波小七孔：贵州景区实名预约制，建议出发前 3–7 天在「一码游贵州」预约。</li>
+    <li>玉龙雪山冰川公园大索道：限流，提前在「丽江旅游集团」公众号预约。</li>
+    <li>贵州省博物馆、广西民族博物馆：免费但需预约，注意周一闭馆。</li>
+    <li>机票/高铁：飞机提前30天、高铁开车前15天/7天关注放票。</li>
+  </ul>
+  <h3>天气与穿衣</h3>
+  <ul>
+    <li>重庆/广州/汕尾/汕头：10月中下旬 22–30℃，短袖+薄外套，沿海地区防晒防风。</li>
+    <li>丽江/玉龙雪山：白天 15–22℃、山上 0–5℃，需冲锋衣/羽绒内胆，防晒+墨镜+润唇膏。</li>
+    <li>贵阳/南宁：15–25℃，昼夜温差大，薄外套+雨具（贵州多阵雨）。</li>
+  </ul>
+  <h3>必备 App</h3>
+  <p>12306（高铁）、航司App（值机）、高德/百度地图、大众点评/美团（吃住）、中央气象台/天气App（台风）、支付宝（乘车码）。</p>
+  <h3>打包清单</h3>
+  <p>身份证、充电宝、薄外套×2、防晒、雨伞、舒适步行鞋、保湿用品、常用药（肠胃/感冒/高反红景天）、口罩、转换插头（无需）。生腌量力而行，备肠胃药。</p>
+  <div class="note">本攻略基于 2026-09 检索的现行交通与票价，节假日浮动属正常。出行前一周再做一次「班次+天气+预约」三核对即可放心出发。</div>
+</section>
+
+<div class="foot">生成于 2026-09-14 · 十月旅行规划 · 路线：重庆→丽江→贵阳→南宁→广州→汕尾→汕头→返程</div>
+
+</div>
+</body>
+</html>
