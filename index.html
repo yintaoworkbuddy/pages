@@ -65,6 +65,22 @@
   @media(max-width:520px){.tool-row{grid-template-columns:1fr}}
   .tool-card.xhs .t-ico{background:#FBEEF1;color:#C4707F}
   .tool-card.fan .t-ico{background:#FBF3E8;color:#C08A4E}
+  .trip-card{background:linear-gradient(135deg,#F5F8FD,#FFFFFF);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin-bottom:12px}
+  .trip-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+  .trip-head .t-ico{width:40px;height:40px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto;background:var(--accent-soft)}
+  .trip-head-txt{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+  .trip-head-txt .t-name{font-size:17px;font-weight:700;line-height:1.3;margin-top:2px}
+  .trip-head-txt .t-sub{font-size:12px;color:var(--sub);margin-top:3px;line-height:1.5}
+  .trip-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:520px){.trip-links{grid-template-columns:1fr}}
+  .trip-link{display:flex;align-items:center;gap:9px;background:#FFFFFF;border:1px solid var(--line);border-radius:11px;padding:10px 12px;text-decoration:none;color:var(--txt);transition:transform .15s,box-shadow .15s,border-color .15s}
+  .trip-link:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(44,54,80,.08);border-color:var(--accent)}
+  .trip-link.primary{background:var(--accent-soft);border-color:#D7E3F5}
+  .trip-link .tl-ico{font-size:18px;flex:0 0 auto}
+  .trip-link .tl-txt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .trip-link .tl-txt b{font-size:13px;font-weight:600}
+  .trip-link .tl-txt i{font-style:normal;font-size:11px;color:var(--sub);margin-top:1px}
+  .trip-link .tl-arrow{font-size:18px;color:#B4BCC9;flex:0 0 auto}
   footer{color:var(--sub);font-size:12px;text-align:center}
 
   /* 离线提示条 */
@@ -99,24 +115,28 @@
   <!-- 工具跳转区 -->
   <section class="tools" data-page-node-id="c8u661Ok9qikweInBhriA9">
     <h2 class="tools-title" data-page-node-id="pcCPJ8fbqjoW5N3JYBlsyV">🧰 常用工具</h2>
-    <a class="tool-card main" href="travel-planner.html" data-page-node-id="4wmuEP9gE2VTX6lk9FrVOH">
-      <span class="t-ico" data-page-node-id="6xvbFO9hQZObQkmhPMlJLs">🧳</span>
-      <span class="t-body" data-page-node-id="jwtKonSAg9AU5eNpPw86Ts">
-        <span class="route-badge" data-page-node-id="RLkzzE6BGbpKFzwqMFKxck">十月环线 · 10/3–10/17 · 已定稿</span>
-        <span class="t-name" data-page-node-id="1yKTNOrfFmgeg5rL5JjO3s">旅行规划工作台</span>
-        <span class="t-sub" data-page-node-id="Qzj81SApbAHEXg3xD8KFPN">9 城 15 天 14 晚 · 行程 / 预算 / 看板 · 可自行编辑 · 数据存本机</span>
-      </span>
-      <span class="t-arrow" data-page-node-id="Tr63o55b6MKT5aw9siY8Va">›</span>
-    </a>
-    <a class="tool-card main" href="oct-trip-guide.html">
-      <span class="t-ico">📖</span>
-      <span class="t-body">
-        <span class="route-badge">完整攻略 · 10/3–10/17 · 定稿</span>
-        <span class="t-name">十月旅行完整逐日方案</span>
-        <span class="t-sub">重庆/丽江(玉龙雪山)/昆明/南宁/广州/顺德/汕尾/汕头/福州 · 含返程 AB 计划</span>
-      </span>
-      <span class="t-arrow">›</span>
-    </a>
+    <div class="trip-card" data-page-node-id="4wmuEP9gE2VTX6lk9FrVOH">
+      <div class="trip-head">
+        <span class="t-ico" data-page-node-id="6xvbFO9hQZObQkmhPMlJLs">🧳</span>
+        <div class="trip-head-txt">
+          <span class="route-badge" data-page-node-id="RLkzzE6BGbpKFzwqMFKxck">十月环线 · 10/3–10/17 · 已定稿</span>
+          <span class="t-name" data-page-node-id="1yKTNOrfFmgeg5rL5JjO3s">十月旅行规划</span>
+          <span class="t-sub" data-page-node-id="Qzj81SApbAHEXg3xD8KFPN">9 城 15 天 14 晚 · 重庆 / 丽江(玉龙雪山) / 昆明 / 南宁 / 广州(顺德) / 汕尾 / 汕头 / 福州</span>
+        </div>
+      </div>
+      <div class="trip-links">
+        <a class="trip-link primary" href="travel-planner.html">
+          <span class="tl-ico">🗂️</span>
+          <span class="tl-txt"><b>旅行规划工作台</b><i>行程 · 预算 · 看板 · 可编辑</i></span>
+          <span class="tl-arrow">›</span>
+        </a>
+        <a class="trip-link" href="oct-trip-guide.html">
+          <span class="tl-ico">📖</span>
+          <span class="tl-txt"><b>完整逐日攻略</b><i>含返程 AB 计划 · 抢票提醒</i></span>
+          <span class="tl-arrow">›</span>
+        </a>
+      </div>
+    </div>
     <div class="tool-row" data-page-node-id="TgTktBogZhlG5MZ4XGOyF3">
       <a class="tool-card xhs" href="https://www.xiaohongshu.com" target="_blank" rel="noopener" data-page-node-id="X1NIFIqepsH2i83VHyJCaz">
         <span class="t-ico" data-page-node-id="GGeNLSXi4tHqum6TEoElym">📕</span>
