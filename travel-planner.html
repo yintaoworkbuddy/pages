@@ -450,7 +450,7 @@ body{-webkit-tap-highlight-color:transparent}
       </div>
       <div class="cw-week" data-page-node-id="7LJkxj3NbPn3EBy2rRDhD7"><span data-page-node-id="Zsvjv4sBKR887FYzwTAOHj">日</span><span data-page-node-id="bzDGHFPHKi4HQAjDYO4nP4">一</span><span data-page-node-id="iFBFhhcZUHGY0rVJleuXWy">二</span><span data-page-node-id="fFY0A60e2myl2JmNrWLlPj">三</span><span data-page-node-id="75KJORjnxw0HtdfnQEA4Jn">四</span><span data-page-node-id="YVbiOiQF0r6JBPDq7onQcu">五</span><span data-page-node-id="KwyPc3BEOiuCpN5pj4ud7g">六</span></div>
       <div class="cw-grid" id="wb-calGrid" data-page-node-id="OQ56VjSv2v8rymvKzJD3yl"></div>
-      <div class="cw-foot" data-page-node-id="a1BsXj2tCIc9DFXdfroEhS"><span class="trip-span" data-page-node-id="iR0nhUCPPaAQpY5tk97VOe">🧳 10/3–10/17 · 15天13晚</span><span data-page-node-id="e7roJZy7vxQx3xVh37dt4F">安庆 → 9城 → 安庆</span></div>
+      <div class="cw-foot" data-page-node-id="a1BsXj2tCIc9DFXdfroEhS"><span class="trip-span" data-page-node-id="iR0nhUCPPaAQpY5tk97VOe">🧳 10/3–10/17 · 15天14晚</span><span data-page-node-id="e7roJZy7vxQx3xVh37dt4F">安庆 → 9城 → 安庆</span></div>
       <div class="cw-legend" id="wb-calLegend" data-page-node-id="fPmioZ4lfjSJK5j3F3B4E5"></div>
     </div>
     <div class="cw-card wth" data-page-node-id="wO9aU8lp7ltvbwLuR2GPJV">
@@ -715,7 +715,7 @@ var OPTIONS_MAP = {
     "目的地看板": { "text": "目的地看板", "id": "43GUwpsWENMT" }
   }
 };
-var STORAGE_KEY = "wb_travel_planner_data_v15";
+var STORAGE_KEY = "wb_travel_planner_data_v16";
 var syncMode = "offline";
 var allRecords = [];
 var editTarget = null;
@@ -939,46 +939,52 @@ function buildProperties(rec) {
 function getExampleData() {
   var todayStr = getTodayStr();
   return [
-    // ===== 行程规划（2026-09-16 定稿 · 安庆-重庆-丽江-昆明-南宁-广州-汕尾-汕头-福州-安庆 · 10/3-10/17 共15天）=====
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-03", title: "安庆→重庆（PN6236 西部航空）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "PN6236 22:20→次日00:30（仅周二/四/六，10/3周六✓），¥450/人（2人¥900）；深夜落地，轻轨10号线约40分钟进市区，先补觉" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-04", title: "重庆Day1 · 解放碑/洪崖洞 + 火锅开局", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "凌晨落地先补觉；中午解放碑+洪崖洞；晚餐珮姐老火锅或周师兄大刀腰片（提前2h取号）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-05", title: "重庆Day2 · 李子坝→鹅岭二厂→长江索道→南山", amount: 0, category: "都市", status: "已确定", priority: "高", notes: "傍晚长江索道（南站排队少）→南山一棵树夜景；夜宵九街烧烤、花市豌杂面、山城小汤圆" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-06", title: "重庆Day3 · 磁器口收尾 + 采购伴手礼", amount: 0, category: "美食", status: "已确定", priority: "中", notes: "上午磁器口或三峡博物馆；午餐最后一顿老火锅/酸辣粉+抄手；采购火锅底料、陈麻花；21:00前睡，明早04:30出发" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-07", title: "重庆→丽江（PN6261）+ 古城适应海拔", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "PN6261 06:25→08:10，¥350/人（2人¥700）；04:30到机场；08:10落地后古城慢逛四方街/木府/狮子山，下午束河或白沙古镇；晚餐阿婆腊排骨火锅；海拔2400m首日不洗澡不饮酒；玉龙雪山因10/8早车赶不上，若已抢到大索道票且体力好可改当天直冲" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-08", title: "丽江→昆明（C452 动车）+ 昆明开局", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "C452 08:08→12:02，¥190/人（2人¥380）⚠到站是昆明站（市中心），不是昆明南站；下午翠湖+陆军讲武堂（免费）；晚餐建新园过桥米线或福照楼汽锅鸡（云瑞西路36号，人均¥52-79）；夜里园西路炸洋芋" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-09", title: "昆明 · 石林 或 滇池+篆新早市", amount: 0, category: "景区", status: "已确定", priority: "高", notes: "早8点篆新农贸市场（豆花米线¥10、烧饵块¥7）；二选一：石林一日¥155/人 或 滇池海埂+云南民族村；晚餐老滇缅320傣味（柠檬撒撇、酸笋鱼，人均¥80）；10月菌子季已收尾，别为菌子专程" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-10", title: "昆明南→南宁东（D3904）+ 南宁夜市", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "D3904 09:58→14:21，¥271.5/人（2人¥543）；⚠从昆明南站发车，地铁1号线约50分钟，别跑到昆明站；下午三街两巷+青秀山（¥20+观光车¥20）；晚餐甘家界牌柠檬鸭（人均¥60）+建政路夜市" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-11", title: "南宁东→广州南（D3601）+ 早茶开局", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "D3601 06:49→10:06，¥208/人（2人¥416），比D577的¥250便宜且早到40分钟；早餐舒记老友粉打包上车；10:06到广州南（就在市区）；午餐点都德/陶陶居早茶；下午沙面岛→陈家祠→北京路" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-12", title: "广州 · 长隆野生动物世界 ⭐", amount: 0, category: "亲子", status: "已确定", priority: "高", notes: "开园即入09:30先坐小火车，11点后排队翻倍；空中缆车、白虎/考拉/大熊猫；晚上宝业路/荔湾宵夜大排档；门票官方App买比现场便宜¥30-50" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-13", title: "广州 · 顺德美食一日 ⭐", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "广州南→顺德站城际15分钟¥10/人；清晖园→鱼生（一鱼四吃）+桑拿鸡→逢简水乡→双皮奶/姜撞奶（民信、仁信老铺）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "广州→汕尾（G6301）+ 红海湾看海", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "G6301 07:41→09:13，¥143/人（2人¥286）；下午红海湾遮浪半岛（一边汹涌一边平静）+海上古堡日落；晚上二马路夜市：一道生腌（浅尝）→兄弟大排档→汕中冰室芒果冰" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-15", title: "汕尾→汕头 · 生腌朝圣 ⭐", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "上午金町湾白沙滩或风车岛海上公路；中午二马路最后一轮；午后高铁38-55分钟→汕头¥79/人（2人¥158）；傍晚龙眼南路夜市：瑞娇嫲嫲生腌（虾¥38/蟹¥88/生蚝¥38）配滚烫白粥¥2、小吴肠粉、细姨甜汤" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-16", title: "汕头小吃总纲 → 转场福州", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "早粿条汤/肠粉；午杏花吴记或八合里海记牛肉火锅（吊龙、匙仁）+春梅里卤鹅+榕香蚝烙+广场老牌豆花+甘草水果；15:17 G3048→17:50福州，¥214/人（2人¥428）" },
-    { id: genId(), rid: "", type: "行程规划", date: "2026-10-17", title: "福州半日 → 返程 AB 计划 ⭐", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "上午三坊七巷或鼓山（二选一）。【A 无台风 · 默认】PN6236 20:10→21:35，¥300-350/人（2人¥700），仅周二/四/六，10/17周六✓，当晚到家。【B 有台风 · 内陆线撤离】福州→南昌西 D2242 07:01→10:28 ¥173/人 + 南昌西→安庆 D3198 15:15→17:10 ¥133/人 = ¥306/人（2人¥612），17:10到家；备选B2（原设想赣州线）福州→赣州D6572 06:25→11:35 ¥235.5/人 + 赣州站打车到赣州西¥30 + 赣州西→安庆G2786 15:35→19:21 ¥374/人 = 2人约¥1250、13小时，比南昌线贵¥640且慢2.5h，仅在南昌线无票时用" },
+    // ===== 行程规划（2026-09-16 用户定稿时间轴 · 安庆-重庆-丽江-昆明-南宁-广州-汕尾-汕头-福州-安庆 · 10/3-10/17 共15天14晚）=====
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-03", title: "安庆→重庆（PN6236 23:45 红眼）", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "PN6236 23:45天柱山→次日01:55江北T3，¥450/人（2人¥900）；凌晨落地只能打车进市区（约¥80-100）或提前订接机，轻轨已收班；白天正常上班，晚上直接飞" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-04", title: "重庆Day1 · 补觉→解放碑/洪崖洞→火锅开局", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "凌晨落地，上午补觉；下午解放碑+八一好吃街+洪崖洞（白天拍照、亮灯后19:30回看夜景）；晚餐珮姐老火锅或周师兄大刀腰片，提前2小时线上取号；夜宵花市豌杂面" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-05", title: "重庆Day2 · 李子坝→鹅岭二厂→长江索道→南山", amount: 0, category: "都市", status: "已确定", priority: "高", notes: "上午李子坝轻轨穿楼→鹅岭二厂（从李子坝步行上山约20分钟）；下午三峡博物馆或磁器口；傍晚长江索道（南站排队少）；晚上南山一棵树看夜景+九街烧烤/老甘家小龙虾" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-06", title: "重庆Day3 · 上午收尾 → 8L9818 16:25 飞丽江", amount: 0, category: "飞机", status: "已确定", priority: "高", notes: "8L9818（祥鹏）16:25江北T3→18:05三义，¥350/人（2人¥700），准点率100%、取消率仅3%；13:00前出发（机场离市区50-60分钟+安检）；上午只能安排一顿早午餐，推荐花市豌杂面或老字号小面，别排景点；买火锅底料/陈麻花走人" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-07", title: "丽江 · 玉龙雪山登顶 ⭐ 需提前抢票", amount: 0, category: "景区", status: "待确认", priority: "高", notes: "⚠️抢票：【丽江旅游集团】小程序提前7天每晚20:00放票 → 10/7的票 9/30晚20:00开抢，定闹钟；【玉龙雪山服务】小程序另买进山费。费用：进山费100+环保车20（必买）+冰川公园大索道140=¥260/人（2人¥520）；抢7:00-8:59时段人少光线好；同一身份证90天限购1次。路线：甘海子→大索道4506m→4680m栈道→蓝月谷→《印象丽江》可选；山顶气温0℃左右，租羽绒服+氧气瓶；若大索道没抢到，退而求其次云杉坪索道¥60+蓝月谷（海拔3200更轻松）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-08", title: "上午束河 → C456 13:01 昆明 → 昆明夜市", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "上午束河古镇（比大研安静，九鼎龙潭+青龙桥+四方听音广场，2小时够了）；C456 13:01丽江→17:01昆明，¥190/人（2人¥380）；⚠到站是【昆明站】（市中心），不是昆明南站；傍晚翠湖+陆军讲武堂（免费）或南强街巷；晚餐建新园过桥米线（¥45）或福照楼汽锅鸡（云瑞西路36号，人均¥52-79）；夜里园西路炸洋芋、烧饵块" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-09", title: "昆明南 D3904 09:58 → 南宁 14:21 · 桂南开局", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "D3904 09:58→14:21，¥271.5/人（2人¥543）；⚠从【昆明南站】发车，市区地铁1号线约50分钟，07:30前出门，千万别跑到昆明站；14:21到南宁东→地铁1号线20分钟进市区；下午舒记老友粉（思贤路店）→三街两巷→邕江边散步；晚餐甘家界牌柠檬鸭（人均¥60）+建政路夜市（烤生蚝、酸嘢、卷筒粉）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-10", title: "南宁Day2 · 二选一（机动日）", amount: 0, category: "景区", status: "待确认", priority: "中", notes: "【A 德天跨国瀑布一日】5A，门票¥110-115含观光车，跟团一日¥160-240/人（含往返车+门票）；但南宁单程3.5-4小时，往返7小时车程，早6:50集合晚8点回，很累；竹筏¥48值得坐，界河双瀑同框。【B 市区松弛版·推荐】广西民族博物馆（免费，需预约）→青秀山（¥20+观光车¥20，兰园/苏铁园/龙象塔看邕江）→中山路/农院路夜市→生榨米粉、八仙粉、宾阳酸粉。若前几站累了就选B" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-11", title: "南宁东 D3601 06:49 → 广州南 10:06 · 早茶开局", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "D3601 06:49→10:06，¥208/人（2人¥416），比D577的¥250便宜还早到40分钟；早餐打包上车；10:06到广州南（就在市区，地铁直达）；午餐点都德/陶陶居早茶（虾饺、凤爪、肠粉、艇仔粥）；下午沙面岛→陈家祠→北京路；晚上珠江夜游或天字码头散步" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-12", title: "广州 · 长隆野生动物世界 ⭐", amount: 0, category: "亲子", status: "已确定", priority: "高", notes: "门票约¥350/人（2人¥700），官方App买比现场便宜¥30-50；09:30开园即入先坐小火车（11点后排队翻倍）；空中缆车→白虎山→考拉园→大熊猫中心；下午4点后猛兽区活跃；晚上宝业路/荔湾宵夜大排档；园内餐饮贵，可自带水" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-13", title: "广州 · 顺德美食一日 ⭐", amount: 0, category: "美食", status: "已确定", priority: "高", notes: "广州南→顺德站城际15分钟¥10/人（往返2人¥80）；清晖园（¥15）→鱼生（一鱼四吃，推荐了能/猪肉婆）→桑拿鸡/毋米粥→逢简水乡（免费，坐乌篷船¥60）→双皮奶姜撞奶（民信/仁信老铺）；晚上回广州住；若想省事也可住顺德，但10/14要从广州南出发，需早回" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-14", title: "广州南 G6301 07:41 → 汕尾 09:13 · 看海", amount: 0, category: "高铁", status: "已确定", priority: "高", notes: "G6301 07:41→09:13，¥143.5/人（2人¥287）；上午红海湾遮浪半岛（一边汹涌一边平静，天然奇观）+海上古堡看日落；下午金町湾白沙滩或风车岛海上公路；晚餐二马路夜市：一道生腌（浅尝，配白酒）→兄弟大排档（椒盐皮皮虾、姜葱炒蟹）→汕中冰室芒果冰；⚠台风季出发前看天气" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-15", title: "汕尾→汕头 · 生腌朝圣 ⭐（可动态调整）", amount: 0, category: "高铁", status: "待确认", priority: "高", notes: "汕尾→汕头动车1小时20分左右，¥79/人（2人¥158），可选D7148 08:11→09:39 或 D7156 10:30→11:54（想在汕尾多吃一顿就坐10:30）；汕头下午小公园骑楼→开埠文化陈列馆；傍晚龙眼南路夜市：瑞娇嫲嫲生腌（虾¥38/蟹¥88/生蚝¥38）配滚烫白粥¥2、小吴肠粉、细姨甜汤、广场老牌豆花" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-16", title: "汕头小吃总纲 → G3048 15:17 转场福州", amount: 0, category: "高铁", status: "待确认", priority: "高", notes: "早粿条汤/肠粉；午杏花吴记或八合里海记牛肉火锅（吊龙、匙仁、三花趾，沙茶酱）+春梅里卤鹅+榕香蚝烙+甘草水果；G3048 15:17汕头→17:50福州南，¥214/人（2人¥428）；💡想在汕头吃到晚上可改G3040 18:26→21:17福州南¥214/人或21:36福州站¥223（福州站更近市区）；晚上三坊七巷+达明美食街（鱼丸、肉燕、拌面扁肉）" },
+    { id: genId(), rid: "", type: "行程规划", date: "2026-10-17", title: "福州半日 → 返程 AB 计划 ⭐", amount: 0, category: "飞机", status: "待确认", priority: "高", notes: "上午三坊七巷/上下杭 或 鼓山（二选一），中午达明路吃鱼丸肉燕。【A 无台风 · 默认】PN6236 20:10→21:35，¥350/人（2人¥700），仅周二/四/六，10/17周六✓，当晚到家。【B1 有台风 · 内陆线撤离·推荐】福州D2242 07:01→南昌西10:28 ¥173/人 + 南昌西D3198 15:15→安庆17:10 ¥133/人 = ¥306/人（2人¥612），17:10到家，比A便宜¥388。【B2 赣州线】福州→赣州¥235.5/人 + 打车到赣州西¥30 + 赣州西→安庆¥374/人 = 2人约¥1250、13小时，比B1贵¥638且慢2.5h，仅在南昌线无票时用。判断节点：10/15晚看台风路径" },
 
-    // ===== 预算管理（2人交通 · 10/3-10/17 · 主线按 A 计划口径）=====
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-03", title: "机票：安庆→重庆（2人，PN6236）", amount: 900, category: "交通", status: "支出", priority: "", notes: "¥450/人×2；22:20→00:30" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-07", title: "机票：重庆→丽江（2人，PN6261）", amount: 700, category: "交通", status: "支出", priority: "", notes: "¥350/人×2；06:25→08:10" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-08", title: "动车：丽江→昆明（2人，C452）", amount: 380, category: "交通", status: "支出", priority: "", notes: "¥190/人×2；08:08→12:02，到昆明站" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-10", title: "动车：昆明南→南宁东（2人，D3904）", amount: 543, category: "交通", status: "支出", priority: "", notes: "¥271.5/人×2；09:58→14:21" },
+    // ===== 预算管理（2人口径 · 10/3-10/17 · 主线按 A 计划）=====
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-03", title: "机票：安庆→重庆（2人，PN6236 23:45）", amount: 900, category: "交通", status: "支出", priority: "", notes: "¥450/人×2；23:45→次日01:55" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-06", title: "机票：重庆→丽江（2人，8L9818 16:25）", amount: 700, category: "交通", status: "支出", priority: "", notes: "¥350/人×2；16:25→18:05" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-08", title: "动车：丽江→昆明（2人，C456 13:01）", amount: 380, category: "交通", status: "支出", priority: "", notes: "¥190/人×2；13:01→17:01，到昆明站" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-09", title: "动车：昆明南→南宁东（2人，D3904）", amount: 543, category: "交通", status: "支出", priority: "", notes: "¥271.5/人×2；09:58→14:21" },
     { id: genId(), rid: "", type: "预算管理", date: "2026-10-11", title: "动车：南宁东→广州南（2人，D3601）", amount: 416, category: "交通", status: "支出", priority: "", notes: "¥208/人×2；06:49→10:06" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-13", title: "城际：广州↔顺德往返（2人）", amount: 40, category: "交通", status: "支出", priority: "", notes: "¥10/人×2×往返；15分钟" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-14", title: "高铁：广州→汕尾（2人，G6301）", amount: 286, category: "交通", status: "支出", priority: "", notes: "¥143/人×2；07:41→09:13" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-15", title: "高铁：汕尾→汕头（2人）", amount: 158, category: "交通", status: "支出", priority: "", notes: "¥79/人×2；38–55分钟" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-16", title: "高铁：汕头→福州（2人，G3048）", amount: 428, category: "交通", status: "支出", priority: "", notes: "¥214/人×2；15:17→17:50" },
-    { id: genId(), rid: "", type: "预算管理", date: "2026-10-17", title: "返程A：福州→安庆机票（2人，PN6236）", amount: 700, category: "交通", status: "支出", priority: "", notes: "¥350/人×2；20:10→21:35；若台风改B计划动车经南昌西，2人¥612（见行程备注）" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-13", title: "城际：广州↔顺德往返（2人）", amount: 80, category: "交通", status: "支出", priority: "", notes: "¥10/人×2×往返；单程15分钟" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-14", title: "高铁：广州南→汕尾（2人，G6301）", amount: 287, category: "交通", status: "支出", priority: "", notes: "¥143.5/人×2；07:41→09:13" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-15", title: "高铁：汕尾→汕头（2人）", amount: 158, category: "交通", status: "支出", priority: "", notes: "¥79/人×2；约1小时20分" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-16", title: "高铁：汕头→福州南（2人，G3048）", amount: 428, category: "交通", status: "支出", priority: "", notes: "¥214/人×2；15:17→17:50" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-17", title: "返程A：福州→安庆机票（2人，PN6236）", amount: 700, category: "交通", status: "支出", priority: "", notes: "¥350/人×2；20:10→21:35；若台风改B1经南昌西，2人¥612（见行程备注）" },
     { id: genId(), rid: "", type: "预算管理", date: "2026-10-03", title: "机建+燃油附加（2人 · 3段航班）", amount: 780, category: "交通", status: "支出", priority: "", notes: "约¥130/人/段×3段×2人；票面价不含此项" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-07", title: "门票：玉龙雪山（2人）", amount: 520, category: "门票", status: "支出", priority: "", notes: "¥260/人×2 = 进山费100+环保车20+大索道140；若改云杉坪则为¥180/人" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-12", title: "门票：长隆野生动物世界（2人）", amount: 700, category: "门票", status: "支出", priority: "", notes: "¥350/人×2；官方App买便宜¥30-50" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-10", title: "门票：其他景点（2人 · 德天/青秀山/清晖园等）", amount: 380, category: "门票", status: "支出", priority: "", notes: "德天¥110-115/人 或 青秀山¥20+观光车¥20；清晖园¥15；其余多免费" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-03", title: "住宿：14晚（2人）", amount: 4040, category: "住宿", status: "支出", priority: "", notes: "重庆3晚900 + 丽江2晚520 + 昆明1晚280 + 南宁2晚560 + 广州3晚1140 + 汕尾1晚220 + 汕头1晚220 + 福州1晚200" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-03", title: "餐饮：15天（2人）", amount: 4500, category: "餐饮", status: "支出", priority: "", notes: "约¥300/天/2人；火锅、生腌、早茶、夜市为主要支出" },
+    { id: genId(), rid: "", type: "预算管理", date: "2026-10-03", title: "市内交通+打车（2人）", amount: 800, category: "交通", status: "支出", priority: "", notes: "含重庆凌晨落地打车、各城地铁打车、长隆往返" },
 
-    // ===== 目的地看板（最新 9 城）=====
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "重庆", amount: 0, category: "山城火锅", status: "已确定", priority: "高", notes: "洪崖洞、解放碑、李子坝、长江索道、南山一棵树；美食：珮姐老火锅、周师兄腰片、花市豌杂面、九街烧烤" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "丽江", amount: 0, category: "雪山古城", status: "已确定", priority: "高", notes: "丽江古城、木府、束河、白沙古镇；美食：阿婆腊排骨、纳西烤肉；注意高原反应；玉龙雪山本轮因赶车放弃" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "昆明", amount: 0, category: "春城米线", status: "已确定", priority: "高", notes: "翠湖、陆军讲武堂、石林/滇池、篆新农贸市场；美食：过桥米线、汽锅鸡、傣味撒撇、烧饵块" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "南宁", amount: 0, category: "桂南小吃", status: "已确定", priority: "中", notes: "青秀山、三街两巷、建政路夜市；美食：老友粉、生榨米粉、柠檬鸭、卷筒粉" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "广州", amount: 0, category: "花城长隆", status: "已确定", priority: "高", notes: "长隆野生动物世界、广州塔、沙面、陈家祠；美食：点都德/陶陶居早茶、炳胜品味" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "顺德", amount: 0, category: "美食之都", status: "已确定", priority: "高", notes: "清晖园、逢简水乡、顺峰山公园；美食：鱼生、桑拿鸡、双皮奶、毋米粥、均安蒸猪" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕尾", amount: 0, category: "粤东海滨", status: "已确定", priority: "中", notes: "红海湾遮浪半岛、金町湾、风车岛、二马路夜市；美食：生腌、海鲜大排档、菜粿薄饼" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕头", amount: 0, category: "生腌朝圣", status: "已确定", priority: "高", notes: "龙眼南路夜市、小公园骑楼、南澳岛（可选）；美食：瑞娇嫲嫲生腌、八合里牛肉火锅、春梅里卤鹅、榕香蚝烙" },
-    { id: genId(), rid: "", type: "目的地看板", date: "", title: "福州", amount: 0, category: "顺路收尾", status: "已确定", priority: "中", notes: "三坊七巷、上下杭、鼓山；美食：鱼丸、肉燕、拌面扁肉、佛跳墙；台风季返程在此二选一走A或B" }
+    // ===== 目的地看板（9 城）=====
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "重庆", amount: 0, category: "山城火锅", status: "已确定", priority: "高", notes: "洪崖洞、解放碑、李子坝、鹅岭二厂、长江索道、南山一棵树；美食：珮姐老火锅、周师兄腰片、花市豌杂面、九街烧烤" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "丽江", amount: 0, category: "雪山古城", status: "已确定", priority: "高", notes: "玉龙雪山4680m、蓝月谷、束河古镇、白沙古镇；美食：阿婆腊排骨、纳西烤肉；⚠大索道需提前7天20:00在丽江旅游集团小程序抢" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "昆明", amount: 0, category: "春城米线", status: "已确定", priority: "中", notes: "翠湖、陆军讲武堂、南强街巷、篆新农贸市场；美食：建新园过桥米线、福照楼汽锅鸡、烧饵块、园西路炸洋芋" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "南宁", amount: 0, category: "桂南小吃", status: "已确定", priority: "中", notes: "青秀山、三街两巷、建政路夜市、德天瀑布（可选一日）；美食：舒记老友粉、甘家界柠檬鸭、生榨米粉、卷筒粉、酸嘢" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "广州", amount: 0, category: "花城长隆", status: "已确定", priority: "高", notes: "长隆野生动物世界、沙面、陈家祠、珠江夜游；美食：点都德/陶陶居早茶、炳胜品味、宝业路宵夜" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "顺德", amount: 0, category: "美食之都", status: "已确定", priority: "高", notes: "清晖园、逢简水乡、顺峰山公园；美食：鱼生、桑拿鸡、毋米粥、双皮奶、均安蒸猪" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕尾", amount: 0, category: "粤东海滨", status: "已确定", priority: "中", notes: "红海湾遮浪半岛、金町湾、风车岛、二马路夜市；美食：生腌、海鲜大排档、菜粿薄饼、汕中冰室" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "汕头", amount: 0, category: "生腌朝圣", status: "已确定", priority: "高", notes: "龙眼南路夜市、小公园骑楼、开埠文化陈列馆；美食：瑞娇嫲嫲生腌、八合里牛肉火锅、春梅里卤鹅、榕香蚝烙、甘草水果" },
+    { id: genId(), rid: "", type: "目的地看板", date: "", title: "福州", amount: 0, category: "顺路收尾", status: "已确定", priority: "中", notes: "三坊七巷、上下杭、鼓山、达明美食街；美食：鱼丸、肉燕、拌面扁肉、佛跳墙；台风季返程在此二选一走A或B" }
   ];
 }
 
@@ -993,9 +999,9 @@ var FERRY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 var CITY_META = {
   "安庆":   { icon:"🏠", badge:"出发 / 归程",   btype:"culture" , must:"" , color:"#9AA5B8" },
   "重庆":   { icon:"🌶️", badge:"火锅主场",     btype:"food" , must:"珮姐老火锅 · 周师兄腰片 · 长江索道 · 洪崖洞" , color:"#DE9090" },
-  "丽江":   { icon:"🏔️", badge:"雪山古城",     btype:"memory" , must:"丽江古城 · 束河 · 白沙古镇 · 阿婆腊排骨" , color:"#8FB3D9" },
-  "昆明":   { icon:"🌸", badge:"春城米线",     btype:"food" , must:"翠湖 · 石林/滇池 · 过桥米线 · 汽锅鸡" , color:"#A6C48D" },
-  "南宁":   { icon:"🍜", badge:"桂南小吃",     btype:"food" , must:"青秀山 · 老友粉 · 柠檬鸭 · 建政路夜市" , color:"#C8B48A" },
+  "丽江":   { icon:"🏔️", badge:"雪山登顶",     btype:"memory" , must:"玉龙雪山4680m · 蓝月谷 · 束河古镇 · 阿婆腊排骨" , color:"#8FB3D9" },
+  "昆明":   { icon:"🌸", badge:"春城米线",     btype:"food" , must:"翠湖 · 南强街巷 · 过桥米线 · 汽锅鸡" , color:"#A6C48D" },
+  "南宁":   { icon:"🍜", badge:"桂南小吃",     btype:"food" , must:"青秀山 · 舒记老友粉 · 柠檬鸭 · 建政路夜市" , color:"#C8B48A" },
   "广州":   { icon:"🏙️", badge:"长隆 + 早茶",  btype:"food" , must:"长隆野生动物世界 · 沙面 · 陈家祠 · 点都德早茶" , color:"#7FC4B0" },
   "顺德":   { icon:"🍲", badge:"美食之都",     btype:"food" , must:"清晖园 · 鱼生 · 桑拿鸡 · 双皮奶" , color:"#D9C97E" },
   "汕尾":   { icon:"🌊", badge:"看海 + 海鲜",  btype:"culture" , must:"红海湾遮浪半岛 · 金町湾 · 二马路夜市" , color:"#9AC8D9" },
@@ -1009,11 +1015,11 @@ function cityMetaOf(title){
 }
 
 var ROUTE_STOPS = [
-  { city: "安庆", dates: "10/3 出发", home: true },
-  { city: "重庆", dates: "10/4-7", nights: "3晚" },
-  { city: "丽江", dates: "10/7-8", nights: "1晚" },
-  { city: "昆明", dates: "10/8-10", nights: "2晚" },
-  { city: "南宁", dates: "10/10-11", nights: "1晚" },
+  { city: "安庆", dates: "10/3 23:45 起飞", home: true },
+  { city: "重庆", dates: "10/4-6", nights: "3晚" },
+  { city: "丽江", dates: "10/6-8", nights: "2晚" },
+  { city: "昆明", dates: "10/8-9", nights: "1晚" },
+  { city: "南宁", dates: "10/9-11", nights: "2晚" },
   { city: "广州", dates: "10/11-14", nights: "3晚" },
   { city: "汕尾", dates: "10/14-15", nights: "1晚" },
   { city: "汕头", dates: "10/15-16", nights: "1晚" },
@@ -1022,9 +1028,9 @@ var ROUTE_STOPS = [
 ];
 var ROUTE_SEGS = [
   { type: "plane", date: "10/3" },
-  { type: "plane", date: "10/7" },
+  { type: "plane", date: "10/6" },
   { type: "train", date: "10/8" },
-  { type: "train", date: "10/10" },
+  { type: "train", date: "10/9" },
   { type: "train", date: "10/11" },
   { type: "train", date: "10/14" },
   { type: "train", date: "10/15" },
@@ -1057,7 +1063,7 @@ function renderOverview() {
 
   document.getElementById("statsRow").innerHTML =
     '<div class="stat-card"><div class="stat-value">' + countHtml + '</div><div class="stat-label">倒计时</div></div>' +
-    '<div class="stat-card"><div class="stat-value">15<small>天13晚</small></div><div class="stat-label">9 城环线</div></div>' +
+    '<div class="stat-card"><div class="stat-value">15<small>天14晚</small></div><div class="stat-label">9 城环线</div></div>' +
     '<div class="stat-card"><div class="stat-value">' + transportCount + '<small> 段</small></div><div class="stat-label">已定价大交通</div></div>' +
     '<div class="stat-card"><div class="stat-value">¥' + transportSum.toLocaleString() + '</div><div class="stat-label">2人交通支出</div></div>';
 
